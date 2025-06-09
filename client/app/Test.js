@@ -7,7 +7,7 @@ export default function Test() {
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    fetch('http://10.0.0.158:5000/api/hello')
+    fetch('http://127.0.0.1:5000/api/hello')
       .then((response) => response.json())
       .then((data) => {
         setMessage(data.message);
