@@ -1,20 +1,22 @@
-import React, { useEffect, useState } from 'react';
-import { View, Text, ActivityIndicator, StyleSheet } from 'react-native';
+// rnfe
 
-export default function Test() {
-  const [message, setMessage] = useState('');
+import { useEffect, useState } from "react";
+import { ActivityIndicator, View, Text, StyleSheet } from "react-native";
+
+export default function test() {
+  const [message, setMessage] = useState("");
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    fetch('http://127.0.0.1:5000/api/hello')
+    fetch("http://10.0.0.10:5000/api/hello")
       .then((response) => response.json())
       .then((data) => {
         setMessage(data.message);
         setLoading(false);
       })
       .catch((err) => {
-        setError('Failed to fetch data');
+        setError(`Failed to fetch data: ${err.message}`);
         setLoading(false);
       });
   }, []);
@@ -45,15 +47,15 @@ export default function Test() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center'
+    justifyContent: "center",
+    alignItems: "center",
   },
   messageText: {
     fontSize: 18,
-    color: '#333'
+    color: "#333",
   },
   errorText: {
     fontSize: 16,
-    color: 'red'
-  }
+    color: "red",
+  },
 });
