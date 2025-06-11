@@ -1,0 +1,7 @@
+Flask
+firebase-admin
+Flask-CORS
+scikit-learn
+numpy
+pandas
+tda-api
