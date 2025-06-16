@@ -1,18 +1,22 @@
 from flask import Blueprint, request, jsonify
-from firebase_admin import db
 import uuid
 from datetime import datetime
 
 session_bp = Blueprint('session', __name__)
+
 @session_bp.route('/start_session', methods=['POST'])
 def start_session():
+    from firebase_admin import firestore 
+    db = firestore.client()  
     data = request.json
     user_id = data.get('user_id')
 
     if not user_id:
         return jsonify({"error": "User ID is required"}), 400
+
     session_id = str(uuid.uuid4())
     start_time = datetime.utcnow().isoformat()
+
     session_data = {
         'start_time': start_time,
         'status': 'active',
@@ -20,11 +24,14 @@ def start_session():
         'session_id': session_id
     }
 
-    db.reference(f'users/{user_id}/sessions/{session_id}').set(session_data)
+    db.collection('users').document(user_id).collection('sessions').document(session_id).set(session_data)
+
     return jsonify({'message': 'Session started', 'session_id': session_id}), 200
 
 @session_bp.route('/end_session', methods=['POST'])
 def end_session():
+    from firebase_admin import firestore 
+    db = firestore.client()  
     data = request.get_json()
     user_id = data.get('user_id')
     session_id = data.get('session_id')
@@ -32,13 +39,13 @@ def end_session():
     if not user_id or not session_id:
         return jsonify({'error': 'user_id and session_id are required'}), 400
 
-    end_time = datetime.utcnow().isoformat()
+    session_ref = db.collection('users').document(user_id).collection('sessions').document(session_id)
+    session_doc = session_ref.get()
 
-    session_ref = db.reference(f'users/{user_id}/sessions/{session_id}')
-    existing_data = session_ref.get()
-
-    if not existing_data:
+    if not session_doc.exists:
         return jsonify({'error': 'Session not found'}), 404
+
+    end_time = datetime.utcnow().isoformat()
 
     update_data = {
         'end_time': end_time,
@@ -56,8 +63,14 @@ def end_session():
 
 @session_bp.route('/session/<user_id>', methods=['GET'])
 def get_sessions(user_id):
-    sessions_ref = db.reference(f'users/{user_id}/sessions')
-    sessions = sessions_ref.get()
+    from firebase_admin import firestore  
+    db = firestore.client() 
+    sessions_ref = db.collection('users').document(user_id).collection('sessions')
+    sessions_docs = sessions_ref.stream()
+
+    sessions = {}
+    for doc in sessions_docs:
+        sessions[doc.id] = doc.to_dict()
 
     if not sessions:
         return jsonify({'message': 'No sessions found'}), 404
