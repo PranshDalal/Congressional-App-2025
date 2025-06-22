@@ -4,7 +4,7 @@ import BackgroundView from "@/components/BackgroundView";
 import { SafeAreaView } from "react-native-safe-area-context";
 import globalStyles from "@/styles/globalStyles";
 import { Link } from "expo-router";
-import Button from "@/components/Button";
+import TextButton from "@/components/TextButton";
 
 const Session = () => {
   return (
@@ -13,7 +13,7 @@ const Session = () => {
         <View style={globalStyles.screenPadding}>
           <Text style={globalStyles.header1}>Session</Text>
           <Link href="./(app)" asChild>
-            <Button title="End Session" onPress={() => {}} />
+            <TextButton title="End Session" onPress={() => {}} />
           </Link>
         </View>
       </SafeAreaView>

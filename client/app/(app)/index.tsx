@@ -2,7 +2,7 @@ import { View, Text, SafeAreaView, StyleSheet } from "react-native";
 import React from "react";
 import theme from "@/styles/theme";
 import BackgroundView from "@/components/BackgroundView";
-import Button from "@/components/Button";
+import TextButton from "@/components/TextButton";
 import globalStyles from "@/styles/globalStyles";
 import { Link } from "expo-router";
 
@@ -13,7 +13,7 @@ const App = () => {
         <View style={globalStyles.screenPadding}>
           <Text style={[globalStyles.header1]}>Welcome</Text>
           <Link href="./(session)" push asChild>
-            <Button title="Start Session" onPress={() => {}} />
+            <TextButton title="Start Session" onPress={() => {}} />
           </Link>
         </View>
       </SafeAreaView>

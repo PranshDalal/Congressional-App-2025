@@ -17,7 +17,7 @@ type ButtonProps = {
   textStyle?: TextStyle;
 };
 
-export default function Button({
+export default function TextButton({
   title,
   onPress,
   variant = "primary",
