@@ -14,16 +14,18 @@ const App = () => {
       <SafeAreaView>
         <View style={globalStyles.screenPadding}>
           <Text style={[globalStyles.header1]}>Welcome</Text>
-          <Link href="./(session)" push asChild>
-            <TextButton title="Start Session" onPress={() => {}} />
-          </Link>
-          <TextButton
-            title="Sign in"
-            onPress={() => {
-              router.push("/sign-in");
-            }}
-            variant="secondary"
-          />
+          <View style={{ alignItems: "center" }}>
+            <Link href="./(session)" push asChild>
+              <TextButton title="Start Session" onPress={() => {}} />
+            </Link>
+            <TextButton
+              title="Sign in"
+              onPress={() => {
+                router.push("/sign-in");
+              }}
+              variant="secondary"
+            />
+          </View>
         </View>
       </SafeAreaView>
     </BackgroundView>

@@ -38,7 +38,6 @@ export default function TextButton({
       onPress={buttonPressed}
       style={({ pressed }) => [
         styles.base,
-        globalStyles.centered,
         { width: width },
         variant === "primary" ? styles.primary : styles.secondary,
         pressed && styles.pressed,
@@ -55,7 +54,7 @@ const styles = StyleSheet.create({
     paddingVertical: theme.spacing.md,
     paddingHorizontal: theme.spacing.lg,
     borderRadius: theme.radii.md,
-    alignItems: "flex-start",
+    alignItems: "center",
   },
   primary: {
     backgroundColor: theme.colors.primary,

@@ -1,24 +1,25 @@
 import { TextInput, StyleSheet, TextInputProps } from "react-native";
-import React from "react";
+import React, { forwardRef } from "react";
 import theme from "@/styles/theme";
 
 type StyledTextInputProps = TextInputProps & {
   width?: any;
 };
 
-export default function StyledTextInput({
-  style,
-  width = "75%",
-  ...rest
-}: StyledTextInputProps) {
-  return (
-    <TextInput
-      placeholderTextColor={theme.colors.textMuted}
-      style={[styles.base, styles.default, { width }, style]}
-      {...rest}
-    />
-  );
-}
+const StyledTextInput = forwardRef<TextInput, StyledTextInputProps>(
+  ({ style, width = "90%", ...rest }, ref) => {
+    return (
+      <TextInput
+        ref={ref}
+        placeholderTextColor={theme.colors.textMuted}
+        style={[styles.base, styles.default, { width }, style]}
+        {...rest}
+      />
+    );
+  }
+);
+
+export default StyledTextInput;
 
 const styles = StyleSheet.create({
   base: {

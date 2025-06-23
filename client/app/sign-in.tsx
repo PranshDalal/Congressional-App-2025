@@ -1,5 +1,5 @@
-import { View, Text } from "react-native";
-import React, { useState } from "react";
+import { View, Text, TextInput } from "react-native";
+import React, { useRef, useState } from "react";
 import BackgroundView from "@/components/BackgroundView";
 import { SafeAreaView } from "react-native-safe-area-context";
 import globalStyles from "@/styles/globalStyles";
@@ -12,6 +12,8 @@ const SignUp = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
+  const inputPasswordRef = useRef<TextInput>(null);
+
   return (
     <BackgroundView>
       <SafeAreaView>
@@ -20,23 +22,27 @@ const SignUp = () => {
           <Text style={globalStyles.mutedText}>Please sign in to continue</Text>
           <SizedBox height={25} />
           <StyledTextInput
+            onSubmitEditing={() => inputPasswordRef.current?.focus()}
             placeholder="Email"
             keyboardType="email-address"
             value={email}
             onChangeText={setEmail}
+            enterKeyHint="next"
           />
           <SizedBox height={10} />
           <StyledTextInput
+            ref={inputPasswordRef}
             placeholder="Password"
             secureTextEntry
             value={password}
             onChangeText={setPassword}
+            enterKeyHint="done"
           />
           <SizedBox height={20} />
           <TextButton
             title="Sign In"
             onPress={() => {}}
-            width="75%"
+            width="90%"
             textStyle={{ fontWeight: theme.fontWeight.semibold }}
           />
         </View>
