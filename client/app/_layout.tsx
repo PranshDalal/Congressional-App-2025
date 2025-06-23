@@ -13,7 +13,7 @@ export default function RootLayout() {
 
   return (
     <ThemeProvider value={colorScheme === "dark" ? DarkTheme : DefaultTheme}>
-      <Stack>
+      <Stack screenOptions={{contentStyle: {backgroundColor: "#242c40"}}}>
         <Stack.Screen name="(app)" options={{ headerShown: false }} />
         <Stack.Screen name="(session)" options={{ headerShown: false, gestureEnabled: false }} />
         <Stack.Screen name="+not-found" />

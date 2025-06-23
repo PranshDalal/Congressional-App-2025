@@ -8,13 +8,15 @@ import {
 import React from "react";
 import theme from "@/styles/theme";
 import globalStyles from "@/styles/globalStyles";
+import * as Haptics from "expo-haptics";
 
 type ButtonProps = {
   title: string;
   onPress: () => void;
-  variant?: "primary";
+  variant?: "primary" | "secondary";
   style?: ViewStyle;
   textStyle?: TextStyle;
+  width?: any;
 };
 
 export default function TextButton({
@@ -23,14 +25,22 @@ export default function TextButton({
   variant = "primary",
   style,
   textStyle,
+  width = undefined,
 }: ButtonProps) {
+  function buttonPressed() {
+    if (variant === "primary") {
+      Haptics.selectionAsync();
+    }
+    onPress();
+  }
   return (
     <Pressable
-      onPress={onPress}
+      onPress={buttonPressed}
       style={({ pressed }) => [
         styles.base,
         globalStyles.centered,
-        variant === "primary" ? styles.primary : styles.primary,
+        { width: width },
+        variant === "primary" ? styles.primary : styles.secondary,
         pressed && styles.pressed,
         style,
       ]}
@@ -42,17 +52,20 @@ export default function TextButton({
 
 const styles = StyleSheet.create({
   base: {
-    paddingVertical: theme.spacing.sm,
+    paddingVertical: theme.spacing.md,
     paddingHorizontal: theme.spacing.lg,
     borderRadius: theme.radii.md,
-    alignSelf: 'flex-start'
+    alignItems: "flex-start",
   },
   primary: {
+    backgroundColor: theme.colors.primary,
+  },
+  secondary: {
     backgroundColor: theme.colors.bgLight,
     borderWidth: 1,
     borderColor: theme.colors.border,
   },
   pressed: {
-    opacity: 0.8
+    opacity: 0.8,
   },
 });

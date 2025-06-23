@@ -30,26 +30,26 @@ const globalStyles = StyleSheet.create({
   },
 
   header1: {
-    fontSize: theme.fontSize.h1,
-    // fontWeight: "bold",
+    fontSize: theme.fontSize.xxl,
+    fontWeight: theme.fontWeight.bold,
     color: theme.colors.text,
   },
   header2: {
-    fontSize: theme.fontSize.h2,
-    // fontWeight: "600",
+    fontSize: theme.fontSize.xl,
+    fontWeight: theme.fontWeight.bold,
     color: theme.colors.text,
   },
   header3: {
-    fontSize: theme.fontSize.h3,
-    // fontWeight: "400",
+    fontSize: theme.fontSize.lg,
+    fontWeight: theme.fontWeight.semibold,
     color: theme.colors.text,
   },
   bodyText: {
-    fontSize: theme.fontSize.default,
+    fontSize: theme.fontSize.base,
     color: theme.colors.text,
   },
   mutedText: {
-    fontSize: theme.fontSize.default,
+    fontSize: theme.fontSize.base,
     color: theme.colors.textMuted,
   },
 });

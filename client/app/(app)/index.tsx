@@ -4,9 +4,11 @@ import theme from "@/styles/theme";
 import BackgroundView from "@/components/BackgroundView";
 import TextButton from "@/components/TextButton";
 import globalStyles from "@/styles/globalStyles";
-import { Link } from "expo-router";
+import { Link, useRouter } from "expo-router";
 
 const App = () => {
+  const router = useRouter();
+
   return (
     <BackgroundView>
       <SafeAreaView>
@@ -15,6 +17,13 @@ const App = () => {
           <Link href="./(session)" push asChild>
             <TextButton title="Start Session" onPress={() => {}} />
           </Link>
+          <TextButton
+            title="Sign in"
+            onPress={() => {
+              router.push("/sign-in");
+            }}
+            variant="secondary"
+          />
         </View>
       </SafeAreaView>
     </BackgroundView>
@@ -22,15 +31,3 @@ const App = () => {
 };
 
 export default App;
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: "center",
-    justifyContent: "center",
-  },
-  text: {
-    fontSize: 20,
-    color: "#333",
-  },
-});

@@ -12,6 +12,6 @@ export default function BackgroundView({ children }: ViewProps) {
 const styles = StyleSheet.create({
   background: {
     flex: 1,
-    backgroundColor: theme.colors.bgDark,
+    // backgroundColor: theme.colors.bgDark,
   },
 })

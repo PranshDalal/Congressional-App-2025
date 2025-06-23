@@ -5,10 +5,17 @@ const { width, height, scale } = Dimensions.get("window");
 export const theme = {
   colors,
   fontSize: {
-    default: 14,
-    h1: 42,
-    h2: 36,
-    h3: 28,
+    sm: 12,
+    base: 14,
+    lg: 16,
+    xl: 20,
+    xxl: 24,
+  },
+  fontWeight: {
+    light: 300,
+    normal: 400,
+    semibold: 600,
+    bold: 700,
   },
   spacing: {
     sm: 8,
