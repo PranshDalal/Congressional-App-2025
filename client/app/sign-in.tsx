@@ -7,6 +7,7 @@ import StyledTextInput from "@/components/StyledTextInput";
 import SizedBox from "@/components/SizedBox";
 import TextButton from "@/components/TextButton";
 import theme from "@/styles/theme";
+import { Link } from "expo-router";
 
 const SignUp = () => {
   const [email, setEmail] = useState("");
@@ -45,6 +46,16 @@ const SignUp = () => {
             width="90%"
             textStyle={{ fontWeight: theme.fontWeight.semibold }}
           />
+          <SizedBox height={25} />
+          <View style={{ flexDirection: "row" }}>
+            <Text style={globalStyles.mutedText}>Don't have an account? </Text>
+            <Link
+              href="/(app)"
+              style={[globalStyles.bodyText, { color: theme.colors.link }]}
+            >
+              Sign Up
+            </Link>
+          </View>
         </View>
       </SafeAreaView>
     </BackgroundView>

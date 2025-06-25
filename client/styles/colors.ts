@@ -8,6 +8,7 @@ const darkColors = {
   text: "#f2f2f2", // 0°, 0%, 95%
   textMuted: "#b3b3b3", // 0°, 0%, 70%
   primary: "#7906d0", // 274°, 94%, 42%
+  link: "#155dfc"
 };
 
 // Not Implemented yet
@@ -19,6 +20,7 @@ const lightColors = {
   text: "#f2f2f2", // 0°, 0%, 95%
   textMuted: "#b3b3b3", // 0°, 0%, 70%
   primary: "#7906d0", //274°, 94%, 42%
+  link: "#155dfc"
 };
 
 export var colors = {
