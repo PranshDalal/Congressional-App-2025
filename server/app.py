@@ -4,17 +4,19 @@ import firebase_admin
 from firebase_admin import credentials
 from firebase_admin import firestore
 from routes.session_routes import session_bp
+from routes.analysis_routes import analysis_bp 
 
 def create_app():
     app = Flask(__name__)
     CORS(app)
 
-    cred = credentials.Certificate('service_acc.json')
+    cred = credentials.Certificate('service_acc2.json')
     firebase_admin.initialize_app(cred)
 
     db_client = firestore.client()
 
     app.register_blueprint(session_bp, url_prefix='/api')
+    app.register_blueprint(analysis_bp, url_prefix='/api')
 
     @app.route('/api/hello', methods=['GET'])
     def hello():
