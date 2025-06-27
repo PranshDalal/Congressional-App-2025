@@ -1,5 +1,5 @@
 from flask import Blueprint, request, jsonify
-from firebase_admin import firestore # Changed from db
+from firebase_admin import firestore
 import numpy as np
 import pandas as pd
 from sklearn.preprocessing import StandardScaler
