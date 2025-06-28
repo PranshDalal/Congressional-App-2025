@@ -8,7 +8,7 @@ import TextButton from "@/components/TextButton";
 import theme from "@/styles/theme";
 import { Ionicons } from "@expo/vector-icons";
 
-const Session = () => {
+const SessionScreen = () => {
   const [elapsed, setElapsed] = useState(0);
   const [stopwatchRunning, setStopwatchRunning] = useState(true);
   const intervalRef = useRef<number | null>(null);
@@ -67,7 +67,7 @@ const Session = () => {
   );
 };
 
-export default Session;
+export default SessionScreen;
 
 const styles = StyleSheet.create({
   bottomStickyView: {

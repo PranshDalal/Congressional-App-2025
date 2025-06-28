@@ -9,7 +9,7 @@ import theme from "@/styles/theme";
 import { Link } from "expo-router";
 import DismissKeyboard from "@/components/DismissKeyboard";
 
-const SignUp = () => {
+const SigninScreen = () => {
   const [email, setEmail] = useState("");
   const [emailError, setEmailError] = useState("");
 
@@ -103,7 +103,7 @@ const SignUp = () => {
   );
 };
 
-export default SignUp;
+export default SigninScreen;
 
 const styles = StyleSheet.create({
   link: {
