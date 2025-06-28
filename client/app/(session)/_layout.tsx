@@ -8,6 +8,7 @@ export default function SessionLayout() {
       }}
     >
       <Stack.Screen name="index" />
+      <Stack.Screen name="survey" options={{ gestureEnabled: false }} />
     </Stack>
   );
 }

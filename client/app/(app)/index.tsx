@@ -10,24 +10,22 @@ const App = () => {
   const router = useRouter();
 
   return (
-    <BackgroundView>
-      <SafeAreaView>
-        <View style={globalStyles.screenPadding}>
-          <Text style={[globalStyles.header1]}>Welcome</Text>
-          <View style={{ alignItems: "center" }}>
-            <Link href="./(session)" push asChild>
-              <TextButton title="Start Session" onPress={() => {}} />
-            </Link>
-            <TextButton
-              title="Sign in"
-              onPress={() => {
-                router.push("/sign-in");
-              }}
-              variant="secondary"
-            />
-          </View>
-        </View>
-      </SafeAreaView>
+    <BackgroundView withSafeArea withScreenPadding>
+      <Text style={[globalStyles.header1]}>Welcome</Text>
+      <View style={{ alignItems: "center" }}>
+        <Link href="./(session)" push asChild>
+          <TextButton title="Start Session" onPress={() => {}} />
+        </Link>
+        <Link href="/sign-in" asChild>
+          <TextButton
+            title="Sign in"
+            onPress={() => {
+              // router.push("/sign-in");
+            }}
+            variant="secondary"
+          />
+        </Link>
+      </View>
     </BackgroundView>
   );
 };

@@ -23,6 +23,18 @@ const lightColors = {
   link: "#155dfc"
 };
 
+const pinkColors = {
+  bgDark: "#f3bed3", // 0°, 0%, 5%
+  bg: "#f7d4e0", // 0°, 0%, 10%
+  bgLight: "#fbe9f0", // 0°, 0%, 15%
+  border: "#e77ea8", // 0°, 0%, 30%
+  text: "#16040b", // 0°, 0%, 95%
+  textMuted: "#811840", // 0°, 0%, 70%
+  primary: "#7906d0", // 274°, 94%, 42%
+  link: "#155dfc"
+}
+
 export var colors = {
+  // ...pinkColors
   ...(isDarkTheme ? darkColors : lightColors),
 };

@@ -3,6 +3,7 @@ import {
   StyleSheet,
   Text,
   TextStyle,
+  View,
   ViewStyle,
 } from "react-native";
 import React from "react";
@@ -17,6 +18,7 @@ type ButtonProps = {
   style?: ViewStyle;
   textStyle?: TextStyle;
   width?: any;
+  icon?: React.ReactNode;
 };
 
 export default function TextButton({
@@ -26,6 +28,7 @@ export default function TextButton({
   style,
   textStyle,
   width = undefined,
+  icon,
 }: ButtonProps) {
   function buttonPressed() {
     if (variant === "primary") {
@@ -44,7 +47,18 @@ export default function TextButton({
         style,
       ]}
     >
-      <Text style={[globalStyles.bodyText, textStyle]}>{title}</Text>
+      <View
+        style={{
+          flexDirection: "row",
+          alignItems: "center",
+          justifyContent: "center",
+        }}
+      >
+        {icon && (
+          <View style={{ marginRight: title.length != 0 ? 8 : 0 }}>{icon}</View>
+        )}
+        <Text style={[globalStyles.bodyText, textStyle]}>{title}</Text>
+      </View>
     </Pressable>
   );
 }
