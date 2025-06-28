@@ -53,7 +53,7 @@ const SessionScreen = () => {
           onPress={() => setStopwatchRunning((r) => !r)}
           width="45%"
         />
-        <Link href="/survey" asChild>
+        <Link href="/survey" replace asChild>
           <TextButton
             title="End Session"
             // style={styles.endSessionButton}

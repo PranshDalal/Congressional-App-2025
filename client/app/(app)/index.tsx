@@ -10,7 +10,7 @@ const IndexScreen = () => {
     <BackgroundView withSafeArea withScreenPadding>
       <Text style={[globalStyles.header1]}>Welcome</Text>
       <View style={{ alignItems: "center" }}>
-        <Link href="./(session)" push asChild>
+        <Link href="./(session)" replace asChild>
           <TextButton title="Start Session" onPress={() => {}} />
         </Link>
         <Link href="/sign-in" push asChild>
