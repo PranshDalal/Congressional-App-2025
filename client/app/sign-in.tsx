@@ -19,12 +19,27 @@ const SignUp = () => {
   const inputPasswordRef = useRef<TextInput>(null);
 
   function handleSignIn() {
-    if (email.length == 0) setEmailError("This field is required");
-    if (email.length == 1) setEmailError("");
+    setEmailError("");
+    setPasswordError("");
+
+    if (email.length == 0) {
+      setEmailError("This field is required");
+      return;
+    }
+    if (password.length == 0) {
+      setPasswordError("This field is required");
+      return;
+    }
   }
 
   function forgotPassword() {
-    if (email.length == 0) setEmailError("This field is required");
+    setEmailError("");
+    setPasswordError("");
+
+    if (email.length == 0) {
+      setEmailError("This field is required");
+      return;
+    }
   }
 
   return (
@@ -51,12 +66,14 @@ const SignUp = () => {
         <SizedBox height={10} />
         <StyledTextInput
           value={password}
+          onSubmitEditing={() => handleSignIn()}
           ref={inputPasswordRef}
           placeholder="Password"
           secureTextEntry
           onChangeText={setPassword}
           enterKeyHint="done"
           width="100%"
+          error={passwordError}
         />
         <SizedBox height={5} />
         <Pressable
