@@ -16,7 +16,7 @@ const SurveyScreen = () => {
         </View>
 
         <View style={styles.bottomStickyView}>
-          <Link href="/(app)" asChild>
+          <Link href="/(app)" replace asChild>
             <TextButton
               title="Delete"
               variant="secondary"
@@ -24,7 +24,7 @@ const SurveyScreen = () => {
               width="45%"
             />
           </Link>
-          <Link href="/(app)" asChild>
+          <Link href="/(app)" replace asChild>
             <TextButton title="Save" onPress={() => {}} width="45%" />
           </Link>
         </View>
@@ -49,5 +49,5 @@ const styles = StyleSheet.create({
     backgroundColor: theme.colors.bg,
     borderTopLeftRadius: theme.radii.lg,
     borderTopRightRadius: theme.radii.lg,
-  }
+  },
 });
