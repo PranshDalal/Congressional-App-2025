@@ -16,14 +16,8 @@ const App = () => {
         <Link href="./(session)" push asChild>
           <TextButton title="Start Session" onPress={() => {}} />
         </Link>
-        <Link href="/sign-in" asChild>
-          <TextButton
-            title="Sign in"
-            onPress={() => {
-              // router.push("/sign-in");
-            }}
-            variant="secondary"
-          />
+        <Link href="/sign-in" push asChild>
+          <TextButton title="Sign in" onPress={() => {}} variant="secondary" />
         </Link>
       </View>
     </BackgroundView>

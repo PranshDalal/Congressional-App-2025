@@ -1,6 +1,7 @@
 import globalStyles from "@/styles/globalStyles";
 import theme from "@/styles/theme";
 import { View, ViewProps, StyleSheet, SafeAreaView } from "react-native";
+import DismissKeyboard from "./DismissKeyboard";
 
 type BackgroundViewProps = ViewProps & {
   withSafeArea?: boolean;
@@ -14,28 +15,28 @@ export default function BackgroundView({
   ...props
 }: BackgroundViewProps) {
   return (
-    <View
-      style={[
-        styles.background,
-        withScreenPadding
-          ? globalStyles.screenPadding
-          : undefined,
-      ]}
-    >
-      {withSafeArea ? (
-        <SafeAreaView
-          style={[
-            { flex: 1 },
-            // withScreenPadding ? globalStyles.screenPadding : undefined,
-            props.style,
-          ]}
-        >
-          {children}
-        </SafeAreaView>
-      ) : (
-        <View style={[{ flex: 1 }, props.style]}>{children}</View>
-      )}
-    </View>
+    <DismissKeyboard>
+      <View
+        style={[
+          styles.background,
+          withScreenPadding ? globalStyles.screenPadding : undefined,
+        ]}
+      >
+        {withSafeArea ? (
+          <SafeAreaView
+            style={[
+              { flex: 1 },
+              // withScreenPadding ? globalStyles.screenPadding : undefined,
+              props.style,
+            ]}
+          >
+            {children}
+          </SafeAreaView>
+        ) : (
+          <View style={[{ flex: 1 }, props.style]}>{children}</View>
+        )}
+      </View>
+    </DismissKeyboard>
   );
 }
 

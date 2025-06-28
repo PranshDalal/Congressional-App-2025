@@ -8,7 +8,8 @@ const darkColors = {
   text: "#f2f2f2", // 0°, 0%, 95%
   textMuted: "#b3b3b3", // 0°, 0%, 70%
   primary: "#7906d0", // 274°, 94%, 42%
-  link: "#155dfc"
+  link: "#4b81fa",
+  danger: "#f00726",
 };
 
 // Not Implemented yet
@@ -20,7 +21,8 @@ const lightColors = {
   text: "#f2f2f2", // 0°, 0%, 95%
   textMuted: "#b3b3b3", // 0°, 0%, 70%
   primary: "#7906d0", //274°, 94%, 42%
-  link: "#155dfc"
+  link: "#4b81fa",
+  danger: "#f00726",
 };
 
 const pinkColors = {
@@ -31,8 +33,9 @@ const pinkColors = {
   text: "#16040b", // 0°, 0%, 95%
   textMuted: "#811840", // 0°, 0%, 70%
   primary: "#7906d0", // 274°, 94%, 42%
-  link: "#155dfc"
-}
+  link: "#4b81fa",
+  danger: "#f00726",
+};
 
 export var colors = {
   // ...pinkColors
