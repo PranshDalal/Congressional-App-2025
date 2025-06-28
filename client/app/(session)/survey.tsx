@@ -7,7 +7,7 @@ import { Link } from "expo-router";
 import TextButton from "@/components/TextButton";
 import theme from "@/styles/theme";
 
-const Survey = () => {
+const SurveyScreen = () => {
   return (
     <BackgroundView>
       <SafeAreaView style={{ flex: 1 }}>
@@ -33,7 +33,7 @@ const Survey = () => {
   );
 };
 
-export default Survey;
+export default SurveyScreen;
 
 const styles = StyleSheet.create({
   bottomStickyView: {

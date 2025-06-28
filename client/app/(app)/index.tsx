@@ -1,14 +1,11 @@
 import { View, Text, SafeAreaView, StyleSheet } from "react-native";
 import React from "react";
-import theme from "@/styles/theme";
 import BackgroundView from "@/components/BackgroundView";
 import TextButton from "@/components/TextButton";
 import globalStyles from "@/styles/globalStyles";
-import { Link, useRouter } from "expo-router";
+import { Link } from "expo-router";
 
-const App = () => {
-  const router = useRouter();
-
+const IndexScreen = () => {
   return (
     <BackgroundView withSafeArea withScreenPadding>
       <Text style={[globalStyles.header1]}>Welcome</Text>
@@ -24,4 +21,4 @@ const App = () => {
   );
 };
 
-export default App;
+export default IndexScreen;
