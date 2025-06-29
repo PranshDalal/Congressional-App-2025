@@ -1,4 +1,4 @@
-import { View, Text, StyleSheet } from "react-native";
+import { View, Text, StyleSheet, Dimensions } from "react-native";
 import React, { useEffect, useRef, useState } from "react";
 import BackgroundView from "@/components/BackgroundView";
 import globalStyles from "@/styles/globalStyles";
@@ -6,6 +6,7 @@ import { Link } from "expo-router";
 import TextButton from "@/components/TextButton";
 import theme from "@/styles/theme";
 import { Ionicons } from "@expo/vector-icons";
+import BouncingCircles from "@/components/BouncingCircles";
 
 const SessionScreen = () => {
   const [elapsed, setElapsed] = useState(0);
@@ -29,20 +30,22 @@ const SessionScreen = () => {
   }, [stopwatchRunning]);
 
   return (
-    <BackgroundView style={globalStyles.centered}>
-      <Text style={[globalStyles.header1, styles.stopwatchText]}>
-        {formatTime(elapsed)}
-      </Text>
-      <Text style={[globalStyles.mutedText]}>
-        {stopwatchRunning ? "Collecting ambient data..." : "Paused"}
-      </Text>
+    <BackgroundView style={styles.container}>
+      <BouncingCircles />
+      <View style={styles.content}>
+        <Text style={[globalStyles.header1, styles.stopwatchText]}>
+          {formatTime(elapsed)}
+        </Text>
+        <Text style={globalStyles.header2}>
+          {stopwatchRunning ? "Collecting ambient data..." : "Paused"}
+        </Text>
+      </View>
 
       <View style={styles.bottomStickyView}>
         <TextButton
           title=""
           icon={
             stopwatchRunning ? (
-              // TODO: fix this, bad icon library thingy idk
               <Ionicons name="pause" size={18} color={theme.colors.text} />
             ) : (
               <Ionicons name="play" size={18} color={theme.colors.text} />
@@ -53,13 +56,7 @@ const SessionScreen = () => {
           width="45%"
         />
         <Link href="/survey" replace asChild>
-          <TextButton
-            title="End Session"
-            // style={styles.endSessionButton}
-            // textStyle={styles.endSessionButtonText}
-            onPress={() => {}}
-            width="45%"
-          />
+          <TextButton title="End Session" onPress={() => {}} width="45%" />
         </Link>
       </View>
     </BackgroundView>
@@ -69,6 +66,15 @@ const SessionScreen = () => {
 export default SessionScreen;
 
 const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: theme.colors.bg,
+  },
+  content: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+  },
   bottomStickyView: {
     flexDirection: "row",
     justifyContent: "space-evenly",
@@ -85,6 +91,7 @@ const styles = StyleSheet.create({
   },
   stopwatchText: {
     fontSize: theme.fontSize.bigBoy,
+    color: theme.colors.text,
   },
 });
 
