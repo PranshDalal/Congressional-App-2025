@@ -10,6 +10,7 @@ export const theme = {
     lg: 16,
     xl: 20,
     xxl: 24,
+    bigBoy: 48
   },
   fontWeight: {
     light: 300,
@@ -21,6 +22,7 @@ export const theme = {
     sm: 8,
     md: 16,
     lg: 24,
+    xl: 32,
   },
   radii: {
     sm: 4,

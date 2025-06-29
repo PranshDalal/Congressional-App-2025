@@ -1,24 +1,102 @@
-import { View, Text } from "react-native";
-import React from "react";
+import { View, Text, StyleSheet } from "react-native";
+import React, { useEffect, useRef, useState } from "react";
 import BackgroundView from "@/components/BackgroundView";
 import { SafeAreaView } from "react-native-safe-area-context";
 import globalStyles from "@/styles/globalStyles";
 import { Link } from "expo-router";
 import TextButton from "@/components/TextButton";
+import theme from "@/styles/theme";
+import { Ionicons } from "@expo/vector-icons";
 
-const Session = () => {
+const SessionScreen = () => {
+  const [elapsed, setElapsed] = useState(0);
+  const [stopwatchRunning, setStopwatchRunning] = useState(true);
+  const intervalRef = useRef<number | null>(null);
+  const startTimeRef = useRef<number>(Date.now());
+
+  useEffect(() => {
+    if (stopwatchRunning) {
+      startTimeRef.current = Date.now() - elapsed;
+      intervalRef.current = setInterval(() => {
+        setElapsed(Date.now() - startTimeRef.current);
+      }, 100);
+    } else if (intervalRef.current) {
+      clearInterval(intervalRef.current);
+    }
+
+    return () => {
+      if (intervalRef.current) clearInterval(intervalRef.current);
+    };
+  }, [stopwatchRunning]);
+
   return (
-    <BackgroundView>
-      <SafeAreaView>
-        <View style={globalStyles.screenPadding}>
-          <Text style={globalStyles.header1}>Session</Text>
-          <Link href="./(app)" asChild>
-            <TextButton title="End Session" onPress={() => {}} />
-          </Link>
-        </View>
-      </SafeAreaView>
+    <BackgroundView style={globalStyles.centered}>
+      <Text style={[globalStyles.header1, styles.stopwatchText]}>
+        {formatTime(elapsed)}
+      </Text>
+      <Text style={[globalStyles.mutedText]}>
+        {stopwatchRunning ? "Collecting ambient data..." : "Paused"}
+      </Text>
+
+      <View style={styles.bottomStickyView}>
+        <TextButton
+          title=""
+          icon={
+            stopwatchRunning ? (
+              // TODO: fix this, bad icon library thingy idk
+              <Ionicons name="pause" size={18} color={theme.colors.text} />
+            ) : (
+              <Ionicons name="play" size={18} color={theme.colors.text} />
+            )
+          }
+          variant="secondary"
+          onPress={() => setStopwatchRunning((r) => !r)}
+          width="45%"
+        />
+        <Link href="/survey" replace asChild>
+          <TextButton
+            title="End Session"
+            // style={styles.endSessionButton}
+            // textStyle={styles.endSessionButtonText}
+            onPress={() => {}}
+            width="45%"
+          />
+        </Link>
+      </View>
     </BackgroundView>
   );
 };
 
-export default Session;
+export default SessionScreen;
+
+const styles = StyleSheet.create({
+  bottomStickyView: {
+    flexDirection: "row",
+    justifyContent: "space-evenly",
+    alignItems: "center",
+    paddingBottom: theme.spacing.xl,
+    paddingTop: theme.spacing.md,
+    position: "absolute",
+    left: 0,
+    right: 0,
+    bottom: 0,
+    backgroundColor: theme.colors.bg,
+    borderTopLeftRadius: theme.radii.lg,
+    borderTopRightRadius: theme.radii.lg,
+  },
+  stopwatchText: {
+    fontSize: theme.fontSize.bigBoy,
+  },
+});
+
+function formatTime(milliseconds: number) {
+  const totalSeconds = Math.floor(milliseconds / 1000);
+  const hours = Math.floor(totalSeconds / 3600);
+  const minutes = Math.floor((totalSeconds % 3600) / 60);
+  const seconds = totalSeconds % 60;
+  return [
+    hours.toString().padStart(2, "0"),
+    minutes.toString().padStart(2, "0"),
+    seconds.toString().padStart(2, "0"),
+  ].join(":");
+}
