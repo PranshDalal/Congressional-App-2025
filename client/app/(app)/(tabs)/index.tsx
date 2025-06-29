@@ -21,7 +21,7 @@ const IndexScreen = () => {
     <BackgroundView withSafeArea withScreenPadding>
       <Text style={[globalStyles.header1]}>Welcome, {displayName}</Text>
       <View style={{ alignItems: "center" }}>
-        <Link href="./(session)" replace asChild>
+        <Link href="./(session)/session" replace asChild>
           <TextButton title="Start Session" onPress={() => {}} />
         </Link>
         <TextButton title="Sign Out" onPress={signOut} variant="secondary" />

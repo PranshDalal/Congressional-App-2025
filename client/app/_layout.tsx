@@ -36,11 +36,10 @@ export default function RootLayout() {
         </Protected>
         <Protected guard={user !== null}>
           <Stack.Screen name="(app)" options={{ headerShown: false }} />
-          <Stack.Screen name="(session)" options={{ headerShown: false }} />
         </Protected>
         <Stack.Screen name="+not-found" />
       </Stack>
-      <StatusBar style="auto" />
+      <StatusBar style="light" />
     </ThemeProvider>
   );
 }
