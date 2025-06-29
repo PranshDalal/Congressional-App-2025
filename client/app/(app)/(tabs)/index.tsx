@@ -7,11 +7,7 @@ import { Link } from "expo-router";
 import auth from "@react-native-firebase/auth";
 
 const IndexScreen = () => {
-  const [displayName, setDisplayName] = React.useState<string | null>(null);
-
-  useEffect(() => {
-    setDisplayName(auth().currentUser?.displayName ?? null);
-  }, []);
+  const user = auth().currentUser;
 
   const signOut = async () => {
     await auth().signOut();
@@ -19,7 +15,7 @@ const IndexScreen = () => {
 
   return (
     <BackgroundView withSafeArea withScreenPadding>
-      <Text style={[globalStyles.header1]}>Welcome, {displayName}</Text>
+      <Text style={[globalStyles.header1]}>Welcome, {user?.displayName}</Text>
       <View style={{ alignItems: "center" }}>
         <Link href="./(session)/session" replace asChild>
           <TextButton title="Start Session" onPress={() => {}} />
