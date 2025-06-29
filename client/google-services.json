@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "638057505457",
+    "project_id": "cong-app-2025",
+    "storage_bucket": "cong-app-2025.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:638057505457:android:1cafaa4290cb3b5048b890",
+        "android_client_info": {
+          "package_name": "com.pranshdalal.client"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC9nTi-NYq1nVFSLKSjy-OCYDDp4f2bSZA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

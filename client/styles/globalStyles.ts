@@ -52,6 +52,10 @@ const globalStyles = StyleSheet.create({
     fontSize: theme.fontSize.base,
     color: theme.colors.textMuted,
   },
+  linkText: {
+    fontSize: theme.fontSize.base,
+    color: theme.colors.link,
+  }
 });
 
 export default globalStyles;
