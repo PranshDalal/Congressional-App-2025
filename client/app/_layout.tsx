@@ -29,7 +29,7 @@ export default function RootLayout() {
   }, []);
 
   return (
-    <ThemeProvider value={colorScheme === "dark" ? DarkTheme : DefaultTheme}>
+    <ThemeProvider value={DarkTheme}>{/* value={colorScheme === "dark" ? DarkTheme : DefaultTheme}> */}
       <Stack>
         <Protected guard={user === null}>
           <Stack.Screen name="(auth)" options={{ headerShown: false }} />

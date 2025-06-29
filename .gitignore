@@ -3,3 +3,5 @@ client/node_modules/
 client/.expo/
 server/service_acc.json
 server/routes/__pycache__/
+.vscode/
+.expo/
