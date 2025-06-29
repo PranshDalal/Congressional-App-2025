@@ -8,6 +8,8 @@ import TextButton from "@/components/TextButton";
 import theme from "@/styles/theme";
 import { Link } from "expo-router";
 import DismissKeyboard from "@/components/DismissKeyboard";
+import auth from "@react-native-firebase/auth";
+import { FirebaseError } from "firebase/app";
 
 const SigninScreen = () => {
   const [email, setEmail] = useState("");
@@ -16,9 +18,11 @@ const SigninScreen = () => {
   const [password, setPassword] = useState("");
   const [passwordError, setPasswordError] = useState("");
 
+  const [loading, setLoading] = useState(false);
+
   const inputPasswordRef = useRef<TextInput>(null);
 
-  function handleSignIn() {
+  const handleSignIn = async () => {
     setEmailError("");
     setPasswordError("");
 
@@ -30,9 +34,19 @@ const SigninScreen = () => {
       setPasswordError("This field is required");
       return;
     }
+
+    setLoading(true);
+    try {
+      await auth().signInWithEmailAndPassword(email, password);
+    } catch (e: any) {
+      const err = e as FirebaseError;
+      alert("Registration failed: " + err.message);
+    } finally {
+      setLoading(false);
+    }
   }
 
-  function forgotPassword() {
+  const forgotPassword = () => {
     setEmailError("");
     setPasswordError("");
 
@@ -66,7 +80,7 @@ const SigninScreen = () => {
         <SizedBox height={10} />
         <StyledTextInput
           value={password}
-          onSubmitEditing={() => handleSignIn()}
+          onSubmitEditing={handleSignIn}
           ref={inputPasswordRef}
           placeholder="Password"
           secureTextEntry
@@ -77,24 +91,24 @@ const SigninScreen = () => {
         />
         <SizedBox height={5} />
         <Pressable
-          onPress={() => forgotPassword()}
+          onPress={forgotPassword}
           style={{ alignSelf: "flex-start" }}
         >
-          <Text style={[globalStyles.bodyText, styles.link]}>
+          <Text style={globalStyles.linkText}>
             Forgot your password?
           </Text>
         </Pressable>
         <SizedBox height={20} />
         <TextButton
           title="Sign In"
-          onPress={() => handleSignIn()}
+          onPress={handleSignIn}
           width="100%"
           textStyle={{ fontWeight: theme.fontWeight.semibold }}
         />
         <SizedBox height={25} />
         <View style={{ flexDirection: "row" }}>
           <Text style={globalStyles.mutedText}>Don't have an account? </Text>
-          <Link href="/(app)" style={[globalStyles.bodyText, styles.link]}>
+          <Link href="/sign-up" style={globalStyles.linkText} replace>
             Sign Up
           </Link>
         </View>
@@ -104,9 +118,3 @@ const SigninScreen = () => {
 };
 
 export default SigninScreen;
-
-const styles = StyleSheet.create({
-  link: {
-    color: theme.colors.link,
-  },
-});
