@@ -77,6 +77,8 @@ const styles = StyleSheet.create({
     backgroundColor: theme.colors.bgLight,
     borderWidth: 1,
     borderColor: theme.colors.border,
+    paddingVertical: theme.spacing.md-1,
+    paddingHorizontal: theme.spacing.lg-1,
   },
   pressed: {
     opacity: 0.8,
