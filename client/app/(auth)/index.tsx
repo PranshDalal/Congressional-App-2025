@@ -8,7 +8,7 @@ import TextButton from "@/components/TextButton";
 import theme from "@/styles/theme";
 import { Link } from "expo-router";
 import DismissKeyboard from "@/components/DismissKeyboard";
-import auth from "@react-native-firebase/auth";
+import { getAuth } from "@react-native-firebase/auth";
 import { FirebaseError } from "firebase/app";
 
 const SigninScreen = () => {
@@ -37,7 +37,7 @@ const SigninScreen = () => {
 
     setLoading(true);
     try {
-      await auth().signInWithEmailAndPassword(email, password);
+      await getAuth().signInWithEmailAndPassword(email, password);
     } catch (e: any) {
       const err = e as FirebaseError;
       alert("Registration failed: " + err.message);

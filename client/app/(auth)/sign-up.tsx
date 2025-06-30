@@ -8,7 +8,7 @@ import TextButton from "@/components/TextButton";
 import theme from "@/styles/theme";
 import { Link } from "expo-router";
 import DismissKeyboard from "@/components/DismissKeyboard";
-import auth from "@react-native-firebase/auth";
+import auth, { getAuth } from "@react-native-firebase/auth";
 import { FirebaseError } from "firebase/app";
 
 const SignupScreen = () => {
@@ -74,7 +74,7 @@ const SignupScreen = () => {
 
     setLoading(true);
     try {
-      const user = await auth().createUserWithEmailAndPassword(email, password);
+      const user = await getAuth().createUserWithEmailAndPassword(email, password);
       await user.user.updateProfile({ displayName: name });
     } catch (e: any) {
       const err = e as FirebaseError;

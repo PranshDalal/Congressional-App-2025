@@ -9,7 +9,7 @@ import {
 import { StatusBar } from "expo-status-bar";
 import { Protected } from "expo-router/build/views/Protected";
 import { useEffect, useState } from "react";
-import auth, { FirebaseAuthTypes } from "@react-native-firebase/auth";
+import { FirebaseAuthTypes, getAuth, onAuthStateChanged } from "@react-native-firebase/auth";
 
 export default function RootLayout() {
   const colorScheme = useColorScheme();
@@ -17,14 +17,14 @@ export default function RootLayout() {
   const [initializing, setInitializing] = useState(true);
   const [user, setUser] = useState<FirebaseAuthTypes.User | null>();
 
-  const onAuthStateChanged = (user: FirebaseAuthTypes.User | null) => {
+  const handleAuthStateChanged = (user: FirebaseAuthTypes.User | null) => {
     console.log("onAuthStateChanged", user);
     setUser(user);
     if (initializing) setInitializing(false);
   };
 
   useEffect(() => {
-    const subscriber = auth().onAuthStateChanged(onAuthStateChanged);
+    const subscriber = onAuthStateChanged(getAuth(), handleAuthStateChanged);
     return subscriber;
   }, []);
 
