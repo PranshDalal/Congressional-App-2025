@@ -1,4 +1,4 @@
-import { View, Text, StyleSheet, Dimensions } from "react-native";
+import { View, Text, StyleSheet, Dimensions, Easing } from "react-native";
 import React, { useEffect, useRef, useState } from "react";
 import BackgroundView from "@/components/BackgroundView";
 import globalStyles from "@/styles/globalStyles";
@@ -7,12 +7,17 @@ import TextButton from "@/components/TextButton";
 import theme from "@/styles/theme";
 import { Ionicons } from "@expo/vector-icons";
 import BouncingCircles from "@/components/BouncingCircles";
+import { Animated } from "react-native";
 
 const SessionScreen = () => {
   const [elapsed, setElapsed] = useState(0);
   const [stopwatchRunning, setStopwatchRunning] = useState(true);
   const intervalRef = useRef<number | null>(null);
   const startTimeRef = useRef<number>(Date.now());
+
+  const [speedMultiplier, setSpeedMultiplier] = useState(1);
+
+  const speedAnim = useRef(new Animated.Value(1)).current;
 
   useEffect(() => {
     if (stopwatchRunning) {
@@ -29,6 +34,21 @@ const SessionScreen = () => {
     };
   }, [stopwatchRunning]);
 
+  useEffect(() => {
+    Animated.timing(speedAnim, {
+      toValue: stopwatchRunning ? 1 : 0,
+      duration: 800, // ms, adjust for desired ease
+      useNativeDriver: false,
+      easing: Easing.inOut(Easing.ease),
+    }).start();
+  }, [stopwatchRunning]);
+
+  // Listen to speedAnim and update speedMultiplier
+  useEffect(() => {
+    const id = speedAnim.addListener(({ value }) => setSpeedMultiplier(value));
+    return () => speedAnim.removeListener(id);
+  }, [speedAnim]);
+
   return (
     <BackgroundView style={styles.container}>
       <BouncingCircles />
@@ -36,7 +56,7 @@ const SessionScreen = () => {
         <Text style={[globalStyles.header1, styles.stopwatchText]}>
           {formatTime(elapsed)}
         </Text>
-        <Text style={globalStyles.header2}>
+        <Text style={globalStyles.mutedText}>
           {stopwatchRunning ? "Collecting ambient data..." : "Paused"}
         </Text>
       </View>
