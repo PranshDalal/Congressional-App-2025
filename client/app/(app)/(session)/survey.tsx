@@ -16,7 +16,7 @@ const SurveyScreen = () => {
         </View>
 
         <View style={styles.bottomStickyView}>
-          <Link href="/(app)" replace asChild>
+          <Link href="/(app)/(tabs)" replace asChild>
             <TextButton
               title="Delete"
               variant="secondary"
@@ -24,7 +24,7 @@ const SurveyScreen = () => {
               width="45%"
             />
           </Link>
-          <Link href="/(app)" replace asChild>
+          <Link href="/(app)/(tabs)" replace asChild>
             <TextButton title="Save" onPress={() => {}} width="45%" />
           </Link>
         </View>
