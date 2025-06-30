@@ -4,13 +4,13 @@ import BackgroundView from "@/components/BackgroundView";
 import TextButton from "@/components/TextButton";
 import globalStyles from "@/styles/globalStyles";
 import { Link } from "expo-router";
-import auth from "@react-native-firebase/auth";
+import { getAuth } from "@react-native-firebase/auth";
 
 const IndexScreen = () => {
-  const user = auth().currentUser;
+  const user = getAuth().currentUser;
 
   const signOut = async () => {
-    await auth().signOut();
+    await getAuth().signOut();
   };
 
   return (
