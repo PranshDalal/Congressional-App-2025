@@ -1,23 +1,39 @@
 // rnfe
 
 import { View, Text } from "react-native";
-import React from "react";
+import React, { useState } from "react";
 import BackgroundView from "@/components/BackgroundView";
 import globalStyles from "@/styles/globalStyles";
 import SizedBox from "@/components/SizedBox";
 import TextButton from "@/components/TextButton";
 import { getAuth } from "@react-native-firebase/auth";
+import StyledModal from "@/components/StyledModal";
 
 const settings = () => {
+  const [signOutModalVisible, setSignOutModalVisible] = useState(false);
+
   const signOut = async () => {
     await getAuth().signOut();
-  }
+  };
 
   return (
     <BackgroundView withScreenPadding withSafeArea>
       <Text style={globalStyles.header1}>Settings</Text>
       <SizedBox height={50} />
-      <TextButton title="Sign Out" onPress={signOut} variant="secondary" />
+      <TextButton
+        title="Sign Out"
+        onPress={() => setSignOutModalVisible(true)}
+        variant="secondary"
+      />
+      <StyledModal
+        title="Sign Out"
+        body="Are you sure you want to sign out?"
+        type="ask"
+        submitButtonText="Sign Out"
+        visible={signOutModalVisible}
+        onSubmit={signOut}
+        setModalVisibleCallback={setSignOutModalVisible}
+      />
     </BackgroundView>
   );
 };

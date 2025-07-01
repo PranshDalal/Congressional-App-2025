@@ -2,14 +2,17 @@ import { View, Text, StyleSheet } from "react-native";
 import React, { useEffect, useRef, useState } from "react";
 import BackgroundView from "@/components/BackgroundView";
 import globalStyles from "@/styles/globalStyles";
-import { Link, useLocalSearchParams } from "expo-router";
+import { Link, useLocalSearchParams, useRouter } from "expo-router";
 import TextButton from "@/components/TextButton";
 import theme from "@/styles/theme";
 import { Ionicons } from "@expo/vector-icons";
 import BouncingCircles from "@/components/BouncingCircles";
 import RNSoundLevel from "react-native-sound-level";
+import StyledModal from "@/components/StyledModal";
 
 const SessionScreen = () => {
+  const router = useRouter();
+
   const [elapsed, setElapsed] = useState(0);
   const [isStopwatchRunning, setStopwatchRunning] = useState(true);
   const [dB, setDB] = useState(Number);
@@ -20,6 +23,8 @@ const SessionScreen = () => {
   const startTimeRef = useRef<number>(Date.now());
 
   const { "microphone-enabled": microphoneEnabled } = useLocalSearchParams();
+
+  const [endSessionModalVisible, setEndSessionModalVisible] = useState(false);
 
   useEffect(() => {
     if (isStopwatchRunning) {
@@ -96,10 +101,23 @@ const SessionScreen = () => {
           onPress={() => setStopwatchRunning((r) => !r)}
           width="45%"
         />
-        <Link href="/session/survey" replace asChild>
-          <TextButton title="End Session" onPress={() => {}} width="45%" />
-        </Link>
+        {/* <Link href="/session/survey" replace asChild> */}
+        <TextButton
+          title="End Session"
+          onPress={() => setEndSessionModalVisible(true)}
+          width="45%"
+        />
+        {/* </Link> */}
       </View>
+      <StyledModal
+        title={"End Session"}
+        body={"Are you sure you want to end the session?"}
+        visible={endSessionModalVisible}
+        setModalVisibleCallback={setEndSessionModalVisible}
+        type="ask"
+        onSubmit={() => router.replace("/session/survey")}
+        submitButtonText="End Session"
+      />
     </BackgroundView>
   );
 };

@@ -23,6 +23,8 @@ const colors = [
   "#9A6EA3", // Darker Orchid Pink
   "#7C5DAA", // Darker Violet
   "#8B7CA7", // Darker Pastel Purple
+  "#6CA08C", // Muted Green
+  "#6A7CA7", // Muted Blue
 ];
 
 const getRandomPosition = (size: number) => ({
