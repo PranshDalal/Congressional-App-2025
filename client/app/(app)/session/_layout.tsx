@@ -5,10 +5,10 @@ export default function SessionLayout() {
     <Stack
       screenOptions={{
         headerShown: false,
+        gestureEnabled: false,
       }}
     >
       <Stack.Screen name="index" />
-      {/* <Stack.Screen name="check-microphone" /> */}
       <Stack.Screen name="request-microphone" />
       <Stack.Screen name="survey" />
     </Stack>
