@@ -8,6 +8,8 @@ export default function SessionLayout() {
       }}
     >
       <Stack.Screen name="index" />
+      {/* <Stack.Screen name="check-microphone" /> */}
+      <Stack.Screen name="request-microphone" />
       <Stack.Screen name="survey" />
     </Stack>
   );

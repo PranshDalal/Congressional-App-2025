@@ -150,7 +150,7 @@ const SignupScreen = () => {
         <SizedBox height={25} />
         <View style={{ flexDirection: "row" }}>
           <Text style={globalStyles.mutedText}>Already have an account? </Text>
-          <Link href="/" style={globalStyles.linkText} replace>
+          <Link href="/sign-in" style={globalStyles.linkText} replace>
             Sign In
           </Link>
         </View>

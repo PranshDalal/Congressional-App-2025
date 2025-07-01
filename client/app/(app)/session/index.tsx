@@ -1,13 +1,13 @@
-import { View, Text, StyleSheet, Dimensions, Easing } from "react-native";
+import { View, Text, StyleSheet } from "react-native";
 import React, { useEffect, useRef, useState } from "react";
 import BackgroundView from "@/components/BackgroundView";
 import globalStyles from "@/styles/globalStyles";
-import { Link } from "expo-router";
+import { Link, useLocalSearchParams } from "expo-router";
 import TextButton from "@/components/TextButton";
 import theme from "@/styles/theme";
 import { Ionicons } from "@expo/vector-icons";
 import BouncingCircles from "@/components/BouncingCircles";
-import { Animated } from "react-native";
+import RNSoundLevel from "react-native-sound-level";
 
 const SessionScreen = () => {
   const [elapsed, setElapsed] = useState(0);
@@ -15,9 +15,7 @@ const SessionScreen = () => {
   const intervalRef = useRef<number | null>(null);
   const startTimeRef = useRef<number>(Date.now());
 
-  const [speedMultiplier, setSpeedMultiplier] = useState(1);
-
-  const speedAnim = useRef(new Animated.Value(1)).current;
+  const { "microphone-enabled": microphoneEnabled } = useLocalSearchParams();
 
   useEffect(() => {
     if (stopwatchRunning) {
@@ -35,19 +33,18 @@ const SessionScreen = () => {
   }, [stopwatchRunning]);
 
   useEffect(() => {
-    Animated.timing(speedAnim, {
-      toValue: stopwatchRunning ? 1 : 0,
-      duration: 800, // ms, adjust for desired ease
-      useNativeDriver: false,
-      easing: Easing.inOut(Easing.ease),
-    }).start();
-  }, [stopwatchRunning]);
+    if (microphoneEnabled === "true" && stopwatchRunning) {
+      RNSoundLevel.start();
 
-  // Listen to speedAnim and update speedMultiplier
-  useEffect(() => {
-    const id = speedAnim.addListener(({ value }) => setSpeedMultiplier(value));
-    return () => speedAnim.removeListener(id);
-  }, [speedAnim]);
+      RNSoundLevel.onNewFrame = (data) => {
+        console.log("dB:", data.value);
+      };
+
+      return () => {
+        RNSoundLevel.stop();
+      };
+    }
+  }, [microphoneEnabled, stopwatchRunning]);
 
   return (
     <BackgroundView style={styles.container}>
@@ -75,7 +72,7 @@ const SessionScreen = () => {
           onPress={() => setStopwatchRunning((r) => !r)}
           width="45%"
         />
-        <Link href="/survey" replace asChild>
+        <Link href="/session/survey" replace asChild>
           <TextButton title="End Session" onPress={() => {}} width="45%" />
         </Link>
       </View>
