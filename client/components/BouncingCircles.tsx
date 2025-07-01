@@ -1,6 +1,6 @@
 import React, { useMemo, useState } from "react";
 import { Dimensions, StyleSheet, View } from "react-native";
-import { MotiView } from "moti";
+import { MotiView, useAnimationState } from "moti";
 import { BlurView } from "expo-blur";
 import { Easing } from "react-native-reanimated";
 
@@ -95,15 +95,27 @@ const Circle = React.memo(({ index }: { index: number }) => {
   );
 });
 
-const BouncingCircles = () => {
+type BouncingCirclesProps = {
+  paused?: boolean;
+};
+
+const BouncingCircles = ({ paused = false }: BouncingCirclesProps) => {
   return (
-    <View style={styles.container} pointerEvents="none">
-      {Array.from({ length: 10 }).map((_, index) => (
-        <Circle key={index} index={index} />
-      ))}
+    <React.Fragment>
+      <MotiView
+        animate={{ opacity: paused ? 0 : 1 }}
+        transition={{ type: "timing", duration: 5000 }}
+        style={StyleSheet.absoluteFill}
+      >
+        <View style={styles.container} pointerEvents="none">
+          {Array.from({ length: 10 }).map((_, index) => (
+            <Circle key={index} index={index} />
+          ))}
+        </View>
+      </MotiView>
       <BlurView intensity={40} style={StyleSheet.absoluteFill} />
       <View style={styles.blurOverlay} />
-    </View>
+    </React.Fragment>
   );
 };
 

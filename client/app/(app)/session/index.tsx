@@ -72,7 +72,7 @@ const SessionScreen = () => {
 
   return (
     <BackgroundView style={styles.container}>
-      <BouncingCircles />
+      <BouncingCircles paused={!isStopwatchRunning} />
       <View style={styles.content}>
         <Text style={[globalStyles.header1, styles.stopwatchText]}>
           {formatTime(elapsed)}
