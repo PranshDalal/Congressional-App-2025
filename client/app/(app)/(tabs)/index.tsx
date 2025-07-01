@@ -1,13 +1,15 @@
 import { View, Text } from "react-native";
-import React, { useEffect } from "react";
+import React from "react";
 import BackgroundView from "@/components/BackgroundView";
 import TextButton from "@/components/TextButton";
 import globalStyles from "@/styles/globalStyles";
-import { Link } from "expo-router";
 import { getAuth } from "@react-native-firebase/auth";
+import { useStartSession } from "@/hooks/useStartSession";
+import SizedBox from "@/components/SizedBox";
 
 const IndexScreen = () => {
   const user = getAuth().currentUser;
+  const startSession = useStartSession();
 
   const signOut = async () => {
     await getAuth().signOut();
@@ -15,11 +17,12 @@ const IndexScreen = () => {
 
   return (
     <BackgroundView withSafeArea withScreenPadding>
-      <Text style={[globalStyles.header1]}>Welcome, {user?.displayName}</Text>
+      <Text style={[globalStyles.header1]}>Welcome back, {user?.displayName}</Text>
+      <SizedBox height={25} />
       <View style={{ alignItems: "center" }}>
-        <Link href="./(session)" replace asChild>
-          <TextButton title="Start Session" onPress={() => {}} />
-        </Link>
+        <Text style={globalStyles.bodyText}>Ready to lock in?</Text>
+        <TextButton title="Start Session" onPress={startSession} />
+        <SizedBox height={50} />
         <TextButton title="Sign Out" onPress={signOut} variant="secondary" />
       </View>
     </BackgroundView>

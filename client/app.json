@@ -13,7 +13,8 @@
       "bundleIdentifier": "com.pranshdalal.client",
       "googleServicesFile": "./GoogleService-Info.plist",
       "infoPlist": {
-        "ITSAppUsesNonExemptEncryption": false
+        "ITSAppUsesNonExemptEncryption": false,
+        "NSMicrophoneUsageDescription": "This app needs your microphone to measure ambient noise levels."
       }
     },
     "android": {
@@ -23,7 +24,8 @@
       },
       "edgeToEdgeEnabled": true,
       "package": "com.pranshdalal.client",
-      "googleServicesFile": "./google-services.json"
+      "googleServicesFile": "./google-services.json",
+      "permissions": ["RECORD_AUDIO"]
     },
     "web": {
       "bundler": "metro",
@@ -38,6 +40,12 @@
           "ios": {
             "useFrameworks": "static"
           }
+        }
+      ],
+      [
+        "react-native-permissions",
+        {
+          "iosPermissions": ["Microphone"]
         }
       ],
       "@react-native-firebase/app",
