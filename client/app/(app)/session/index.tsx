@@ -11,7 +11,7 @@ import RNSoundLevel from "react-native-sound-level";
 
 const SessionScreen = () => {
   const [elapsed, setElapsed] = useState(0);
-  const [stopwatchRunning, setStopwatchRunning] = useState(true);
+  const [isStopwatchRunning, setStopwatchRunning] = useState(true);
   const [dB, setDB] = useState(Number);
   const fakeConvertedDBRef = useRef(-1);
   const [fakeRenderDB, setFakeRenderDB] = useState(-1);
@@ -22,7 +22,7 @@ const SessionScreen = () => {
   const { "microphone-enabled": microphoneEnabled } = useLocalSearchParams();
 
   useEffect(() => {
-    if (stopwatchRunning) {
+    if (isStopwatchRunning) {
       startTimeRef.current = Date.now() - elapsed;
       intervalRef.current = setInterval(() => {
         setElapsed(Date.now() - startTimeRef.current);
@@ -34,11 +34,11 @@ const SessionScreen = () => {
     return () => {
       if (intervalRef.current) clearInterval(intervalRef.current);
     };
-  }, [stopwatchRunning]);
+  }, [isStopwatchRunning]);
 
   // #region Microphone
   useEffect(() => {
-    if (microphoneEnabled === "true" && stopwatchRunning) {
+    if (microphoneEnabled === "true" && isStopwatchRunning) {
       RNSoundLevel.start();
 
       RNSoundLevel.onNewFrame = (data) => {
@@ -49,7 +49,7 @@ const SessionScreen = () => {
       };
 
       const dBUpdateInterval = setInterval(() => {
-        if (stopwatchRunning) {
+        if (isStopwatchRunning) {
           setFakeRenderDB(fakeConvertedDBRef.current);
         } else {
           setFakeRenderDB(-1);
@@ -61,7 +61,7 @@ const SessionScreen = () => {
         clearInterval(dBUpdateInterval);
       };
     }
-  }, [microphoneEnabled, stopwatchRunning]);
+  }, [microphoneEnabled, isStopwatchRunning]);
 
   // #endregion
 
@@ -73,10 +73,10 @@ const SessionScreen = () => {
           {formatTime(elapsed)}
         </Text>
         <Text style={globalStyles.mutedText}>
-          {stopwatchRunning ? "Collecting ambient data..." : "Paused"}
+          {isStopwatchRunning ? "Collecting ambient data..." : "Paused"}
         </Text>
         <Text style={globalStyles.mutedText}>
-          {stopwatchRunning && fakeRenderDB != -1
+          {isStopwatchRunning && fakeRenderDB != -1
             ? "Sound level: " + fakeRenderDB + " dB"
             : ""}
         </Text>
@@ -86,7 +86,7 @@ const SessionScreen = () => {
         <TextButton
           title=""
           icon={
-            stopwatchRunning ? (
+            isStopwatchRunning ? (
               <Ionicons name="pause" size={18} color={theme.colors.text} />
             ) : (
               <Ionicons name="play" size={18} color={theme.colors.text} />
@@ -113,8 +113,7 @@ const styles = StyleSheet.create({
   },
   content: {
     flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
+    ...globalStyles.centered,
   },
   bottomStickyView: {
     flexDirection: "row",
