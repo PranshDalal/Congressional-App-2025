@@ -12,6 +12,10 @@ import RNSoundLevel from "react-native-sound-level";
 const SessionScreen = () => {
   const [elapsed, setElapsed] = useState(0);
   const [stopwatchRunning, setStopwatchRunning] = useState(true);
+  const [dB, setDB] = useState(Number);
+  const fakeConvertedDBRef = useRef(-1);
+  const [fakeRenderDB, setFakeRenderDB] = useState(-1);
+
   const intervalRef = useRef<number | null>(null);
   const startTimeRef = useRef<number>(Date.now());
 
@@ -32,19 +36,34 @@ const SessionScreen = () => {
     };
   }, [stopwatchRunning]);
 
+  // #region Microphone
   useEffect(() => {
     if (microphoneEnabled === "true" && stopwatchRunning) {
       RNSoundLevel.start();
 
       RNSoundLevel.onNewFrame = (data) => {
-        console.log("dB:", data.value);
+        // console.log("Sound level:", data.value);
+        setDB(data.value);
+        const readableDB = Math.round(data.value + 110);
+        fakeConvertedDBRef.current = readableDB;
       };
+
+      const dBUpdateInterval = setInterval(() => {
+        if (stopwatchRunning) {
+          setFakeRenderDB(fakeConvertedDBRef.current);
+        } else {
+          setFakeRenderDB(-1);
+        }
+      }, 1000);
 
       return () => {
         RNSoundLevel.stop();
+        clearInterval(dBUpdateInterval);
       };
     }
   }, [microphoneEnabled, stopwatchRunning]);
+
+  // #endregion
 
   return (
     <BackgroundView style={styles.container}>
@@ -55,6 +74,11 @@ const SessionScreen = () => {
         </Text>
         <Text style={globalStyles.mutedText}>
           {stopwatchRunning ? "Collecting ambient data..." : "Paused"}
+        </Text>
+        <Text style={globalStyles.mutedText}>
+          {stopwatchRunning && fakeRenderDB != -1
+            ? "Sound level: " + fakeRenderDB + " dB"
+            : ""}
         </Text>
       </View>
 
