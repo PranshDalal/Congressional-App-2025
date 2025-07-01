@@ -37,7 +37,7 @@ const SurveyScreen = () => {
         type="ask"
         submitButtonText="Delete Session"
         visible={deleteModalVisible}
-        onSubmit={() => router.replace("/")}
+        onSubmit={() => router.push("/")}
         setModalVisibleCallback={setDeleteModalVisible}
       />
     </BackgroundView>

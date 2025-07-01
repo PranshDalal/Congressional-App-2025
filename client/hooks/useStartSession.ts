@@ -24,12 +24,12 @@ export function useStartSession() {
     const result = await check(type!);
 
     if (result === RESULTS.GRANTED) {
-      router.replace({
+      router.push({
         pathname: "/session",
         params: { "microphone-enabled": "true" },
       });
     } else {
-      router.replace({
+      router.push({
         pathname: "/session/request-microphone",
         params: { "microphone-status": result },
       });

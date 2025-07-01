@@ -33,6 +33,11 @@ const StyledModal = ({
   onSubmit = () => {},
   setModalVisibleCallback,
 }: StyledModalProps) => {
+  const submitCallback = () => {
+    setModalVisibleCallback(false);
+    onSubmit();
+  };
+
   return (
     <Modal
       visible={visible}
@@ -44,30 +49,33 @@ const StyledModal = ({
         onPress={() => setModalVisibleCallback(false)}
         accessible={false}
       >
-          <BlurView intensity={20} style={[globalStyles.centered, { flex: 1 }]}>
-            <View style={styles.background}>
-              <View style={globalStyles.centered}>
-                <Text style={globalStyles.header2}>{title}</Text>
-                <SizedBox height={theme.spacing.sm} />
-                <Text style={globalStyles.mutedText}>{body}</Text>
-              </View>
-              <View>
-                <SizedBox height={theme.spacing.lg} />
-
-                {type === "ask" ? (
-                  <React.Fragment>
-                    <TextButton title={submitButtonText} onPress={onSubmit} />
-                    <SizedBox height={theme.spacing.sm} />
-                  </React.Fragment>
-                ) : null}
-                <TextButton
-                  title={type === "ask" ? cancelButtonText : "Ok"}
-                  onPress={() => setModalVisibleCallback(false)}
-                  variant="secondary"
-                />
-              </View>
+        <BlurView intensity={20} style={[globalStyles.centered, { flex: 1 }]}>
+          <View style={styles.background}>
+            <View style={globalStyles.centered}>
+              <Text style={globalStyles.header2}>{title}</Text>
+              <SizedBox height={theme.spacing.sm} />
+              <Text style={globalStyles.mutedText}>{body}</Text>
             </View>
-          </BlurView>
+            <View>
+              <SizedBox height={theme.spacing.lg} />
+
+              {type === "ask" ? (
+                <React.Fragment>
+                  <TextButton
+                    title={submitButtonText}
+                    onPress={submitCallback}
+                  />
+                  <SizedBox height={theme.spacing.sm} />
+                </React.Fragment>
+              ) : null}
+              <TextButton
+                title={type === "ask" ? cancelButtonText : "Ok"}
+                onPress={() => setModalVisibleCallback(false)}
+                variant="secondary"
+              />
+            </View>
+          </View>
+        </BlurView>
       </TouchableWithoutFeedback>
     </Modal>
   );

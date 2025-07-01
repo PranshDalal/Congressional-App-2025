@@ -101,13 +101,11 @@ const SessionScreen = () => {
           onPress={() => setStopwatchRunning((r) => !r)}
           width="45%"
         />
-        {/* <Link href="/session/survey" replace asChild> */}
         <TextButton
           title="End Session"
           onPress={() => setEndSessionModalVisible(true)}
           width="45%"
         />
-        {/* </Link> */}
       </View>
       <StyledModal
         title={"End Session"}
@@ -115,7 +113,7 @@ const SessionScreen = () => {
         visible={endSessionModalVisible}
         setModalVisibleCallback={setEndSessionModalVisible}
         type="ask"
-        onSubmit={() => router.replace("/session/survey")}
+        onSubmit={() => router.push("/session/survey")}
         submitButtonText="End Session"
       />
     </BackgroundView>
