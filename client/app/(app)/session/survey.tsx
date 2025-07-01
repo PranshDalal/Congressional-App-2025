@@ -1,13 +1,17 @@
 import { View, Text, StyleSheet } from "react-native";
-import React from "react";
+import React, { useState } from "react";
 import BackgroundView from "@/components/BackgroundView";
 import { SafeAreaView } from "react-native-safe-area-context";
 import globalStyles from "@/styles/globalStyles";
-import { Link } from "expo-router";
+import { Link, useRouter } from "expo-router";
 import TextButton from "@/components/TextButton";
 import theme from "@/styles/theme";
+import StyledModal from "@/components/StyledModal";
 
 const SurveyScreen = () => {
+  const router = useRouter();
+  const [deleteModalVisible, setDeleteModalVisible] = useState(false);
+
   return (
     <BackgroundView>
       <SafeAreaView style={{ flex: 1 }}>
@@ -16,19 +20,26 @@ const SurveyScreen = () => {
         </View>
 
         <View style={styles.bottomStickyView}>
-          <Link href="/(app)/(tabs)" replace asChild>
-            <TextButton
-              title="Delete"
-              variant="secondary"
-              onPress={() => {}}
-              width="45%"
-            />
-          </Link>
-          <Link href="/(app)/(tabs)" replace asChild>
+          <TextButton
+            title="Delete"
+            variant="secondary"
+            onPress={() => setDeleteModalVisible(true)}
+            width="45%"
+          />
+          <Link href="/" replace asChild>
             <TextButton title="Save" onPress={() => {}} width="45%" />
           </Link>
         </View>
       </SafeAreaView>
+      <StyledModal
+        title="Delete Session"
+        body="Are you sure you want to delete this session?"
+        type="ask"
+        submitButtonText="Delete Session"
+        visible={deleteModalVisible}
+        onSubmit={() => router.replace("/")}
+        setModalVisibleCallback={setDeleteModalVisible}
+      />
     </BackgroundView>
   );
 };
