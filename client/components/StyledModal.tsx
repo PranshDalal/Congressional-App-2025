@@ -84,10 +84,12 @@ const StyledModal = ({
 const styles = StyleSheet.create({
   background: {
     backgroundColor: theme.colors.bg,
-    width: "90%",
+    width: "92%",
     paddingHorizontal: theme.spacing.lg,
     paddingVertical: theme.spacing.md,
     borderRadius: theme.radii.lg,
+    borderWidth: 1,
+    borderColor: theme.colors.bgLight,
   },
 });
 
