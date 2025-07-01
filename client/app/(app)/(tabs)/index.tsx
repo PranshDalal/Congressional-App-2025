@@ -11,20 +11,14 @@ const IndexScreen = () => {
   const user = getAuth().currentUser;
   const startSession = useStartSession();
 
-  const signOut = async () => {
-    await getAuth().signOut();
-  };
-
   return (
     <BackgroundView withSafeArea withScreenPadding>
       <Text style={[globalStyles.header1]}>Welcome back, {user?.displayName}</Text>
       <SizedBox height={25} />
-      <View style={{ alignItems: "center" }}>
+      {/* <View style={{ alignItems: "center" }}> */}
         <Text style={globalStyles.bodyText}>Ready to lock in?</Text>
         <TextButton title="Start Session" onPress={startSession} />
-        <SizedBox height={50} />
-        <TextButton title="Sign Out" onPress={signOut} variant="secondary" />
-      </View>
+      {/* </View> */}
     </BackgroundView>
   );
 };
