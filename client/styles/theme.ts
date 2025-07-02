@@ -28,6 +28,7 @@ export const theme = {
     sm: 4,
     md: 8,
     lg: 12,
+    full: 36
   },
   screenWidth: width,
   screenHeight: height,

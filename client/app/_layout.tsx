@@ -9,7 +9,14 @@ import {
 import { StatusBar } from "expo-status-bar";
 import { Protected } from "expo-router/build/views/Protected";
 import { useEffect, useState } from "react";
-import { FirebaseAuthTypes, getAuth, onAuthStateChanged } from "@react-native-firebase/auth";
+import {
+  FirebaseAuthTypes,
+  getAuth,
+  onAuthStateChanged,
+} from "@react-native-firebase/auth";
+
+import Toast from "react-native-toast-message";
+import toastConfig from "@/components/toast/ToastConfig";
 
 export default function RootLayout() {
   const colorScheme = useColorScheme();
@@ -29,7 +36,8 @@ export default function RootLayout() {
   }, []);
 
   return (
-    <ThemeProvider value={DarkTheme}>{/* value={colorScheme === "dark" ? DarkTheme : DefaultTheme}> */}
+    <ThemeProvider value={DarkTheme}>
+      {/* value={colorScheme === "dark" ? DarkTheme : DefaultTheme}> */}
       <Stack>
         <Protected guard={user === null}>
           <Stack.Screen name="(auth)" options={{ headerShown: false }} />
@@ -39,6 +47,7 @@ export default function RootLayout() {
         </Protected>
         <Stack.Screen name="+not-found" />
       </Stack>
+      <Toast config={toastConfig} topOffset={55}/>
       <StatusBar style="light" />
     </ThemeProvider>
   );

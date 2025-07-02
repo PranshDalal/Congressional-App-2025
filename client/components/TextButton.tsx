@@ -10,6 +10,7 @@ import React from "react";
 import theme from "@/styles/theme";
 import globalStyles from "@/styles/globalStyles";
 import * as Haptics from "expo-haptics";
+import BouncingDots from "./BouncingDots";
 
 type ButtonProps = {
   title: string;
@@ -19,6 +20,8 @@ type ButtonProps = {
   textStyle?: TextStyle;
   width?: any;
   icon?: React.ReactNode;
+  showLoading?: boolean;
+  stopPressIfLoading?: boolean;
 };
 
 export default function TextButton({
@@ -29,13 +32,20 @@ export default function TextButton({
   textStyle,
   width = undefined,
   icon,
+  showLoading = false,
+  stopPressIfLoading = true,
 }: ButtonProps) {
-  function buttonPressed() {
-    if (variant === "primary") {
-      Haptics.selectionAsync();
+  const isInteractable = () => !showLoading || !stopPressIfLoading;
+
+  const buttonPressed = () => {
+    if (isInteractable()) {
+      if (variant === "primary") {
+        Haptics.selectionAsync();
+      }
+
+      onPress();
     }
-    onPress();
-  }
+  };
   return (
     <Pressable
       onPress={buttonPressed}
@@ -43,7 +53,7 @@ export default function TextButton({
         styles.base,
         { width: width },
         variant === "primary" ? styles.primary : styles.secondary,
-        pressed && styles.pressed,
+        pressed && isInteractable() && styles.pressed,
         style,
       ]}
     >
@@ -54,10 +64,26 @@ export default function TextButton({
           justifyContent: "center",
         }}
       >
-        {icon && (
-          <View style={{ marginRight: title.length != 0 ? 8 : 0 }}>{icon}</View>
+        {showLoading ? (
+          <View
+            style={{
+              height:
+                textStyle?.fontSize ?? globalStyles.bodyText.fontSize * 1.2,
+              alignItems: "center",
+            }}
+          >
+            <BouncingDots />
+          </View>
+        ) : (
+          <React.Fragment>
+            {icon && (
+              <View style={{ marginRight: title.length != 0 ? 8 : 0 }}>
+                {icon}
+              </View>
+            )}
+            <Text style={[globalStyles.bodyText, textStyle]}>{title}</Text>
+          </React.Fragment>
         )}
-        <Text style={[globalStyles.bodyText, textStyle]}>{title}</Text>
       </View>
     </Pressable>
   );
@@ -77,8 +103,8 @@ const styles = StyleSheet.create({
     backgroundColor: theme.colors.bgLight,
     borderWidth: 1,
     borderColor: theme.colors.border,
-    paddingVertical: theme.spacing.md-1,
-    paddingHorizontal: theme.spacing.lg-1,
+    paddingVertical: theme.spacing.md - 1,
+    paddingHorizontal: theme.spacing.lg - 1,
   },
   pressed: {
     opacity: 0.8,

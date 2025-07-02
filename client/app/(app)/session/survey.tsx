@@ -7,10 +7,27 @@ import { Link, useRouter } from "expo-router";
 import TextButton from "@/components/TextButton";
 import theme from "@/styles/theme";
 import StyledModal from "@/components/StyledModal";
+import Toast from "react-native-toast-message";
 
 const SurveyScreen = () => {
   const router = useRouter();
   const [deleteModalVisible, setDeleteModalVisible] = useState(false);
+
+  const saveSession = () => {
+    Toast.show({
+      type: "success",
+      text1: "Saved session",
+    });
+    router.push("/");
+  };
+
+  const deleteSession = () => {
+    Toast.show({
+      type: "error",
+      text1: "Deleted session",
+    });
+    router.push("/");
+  };
 
   return (
     <BackgroundView>
@@ -26,9 +43,7 @@ const SurveyScreen = () => {
             onPress={() => setDeleteModalVisible(true)}
             width="45%"
           />
-          <Link href="/" replace asChild>
-            <TextButton title="Save" onPress={() => {}} width="45%" />
-          </Link>
+          <TextButton title="Save" onPress={saveSession} width="45%" />
         </View>
       </SafeAreaView>
       <StyledModal
@@ -37,7 +52,7 @@ const SurveyScreen = () => {
         type="ask"
         submitButtonText="Delete Session"
         visible={deleteModalVisible}
-        onSubmit={() => router.push("/")}
+        onSubmit={deleteSession}
         setModalVisibleCallback={setDeleteModalVisible}
       />
     </BackgroundView>
