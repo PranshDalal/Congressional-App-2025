@@ -42,12 +42,11 @@ const AskMicrophonePermissionScreen = () => {
       </Text>
       <Text style={globalStyles.header3}>analyze ambient sound levels</Text>
 
-      {microphoneStatus === RESULTS.DENIED ||
-      microphoneStatus === RESULTS.BLOCKED ? (
+      {microphoneStatus === RESULTS.BLOCKED ? (
         <TextButton title="Open Settings" onPress={openSettings} />
-      ) : (
+      ) : microphoneStatus === RESULTS.DENIED ? (
         <TextButton title="Next" onPress={requestPermission} />
-      )}
+      ) : null}
     </BackgroundView>
   );
 };
