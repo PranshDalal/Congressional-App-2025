@@ -1,5 +1,5 @@
-import React, { useMemo, useState } from "react";
-import { Dimensions, StyleSheet, View } from "react-native";
+import React, { useEffect, useMemo, useState } from "react";
+import { Dimensions, Platform, StyleSheet, View, Text } from "react-native";
 import { MotiView, useAnimationState } from "moti";
 import { BlurView } from "expo-blur";
 import { Easing } from "react-native-reanimated";
@@ -113,11 +113,14 @@ const BouncingCircles = ({ paused = false }: BouncingCirclesProps) => {
           ))}
         </View>
       </MotiView>
-      <BlurView
-        intensity={40}
-        style={StyleSheet.absoluteFill}
-        experimentalBlurMethod="dimezisBlurView" // NOTE: BLUR DOESN'T WORK WITH ANDROID, THIS IS NEEDED TO GET IT TO WORK (but looks a bit strange)
-      />
+
+      {Platform.OS === "ios" ? (
+        <BlurView
+          intensity={40}
+          style={StyleSheet.absoluteFill}
+          experimentalBlurMethod="dimezisBlurView" // NOTE: BLUR DOESN'T WORK WITH ANDROID, THIS IS NEEDED TO GET IT TO WORK (but looks a bit strange)
+        />
+      ) : null}
       <View style={styles.blurOverlay} />
     </React.Fragment>
   );
