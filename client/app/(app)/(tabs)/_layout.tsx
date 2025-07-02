@@ -6,6 +6,7 @@ import { HapticTab } from "@/components/HapticTab";
 import { IconSymbol } from "@/components/ui/IconSymbol";
 import TabBarBackground from "@/components/ui/TabBarBackground";
 import theme from "@/styles/theme";
+import { Ionicons } from "@expo/vector-icons";
 
 export default function TabLayout() {
   return (
@@ -30,9 +31,9 @@ export default function TabLayout() {
         options={{
           title: "Home",
           tabBarIcon: ({ color, focused }) => (
-            <IconSymbol
-              size={28}
-              name={focused ? "house.fill" : "house"}
+            <Ionicons
+              size={26}
+              name={focused ? "home" : "home-outline"}
               color={color}
             />
           ),
@@ -43,9 +44,9 @@ export default function TabLayout() {
         options={{
           title: "Settings",
           tabBarIcon: ({ color, focused }) => (
-            <IconSymbol
-              size={28}
-              name={focused ? "gearshape.fill" : "gearshape"}
+            <Ionicons
+              size={26}
+              name={focused ? "settings" : "settings-outline"}
               color={color}
             />
           ),

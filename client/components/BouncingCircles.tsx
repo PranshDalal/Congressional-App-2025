@@ -113,7 +113,11 @@ const BouncingCircles = ({ paused = false }: BouncingCirclesProps) => {
           ))}
         </View>
       </MotiView>
-      <BlurView intensity={40} style={StyleSheet.absoluteFill} />
+      <BlurView
+        intensity={40}
+        style={StyleSheet.absoluteFill}
+        experimentalBlurMethod="dimezisBlurView" // NOTE: BLUR DOESN'T WORK WITH ANDROID, THIS IS NEEDED TO GET IT TO WORK (but looks a bit strange)
+      />
       <View style={styles.blurOverlay} />
     </React.Fragment>
   );

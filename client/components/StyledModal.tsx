@@ -49,7 +49,11 @@ const StyledModal = ({
         onPress={() => setModalVisibleCallback(false)}
         accessible={false}
       >
-        <BlurView intensity={20} style={[globalStyles.centered, { flex: 1 }]}>
+        <BlurView
+          intensity={20}
+          style={[globalStyles.centered, { flex: 1 }]}
+          experimentalBlurMethod="dimezisBlurView"
+        >
           <View style={styles.background}>
             <View style={globalStyles.centered}>
               <Text style={globalStyles.header2}>{title}</Text>
