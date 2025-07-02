@@ -10,8 +10,12 @@ import { Link } from "expo-router";
 import DismissKeyboard from "@/components/DismissKeyboard";
 import auth, { getAuth } from "@react-native-firebase/auth";
 import { FirebaseError } from "firebase/app";
+import Toast from "react-native-toast-message";
+import { useFirebaseErrorHandler } from "@/hooks/useFirebaseErrorHandler";
 
 const SignupScreen = () => {
+  const { handleFirebaseError } = useFirebaseErrorHandler();
+
   const [name, setName] = useState("");
   const [nameError, setNameError] = useState("");
 
@@ -32,6 +36,8 @@ const SignupScreen = () => {
   const inputPasswordVerificationRef = useRef<TextInput>(null);
 
   const handleSignUp = async () => {
+    if (loading) return;
+
     setNameError("");
     setEmailError("");
     setPasswordError("");
@@ -74,11 +80,19 @@ const SignupScreen = () => {
 
     setLoading(true);
     try {
-      const user = await getAuth().createUserWithEmailAndPassword(email, password);
+      const user = await getAuth().createUserWithEmailAndPassword(
+        email,
+        password
+      );
       await user.user.updateProfile({ displayName: name });
+      Toast.show({
+        type: "success",
+        text1: "Signed up",
+      });
     } catch (e: any) {
       const err = e as FirebaseError;
-      alert("Registration failed: " + err.message);
+      handleFirebaseError(err);
+      return;
     } finally {
       setLoading(false);
     }

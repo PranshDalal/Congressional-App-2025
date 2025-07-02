@@ -7,17 +7,21 @@ import { getAuth } from "@react-native-firebase/auth";
 import { useStartSession } from "@/hooks/useStartSession";
 import SizedBox from "@/components/SizedBox";
 
+import Toast from "react-native-toast-message";
+
 const IndexScreen = () => {
   const user = getAuth().currentUser;
   const startSession = useStartSession();
 
   return (
     <BackgroundView withSafeArea withScreenPadding>
-      <Text style={[globalStyles.header1]}>Welcome back, {user?.displayName}</Text>
+      <Text style={[globalStyles.header1]}>
+        Welcome back, {user?.displayName}
+      </Text>
       <SizedBox height={25} />
       {/* <View style={{ alignItems: "center" }}> */}
-        <Text style={globalStyles.bodyText}>Ready to lock in?</Text>
-        <TextButton title="Start Session" onPress={startSession} />
+      <Text style={globalStyles.bodyText}>Ready to lock in?</Text>
+      <TextButton title="Start Session" onPress={startSession} />
       {/* </View> */}
     </BackgroundView>
   );

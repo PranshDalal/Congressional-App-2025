@@ -8,10 +8,14 @@ import TextButton from "@/components/TextButton";
 import theme from "@/styles/theme";
 import { Link } from "expo-router";
 import DismissKeyboard from "@/components/DismissKeyboard";
-import { getAuth } from "@react-native-firebase/auth";
+import { getAuth, sendPasswordResetEmail } from "@react-native-firebase/auth";
 import { FirebaseError } from "firebase/app";
+import Toast from "react-native-toast-message";
+import { useFirebaseErrorHandler } from "@/hooks/useFirebaseErrorHandler";
 
 const SigninScreen = () => {
+  const { handleFirebaseError } = useFirebaseErrorHandler();
+
   const [email, setEmail] = useState("");
   const [emailError, setEmailError] = useState("");
 
@@ -19,10 +23,13 @@ const SigninScreen = () => {
   const [passwordError, setPasswordError] = useState("");
 
   const [loading, setLoading] = useState(false);
+  const [emailResetCooldown, setEmailResetCooldown] = useState(Date.now());
 
   const inputPasswordRef = useRef<TextInput>(null);
 
   const handleSignIn = async () => {
+    if (loading) return;
+
     setEmailError("");
     setPasswordError("");
 
@@ -38,23 +45,59 @@ const SigninScreen = () => {
     setLoading(true);
     try {
       await getAuth().signInWithEmailAndPassword(email, password);
+      Toast.show({
+        type: "success",
+        text1: "Signed in",
+      });
     } catch (e: any) {
       const err = e as FirebaseError;
-      alert("Registration failed: " + err.message);
+      handleFirebaseError(err);
+      return;
     } finally {
       setLoading(false);
     }
-  }
+  };
 
-  const forgotPassword = () => {
+  const forgotPassword = async () => {
+    if (loading) return;
+
     setEmailError("");
     setPasswordError("");
+
+    if (emailResetCooldown - Date.now() > 0) {
+      Toast.show({
+        type: "error",
+        text1:
+          "Too fast! Try again in " +
+          Math.floor((emailResetCooldown - Date.now()) / 1000) +
+          " seconds",
+      });
+      return;
+    }
 
     if (email.length == 0) {
       setEmailError("This field is required");
       return;
     }
-  }
+
+    setLoading(true);
+    try {
+      await sendPasswordResetEmail(getAuth(), email);
+      Toast.show({
+        text1: "Password reset email sent",
+      });
+      setEmailResetCooldown(Date.now() + 60000);
+      // setTimeout(() => setEmailResetCooldown(false), 60000);
+    } catch (e: any) {
+      const err = e as FirebaseError;
+      Toast.show({
+        type: "error",
+        text1: "Error sending email: " + err.code,
+      });
+    } finally {
+      setLoading(false);
+    }
+  };
 
   return (
     <DismissKeyboard>
@@ -90,13 +133,8 @@ const SigninScreen = () => {
           error={passwordError}
         />
         <SizedBox height={5} />
-        <Pressable
-          onPress={forgotPassword}
-          style={{ alignSelf: "flex-start" }}
-        >
-          <Text style={globalStyles.linkText}>
-            Forgot your password?
-          </Text>
+        <Pressable onPress={forgotPassword} style={{ alignSelf: "flex-start" }}>
+          <Text style={globalStyles.linkText}>Forgot your password?</Text>
         </Pressable>
         <SizedBox height={20} />
         <TextButton
@@ -104,6 +142,7 @@ const SigninScreen = () => {
           onPress={handleSignIn}
           width="100%"
           textStyle={{ fontWeight: theme.fontWeight.semibold }}
+          showLoading={loading}
         />
         <SizedBox height={25} />
         <View style={{ flexDirection: "row" }}>
