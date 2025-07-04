@@ -9,6 +9,7 @@ import { Ionicons } from "@expo/vector-icons";
 import BouncingCircles from "@/components/BouncingCircles";
 import RNSoundLevel from "react-native-sound-level";
 import StyledModal from "@/components/StyledModal";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 const SessionScreen = () => {
   const router = useRouter();
@@ -87,7 +88,7 @@ const SessionScreen = () => {
         </Text>
       </View>
 
-      <View style={styles.bottomStickyView}>
+      <SafeAreaView edges={["bottom"]} style={styles.bottomStickyView}>
         <TextButton
           title=""
           icon={
@@ -106,7 +107,7 @@ const SessionScreen = () => {
           onPress={() => setEndSessionModalVisible(true)}
           width="45%"
         />
-      </View>
+      </SafeAreaView>
       <StyledModal
         title={"End Session"}
         body={"Are you sure you want to end the session?"}
@@ -135,7 +136,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-evenly",
     alignItems: "center",
-    paddingBottom: theme.spacing.xl,
+    // paddingBottom: theme.spacing.xl,
     paddingTop: theme.spacing.md,
     position: "absolute",
     left: 0,
