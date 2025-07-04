@@ -10,6 +10,7 @@ export const firebaseErrorMessages: Record<string, string> = {
   "auth/weak-password": "Password should be at least 6 characters",
   "auth/network-request-failed": "Network error. Please check network settings",
   "auth/internal-error": "An internal error occured",
+  "auth/too-many-requests": "Slow down! Try again later"
 };
 
 export function useFirebaseErrorHandler() {
