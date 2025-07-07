@@ -30,6 +30,8 @@ const AskMicrophonePermissionScreen = () => {
 
   const { "microphone-status": microphoneStatus } = useLocalSearchParams();
 
+  const [openedSettings, setOpenedSettings] = useState(false);
+
   const requestPermission = async () => {
     const type = getMicrophonePermissionType();
     const result = await request(type!);
@@ -46,20 +48,25 @@ const AskMicrophonePermissionScreen = () => {
   };
 
   const requestPermissionThroughSettings = async () => {
+    setOpenedSettings(true);
     await openSettings();
 
     const type = getMicrophonePermissionType();
     const result = await check(type!);
 
-    // router.navigate({
-    //   pathname: "./",
-    //   params: {
-    //     "microphone-enabled":
-    //       result === RESULTS.GRANTED || result === RESULTS.LIMITED
-    //         ? "true"
-    //         : "false",
-    //   },
-    // });
+    // routeToSession(result);
+  };
+
+  const routeToSession = (result: string) => {
+    router.navigate({
+      pathname: "./",
+      params: {
+        "microphone-enabled":
+          result === RESULTS.GRANTED || result === RESULTS.LIMITED
+            ? "true"
+            : "false",
+      },
+    });
   };
 
   return (
@@ -76,19 +83,25 @@ const AskMicrophonePermissionScreen = () => {
         reccomendations.
       </Text>
       <SafeAreaView style={styles.bottomStickyView} edges={["bottom"]}>
-        {microphoneStatus === RESULTS.BLOCKED ? (
+        {microphoneStatus === RESULTS.BLOCKED && !openedSettings ? (
           <TextButton
             title="Open Settings"
             onPress={requestPermissionThroughSettings}
             width={"90%"}
           />
-        ) : microphoneStatus === RESULTS.DENIED ? (
+        ) : microphoneStatus === RESULTS.DENIED && !openedSettings ? (
           <TextButton
             title="Continue"
             onPress={requestPermission}
             width={"90%"}
           />
-        ) : null}
+        ) : (
+          <TextButton
+            title="Continue"
+            onPress={() => routeToSession("false")}
+            width={"90%"}
+          />
+        )}
       </SafeAreaView>
     </BackgroundView>
   );
