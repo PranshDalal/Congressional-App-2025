@@ -51,8 +51,8 @@ const AskMicrophonePermissionScreen = () => {
     setOpenedSettings(true);
     await openSettings();
 
-    const type = getMicrophonePermissionType();
-    const result = await check(type!);
+    // const type = getMicrophonePermissionType();
+    // const result = await check(type!);
 
     // routeToSession(result);
   };
