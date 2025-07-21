@@ -1,6 +1,12 @@
-import React from 'react';
-import { View, Text, Pressable, Dimensions } from 'react-native';
-import { StyleSheet } from 'react-native';
+import React, { useEffect, useRef } from 'react';
+import {
+  View,
+  Text,
+  Pressable,
+  PanResponder,
+  Dimensions,
+  StyleSheet,
+} from 'react-native';
 import theme from '@/styles/theme';
 
 interface CustomSliderProps {
@@ -12,6 +18,7 @@ interface CustomSliderProps {
   minimumTrackTintColor?: string;
   maximumTrackTintColor?: string;
   style?: any;
+  showValue?: boolean;
 }
 
 const CustomSlider: React.FC<CustomSliderProps> = ({
@@ -23,29 +30,69 @@ const CustomSlider: React.FC<CustomSliderProps> = ({
   minimumTrackTintColor = theme.colors.primary,
   maximumTrackTintColor = theme.colors.textMuted,
   style,
+  showValue = true,
 }) => {
-  const SLIDER_WIDTH = Dimensions.get('window').width - 64; 
-  const THUMB_SIZE = 20;
+  const SLIDER_WIDTH = Dimensions.get('window').width - 64;
+  const THUMB_SIZE = 24;
 
-  const percentage = (value - minimumValue) / (maximumValue - minimumValue);
-  const thumbPosition = percentage * (SLIDER_WIDTH - THUMB_SIZE);
-  const fillWidth = percentage * SLIDER_WIDTH;
+  // Sync thumb position when `value` changes externally
 
-  const handlePress = (event: any) => {
-    const locationX = event.nativeEvent.locationX;
-    const newPercentage = locationX / SLIDER_WIDTH;
-    const newValue = minimumValue + newPercentage * (maximumValue - minimumValue);
-    const steppedValue = Math.round(newValue / step) * step;
-    const clampedValue = Math.max(minimumValue, Math.min(maximumValue, steppedValue));
-    onValueChange(clampedValue);
+  const calculateValueFromPosition = (x: number) => {
+    const clampedX = Math.max(0, Math.min(x, SLIDER_WIDTH - THUMB_SIZE));
+    const percentage = clampedX / (SLIDER_WIDTH - THUMB_SIZE);
+    const rawValue = minimumValue + percentage * (maximumValue - minimumValue);
+    const stepped = Math.round(rawValue / step) * step;
+    return Math.max(minimumValue, Math.min(maximumValue, stepped));
   };
+
+  const panResponder = useRef(
+    PanResponder.create({
+      onStartShouldSetPanResponder: () => true,
+      onMoveShouldSetPanResponder: () => true,
+      onPanResponderGrant: (evt) => {
+        // Set the initial position based on where the user touched
+        const locationX = evt.nativeEvent.locationX;
+        const newValue = calculateValueFromPosition(locationX);
+        onValueChange(newValue);
+      },
+      onPanResponderMove: (evt, gesture) => {
+        // Calculate position based on the initial touch point plus the gesture movement
+        const startPosition = (value - minimumValue) / (maximumValue - minimumValue) * (SLIDER_WIDTH - THUMB_SIZE);
+        const newX = startPosition + gesture.dx;
+        const newValue = calculateValueFromPosition(newX);
+        onValueChange(newValue);
+      },
+    })
+  ).current;
+
+  const fillWidth = (value - minimumValue) / (maximumValue - minimumValue) * SLIDER_WIDTH;
+  const thumbPosition = (value - minimumValue) / (maximumValue - minimumValue) * (SLIDER_WIDTH - THUMB_SIZE);
 
   return (
     <View style={[styles.container, style]}>
-      <Pressable style={styles.track} onPress={handlePress}>
+      <Pressable
+        style={[styles.track, { width: SLIDER_WIDTH }]}
+        onPress={(event) => {
+          const locationX = event.nativeEvent.locationX;
+          const newValue = calculateValueFromPosition(locationX);
+          onValueChange(newValue);
+        }}
+      >
         <View style={[styles.trackBackground, { backgroundColor: maximumTrackTintColor }]} />
         <View style={[styles.trackFill, { backgroundColor: minimumTrackTintColor, width: fillWidth }]} />
-        <View style={[styles.thumb, { left: thumbPosition }]} />
+        <View
+          {...panResponder.panHandlers}
+          style={[
+            styles.thumb,
+            {
+              left: thumbPosition,
+            },
+          ]}
+        >
+          {showValue && (
+            <Text style={styles.valueLabel}>{value}</Text>
+          )}
+        </View>
       </Pressable>
     </View>
   );
@@ -53,38 +100,46 @@ const CustomSlider: React.FC<CustomSliderProps> = ({
 
 const styles = StyleSheet.create({
   container: {
-    height: 40,
+    height: 60,
     justifyContent: 'center',
   },
   track: {
-    height: 4,
-    backgroundColor: 'transparent',
+    height: 6,
+    borderRadius: 3,
     position: 'relative',
-    width: '100%',
+    justifyContent: 'center',
   },
   trackBackground: {
-    height: 4,
-    borderRadius: 2,
+    height: 6,
+    borderRadius: 3,
     position: 'absolute',
     width: '100%',
   },
   trackFill: {
-    height: 4,
-    borderRadius: 2,
+    height: 6,
+    borderRadius: 3,
     position: 'absolute',
   },
   thumb: {
-    width: 20,
-    height: 20,
-    borderRadius: 10,
+    width: 24,
+    height: 24,
+    borderRadius: 12,
     backgroundColor: theme.colors.primary,
     position: 'absolute',
-    top: -8,
+    justifyContent: 'center',
+    alignItems: 'center',
+    top: -10,
+    zIndex: 2,
     shadowColor: '#000',
     shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.3,
-    shadowRadius: 4,
+    shadowOpacity: 0.25,
+    shadowRadius: 3.84,
     elevation: 5,
+  },
+  valueLabel: {
+    color: '#fff',
+    fontSize: 10,
+    fontWeight: 'bold',
   },
 });
 

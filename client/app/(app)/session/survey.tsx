@@ -1,4 +1,4 @@
-import { View, Text, StyleSheet } from "react-native";
+import { View, Text, StyleSheet, Pressable, ScrollView } from "react-native";
 import React, { useState } from "react";
 import BackgroundView from "@/components/BackgroundView";
 import { SafeAreaView } from "react-native-safe-area-context";
@@ -10,22 +10,40 @@ import StyledModal from "@/components/StyledModal";
 import Toast from "react-native-toast-message";
 import CustomSlider from "@/components/CustomSlider";
 import SizedBox from "@/components/SizedBox";
+import StyledTextInput from "@/components/StyledTextInput";
 
 const SurveyScreen = () => {
   const router = useRouter();
   const [deleteModalVisible, setDeleteModalVisible] = useState(false);
   
   const [focusRating, setFocusRating] = useState(5);
-  const [noiseLevel, setNoiseLevel] = useState(5);
   const [lightLevel, setLightLevel] = useState(5);
-  const [motionLevel, setMotionLevel] = useState(5);
+  const [hadMusicOrHeadphones, setHadMusicOrHeadphones] = useState<boolean | null>(null);
+  const [consumedItems, setConsumedItems] = useState<string[]>([]);
+  const [taskType, setTaskType] = useState("");
 
   const saveSession = () => {
+    console.log({
+      focusRating,
+      lightLevel,
+      hadMusicOrHeadphones,
+      consumedItems,
+      taskType,
+    });
+    
     Toast.show({
       type: "success",
       text1: "Saved session",
     });
     router.push("/");
+  };
+
+  const toggleConsumedItem = (item: string) => {
+    setConsumedItems(prev => 
+      prev.includes(item) 
+        ? prev.filter(i => i !== item)
+        : [...prev, item]
+    );
   };
 
   const deleteSession = () => {
@@ -39,9 +57,15 @@ const SurveyScreen = () => {
   return (
     <BackgroundView>
       <SafeAreaView style={{ flex: 1 }}>
-        <View style={globalStyles.screenPadding}>
-          <Text style={[globalStyles.header1]}>Survey</Text>
-          <SizedBox height={30} />
+        <ScrollView 
+          style={{ flex: 1 }}
+          contentContainerStyle={styles.scrollContent}
+          keyboardShouldPersistTaps="handled"
+          showsVerticalScrollIndicator={false}
+        >
+          <View style={globalStyles.screenPadding}>
+            <Text style={[globalStyles.header1]}>Survey</Text>
+            <SizedBox height={30} />
           
           {/* Focus Rating Slider */}
           <View style={styles.sliderContainer}>
@@ -86,11 +110,68 @@ const SurveyScreen = () => {
             </View>
           </View>
 
-          <SizedBox height={20} />
+          <SizedBox height={30} />
 
-        </View>
+          {/* Music/Headphones Question */}
+          <View style={styles.questionContainer}>
+            <Text style={styles.questionLabel}>Did you have music or headphones on?</Text>
+            <View style={styles.radioGroup}>
+              <Pressable 
+                style={[styles.radioOption, hadMusicOrHeadphones === true && styles.radioSelected]}
+                onPress={() => setHadMusicOrHeadphones(true)}
+              >
+                <Text style={[styles.radioText, hadMusicOrHeadphones === true && styles.radioTextSelected]}>
+                  Yes
+                </Text>
+              </Pressable>
+              <Pressable 
+                style={[styles.radioOption, hadMusicOrHeadphones === false && styles.radioSelected]}
+                onPress={() => setHadMusicOrHeadphones(false)}
+              >
+                <Text style={[styles.radioText, hadMusicOrHeadphones === false && styles.radioTextSelected]}>
+                  No
+                </Text>
+              </Pressable>
+            </View>
+          </View>
 
-        <View style={styles.bottomStickyView}>
+          <SizedBox height={25} />
+
+          {/* Consumption Question */}
+          <View style={styles.questionContainer}>
+            <Text style={styles.questionLabel}>Did you consume any of the following?</Text>
+            <View style={styles.checkboxGroup}>
+              {['Caffeine', 'Sugar', 'Snacks', 'None'].map((item) => (
+                <Pressable 
+                  key={item}
+                  style={[styles.checkboxOption, consumedItems.includes(item) && styles.checkboxSelected]}
+                  onPress={() => toggleConsumedItem(item)}
+                >
+                  <Text style={[styles.checkboxText, consumedItems.includes(item) && styles.checkboxTextSelected]}>
+                    {item}
+                  </Text>
+                </Pressable>
+              ))}
+            </View>
+          </View>
+
+          <SizedBox height={25} />
+
+          {/* Task Type Question */}
+          <View style={styles.questionContainer}>
+            <Text style={styles.questionLabel}>Task Type</Text>
+            <StyledTextInput
+              placeholder="e.g., Studying, Work, Reading..."
+              value={taskType}
+              onChangeText={setTaskType}
+              style={styles.textInput}
+            />
+          </View>
+
+            <SizedBox height={20} />
+
+          </View>
+        </ScrollView>        <View style={styles.bottomStickyView}>
           <TextButton
             title="Delete"
             variant="secondary"
@@ -116,6 +197,9 @@ const SurveyScreen = () => {
 export default SurveyScreen;
 
 const styles = StyleSheet.create({
+  scrollContent: {
+    paddingBottom: 120, // Extra padding to ensure content isn't hidden behind sticky bottom
+  },
   bottomStickyView: {
     flexDirection: "row",
     justifyContent: "space-evenly",
@@ -151,5 +235,68 @@ const styles = StyleSheet.create({
   sliderEndLabel: {
     fontSize: theme.fontSize.sm,
     color: theme.colors.textMuted,
+  },
+  // New styles for additional survey questions
+  questionContainer: {
+    marginBottom: theme.spacing.md,
+  },
+  questionLabel: {
+    fontSize: theme.fontSize.lg,
+    fontWeight: theme.fontWeight.semibold,
+    color: theme.colors.text,
+    marginBottom: theme.spacing.sm,
+  },
+  radioGroup: {
+    flexDirection: "row",
+    gap: theme.spacing.sm,
+  },
+  radioOption: {
+    paddingVertical: theme.spacing.sm,
+    paddingHorizontal: theme.spacing.md,
+    borderRadius: theme.radii.md,
+    borderWidth: 2,
+    borderColor: theme.colors.textMuted,
+    backgroundColor: 'transparent',
+  },
+  radioSelected: {
+    borderColor: theme.colors.primary,
+    backgroundColor: theme.colors.primary,
+  },
+  radioText: {
+    fontSize: theme.fontSize.base,
+    color: theme.colors.text,
+    textAlign: 'center',
+  },
+  radioTextSelected: {
+    color: '#fff',
+    fontWeight: theme.fontWeight.semibold,
+  },
+  checkboxGroup: {
+    flexDirection: "row",
+    flexWrap: "wrap",
+    gap: theme.spacing.sm,
+  },
+  checkboxOption: {
+    paddingVertical: theme.spacing.sm,
+    paddingHorizontal: theme.spacing.md,
+    borderRadius: theme.radii.md,
+    borderWidth: 2,
+    borderColor: theme.colors.textMuted,
+    backgroundColor: 'transparent',
+  },
+  checkboxSelected: {
+    borderColor: theme.colors.primary,
+    backgroundColor: theme.colors.primary,
+  },
+  checkboxText: {
+    fontSize: theme.fontSize.base,
+    color: theme.colors.text,
+  },
+  checkboxTextSelected: {
+    color: '#fff',
+    fontWeight: theme.fontWeight.semibold,
+  },
+  textInput: {
+    width: "100%",
   },
 });
