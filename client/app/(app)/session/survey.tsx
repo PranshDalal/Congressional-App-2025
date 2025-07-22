@@ -19,16 +19,18 @@ const SurveyScreen = () => {
   const [focusRating, setFocusRating] = useState(5);
   const [lightLevel, setLightLevel] = useState(5);
   const [hadMusicOrHeadphones, setHadMusicOrHeadphones] = useState<boolean | null>(null);
-  const [consumedItems, setConsumedItems] = useState<string[]>([]);
   const [taskType, setTaskType] = useState("");
+  const [location, setLocation] = useState("");
+  const [ventilationStatus, setVentilationStatus] = useState<string | null>(null);
 
   const saveSession = () => {
     console.log({
       focusRating,
       lightLevel,
       hadMusicOrHeadphones,
-      consumedItems,
-      taskType,
+      ventilationStatus,
+      location,
+      taskType
     });
     
     Toast.show({
@@ -135,25 +137,46 @@ const SurveyScreen = () => {
             </View>
           </View>
 
-          <SizedBox height={25} />
-
-          {/* Consumption Question */}
+          {/* Ventilation Question */}
           <View style={styles.questionContainer}>
-            <Text style={styles.questionLabel}>Did you consume any of the following?</Text>
-            <View style={styles.checkboxGroup}>
-              {['Caffeine', 'Sugar', 'Snacks', 'None'].map((item) => (
-                <Pressable 
-                  key={item}
-                  style={[styles.checkboxOption, consumedItems.includes(item) && styles.checkboxSelected]}
-                  onPress={() => toggleConsumedItem(item)}
+            <Text style={styles.questionLabel}>What kind of ventilation was in the room?</Text>
+            <ScrollView
+              horizontal
+              showsHorizontalScrollIndicator={false}
+              contentContainerStyle={{ flexDirection: "row", gap: 12 }}
+            >
+              {[
+                "Closed room (no ventilation)",
+                "Air conditioning (AC)",
+                "Open window",
+                "Fan on",
+                "Other",
+              ].map((option) => (
+                <Pressable
+                  key={option}
+                  style={[
+                    styles.radioOption,
+                    ventilationStatus === option && styles.radioSelected,
+                  ]}
+                  onPress={() => setVentilationStatus(option)}
                 >
-                  <Text style={[styles.checkboxText, consumedItems.includes(item) && styles.checkboxTextSelected]}>
-                    {item}
+                  <Text
+                    style={[
+                      styles.radioText,
+                      ventilationStatus === option && styles.radioTextSelected,
+                    ]}
+                  >
+                    {option}
                   </Text>
                 </Pressable>
               ))}
-            </View>
+            </ScrollView>
           </View>
+
+
+
+
+          <SizedBox height={25} />
 
           <SizedBox height={25} />
 
@@ -169,6 +192,17 @@ const SurveyScreen = () => {
           </View>
 
             <SizedBox height={20} />
+
+          {/* Location Questions */}
+          <View style={styles.questionContainer}>
+            <Text style={styles.questionLabel}>Location</Text>
+            <StyledTextInput
+              placeholder="Where did this take place?"
+              value={location}
+              onChangeText={setLocation}
+              style={styles.textInput}
+            />
+          </View>
 
           </View>
         </ScrollView>        <View style={styles.bottomStickyView}>
@@ -198,7 +232,7 @@ export default SurveyScreen;
 
 const styles = StyleSheet.create({
   scrollContent: {
-    paddingBottom: 120, // Extra padding to ensure content isn't hidden behind sticky bottom
+    paddingBottom: 120, 
   },
   bottomStickyView: {
     flexDirection: "row",
@@ -236,7 +270,6 @@ const styles = StyleSheet.create({
     fontSize: theme.fontSize.sm,
     color: theme.colors.textMuted,
   },
-  // New styles for additional survey questions
   questionContainer: {
     marginBottom: theme.spacing.md,
   },
