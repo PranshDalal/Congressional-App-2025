@@ -11,7 +11,6 @@ import RNSoundLevel from "react-native-sound-level";
 import StyledModal from "@/components/StyledModal";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { Accelerometer } from "expo-sensors";
-import { Camera } from "expo-camera";
 
 const SessionScreen = () => {
   const router = useRouter();
@@ -24,10 +23,6 @@ const SessionScreen = () => {
 
   const [motionData, setMotionData] = useState({ x: 0, y: 0, z: 0 });
   const [motionMagnitude, setMotionMagnitude] = useState(0);
-
-  const [lighting, setLighting] = useState<number | null>(null);
-
-  const cameraRef = useRef<Camera | null>(null);
 
   const intervalRef = useRef<number | null>(null);
   const startTimeRef = useRef<number>(Date.now());
@@ -90,7 +85,7 @@ const SessionScreen = () => {
         setMotionMagnitude(magnitude);
       });
 
-      Accelerometer.setUpdateInterval(200); 
+      Accelerometer.setUpdateInterval(200); // 5 times per second
     } else {
       if (accelerometerSubscription) {
         accelerometerSubscription.remove();
@@ -106,54 +101,8 @@ const SessionScreen = () => {
   }, [isStopwatchRunning]);
   // #endregion
 
-  // #region Lighting (camera brightness)
-  useEffect(() => {
-    let lightingInterval: NodeJS.Timeout;
-
-    if (isStopwatchRunning && cameraRef.current) {
-      lightingInterval = setInterval(async () => {
-        try {
-          const photo = await cameraRef.current!.takePictureAsync({
-            base64: true,
-            quality: 0.1,
-          });
-
-          const avg = estimateBrightness(photo.base64 ?? "");
-          setLighting(avg);
-        } catch (err) {
-          console.warn("Camera error:", err);
-        }
-      }, 4000);
-    }
-
-    return () => {
-      clearInterval(lightingInterval);
-    };
-  }, [isStopwatchRunning]);
-
-  function estimateBrightness(base64: string): number {
-    let sum = 0;
-    let count = 0;
-
-    for (let i = 0; i < base64.length; i += 100) {
-      const charCode = base64.charCodeAt(i);
-      sum += charCode;
-      count++;
-    }
-
-    const avg = Math.round((sum / count / 255) * 100); 
-    return avg;
-  }
-  // #endregion
-
   return (
     <BackgroundView style={styles.container}>
-      <Camera
-        ref={(ref) => (cameraRef.current = ref)}
-        style={{ width: 1, height: 1, position: "absolute", top: -100 }}
-        type={Camera.Constants.Type.front}
-        ratio="1:1"
-      />
       <BouncingCircles paused={!isStopwatchRunning} />
       <View style={styles.content}>
         <Text style={[globalStyles.header1, styles.stopwatchText]}>
@@ -171,9 +120,6 @@ const SessionScreen = () => {
           {isStopwatchRunning
             ? `Motion magnitude: ${motionMagnitude.toFixed(3)}`
             : ""}
-        </Text>
-        <Text style={globalStyles.mutedText}>
-          {lighting !== null ? `Lighting: ${lighting}/100` : ""}
         </Text>
       </View>
 
