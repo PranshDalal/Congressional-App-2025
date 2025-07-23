@@ -11,9 +11,11 @@ import RNSoundLevel from "react-native-sound-level";
 import StyledModal from "@/components/StyledModal";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { Accelerometer } from "expo-sensors";
+import { CameraView, useCameraPermissions } from "expo-camera";
 
 const SessionScreen = () => {
   const router = useRouter();
+  const [permission, requestPermission] = useCameraPermissions();
 
   const [elapsed, setElapsed] = useState(0);
   const [isStopwatchRunning, setStopwatchRunning] = useState(true);
@@ -24,12 +26,22 @@ const SessionScreen = () => {
   const [motionData, setMotionData] = useState({ x: 0, y: 0, z: 0 });
   const [motionMagnitude, setMotionMagnitude] = useState(0);
 
+  const [lighting, setLighting] = useState<number | null>(null);
+  const cameraRef = useRef<CameraView | null>(null);
+
   const intervalRef = useRef<number | null>(null);
   const startTimeRef = useRef<number>(Date.now());
 
   const { "microphone-enabled": microphoneEnabled } = useLocalSearchParams();
 
   const [endSessionModalVisible, setEndSessionModalVisible] = useState(false);
+
+  // Request camera permission when component mounts
+  useEffect(() => {
+    if (!permission?.granted && permission?.canAskAgain) {
+      requestPermission();
+    }
+  }, []);
 
   useEffect(() => {
     if (isStopwatchRunning) {
@@ -75,7 +87,7 @@ const SessionScreen = () => {
 
   // #region Accelerometer (Motion)
   useEffect(() => {
-    let accelerometerSubscription: { remove: () => void } | null = null;
+    let accelerometerSubscription: any = null;
 
     if (isStopwatchRunning) {
       accelerometerSubscription = Accelerometer.addListener(({ x, y, z }) => {
@@ -85,7 +97,7 @@ const SessionScreen = () => {
         setMotionMagnitude(magnitude);
       });
 
-      Accelerometer.setUpdateInterval(200); // 5 times per second
+      Accelerometer.setUpdateInterval(200); 
     } else {
       if (accelerometerSubscription) {
         accelerometerSubscription.remove();
@@ -101,8 +113,62 @@ const SessionScreen = () => {
   }, [isStopwatchRunning]);
   // #endregion
 
+  // #region Lighting (camera brightness)
+  useEffect(() => {
+    let lightingInterval: any;
+
+    if (isStopwatchRunning && permission?.granted && cameraRef.current) {
+      lightingInterval = setInterval(async () => {
+        try {
+          const photo = await cameraRef.current!.takePictureAsync({
+            base64: true,
+            quality: 0.1,
+          });
+
+          const avg = estimateBrightness(photo.base64 ?? "");
+          setLighting(avg);
+        } catch (err) {
+          console.warn("Camera error:", err);
+        }
+      }, 4000);
+    }
+
+    return () => {
+      if (lightingInterval) {
+        clearInterval(lightingInterval);
+      }
+    };
+  }, [isStopwatchRunning, permission?.granted]);
+
+  function estimateBrightness(base64: string): number {
+    try {
+      let sum = 0;
+      let count = 0;
+
+      for (let i = 0; i < base64.length; i += 100) {
+        const charCode = base64.charCodeAt(i);
+        sum += charCode;
+        count++;
+      }
+
+      const avg = Math.round((sum / count / 255) * 100); 
+      return avg;
+    } catch (err) {
+      console.warn("Brightness estimation error:", err);
+      return 0;
+    }
+  }
+  // #endregion
+
   return (
     <BackgroundView style={styles.container}>
+      {permission?.granted && (
+        <CameraView
+          ref={cameraRef}
+          style={{ width: 1, height: 1, position: "absolute", top: -100 }}
+          facing="front"
+        />
+      )}
       <BouncingCircles paused={!isStopwatchRunning} />
       <View style={styles.content}>
         <Text style={[globalStyles.header1, styles.stopwatchText]}>
@@ -120,6 +186,9 @@ const SessionScreen = () => {
           {isStopwatchRunning
             ? `Motion magnitude: ${motionMagnitude.toFixed(3)}`
             : ""}
+        </Text>
+        <Text style={globalStyles.mutedText}>
+          {lighting !== null ? `Lighting: ${lighting}/100` : ""}
         </Text>
       </View>
 

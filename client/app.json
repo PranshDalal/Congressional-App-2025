@@ -14,7 +14,8 @@
       "googleServicesFile": "./GoogleService-Info.plist",
       "infoPlist": {
         "ITSAppUsesNonExemptEncryption": false,
-        "NSMicrophoneUsageDescription": "This app needs your microphone to measure ambient noise levels."
+        "NSMicrophoneUsageDescription": "This app needs your microphone to measure ambient noise levels.",
+        "NSCameraUsageDescription": "This app needs access to the camera to measure ambient lighting conditions during focus sessions."
       }
     },
     "android": {
@@ -25,7 +26,7 @@
       "edgeToEdgeEnabled": true,
       "package": "com.pranshdalal.client",
       "googleServicesFile": "./google-services.json",
-      "permissions": ["RECORD_AUDIO"]
+      "permissions": ["RECORD_AUDIO", "CAMERA"]
     },
     "web": {
       "bundler": "metro",
