@@ -40,14 +40,6 @@ const SurveyScreen = () => {
     router.push("/");
   };
 
-  const toggleConsumedItem = (item: string) => {
-    setConsumedItems(prev => 
-      prev.includes(item) 
-        ? prev.filter(i => i !== item)
-        : [...prev, item]
-    );
-  };
-
   const deleteSession = () => {
     Toast.show({
       type: "error",
