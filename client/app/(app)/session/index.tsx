@@ -12,6 +12,8 @@ import StyledModal from "@/components/StyledModal";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { Accelerometer } from "expo-sensors";
 import { CameraView, useCameraPermissions } from "expo-camera";
+import auth from "@react-native-firebase/auth";
+import axios from "axios";
 
 const SessionScreen = () => {
   const router = useRouter();
@@ -30,14 +32,48 @@ const SessionScreen = () => {
   const [isCameraReady, setIsCameraReady] = useState(false);
   const cameraRef = useRef<CameraView | null>(null);
 
+  const [noiseReadings, setNoiseReadings] = useState<number[]>([]);
+  const [motionReadings, setMotionReadings] = useState<number[]>([]);
+  const [lightReadings, setLightReadings] = useState<number[]>([]);
+
   const intervalRef = useRef<number | null>(null);
   const startTimeRef = useRef<number>(Date.now());
 
   const { "microphone-enabled": microphoneEnabled } = useLocalSearchParams();
 
   const [endSessionModalVisible, setEndSessionModalVisible] = useState(false);
+  const [sessionId, setSessionId] = useState<string | null>(null);
 
-  // Request camera permission when component mounts
+  useEffect(() => {
+    const startSession = async () => {
+      try {
+        const currentUser = auth().currentUser;
+        console.log("Current user:", currentUser);
+        if (!currentUser) {
+          console.error('No authenticated user found');
+          return;
+        }
+
+        console.log("Starting session for user:", currentUser.uid);
+
+        const response = await axios.post(`${process.env.EXPO_PUBLIC_API_BASE_URL}/api/start_session`, {
+          user_id: currentUser.uid,
+        });
+
+        setSessionId(response.data.session_id);
+        console.log('Session started:', response.data.session_id);
+      } catch (error) {
+        if (axios.isAxiosError(error)) {
+          console.error('Failed to start session:', error.response?.data?.error || error.message);
+        } else {
+          console.error('Error starting session:', error);
+        }
+      }
+    };
+
+    startSession();
+  }, []); 
+
   useEffect(() => {
     console.log('Camera permission state:', permission);
     if (!permission?.granted) {
@@ -61,6 +97,38 @@ const SessionScreen = () => {
     };
   }, [isStopwatchRunning]);
 
+  const collectSessionData = () => {
+    const avgNoiseLevel = noiseReadings.length > 0 
+      ? Math.round(noiseReadings.reduce((sum, reading) => sum + reading, 0) / noiseReadings.length)
+      : fakeRenderDB;
+
+    const avgMotionLevel = motionReadings.length > 0
+      ? Math.round((motionReadings.reduce((sum, reading) => sum + reading, 0) / motionReadings.length) * 1000) / 1000 
+      : motionMagnitude;
+
+    const avgLightLevel = lightReadings.length > 0
+      ? Math.round(lightReadings.reduce((sum, reading) => sum + reading, 0) / lightReadings.length)
+      : lighting;
+
+    console.log('📊 Session averages calculated:', {
+      noise: { readings: noiseReadings.length, average: avgNoiseLevel },
+      motion: { readings: motionReadings.length, average: avgMotionLevel },
+      light: { readings: lightReadings.length, average: avgLightLevel }
+    });
+
+    return {
+      session_id: sessionId,
+      noise_level: avgNoiseLevel,
+      motion_level: avgMotionLevel,
+      light_level: avgLightLevel,
+      user_id: auth().currentUser?.uid,
+      elapsed_time: elapsed,
+      noise_sample_count: noiseReadings.length,
+      motion_sample_count: motionReadings.length,
+      light_sample_count: lightReadings.length,
+    };
+  };
+
   // #region Microphone
   useEffect(() => {
     if (microphoneEnabled === "true" && isStopwatchRunning) {
@@ -75,6 +143,9 @@ const SessionScreen = () => {
       const dBUpdateInterval = setInterval(() => {
         if (isStopwatchRunning) {
           setFakeRenderDB(fakeConvertedDBRef.current);
+          if (fakeConvertedDBRef.current > 0) {
+            setNoiseReadings(prev => [...prev, fakeConvertedDBRef.current]);
+          }
         } else {
           setFakeRenderDB(-1);
         }
@@ -98,6 +169,8 @@ const SessionScreen = () => {
 
         const magnitude = Math.sqrt(x * x + y * y + z * z);
         setMotionMagnitude(magnitude);
+        
+        setMotionReadings(prev => [...prev, magnitude]);
       });
 
       Accelerometer.setUpdateInterval(200); 
@@ -139,6 +212,10 @@ const SessionScreen = () => {
             if (photo.base64) {
               const avg = estimateBrightness(photo.base64);
               setLighting(avg);
+              
+              if (avg !== null && avg > 0) {
+                setLightReadings(prev => [...prev, avg]);
+              }
             } else {
               console.warn("No base64 data from camera");
             }
@@ -281,7 +358,15 @@ const SessionScreen = () => {
         visible={endSessionModalVisible}
         setModalVisibleCallback={setEndSessionModalVisible}
         type="ask"
-        onSubmit={() => router.push("/session/survey")}
+        onSubmit={() => {
+          const sessionData = collectSessionData();
+          router.push({
+            pathname: "/session/survey",
+            params: {
+              sessionData: JSON.stringify(sessionData)
+            }
+          });
+        }}
         submitButtonText="End Session"
       />
     </BackgroundView>

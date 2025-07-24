@@ -11,11 +11,13 @@ import Toast from "react-native-toast-message";
 import CustomSlider from "@/components/CustomSlider";
 import SizedBox from "@/components/SizedBox";
 import StyledTextInput from "@/components/StyledTextInput";
+import { useLocalSearchParams } from "expo-router";
+import axios from "axios";
 
 const SurveyScreen = () => {
   const router = useRouter();
   const [deleteModalVisible, setDeleteModalVisible] = useState(false);
-  
+  const { sessionData } = useLocalSearchParams();
   const [focusRating, setFocusRating] = useState(5);
   const [lightLevel, setLightLevel] = useState(5);
   const [hadMusicOrHeadphones, setHadMusicOrHeadphones] = useState<boolean | null>(null);
@@ -23,21 +25,52 @@ const SurveyScreen = () => {
   const [location, setLocation] = useState("");
   const [ventilationStatus, setVentilationStatus] = useState<string | null>(null);
 
-  const saveSession = () => {
-    console.log({
-      focusRating,
-      lightLevel,
-      hadMusicOrHeadphones,
-      ventilationStatus,
-      location,
-      taskType
-    });
-    
-    Toast.show({
-      type: "success",
-      text1: "Saved session",
-    });
-    router.push("/");
+  const parsedSessionData = sessionData ? JSON.parse(sessionData as string) : {};
+
+  const saveSession = async () => {
+    try {
+      const completeSessionData = {
+        ...parsedSessionData,
+        focus_level: focusRating,
+        headphones: hadMusicOrHeadphones,
+        ventilation: ventilationStatus,
+        location: location,
+        task_type: taskType,
+        completed_at: new Date().toISOString()
+      };
+      
+      if (!completeSessionData.session_id) {
+        Toast.show({
+          type: "error",
+          text1: "No session ID found",
+          text2: "Cannot save session without ID"
+        });
+        return;
+      }
+
+      const response = await axios.post(`${process.env.EXPO_PUBLIC_API_BASE_URL}/api/end_session`, completeSessionData, {
+        timeout: 10000,
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
+
+      Toast.show({
+        type: "success",
+        text1: "Saved session",
+        text2: "Session data saved successfully"
+      });
+      
+      router.push("/");
+      
+    } catch (error) {
+      Toast.show({
+        type: "error",
+        text1: "Failed to save session",
+      });
+      
+      router.push("/");
+    }
   };
 
   const deleteSession = () => {
@@ -85,24 +118,6 @@ const SurveyScreen = () => {
 
           <SizedBox height={20} />
 
-          {/* Light Level Slider */}
-          <View style={styles.sliderContainer}>
-            <Text style={styles.sliderLabel}>Light Level: {lightLevel}</Text>
-            <CustomSlider
-              style={styles.slider}
-              minimumValue={1}
-              maximumValue={10}
-              value={lightLevel}
-              onValueChange={setLightLevel}
-              step={1}
-              minimumTrackTintColor={theme.colors.primary}
-              maximumTrackTintColor={theme.colors.textMuted}
-            />
-            <View style={styles.sliderLabels}>
-              <Text style={styles.sliderEndLabel}>Dark</Text>
-              <Text style={styles.sliderEndLabel}>Bright</Text>
-            </View>
-          </View>
 
           <SizedBox height={30} />
 
@@ -197,7 +212,9 @@ const SurveyScreen = () => {
           </View>
 
           </View>
-        </ScrollView>        <View style={styles.bottomStickyView}>
+        </ScrollView>
+        
+        <View style={styles.bottomStickyView}>
           <TextButton
             title="Delete"
             variant="secondary"
