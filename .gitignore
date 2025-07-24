@@ -5,3 +5,4 @@ server/service_acc.json
 server/routes/__pycache__/
 .vscode/
 .expo/
+client/.env

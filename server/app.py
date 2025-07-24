@@ -10,7 +10,7 @@ def create_app():
     app = Flask(__name__)
     CORS(app)
 
-    cred = credentials.Certificate('service_acc2.json')
+    cred = credentials.Certificate('service_acc.json')
     firebase_admin.initialize_app(cred)
 
     db_client = firestore.client()
@@ -26,4 +26,4 @@ def create_app():
 
 if __name__ == '__main__':
     app = create_app()
-    app.run(debug=True)
+    app.run(debug=True, host='0.0.0.0', port=5000)

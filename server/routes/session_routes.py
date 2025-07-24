@@ -20,7 +20,6 @@ def start_session():
     session_data = {
         'start_time': start_time,
         'status': 'active',
-        'location': data.get('location', ''),
         'session_id': session_id
     }
 
@@ -54,7 +53,9 @@ def end_session():
         'light_level': data.get('light_level'),
         'motion_level': data.get('motion_level'),
         'headphones': data.get('headphones'),
-        'music_info': data.get('music_info'),
+        'ventilation': data.get('ventilation'),
+        'location': data.get('location'),
+        'task_type': data.get('task_type'),
         'status': 'completed'
     }
 
