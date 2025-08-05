@@ -13,22 +13,31 @@ def fetch_user_sessions(user_id):
     db = firestore.client()
     sessions_ref = db.collection(f'users/{user_id}/sessions')
     sessions = sessions_ref.stream()
-    if not sessions:
-        return None
     session_list = [doc.to_dict() for doc in sessions]
-    return pd.DataFrame(session_list)
+    return pd.DataFrame(session_list) if session_list else None
 
 def preprocess_data(df):
-    features = ['noise_level', 'light_level', 'motion_level', 'focus_rating']
-    df_featured = df[features].copy()
+    numeric_features = ['focus_rating', 'noise_level', 'light_level', 'motion_level']
+    categorical_features = ['headphones', 'ventilation']
 
-    for col in features:
-        df_featured[col] = pd.to_numeric(df_featured[col], errors='coerce')
+    for col in numeric_features:
+        df[col] = pd.to_numeric(df[col], errors='coerce')
+    df['headphones'] = df['headphones'].astype(float)
+
+    if 'ventilation' in df.columns:
+        df['ventilation'] = df['ventilation'].astype(str)
+        df['ventilation'] = df['ventilation'].astype('category').cat.codes.replace(-1, np.nan)  # -1 means NaN
+
+    feature_cols = numeric_features + categorical_features
+    df_featured = df[feature_cols].copy()
+
     df_featured.dropna(inplace=True)
 
     scaler = StandardScaler()
     scaled_data = scaler.fit_transform(df_featured)
+
     return scaled_data, df_featured.index
+
 
 @analysis_bp.route('/analyze_sessions', methods=['POST'])
 def analyze_sessions():
@@ -83,12 +92,17 @@ def get_recommendations(user_id):
     if df is None or len(df) < 5:
         return jsonify({'message': 'Not enough session data to generate recommendations.'}), 200
 
+    df['focus_rating'] = pd.to_numeric(df['focus_rating'], errors='coerce')
     high_focus_sessions = df[df['focus_rating'] >= 4]
 
     if high_focus_sessions.empty:
         return jsonify({'message': 'No high-focus sessions recorded yet. Keep tracking to get recommendations.'}), 200
 
-    recommendations = high_focus_sessions[['noise_level', 'light_level', 'motion_level']].mean().to_dict()
+    recommended_fields = ['noise_level', 'light_level', 'motion_level', 'headphones', 'ventilation']
+    for field in recommended_fields:
+        high_focus_sessions[field] = pd.to_numeric(high_focus_sessions[field], errors='coerce')
+
+    recommendations = high_focus_sessions[recommended_fields].mean().dropna().to_dict()
 
     return jsonify({
         'message': 'Based on your high-focus sessions, here are your optimal conditions:',
@@ -101,11 +115,12 @@ def get_progress(user_id):
     if df is None:
         return jsonify({'error': 'No session data found for this user.'}), 404
 
-    df['start_time'] = pd.to_datetime(df['start_time'])
+    df['start_time'] = pd.to_datetime(df['start_time'], errors='coerce')
+    df['focus_rating'] = pd.to_numeric(df['focus_rating'], errors='coerce')
+    df = df.dropna(subset=['start_time', 'focus_rating'])
     df.sort_values('start_time', inplace=True)
-    
+
     progress_data = df.set_index('start_time')['focus_rating'].resample('W').mean().reset_index()
     progress_data['start_time'] = progress_data['start_time'].dt.strftime('%Y-%m-%d')
-
 
     return jsonify(progress_data.to_dict(orient='records')), 200
