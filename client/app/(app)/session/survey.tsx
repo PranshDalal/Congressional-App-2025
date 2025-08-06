@@ -31,7 +31,7 @@ const SurveyScreen = () => {
     try {
       const completeSessionData = {
         ...parsedSessionData,
-        focus_level: focusRating,
+        focus_rating: focusRating,
         headphones: hadMusicOrHeadphones,
         ventilation: ventilationStatus,
         location: location,
