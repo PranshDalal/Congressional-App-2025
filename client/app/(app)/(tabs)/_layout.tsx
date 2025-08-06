@@ -40,6 +40,19 @@ export default function TabLayout() {
         }}
       />
       <Tabs.Screen
+        name="stats"
+        options={{
+          title: "Stats",
+          tabBarIcon: ({ color, focused }) => (
+            <IconSymbol
+              size={26}
+              name={focused ? "chart.bar" : "chart.bar"}
+              color={color}
+            />
+          ),
+        }}
+      />
+      <Tabs.Screen
         name="settings"
         options={{
           title: "Settings",
