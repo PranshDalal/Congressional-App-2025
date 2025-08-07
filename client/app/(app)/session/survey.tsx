@@ -88,7 +88,7 @@ const SurveyScreen = () => {
           style={{ flex: 1 }}
           contentContainerStyle={styles.scrollContent}
           keyboardShouldPersistTaps="handled"
-          showsVerticalScrollIndicator={false}
+          showsVerticalScrollIndicator={true}
         >
           <View style={globalStyles.screenPadding}>
             <Text style={[globalStyles.header1]}>Survey</Text>
