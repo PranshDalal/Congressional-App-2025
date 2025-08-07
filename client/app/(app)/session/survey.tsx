@@ -1,18 +1,24 @@
-import { View, Text, StyleSheet, Pressable, ScrollView } from "react-native";
+import {
+  View,
+  Text,
+  StyleSheet,
+  Pressable,
+  ScrollView,
+} from "react-native";
 import React, { useState } from "react";
 import BackgroundView from "@/components/BackgroundView";
-import { SafeAreaView } from "react-native-safe-area-context";
 import globalStyles from "@/styles/globalStyles";
 import { Link, useRouter } from "expo-router";
 import TextButton from "@/components/TextButton";
 import theme from "@/styles/theme";
 import StyledModal from "@/components/StyledModal";
 import Toast from "react-native-toast-message";
-import CustomSlider from "@/components/CustomSlider";
 import SizedBox from "@/components/SizedBox";
 import StyledTextInput from "@/components/StyledTextInput";
 import { useLocalSearchParams } from "expo-router";
 import axios from "axios";
+import StyledSlider from "@/components/StyledSlider";
+import KeyboardAvoidingScrollView from "@/components/KeyboardAvoidingScrollView";
 
 const SurveyScreen = () => {
   const router = useRouter();
@@ -20,12 +26,18 @@ const SurveyScreen = () => {
   const { sessionData } = useLocalSearchParams();
   const [focusRating, setFocusRating] = useState(5);
   const [lightLevel, setLightLevel] = useState(5);
-  const [hadMusicOrHeadphones, setHadMusicOrHeadphones] = useState<boolean | null>(null);
+  const [hadMusicOrHeadphones, setHadMusicOrHeadphones] = useState<
+    boolean | null
+  >(null);
   const [taskType, setTaskType] = useState("");
   const [location, setLocation] = useState("");
-  const [ventilationStatus, setVentilationStatus] = useState<string | null>(null);
+  const [ventilationStatus, setVentilationStatus] = useState<string | null>(
+    null
+  );
 
-  const parsedSessionData = sessionData ? JSON.parse(sessionData as string) : {};
+  const parsedSessionData = sessionData
+    ? JSON.parse(sessionData as string)
+    : {};
 
   const saveSession = async () => {
     try {
@@ -36,39 +48,42 @@ const SurveyScreen = () => {
         ventilation: ventilationStatus,
         location: location,
         task_type: taskType,
-        completed_at: new Date().toISOString()
+        completed_at: new Date().toISOString(),
       };
-      
+
       if (!completeSessionData.session_id) {
         Toast.show({
           type: "error",
           text1: "No session ID found",
-          text2: "Cannot save session without ID"
+          text2: "Cannot save session without ID",
         });
         return;
       }
 
-      const response = await axios.post(`${process.env.EXPO_PUBLIC_API_BASE_URL}/api/end_session`, completeSessionData, {
-        timeout: 10000,
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      });
+      const response = await axios.post(
+        `${process.env.EXPO_PUBLIC_API_BASE_URL}/api/end_session`,
+        completeSessionData,
+        {
+          timeout: 10000,
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
 
       Toast.show({
         type: "success",
         text1: "Saved session",
-        text2: "Session data saved successfully"
+        text2: "Session data saved successfully",
       });
-      
+
       router.push("/");
-      
     } catch (error) {
       Toast.show({
         type: "error",
         text1: "Failed to save session",
       });
-      
+
       router.push("/");
     }
   };
@@ -82,62 +97,68 @@ const SurveyScreen = () => {
   };
 
   return (
-    <BackgroundView>
-      <SafeAreaView style={{ flex: 1 }}>
-        <ScrollView 
-          style={{ flex: 1 }}
-          contentContainerStyle={styles.scrollContent}
-          keyboardShouldPersistTaps="handled"
-          showsVerticalScrollIndicator={true}
-        >
-          <View style={globalStyles.screenPadding}>
-            <Text style={[globalStyles.header1]}>Survey</Text>
-            <SizedBox height={30} />
-          
+    <BackgroundView withSafeArea>
+      <KeyboardAvoidingScrollView>
+        <View style={globalStyles.screenPadding}>
+          <Text style={[globalStyles.header1]}>Survey</Text>
+          <SizedBox height={30} />
+
           {/* Focus Rating Slider */}
-          <View style={styles.sliderContainer}>
-            <Text style={styles.sliderLabel}>Focus Rating: {focusRating}</Text>
-            <CustomSlider
-              style={styles.slider}
-              minimumValue={1}
-              maximumValue={10}
-              value={focusRating}
-              onValueChange={setFocusRating}
-              step={1}
-              minimumTrackTintColor={theme.colors.primary}
-              maximumTrackTintColor={theme.colors.textMuted}
-            />
-            <View style={styles.sliderLabels}>
+          <Text style={styles.sliderLabel}>Focus Rating: {focusRating}</Text>
+          <StyledSlider
+            minimumValue={1}
+            maximumValue={10}
+            value={focusRating}
+            onValueChange={setFocusRating}
+            step={1}
+            showBounds={true}
+          />
+          {/* <View style={styles.sliderLabels}>
               <Text style={styles.sliderEndLabel}>1</Text>
               <Text style={styles.sliderEndLabel}>10</Text>
-            </View>
-          </View>
+            </View> */}
 
           <SizedBox height={20} />
 
-
           <SizedBox height={20} />
-
 
           <SizedBox height={30} />
 
           {/* Music/Headphones Question */}
           <View style={styles.questionContainer}>
-            <Text style={styles.questionLabel}>Did you have music or headphones on?</Text>
+            <Text style={styles.questionLabel}>
+              Did you have music or headphones on?
+            </Text>
             <View style={styles.radioGroup}>
-              <Pressable 
-                style={[styles.radioOption, hadMusicOrHeadphones === true && styles.radioSelected]}
+              <Pressable
+                style={[
+                  styles.radioOption,
+                  hadMusicOrHeadphones === true && styles.radioSelected,
+                ]}
                 onPress={() => setHadMusicOrHeadphones(true)}
               >
-                <Text style={[styles.radioText, hadMusicOrHeadphones === true && styles.radioTextSelected]}>
+                <Text
+                  style={[
+                    styles.radioText,
+                    hadMusicOrHeadphones === true && styles.radioTextSelected,
+                  ]}
+                >
                   Yes
                 </Text>
               </Pressable>
-              <Pressable 
-                style={[styles.radioOption, hadMusicOrHeadphones === false && styles.radioSelected]}
+              <Pressable
+                style={[
+                  styles.radioOption,
+                  hadMusicOrHeadphones === false && styles.radioSelected,
+                ]}
                 onPress={() => setHadMusicOrHeadphones(false)}
               >
-                <Text style={[styles.radioText, hadMusicOrHeadphones === false && styles.radioTextSelected]}>
+                <Text
+                  style={[
+                    styles.radioText,
+                    hadMusicOrHeadphones === false && styles.radioTextSelected,
+                  ]}
+                >
                   No
                 </Text>
               </Pressable>
@@ -146,7 +167,9 @@ const SurveyScreen = () => {
 
           {/* Ventilation Question */}
           <View style={styles.questionContainer}>
-            <Text style={styles.questionLabel}>What kind of ventilation was in the room?</Text>
+            <Text style={styles.questionLabel}>
+              What kind of ventilation was in the room?
+            </Text>
             <ScrollView
               horizontal
               showsHorizontalScrollIndicator={false}
@@ -180,9 +203,6 @@ const SurveyScreen = () => {
             </ScrollView>
           </View>
 
-
-
-
           <SizedBox height={25} />
 
           <SizedBox height={25} />
@@ -198,7 +218,7 @@ const SurveyScreen = () => {
             />
           </View>
 
-            <SizedBox height={20} />
+          <SizedBox height={20} />
 
           {/* Location Questions */}
           <View style={styles.questionContainer}>
@@ -210,20 +230,19 @@ const SurveyScreen = () => {
               style={styles.textInput}
             />
           </View>
-
-          </View>
-        </ScrollView>
-        
-        <View style={styles.bottomStickyView}>
-          <TextButton
-            title="Delete"
-            variant="secondary"
-            onPress={() => setDeleteModalVisible(true)}
-            width="45%"
-          />
-          <TextButton title="Save" onPress={saveSession} width="45%" />
         </View>
-      </SafeAreaView>
+        {/* <SizedBox height={500} /> */}
+      </KeyboardAvoidingScrollView>
+
+      <View style={styles.bottomStickyView}>
+        <TextButton
+          title="Delete"
+          variant="secondary"
+          onPress={() => setDeleteModalVisible(true)}
+          width="45%"
+        />
+        <TextButton title="Save" onPress={saveSession} width="45%" />
+      </View>
       <StyledModal
         title="Delete Session"
         body="Are you sure you want to delete this session?"
@@ -241,7 +260,7 @@ export default SurveyScreen;
 
 const styles = StyleSheet.create({
   scrollContent: {
-    paddingBottom: 120, 
+    // paddingBottom: 120,
   },
   bottomStickyView: {
     flexDirection: "row",
@@ -256,9 +275,6 @@ const styles = StyleSheet.create({
     backgroundColor: theme.colors.bg,
     borderTopLeftRadius: theme.radii.lg,
     borderTopRightRadius: theme.radii.lg,
-  },
-  sliderContainer: {
-    marginBottom: theme.spacing.md,
   },
   sliderLabel: {
     fontSize: theme.fontSize.lg,
@@ -298,7 +314,7 @@ const styles = StyleSheet.create({
     borderRadius: theme.radii.md,
     borderWidth: 2,
     borderColor: theme.colors.textMuted,
-    backgroundColor: 'transparent',
+    backgroundColor: "transparent",
   },
   radioSelected: {
     borderColor: theme.colors.primary,
@@ -307,10 +323,10 @@ const styles = StyleSheet.create({
   radioText: {
     fontSize: theme.fontSize.base,
     color: theme.colors.text,
-    textAlign: 'center',
+    textAlign: "center",
   },
   radioTextSelected: {
-    color: '#fff',
+    color: "#fff",
     fontWeight: theme.fontWeight.semibold,
   },
   checkboxGroup: {
@@ -324,7 +340,7 @@ const styles = StyleSheet.create({
     borderRadius: theme.radii.md,
     borderWidth: 2,
     borderColor: theme.colors.textMuted,
-    backgroundColor: 'transparent',
+    backgroundColor: "transparent",
   },
   checkboxSelected: {
     borderColor: theme.colors.primary,
@@ -335,7 +351,7 @@ const styles = StyleSheet.create({
     color: theme.colors.text,
   },
   checkboxTextSelected: {
-    color: '#fff',
+    color: "#fff",
     fontWeight: theme.fontWeight.semibold,
   },
   textInput: {

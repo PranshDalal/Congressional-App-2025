@@ -15,7 +15,7 @@ type StyledTextInputProps = TextInputProps & {
 };
 
 const StyledTextInput = forwardRef<TextInput, StyledTextInputProps>(
-  ({ style, width = "90%", error, ...rest }, ref) => {
+  ({ style, width = "100%", error, ...rest }, ref) => {
     return (
       <View style={{ width }}>
         <TextInput
