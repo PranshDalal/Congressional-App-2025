@@ -100,59 +100,55 @@ const SigninScreen = () => {
   };
 
   return (
-    <DismissKeyboard>
-      <BackgroundView
-        style={{ alignItems: "center" }}
-        withSafeArea
-        withScreenPadding
-      >
-        <SizedBox height={100} />
-        <Text style={globalStyles.header1}>Welcome Back!</Text>
-        <Text style={globalStyles.mutedText}>Please sign in to continue</Text>
-        <SizedBox height={25} />
-        <StyledTextInput
-          value={email}
-          onSubmitEditing={() => inputPasswordRef.current?.focus()}
-          placeholder="Email"
-          keyboardType="email-address"
-          onChangeText={setEmail}
-          enterKeyHint="next"
-          width="100%"
-          error={emailError}
-        />
-        <SizedBox height={10} />
-        <StyledTextInput
-          value={password}
-          onSubmitEditing={handleSignIn}
-          ref={inputPasswordRef}
-          placeholder="Password"
-          secureTextEntry
-          onChangeText={setPassword}
-          enterKeyHint="done"
-          width="100%"
-          error={passwordError}
-        />
-        <SizedBox height={5} />
-        <Pressable onPress={forgotPassword} style={{ alignSelf: "flex-start" }}>
-          <Text style={globalStyles.linkText}>Forgot your password?</Text>
-        </Pressable>
-        <SizedBox height={20} />
-        <TextButton
-          title="Sign In"
-          onPress={handleSignIn}
-          width="100%"
-          textStyle={{ fontWeight: theme.fontWeight.semibold }}
-          showLoading={loading}
-        />
-        <SizedBox height={25} />
-        <View style={{ flexDirection: "row" }}>
-          <Text style={globalStyles.mutedText}>Don't have an account? </Text>
-          <Link href="/sign-up" style={globalStyles.linkText} replace>
-            Sign Up
-          </Link>
-        </View>
-      </BackgroundView>
-    </DismissKeyboard>
+    <BackgroundView
+      style={{ alignItems: "center" }}
+      withSafeArea
+      withScreenPadding
+    >
+      <SizedBox height={100} />
+      <Text style={globalStyles.header1}>Welcome Back!</Text>
+      <Text style={globalStyles.mutedText}>Please sign in to continue</Text>
+      <SizedBox height={25} />
+      <StyledTextInput
+        value={email}
+        onSubmitEditing={() => inputPasswordRef.current?.focus()}
+        placeholder="Email"
+        keyboardType="email-address"
+        onChangeText={setEmail}
+        enterKeyHint="next"
+        error={emailError}
+      />
+      <SizedBox height={10} />
+      <StyledTextInput
+        value={password}
+        onSubmitEditing={handleSignIn}
+        ref={inputPasswordRef}
+        placeholder="Password"
+        secureTextEntry
+        onChangeText={setPassword}
+        enterKeyHint="done"
+        error={passwordError}
+      />
+      <SizedBox height={5} />
+      <Pressable onPress={forgotPassword} style={{ alignSelf: "flex-start" }}>
+        <Text style={globalStyles.linkText}>Forgot your password?</Text>
+      </Pressable>
+      <SizedBox height={20} />
+      <TextButton
+        title="Sign In"
+        onPress={handleSignIn}
+        width="100%"
+        textStyle={{ fontWeight: theme.fontWeight.semibold }}
+        showLoading={loading}
+      />
+      <SizedBox height={25} />
+      <View style={{ flexDirection: "row" }}>
+        <Text style={globalStyles.mutedText}>Don't have an account? </Text>
+        <Link href="/sign-up" style={globalStyles.linkText} replace>
+          Sign Up
+        </Link>
+      </View>
+    </BackgroundView>
   );
 };
 
