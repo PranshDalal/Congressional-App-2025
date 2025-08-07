@@ -12,16 +12,18 @@ import StyledModal from "@/components/StyledModal";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { Accelerometer } from "expo-sensors";
 import { CameraView, useCameraPermissions } from "expo-camera";
-import auth from "@react-native-firebase/auth";
+import { getAuth } from "@react-native-firebase/auth";
 import axios from "axios";
 
 const SessionScreen = () => {
+  const currentUser = getAuth().currentUser;
+
   const router = useRouter();
   const [permission, requestPermission] = useCameraPermissions();
 
   const [elapsed, setElapsed] = useState(0);
   const [isStopwatchRunning, setStopwatchRunning] = useState(true);
-  const [dB, setDB] = useState<number | null>(null);
+  const [dB, setDB] = useState<number>(-120);
   const fakeConvertedDBRef = useRef(-1);
   const [fakeRenderDB, setFakeRenderDB] = useState(-1);
 
@@ -29,6 +31,7 @@ const SessionScreen = () => {
   const [motionMagnitude, setMotionMagnitude] = useState(0);
 
   const [lighting, setLighting] = useState<number | null>(null);
+  const [pictureSize, setPictureSize] = useState<string | undefined>(undefined);
   const [isCameraReady, setIsCameraReady] = useState(false);
   const cameraRef = useRef<CameraView | null>(null);
 
@@ -47,37 +50,42 @@ const SessionScreen = () => {
   useEffect(() => {
     const startSession = async () => {
       try {
-        const currentUser = auth().currentUser;
         console.log("Current user:", currentUser);
         if (!currentUser) {
-          console.error('No authenticated user found');
+          console.error("No authenticated user found");
           return;
         }
 
         console.log("Starting session for user:", currentUser.uid);
 
-        const response = await axios.post(`${process.env.EXPO_PUBLIC_API_BASE_URL}/api/start_session`, {
-          user_id: currentUser.uid,
-        });
+        const response = await axios.post(
+          `${process.env.EXPO_PUBLIC_API_BASE_URL}/api/start_session`,
+          {
+            user_id: currentUser.uid,
+          }
+        );
 
         setSessionId(response.data.session_id);
-        console.log('Session started:', response.data.session_id);
+        console.log("Session started:", response.data.session_id);
       } catch (error) {
         if (axios.isAxiosError(error)) {
-          console.error('Failed to start session:', error.response?.data?.error || error.message);
+          console.error(
+            "Failed to start session:",
+            error.response?.data?.error || error.message
+          );
         } else {
-          console.error('Error starting session:', error);
+          console.error("Error starting session:", error);
         }
       }
     };
 
     startSession();
-  }, []); 
+  }, []);
 
   useEffect(() => {
-    console.log('Camera permission state:', permission);
+    console.log("Camera permission state:", permission);
     if (!permission?.granted) {
-      console.log('Requesting camera permission...');
+      console.log("Requesting camera permission...");
       requestPermission();
     }
   }, [permission]);
@@ -98,22 +106,35 @@ const SessionScreen = () => {
   }, [isStopwatchRunning]);
 
   const collectSessionData = () => {
-    const avgNoiseLevel = noiseReadings.length > 0 
-      ? Math.round(noiseReadings.reduce((sum, reading) => sum + reading, 0) / noiseReadings.length)
-      : fakeRenderDB;
+    const avgNoiseLevel =
+      noiseReadings.length > 0
+        ? Math.round(
+            noiseReadings.reduce((sum, reading) => sum + reading, 0) /
+              noiseReadings.length
+          )
+        : fakeRenderDB;
 
-    const avgMotionLevel = motionReadings.length > 0
-      ? Math.round((motionReadings.reduce((sum, reading) => sum + reading, 0) / motionReadings.length) * 1000) / 1000 
-      : motionMagnitude;
+    const avgMotionLevel =
+      motionReadings.length > 0
+        ? Math.round(
+            (motionReadings.reduce((sum, reading) => sum + reading, 0) /
+              motionReadings.length) *
+              1000
+          ) / 1000
+        : motionMagnitude;
 
-    const avgLightLevel = lightReadings.length > 0
-      ? Math.round(lightReadings.reduce((sum, reading) => sum + reading, 0) / lightReadings.length)
-      : lighting;
+    const avgLightLevel =
+      lightReadings.length > 0
+        ? Math.round(
+            lightReadings.reduce((sum, reading) => sum + reading, 0) /
+              lightReadings.length
+          )
+        : lighting;
 
-    console.log('📊 Session averages calculated:', {
+    console.log("📊 Session averages calculated:", {
       noise: { readings: noiseReadings.length, average: avgNoiseLevel },
       motion: { readings: motionReadings.length, average: avgMotionLevel },
-      light: { readings: lightReadings.length, average: avgLightLevel }
+      light: { readings: lightReadings.length, average: avgLightLevel },
     });
 
     return {
@@ -121,7 +142,7 @@ const SessionScreen = () => {
       noise_level: avgNoiseLevel,
       motion_level: avgMotionLevel,
       light_level: avgLightLevel,
-      user_id: auth().currentUser?.uid,
+      user_id: currentUser?.uid,
       elapsed_time: elapsed,
       noise_sample_count: noiseReadings.length,
       motion_sample_count: motionReadings.length,
@@ -143,8 +164,8 @@ const SessionScreen = () => {
       const dBUpdateInterval = setInterval(() => {
         if (isStopwatchRunning) {
           setFakeRenderDB(fakeConvertedDBRef.current);
-          if (fakeConvertedDBRef.current > 0) {
-            setNoiseReadings(prev => [...prev, fakeConvertedDBRef.current]);
+          if (dB != -120) {
+            setNoiseReadings((prev) => [...prev, dB]);
           }
         } else {
           setFakeRenderDB(-1);
@@ -169,11 +190,11 @@ const SessionScreen = () => {
 
         const magnitude = Math.sqrt(x * x + y * y + z * z);
         setMotionMagnitude(magnitude);
-        
-        setMotionReadings(prev => [...prev, magnitude]);
+
+        setMotionReadings((prev) => [...prev, magnitude]);
       });
 
-      Accelerometer.setUpdateInterval(200); 
+      Accelerometer.setUpdateInterval(200);
     } else {
       if (accelerometerSubscription) {
         accelerometerSubscription.remove();
@@ -203,18 +224,20 @@ const SessionScreen = () => {
             }
 
             console.log("Attempting to take picture for lighting...");
+            cameraRef.current.resumePreview();
             const photo = await cameraRef.current.takePictureAsync({
               base64: true,
               quality: 0.1,
               skipProcessing: true,
             });
+            cameraRef.current.pausePreview();
 
             if (photo.base64) {
               const avg = estimateBrightness(photo.base64);
               setLighting(avg);
-              
+
               if (avg !== null && avg > 0) {
-                setLightReadings(prev => [...prev, avg]);
+                setLightReadings((prev) => [...prev, avg]);
               }
             } else {
               console.warn("No base64 data from camera");
@@ -223,8 +246,8 @@ const SessionScreen = () => {
             console.warn("Camera error:", err);
             setLighting(null);
           }
-        }, 2000); 
-      }, 1000); 
+        }, 5000);
+      }, 1000);
 
       return () => {
         clearTimeout(initDelay);
@@ -243,7 +266,7 @@ const SessionScreen = () => {
 
   function estimateBrightness(base64: string): number {
     try {
-      const cleanBase64 = base64.replace(/^data:image\/[a-z]+;base64,/, '');
+      const cleanBase64 = base64.replace(/^data:image\/[a-z]+;base64,/, "");
 
       const binaryString = atob(cleanBase64);
       const bytes = new Uint8Array(binaryString.length);
@@ -253,45 +276,71 @@ const SessionScreen = () => {
 
       let sum = 0;
       let count = 0;
-      
-      for (let i = 0; i < bytes.length; i += 1000) {
+
+      const skipPixels = 100;
+
+      for (let i = 0; i < bytes.length; i += skipPixels) {
         sum += bytes[i];
         count++;
       }
-      
+
       const avg = count > 0 ? (sum / count / 255) * 100 : 0;
       const result = Math.round(Math.max(0, Math.min(100, avg)));
-      
-      console.log(`Brightness calculation: ${count} samples, avg=${avg.toFixed(2)}, result=${result}`);
+
+      console.log(
+        `Brightness calculation: ${count} samples, avg=${avg.toFixed(
+          2
+        )}, result=${result}`
+      );
       return result;
     } catch (err) {
       console.warn("Brightness estimation error:", err);
       let sum = 0;
       let count = 0;
-      
+
       for (let i = 0; i < base64.length; i += 100) {
         const charCode = base64.charCodeAt(i);
         sum += charCode;
         count++;
       }
-      
+
       const fallback = Math.round((sum / count / 255) * 100);
       console.log("Using fallback brightness calculation:", fallback);
       return fallback;
     }
   }
+
+  const getSmallestCameraResolution = async () => {
+    const sizes = await cameraRef.current!.getAvailablePictureSizesAsync();
+    const smallestSize = sizes
+      .filter((s) => /^\d+x\d+$/.test(s))
+      .sort((a, b) => {
+        const [aw, ah] = a.split("x").map(Number);
+        const [bw, bh] = b.split("x").map(Number);
+        return aw * ah - bw * bh;
+      })[0];
+
+    console.log("Using smallest camera resolution:", smallestSize);
+    return smallestSize;
+  };
   // #endregion
 
-
   return (
-    <BackgroundView style={styles.container}>
+    <BackgroundView>
       {permission?.granted && (
         <CameraView
           ref={cameraRef}
           style={{ width: 1, height: 1, position: "absolute", top: -100 }}
           facing="front"
+          pictureSize={pictureSize}
+          videoStabilizationMode="off"
+          autofocus="off"
+          active={isStopwatchRunning}
           onCameraReady={() => {
             console.log("Camera is ready!");
+            getSmallestCameraResolution().then((size) => {
+              setPictureSize(size);
+            });
             setIsCameraReady(true);
           }}
           onMountError={(error) => {
@@ -360,11 +409,11 @@ const SessionScreen = () => {
         type="ask"
         onSubmit={() => {
           const sessionData = collectSessionData();
-          router.push({
+          router.replace({
             pathname: "/session/survey",
             params: {
-              sessionData: JSON.stringify(sessionData)
-            }
+              sessionData: JSON.stringify(sessionData),
+            },
           });
         }}
         submitButtonText="End Session"
@@ -376,10 +425,6 @@ const SessionScreen = () => {
 export default SessionScreen;
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: theme.colors.bg,
-  },
   content: {
     flex: 1,
     ...globalStyles.centered,
