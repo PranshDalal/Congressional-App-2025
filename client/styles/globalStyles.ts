@@ -12,7 +12,7 @@ const globalStyles = StyleSheet.create({
 
   screenPadding: {
     paddingHorizontal: theme.spacing.md,
-    paddingVertical: theme.spacing.md,
+    paddingTop: theme.spacing.md,
   },
 
   row: {

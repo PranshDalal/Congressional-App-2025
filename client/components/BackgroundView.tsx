@@ -1,7 +1,11 @@
 import globalStyles from "@/styles/globalStyles";
 import theme from "@/styles/theme";
-import { View, ViewProps, StyleSheet, SafeAreaView } from "react-native";
+import { View, ViewProps, StyleSheet } from "react-native";
 import DismissKeyboard from "./DismissKeyboard";
+import {
+  SafeAreaView,
+  useSafeAreaInsets,
+} from "react-native-safe-area-context";
 
 type BackgroundViewProps = ViewProps & {
   withSafeArea?: boolean;
@@ -14,9 +18,33 @@ export default function BackgroundView({
   withScreenPadding,
   ...props
 }: BackgroundViewProps) {
+  const insets = useSafeAreaInsets();
+
+  const screenPaddingHorizontal = withScreenPadding
+    ? globalStyles.screenPadding.paddingHorizontal
+    : 0;
+  const screenPaddingTop = withScreenPadding
+    ? globalStyles.screenPadding.paddingTop
+    : 0;
+  const safeAreaPaddingTop = withSafeArea ? insets.top : 0;
+
+  const backgroundViewPadding = {
+    paddingHorizontal: withSafeArea
+      ? screenPaddingHorizontal + insets.left + insets.right
+      : screenPaddingHorizontal,
+    paddingTop: screenPaddingTop + safeAreaPaddingTop,
+    paddingBottom: withSafeArea ? insets.bottom : 0,
+  };
+
   return (
     <DismissKeyboard>
       <View
+        style={[styles.background, props.style, backgroundViewPadding]}
+        {...props}
+      >
+        {children}
+      </View>
+      {/* <View
         style={[
           styles.background,
           withScreenPadding ? globalStyles.screenPadding : undefined,
@@ -35,7 +63,7 @@ export default function BackgroundView({
         ) : (
           <View style={[{ flex: 1 }, props.style]}>{children}</View>
         )}
-      </View>
+      </View> */}
     </DismissKeyboard>
   );
 }
