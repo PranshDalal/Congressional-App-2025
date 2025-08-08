@@ -49,23 +49,6 @@ export default function RootLayout() {
     }
   }, [initializing, hideSplash]);
 
-  useEffect(() => {
-    const subscriber = onAuthStateChanged(getAuth(), handleAuthStateChanged);
-
-    const fallback = setTimeout(() => {
-      console.warn(
-        "Auth state listener taking too long — defaulting to signed out"
-      );
-      setUser(null);
-      setInitializing(false);
-    }, 5000);
-
-    return () => {
-      clearTimeout(fallback);
-      subscriber();
-    };
-  }, []);
-
   if (initializing) {
     return null;
   }
