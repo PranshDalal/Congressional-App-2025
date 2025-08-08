@@ -39,7 +39,7 @@ export default function BackgroundView({
   return (
     <DismissKeyboard>
       <View
-        style={[styles.background, props.style, backgroundViewPadding]}
+        style={[styles.background, backgroundViewPadding, props.style]}
         {...props}
       >
         {children}
