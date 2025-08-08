@@ -10,12 +10,14 @@ import {
 type BackgroundViewProps = ViewProps & {
   withSafeArea?: boolean;
   withScreenPadding?: boolean;
+  disableDismiss?: boolean;
 };
 
 export default function BackgroundView({
   children,
   withSafeArea,
   withScreenPadding,
+  disableDismiss,
   ...props
 }: BackgroundViewProps) {
   const insets = useSafeAreaInsets();
@@ -36,34 +38,22 @@ export default function BackgroundView({
     paddingBottom: withSafeArea ? insets.bottom : 0,
   };
 
+  const Content = () => (
+    <View
+      style={[styles.background, backgroundViewPadding, props.style]}
+      {...props}
+    >
+      {children}
+    </View>
+  );
+
+  if (disableDismiss) {
+    return <Content />;
+  }
+
   return (
     <DismissKeyboard>
-      <View
-        style={[styles.background, backgroundViewPadding, props.style]}
-        {...props}
-      >
-        {children}
-      </View>
-      {/* <View
-        style={[
-          styles.background,
-          withScreenPadding ? globalStyles.screenPadding : undefined,
-        ]}
-      >
-        {withSafeArea ? (
-          <SafeAreaView
-            style={[
-              { flex: 1 },
-              // withScreenPadding ? globalStyles.screenPadding : undefined,
-              props.style,
-            ]}
-          >
-            {children}
-          </SafeAreaView>
-        ) : (
-          <View style={[{ flex: 1 }, props.style]}>{children}</View>
-        )}
-      </View> */}
+      <Content />
     </DismissKeyboard>
   );
 }
