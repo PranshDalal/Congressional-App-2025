@@ -3,10 +3,9 @@ import React from "react";
 import { Platform } from "react-native";
 
 import { HapticTab } from "@/components/HapticTab";
-import { IconSymbol } from "@/components/ui/IconSymbol";
 import TabBarBackground from "@/components/ui/TabBarBackground";
 import theme from "@/styles/theme";
-import { Ionicons } from "@expo/vector-icons";
+import { ChartBarOutline, ChartBarSolid, Cog6ToothOutline, Cog6ToothSolid, CogOutline, CogSolid, DevicePhoneMobileOutline, HomeOutline, HomeSolid } from "@/assets/icons/heroicons";
 
 export default function TabLayout() {
   return (
@@ -31,11 +30,8 @@ export default function TabLayout() {
         options={{
           title: "Home",
           tabBarIcon: ({ color, focused }) => (
-            <Ionicons
-              size={26}
-              name={focused ? "home" : "home-outline"}
-              color={color}
-            />
+            focused ? <HomeSolid size={26} color={color} />
+            : <HomeOutline size={26} color={color} />
           ),
         }}
       />
@@ -44,11 +40,8 @@ export default function TabLayout() {
         options={{
           title: "Stats",
           tabBarIcon: ({ color, focused }) => (
-            <IconSymbol
-              size={26}
-              name={focused ? "chart.bar" : "chart.bar"}
-              color={color}
-            />
+            focused ? <ChartBarSolid size={26} color={color} />
+            : <ChartBarOutline size={26} color={color} />
           ),
         }}
       />
@@ -57,11 +50,8 @@ export default function TabLayout() {
         options={{
           title: "Settings",
           tabBarIcon: ({ color, focused }) => (
-            <Ionicons
-              size={26}
-              name={focused ? "settings" : "settings-outline"}
-              color={color}
-            />
+            focused ? <Cog6ToothSolid size={26} color={color} />
+            : <Cog6ToothOutline size={26} color={color} />
           ),
         }}
       />

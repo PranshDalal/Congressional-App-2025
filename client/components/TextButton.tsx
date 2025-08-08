@@ -40,7 +40,6 @@ export default function TextButton({
   const buttonPressed = () => {
     if (isInteractable()) {
       if (variant === "primary") {
-        console.log("🎵 Haptic should fire for:", title);
         Haptics.selectionAsync();
       }
 
