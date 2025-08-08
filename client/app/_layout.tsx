@@ -1,6 +1,6 @@
 import { Stack } from "expo-router";
 
-import { useColorScheme } from "@/hooks/useColorScheme";
+import { useColorScheme } from "@/hooks/theme/useColorScheme";
 import {
   DarkTheme,
   DefaultTheme,
