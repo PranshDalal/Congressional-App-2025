@@ -146,10 +146,13 @@ const StatsScreen = () => {
   }));
 
   return (
-    <BackgroundView withSafeArea withScreenPadding>
+    <BackgroundView withSafeArea withScreenPadding disableDismiss>
       <ScrollView
-        style={{ backgroundColor: "#121212" }}
-        showsVerticalScrollIndicator={false}
+        style={{ flex: 1, backgroundColor: "#121212" }}
+        contentContainerStyle={{ paddingBottom: 40 }}
+        keyboardShouldPersistTaps="handled"
+        nestedScrollEnabled
+        showsVerticalScrollIndicator={true}
       >
 
         {loading ? (
