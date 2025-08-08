@@ -7,8 +7,6 @@ import { getAuth } from "@react-native-firebase/auth";
 import { useStartSession } from "@/hooks/useStartSession";
 import SizedBox from "@/components/SizedBox";
 
-import Toast from "react-native-toast-message";
-
 const IndexScreen = () => {
   const user = getAuth().currentUser;
   const startSession = useStartSession();
