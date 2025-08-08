@@ -8,7 +8,6 @@ import SizedBox from "@/components/SizedBox";
 import TextButton from "@/components/TextButton";
 import { getAuth } from "@react-native-firebase/auth";
 import StyledModal from "@/components/StyledModal";
-import BouncingDots from "@/components/BouncingDots";
 import Toast from "react-native-toast-message";
 
 const settings = () => {
