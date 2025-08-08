@@ -8,7 +8,7 @@ import {
 import React, { useState } from "react";
 import BackgroundView from "@/components/BackgroundView";
 import globalStyles from "@/styles/globalStyles";
-import { Link, useRouter } from "expo-router";
+import { useRouter } from "expo-router";
 import TextButton from "@/components/TextButton";
 import theme from "@/styles/theme";
 import StyledModal from "@/components/StyledModal";

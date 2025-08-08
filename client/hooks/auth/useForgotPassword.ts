@@ -1,8 +1,6 @@
 import { FirebaseError } from "firebase/app";
-import { useRef, useState } from "react";
-import { useFirebaseErrorHandler } from "../useFirebaseErrorHandler";
-import { TextInput } from "react-native";
-import { sendResetPasswordEmail, signIn, signUp } from "@/services/authService";
+import { useState } from "react";
+import { sendResetPasswordEmail } from "@/services/authService";
 import Toast from "react-native-toast-message";
 
 export const useForgotPassword = (

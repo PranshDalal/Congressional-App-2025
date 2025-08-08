@@ -8,21 +8,29 @@ import {
 } from "@react-navigation/native";
 import { StatusBar } from "expo-status-bar";
 import { Protected } from "expo-router/build/views/Protected";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import {
   FirebaseAuthTypes,
   getAuth,
   onAuthStateChanged,
 } from "@react-native-firebase/auth";
 
+import * as SplashScreen from "expo-splash-screen";
+
 import Toast from "react-native-toast-message";
 import toastConfig from "@/components/toast/ToastConfig";
+
+SplashScreen.preventAutoHideAsync();
 
 export default function RootLayout() {
   const colorScheme = useColorScheme();
 
   const [initializing, setInitializing] = useState(true);
   const [user, setUser] = useState<FirebaseAuthTypes.User | null>();
+
+  const hideSplash = useCallback(async () => {
+    await SplashScreen.hideAsync();
+  }, []);
 
   const handleAuthStateChanged = (user: FirebaseAuthTypes.User | null) => {
     console.log("onAuthStateChanged", user);
@@ -34,6 +42,33 @@ export default function RootLayout() {
     const subscriber = onAuthStateChanged(getAuth(), handleAuthStateChanged);
     return subscriber;
   }, []);
+
+  useEffect(() => {
+    if (!initializing) {
+      hideSplash();
+    }
+  }, [initializing, hideSplash]);
+
+  useEffect(() => {
+    const subscriber = onAuthStateChanged(getAuth(), handleAuthStateChanged);
+
+    const fallback = setTimeout(() => {
+      console.warn(
+        "Auth state listener taking too long — defaulting to signed out"
+      );
+      setUser(null);
+      setInitializing(false);
+    }, 5000);
+
+    return () => {
+      clearTimeout(fallback);
+      subscriber();
+    };
+  }, []);
+
+  if (initializing) {
+    return null;
+  }
 
   return (
     <ThemeProvider value={DarkTheme}>
@@ -47,7 +82,7 @@ export default function RootLayout() {
         </Protected>
         <Stack.Screen name="+not-found" />
       </Stack>
-      <Toast config={toastConfig} topOffset={55}/>
+      <Toast config={toastConfig} topOffset={55} />
       <StatusBar style="light" />
     </ThemeProvider>
   );
