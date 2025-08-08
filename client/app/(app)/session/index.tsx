@@ -14,6 +14,7 @@ import { Accelerometer } from "expo-sensors";
 import { CameraView, useCameraPermissions } from "expo-camera";
 import { getAuth } from "@react-native-firebase/auth";
 import axios from "axios";
+import { PauseSolid, PlaySolid } from "@/assets/icons/heroicons";
 
 const SessionScreen = () => {
   const currentUser = getAuth().currentUser;
@@ -385,9 +386,11 @@ const SessionScreen = () => {
           title=""
           icon={
             isStopwatchRunning ? (
-              <Ionicons name="pause" size={18} color={theme.colors.text} />
+              <PauseSolid size={18} color={theme.colors.text} />
+              // <Ionicons name="pause" size={18} color={theme.colors.text} />
             ) : (
-              <Ionicons name="play" size={18} color={theme.colors.text} />
+              <PlaySolid size={18} color={theme.colors.text} />
+              // <Ionicons name="play" size={18} color={theme.colors.text} />
             )
           }
           variant="secondary"
