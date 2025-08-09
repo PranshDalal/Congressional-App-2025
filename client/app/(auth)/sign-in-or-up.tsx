@@ -41,7 +41,7 @@ const styles = StyleSheet.create({
   header: {
     ...globalStyles.header1,
     fontSize: globalStyles.header1.fontSize * 1.5,
-    paddingHorizontal: "20%",
+    paddingHorizontal: theme.spacing.xl,
     textAlign: "center",
     paddingTop: 200,
     paddingBottom: 20,

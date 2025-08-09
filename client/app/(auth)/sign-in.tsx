@@ -60,7 +60,7 @@ const SigninScreen = () => {
           value={password}
           onSubmitEditing={handleSignIn}
           ref={inputPasswordRef}
-          placeholder="Password"
+          placeholder="Your password"
           secureTextEntry
           onChangeText={setPassword}
           enterKeyHint="done"

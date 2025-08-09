@@ -68,7 +68,7 @@ export default function TextButton({
         }}
         style={[
           styles.base,
-          // { width: width },
+          { justifyContent: "center" },
           variant === "primary" ? styles.primary : styles.secondary,
           style,
         ]}
@@ -86,6 +86,7 @@ export default function TextButton({
                 height:
                   textStyle?.fontSize ?? globalStyles.bodyText.fontSize * 1.2,
                 alignItems: "center",
+                justifyContent: "center",
               }}
             >
               <BouncingDots />
