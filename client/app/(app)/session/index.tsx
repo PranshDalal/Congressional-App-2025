@@ -5,7 +5,6 @@ import globalStyles from "@/styles/globalStyles";
 import { useLocalSearchParams, useRouter } from "expo-router";
 import TextButton from "@/components/TextButton";
 import theme from "@/styles/theme";
-import { Ionicons } from "@expo/vector-icons";
 import BouncingCircles from "@/components/BouncingCircles";
 import RNSoundLevel from "react-native-sound-level";
 import StyledModal from "@/components/StyledModal";
@@ -15,8 +14,10 @@ import { CameraView, useCameraPermissions } from "expo-camera";
 import { getAuth } from "@react-native-firebase/auth";
 import axios from "axios";
 import { PauseSolid, PlaySolid } from "@/assets/icons/heroicons";
+import { useKeepAwake } from 'expo-keep-awake';
 
 const SessionScreen = () => {
+  useKeepAwake(); // Stops screen from sleeping
   const currentUser = getAuth().currentUser;
 
   const router = useRouter();
