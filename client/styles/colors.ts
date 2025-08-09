@@ -1,12 +1,12 @@
 const isDarkTheme = true;
 
 const darkColors = {
-  bgDark: "#0d0d0d", // 0°, 0%, 5%
-  bg: "#1a1a1a", // 0°, 0%, 10%
-  bgLight: "#262626", // 0°, 0%, 15%
-  border: "#4d4d4d", // 0°, 0%, 30%
+  bgDark: "#121212", // 0°, 0%, 7%
+  bg: "#1c1c1c", // 0°, 0%, 11%
+  bgLight: "#2b2b2b", // 0°, 0%, 19%
+  border: "#363636", // 0°, 0%, 21%
   text: "#f2f2f2", // 0°, 0%, 95%
-  textMuted: "#b3b3b3", // 0°, 0%, 70%
+  textMuted: "#919191", // 0°, 0%, 57%
   primary: "#7906d0", // 274°, 94%, 42%
   link: "#4b81fa",
   danger: "#f00726",

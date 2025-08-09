@@ -8,6 +8,7 @@ import Toast, {
   BaseToastProps,
   ErrorToast,
 } from "react-native-toast-message";
+import ThemedText from "../ThemedText";
 
 // type CustomToastProps = {
 //   title: string;
@@ -26,25 +27,25 @@ type CustomToastProps = BaseToastProps & {
 export const toastConfig = {
   success: ({ text1, props }: CustomToastProps) => (
     <View style={styles.toast}>
-      <Text style={styles.text}>{text1}</Text>
+      <ThemedText style={styles.text}>{text1}</ThemedText>
       <Ionicons size={20} name="checkmark-circle-outline" color="#00ff00" />
     </View>
   ),
   error: ({ text1, props }: CustomToastProps) => (
     <View style={styles.toast}>
-      <Text style={styles.text}>{text1}</Text>
+      <ThemedText style={styles.text}>{text1}</ThemedText>
       <Ionicons size={20} name="close-circle-outline" color="#ff0000" />
     </View>
   ),
   //   loading: ({ text1, props }: CustomToastProps) =>
   //     props?.isLoading ? (
   //       <View style={styles.toast}>
-  //         <Text style={globalStyles.bodyText}>{text1}</Text>
+  //         <ThemedText>{text1}</ThemedText>
   //         <ActivityIndicator size="small" style={{ marginLeft: 8 }} />
   //       </View>
   //     ) : (
   //       <View style={styles.toast}>
-  //         <Text style={globalStyles.bodyText}>{props?.loadedText}</Text>
+  //         <ThemedText>{props?.loadedText}</ThemedText>
   //       </View>
   //     ),
 };
@@ -61,7 +62,6 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   text: {
-    ...globalStyles.bodyText,
     paddingRight: theme.spacing.sm,
   },
 });

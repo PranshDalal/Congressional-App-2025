@@ -3,6 +3,7 @@ import React from "react";
 import theme from "@/styles/theme";
 import { StyleSheet } from "react-native";
 import globalStyles from "@/styles/globalStyles";
+import ThemedText from "./ThemedText";
 
 type ChipRadioButtonGroupProps = {
   labels: string[];
@@ -23,7 +24,7 @@ const ChipRadioButtonGroup = ({
         <ScrollView
           style={{ paddingBottom: theme.spacing.sm }}
           horizontal
-          showsHorizontalScrollIndicator={true}
+          showsHorizontalScrollIndicator={false}
           contentContainerStyle={{ flexDirection: "row", gap: 12 }}
         >
           {labels.map((label, index) => (
@@ -35,14 +36,14 @@ const ChipRadioButtonGroup = ({
               ]}
               onPress={() => onSelect?.(index)}
             >
-              <Text
+              <ThemedText
                 style={[
                   styles.radioText,
                   selectedIndex === index && styles.radioTextSelected,
                 ]}
               >
                 {label}
-              </Text>
+              </ThemedText>
             </Pressable>
           ))}
         </ScrollView>
@@ -57,14 +58,14 @@ const ChipRadioButtonGroup = ({
               ]}
               onPress={() => onSelect?.(index)}
             >
-              <Text
+              <ThemedText
                 style={[
                   styles.radioText,
                   selectedIndex === index && styles.radioTextSelected,
                 ]}
               >
                 {label}
-              </Text>
+              </ThemedText>
             </Pressable>
           ))}
         </View>
@@ -81,25 +82,23 @@ const styles = StyleSheet.create({
     gap: theme.spacing.sm,
   },
   radioOption: {
-    paddingVertical: theme.spacing.sm,
+    paddingVertical: theme.spacing.sm * 1.5,
     paddingHorizontal: theme.spacing.lg,
     borderRadius: theme.radii.full,
-    borderWidth: 2,
-    borderColor: theme.colors.border,
-    backgroundColor: "transparent",
+    // borderWidth: 2,
+    // borderColor: theme.colors.border,
+    backgroundColor: theme.colors.bgLight,
   },
   radioSelected: {
-    borderColor: theme.colors.primary,
+    // borderColor: theme.colors.primary,
     backgroundColor: theme.colors.primary,
   },
   radioText: {
-    ...globalStyles.bodyText,
     // fontSize: theme.fontSize.base,
     // color: theme.colors.text,
     // textAlign: "center",
   },
   radioTextSelected: {
-    ...globalStyles.bodyText,
     // color: "#fff",
     // fontWeight: theme.fontWeight.semibold,
   },

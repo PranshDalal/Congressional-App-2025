@@ -1,11 +1,18 @@
 import React, { useEffect, useState } from "react";
-import { View, Text, ScrollView, ActivityIndicator, Dimensions } from "react-native";
+import {
+  View,
+  Text,
+  ScrollView,
+  ActivityIndicator,
+  Dimensions,
+} from "react-native";
 import axios from "axios";
 import BackgroundView from "@/components/BackgroundView";
 import globalStyles from "@/styles/globalStyles";
 import SizedBox from "@/components/SizedBox";
 import auth from "@react-native-firebase/auth";
 import { LineChart } from "react-native-chart-kit";
+import ThemedText from "@/components/ThemedText";
 
 const WeeklyFocusChart = ({ sessions }: { sessions: any[] }) => {
   const screenWidth = Dimensions.get("window").width - 32;
@@ -79,10 +86,15 @@ const StatsScreen = () => {
         }
 
         const USER_ID = currentUser.uid;
-        const response = await axios.get(`${process.env.EXPO_PUBLIC_API_BASE_URL}/api/session/${USER_ID}`);
+        const response = await axios.get(
+          `${process.env.EXPO_PUBLIC_API_BASE_URL}/api/session/${USER_ID}`
+        );
         const sessionData = Object.values(response.data);
 
-        sessionData.sort((a: any, b: any) => new Date(b.start_time).getTime() - new Date(a.start_time).getTime());
+        sessionData.sort(
+          (a: any, b: any) =>
+            new Date(b.start_time).getTime() - new Date(a.start_time).getTime()
+        );
         setSessions(sessionData);
       } catch (err) {
         setError("Failed to load sessions");
@@ -140,25 +152,28 @@ const StatsScreen = () => {
     }),
     duration: s.end_time
       ? `${Math.round(
-          (new Date(s.end_time).getTime() - new Date(s.start_time).getTime()) / (1000 * 60)
+          (new Date(s.end_time).getTime() - new Date(s.start_time).getTime()) /
+            (1000 * 60)
         )} min`
       : "N/A",
   }));
 
   return (
-    <BackgroundView withSafeArea withScreenPadding disableDismiss>
+    <BackgroundView withSafeArea disableDismiss>
       <ScrollView
-        style={{ flex: 1, backgroundColor: "#121212" }}
-        contentContainerStyle={{ paddingBottom: 40 }}
+        style={{ flex: 1 }}
+        contentContainerStyle={{
+          paddingBottom: 40,
+          paddingHorizontal: globalStyles.screenPadding.paddingHorizontal,
+        }}
         keyboardShouldPersistTaps="handled"
         nestedScrollEnabled
         showsVerticalScrollIndicator={true}
       >
-
         {loading ? (
           <ActivityIndicator size="large" color="#bb86fc" />
         ) : error ? (
-          <Text style={{ color: "red" }}>{error}</Text>
+          <ThemedText style={{ color: "red" }}>{error}</ThemedText>
         ) : (
           <>
             <View
@@ -168,17 +183,34 @@ const StatsScreen = () => {
                 justifyContent: "space-between",
               }}
             >
-              <StatCard label="Total Sessions" value={stats?.totalSessions || 0} />
-              <StatCard label="Focus Hours" value={`${stats?.totalHours || 0}h`} />
-              <StatCard label="Best Streak" value={`${stats?.bestStreak || 0} days`} />
-              <StatCard label="Avg Focus" value={`${stats?.averageFocus || 0}/10`} />
+              <StatCard
+                label="Total Sessions"
+                value={stats?.totalSessions || 0}
+              />
+              <StatCard
+                label="Focus Hours"
+                value={`${stats?.totalHours || 0}h`}
+              />
+              <StatCard
+                label="Longest Streak"
+                value={`${stats?.bestStreak || 0} days`}
+              />
+              <StatCard
+                label="Avg Focus"
+                value={`${stats?.averageFocus || 0}/10`}
+              />
             </View>
 
             <SizedBox height={30} />
 
-            <Text style={[globalStyles.header2, { marginBottom: 10, color: "#bb86fc" }]}>
+            <ThemedText
+              style={[
+                globalStyles.header2,
+                { marginBottom: 10, color: "#bb86fc" },
+              ]}
+            >
               Recent Sessions
-            </Text>
+            </ThemedText>
             <View
               style={{
                 backgroundColor: "#1e1e2f",
@@ -187,7 +219,9 @@ const StatsScreen = () => {
               }}
             >
               {recentSessions.length === 0 ? (
-                <Text style={[globalStyles.bodyText, { color: "#ccc" }]}>No sessions yet.</Text>
+                <ThemedText style={{ color: "#ccc" }}>
+                  No sessions yet.
+                </ThemedText>
               ) : (
                 recentSessions.map((session) => (
                   <View
@@ -198,8 +232,12 @@ const StatsScreen = () => {
                       marginBottom: 12,
                     }}
                   >
-                    <Text style={[globalStyles.bodyText, { color: "#fff" }]}>{session.date}</Text>
-                    <Text style={[globalStyles.bodyText, { color: "#bb86fc" }]}>{session.duration}</Text>
+                    <ThemedText style={{ color: "#fff" }}>
+                      {session.date}
+                    </ThemedText>
+                    <ThemedText style={{ color: "#bb86fc" }}>
+                      {session.duration}
+                    </ThemedText>
                   </View>
                 ))
               )}
@@ -207,9 +245,14 @@ const StatsScreen = () => {
 
             <SizedBox height={40} />
 
-            <Text style={[globalStyles.header2, { marginBottom: 10, color: "#bb86fc" }]}>
+            <ThemedText
+              style={[
+                globalStyles.header2,
+                { marginBottom: 10, color: "#bb86fc" },
+              ]}
+            >
               Weekly Focus
-            </Text>
+            </ThemedText>
             <View
               style={{
                 backgroundColor: "#1e1e2f",
@@ -230,7 +273,13 @@ const StatsScreen = () => {
 
 export default StatsScreen;
 
-const StatCard = ({ label, value }: { label: string; value: string | number }) => (
+const StatCard = ({
+  label,
+  value,
+}: {
+  label: string;
+  value: string | number;
+}) => (
   <View
     style={{
       width: "48%",
@@ -240,7 +289,11 @@ const StatCard = ({ label, value }: { label: string; value: string | number }) =
       marginBottom: 16,
     }}
   >
-    <Text style={[globalStyles.bodyText, { color: "#bb86fc" }]}>{label}</Text>
-    <Text style={[globalStyles.header3, { marginTop: 4, color: "#ffffff" }]}>{value}</Text>
+    <ThemedText style={{ color: "#bb86fc" }}>{label}</ThemedText>
+    <ThemedText
+      style={[globalStyles.header3, { marginTop: 4, color: "#ffffff" }]}
+    >
+      {value}
+    </ThemedText>
   </View>
 );

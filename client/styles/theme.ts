@@ -9,7 +9,7 @@ export const theme = {
     base: 14,
     lg: 16,
     xl: 20,
-    xxl: 24,
+    xxl: 28,
     bigBoy: 48
   },
   fontWeight: {
@@ -28,6 +28,7 @@ export const theme = {
     sm: 4,
     md: 8,
     lg: 12,
+    xl: 18,
     full: 36
   },
   screenWidth: width,
