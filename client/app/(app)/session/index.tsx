@@ -3,7 +3,7 @@ import React, { useEffect, useRef, useState } from "react";
 import BackgroundView from "@/components/BackgroundView";
 import globalStyles from "@/styles/globalStyles";
 import { useLocalSearchParams, useRouter } from "expo-router";
-import TextButton from "@/components/TextButton";
+import TextButton from "@/components/button/TextButton";
 import theme from "@/styles/theme";
 import BouncingCircles from "@/components/BouncingCircles";
 import RNSoundLevel from "react-native-sound-level";
@@ -354,7 +354,7 @@ const SessionScreen = () => {
       )}
       <BouncingCircles paused={!isStopwatchRunning} />
       <View style={styles.content}>
-        <ThemedText style={[styles.stopwatchText, globalStyles.header1]}>
+        <ThemedText style={[globalStyles.header1, styles.stopwatchText]}>
           {formatTime(elapsed)}
         </ThemedText>
         <ThemedText style={globalStyles.mutedText}>

@@ -1,42 +1,68 @@
-import { Tabs } from "expo-router";
+import { Tabs, useRouter } from "expo-router";
 import React from "react";
 import { Platform } from "react-native";
 
 import { HapticTab } from "@/components/HapticTab";
 import TabBarBackground from "@/components/ui/TabBarBackground";
 import theme from "@/styles/theme";
-import { ChartBarOutline, ChartBarSolid, Cog6ToothOutline, Cog6ToothSolid, CogOutline, CogSolid, DevicePhoneMobileOutline, HomeOutline, HomeSolid } from "@/assets/icons/heroicons";
+import {
+  ChartBarOutline,
+  ChartBarSolid,
+  Cog6ToothOutline,
+  Cog6ToothSolid,
+  DevicePhoneMobileOutline,
+  DevicePhoneMobileSolid,
+  HomeOutline,
+  HomeSolid,
+  UserCircleOutline,
+} from "@/assets/icons/heroicons";
+import { headerPreset } from "@/components/Header";
+import { getAuth } from "@react-native-firebase/auth";
+import IconButton from "@/components/button/IconButton";
 
 export default function TabLayout() {
+  const user = getAuth().currentUser;
+  const router = useRouter();
+
   return (
     <Tabs
       screenOptions={{
+        ...headerPreset,
         tabBarActiveTintColor: theme.colors.text,
-        headerShown: false,
-        // use if tab bar should have haptics
         tabBarButton: HapticTab,
         tabBarBackground: TabBarBackground,
         tabBarStyle: Platform.select({
           ios: {
-            // Use a transparent background on iOS to show the blur effect
             position: "absolute",
           },
           default: {},
         }),
         tabBarShowLabel: false,
         tabBarIconStyle: {
-          paddingTop: 10, // Move icons down
-          height: 60, // Increase height to accommodate
-        }
+          paddingTop: 10,
+          height: 60,
+        },
       }}
     >
       <Tabs.Screen
         name="index"
         options={{
-          title: "Home",
-          tabBarIcon: ({ color, focused }) => (
-            focused ? <HomeSolid size={28} color={color} />
-            : <HomeOutline size={28} color={color} />
+          title: "Welcome back, " + user?.displayName,
+          tabBarIcon: ({ color, focused }) =>
+            focused ? (
+              <HomeSolid size={28} color={color} />
+            ) : (
+              <HomeOutline size={28} color={color} />
+            ),
+          headerRight: () => (
+            <IconButton
+              color={theme.colors.text}
+              size={28}
+              icon={<UserCircleOutline />}
+              onPress={() => {
+                router.push("/settings");
+              }}
+            />
           ),
         }}
       />
@@ -44,30 +70,58 @@ export default function TabLayout() {
         name="stats"
         options={{
           title: "Stats",
-          tabBarIcon: ({ color, focused }) => (
-            focused ? <ChartBarSolid size={28} color={color} />
-            : <ChartBarOutline size={28} color={color} />
-          ),
+          tabBarIcon: ({ color, focused }) =>
+            focused ? (
+              <ChartBarSolid size={28} color={color} />
+            ) : (
+              <ChartBarOutline size={28} color={color} />
+            ),
+          // headerRight: () => (
+          //   <DevicePhoneMobileOutline
+          //     size={24}
+          //     color={theme.colors.text}
+          //     style={{ marginRight: 16 }}
+          //   />
+          // ),
         }}
       />
       <Tabs.Screen
         name="focusZones"
         options={{
           title: "Focus Zones",
-          tabBarIcon: ({ color, focused }) => (
-            focused ? <DevicePhoneMobileOutline size={26} color={color} />
-            : <DevicePhoneMobileOutline size={26} color={color} />
-          ),
+          tabBarIcon: ({ color, focused }) =>
+            focused ? (
+              <DevicePhoneMobileSolid size={26} color={color} />
+            ) : (
+              <DevicePhoneMobileOutline size={26} color={color} />
+            ),
+          // headerRight: () => (
+          //   <ChartBarOutline
+          //     size={24}
+          //     color={theme.colors.text}
+          //     style={{ marginRight: 16 }}
+          //   />
+          // ),
         }}
       />
       <Tabs.Screen
         name="settings"
         options={{
+          href: null,
           title: "Settings",
-          tabBarIcon: ({ color, focused }) => (
-            focused ? <Cog6ToothSolid size={28} color={color} />
-            : <Cog6ToothOutline size={28} color={color} />
-          ),
+          tabBarIcon: ({ color, focused }) =>
+            focused ? (
+              <Cog6ToothSolid size={28} color={color} />
+            ) : (
+              <Cog6ToothOutline size={28} color={color} />
+            ),
+          // headerRight: () => (
+          //   <HomeOutline
+          //     size={24}
+          //     color={theme.colors.text}
+          //     style={{ marginRight: 16 }}
+          //   />
+          // ),
         }}
       />
     </Tabs>

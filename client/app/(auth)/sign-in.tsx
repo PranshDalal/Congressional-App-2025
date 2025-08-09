@@ -4,7 +4,7 @@ import BackgroundView from "@/components/BackgroundView";
 import globalStyles from "@/styles/globalStyles";
 import StyledTextInput from "@/components/StyledTextInput";
 import SizedBox from "@/components/SizedBox";
-import TextButton from "@/components/TextButton";
+import TextButton from "@/components/button/TextButton";
 import theme from "@/styles/theme";
 import { Link } from "expo-router";
 import { useSignIn } from "@/hooks/auth/useSignIn";

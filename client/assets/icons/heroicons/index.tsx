@@ -3,666 +3,664 @@
 //
 
 import React from "react";
-import AcademicCapOutlineSvg from "./outline/academic-cap.svg"
-import AdjustmentsHorizontalOutlineSvg from "./outline/adjustments-horizontal.svg"
-import AdjustmentsVerticalOutlineSvg from "./outline/adjustments-vertical.svg"
-import ArchiveBoxArrowDownOutlineSvg from "./outline/archive-box-arrow-down.svg"
-import ArchiveBoxXMarkOutlineSvg from "./outline/archive-box-x-mark.svg"
-import ArchiveBoxOutlineSvg from "./outline/archive-box.svg"
-import ArrowDownCircleOutlineSvg from "./outline/arrow-down-circle.svg"
-import ArrowDownLeftOutlineSvg from "./outline/arrow-down-left.svg"
-import ArrowDownOnSquareStackOutlineSvg from "./outline/arrow-down-on-square-stack.svg"
-import ArrowDownOnSquareOutlineSvg from "./outline/arrow-down-on-square.svg"
-import ArrowDownRightOutlineSvg from "./outline/arrow-down-right.svg"
-import ArrowDownTrayOutlineSvg from "./outline/arrow-down-tray.svg"
-import ArrowDownOutlineSvg from "./outline/arrow-down.svg"
-import ArrowLeftCircleOutlineSvg from "./outline/arrow-left-circle.svg"
-import ArrowLeftEndOnRectangleOutlineSvg from "./outline/arrow-left-end-on-rectangle.svg"
-import ArrowLeftOnRectangleOutlineSvg from "./outline/arrow-left-on-rectangle.svg"
-import ArrowLeftStartOnRectangleOutlineSvg from "./outline/arrow-left-start-on-rectangle.svg"
-import ArrowLeftOutlineSvg from "./outline/arrow-left.svg"
-import ArrowLongDownOutlineSvg from "./outline/arrow-long-down.svg"
-import ArrowLongLeftOutlineSvg from "./outline/arrow-long-left.svg"
-import ArrowLongRightOutlineSvg from "./outline/arrow-long-right.svg"
-import ArrowLongUpOutlineSvg from "./outline/arrow-long-up.svg"
-import ArrowPathRoundedSquareOutlineSvg from "./outline/arrow-path-rounded-square.svg"
-import ArrowPathOutlineSvg from "./outline/arrow-path.svg"
-import ArrowRightCircleOutlineSvg from "./outline/arrow-right-circle.svg"
-import ArrowRightEndOnRectangleOutlineSvg from "./outline/arrow-right-end-on-rectangle.svg"
-import ArrowRightOnRectangleOutlineSvg from "./outline/arrow-right-on-rectangle.svg"
-import ArrowRightStartOnRectangleOutlineSvg from "./outline/arrow-right-start-on-rectangle.svg"
-import ArrowRightOutlineSvg from "./outline/arrow-right.svg"
-import ArrowSmallDownOutlineSvg from "./outline/arrow-small-down.svg"
-import ArrowSmallLeftOutlineSvg from "./outline/arrow-small-left.svg"
-import ArrowSmallRightOutlineSvg from "./outline/arrow-small-right.svg"
-import ArrowSmallUpOutlineSvg from "./outline/arrow-small-up.svg"
-import ArrowTopRightOnSquareOutlineSvg from "./outline/arrow-top-right-on-square.svg"
-import ArrowTrendingDownOutlineSvg from "./outline/arrow-trending-down.svg"
-import ArrowTrendingUpOutlineSvg from "./outline/arrow-trending-up.svg"
-import ArrowTurnDownLeftOutlineSvg from "./outline/arrow-turn-down-left.svg"
-import ArrowTurnDownRightOutlineSvg from "./outline/arrow-turn-down-right.svg"
-import ArrowTurnLeftDownOutlineSvg from "./outline/arrow-turn-left-down.svg"
-import ArrowTurnLeftUpOutlineSvg from "./outline/arrow-turn-left-up.svg"
-import ArrowTurnRightDownOutlineSvg from "./outline/arrow-turn-right-down.svg"
-import ArrowTurnRightUpOutlineSvg from "./outline/arrow-turn-right-up.svg"
-import ArrowTurnUpLeftOutlineSvg from "./outline/arrow-turn-up-left.svg"
-import ArrowTurnUpRightOutlineSvg from "./outline/arrow-turn-up-right.svg"
-import ArrowUpCircleOutlineSvg from "./outline/arrow-up-circle.svg"
-import ArrowUpLeftOutlineSvg from "./outline/arrow-up-left.svg"
-import ArrowUpOnSquareStackOutlineSvg from "./outline/arrow-up-on-square-stack.svg"
-import ArrowUpOnSquareOutlineSvg from "./outline/arrow-up-on-square.svg"
-import ArrowUpRightOutlineSvg from "./outline/arrow-up-right.svg"
-import ArrowUpTrayOutlineSvg from "./outline/arrow-up-tray.svg"
-import ArrowUpOutlineSvg from "./outline/arrow-up.svg"
-import ArrowUturnDownOutlineSvg from "./outline/arrow-uturn-down.svg"
-import ArrowUturnLeftOutlineSvg from "./outline/arrow-uturn-left.svg"
-import ArrowUturnRightOutlineSvg from "./outline/arrow-uturn-right.svg"
-import ArrowUturnUpOutlineSvg from "./outline/arrow-uturn-up.svg"
-import ArrowsPointingInOutlineSvg from "./outline/arrows-pointing-in.svg"
-import ArrowsPointingOutOutlineSvg from "./outline/arrows-pointing-out.svg"
-import ArrowsRightLeftOutlineSvg from "./outline/arrows-right-left.svg"
-import ArrowsUpDownOutlineSvg from "./outline/arrows-up-down.svg"
-import AtSymbolOutlineSvg from "./outline/at-symbol.svg"
-import BackspaceOutlineSvg from "./outline/backspace.svg"
-import BackwardOutlineSvg from "./outline/backward.svg"
-import BanknotesOutlineSvg from "./outline/banknotes.svg"
-import Bars2OutlineSvg from "./outline/bars-2.svg"
-import Bars3BottomLeftOutlineSvg from "./outline/bars-3-bottom-left.svg"
-import Bars3BottomRightOutlineSvg from "./outline/bars-3-bottom-right.svg"
-import Bars3CenterLeftOutlineSvg from "./outline/bars-3-center-left.svg"
-import Bars3OutlineSvg from "./outline/bars-3.svg"
-import Bars4OutlineSvg from "./outline/bars-4.svg"
-import BarsArrowDownOutlineSvg from "./outline/bars-arrow-down.svg"
-import BarsArrowUpOutlineSvg from "./outline/bars-arrow-up.svg"
-import Battery0OutlineSvg from "./outline/battery-0.svg"
-import Battery100OutlineSvg from "./outline/battery-100.svg"
-import Battery50OutlineSvg from "./outline/battery-50.svg"
-import BeakerOutlineSvg from "./outline/beaker.svg"
-import BellAlertOutlineSvg from "./outline/bell-alert.svg"
-import BellSlashOutlineSvg from "./outline/bell-slash.svg"
-import BellSnoozeOutlineSvg from "./outline/bell-snooze.svg"
-import BellOutlineSvg from "./outline/bell.svg"
-import BoldOutlineSvg from "./outline/bold.svg"
-import BoltSlashOutlineSvg from "./outline/bolt-slash.svg"
-import BoltOutlineSvg from "./outline/bolt.svg"
-import BookOpenOutlineSvg from "./outline/book-open.svg"
-import BookmarkSlashOutlineSvg from "./outline/bookmark-slash.svg"
-import BookmarkSquareOutlineSvg from "./outline/bookmark-square.svg"
-import BookmarkOutlineSvg from "./outline/bookmark.svg"
-import BriefcaseOutlineSvg from "./outline/briefcase.svg"
-import BugAntOutlineSvg from "./outline/bug-ant.svg"
-import BuildingLibraryOutlineSvg from "./outline/building-library.svg"
-import BuildingOffice2OutlineSvg from "./outline/building-office-2.svg"
-import BuildingOfficeOutlineSvg from "./outline/building-office.svg"
-import BuildingStorefrontOutlineSvg from "./outline/building-storefront.svg"
-import CakeOutlineSvg from "./outline/cake.svg"
-import CalculatorOutlineSvg from "./outline/calculator.svg"
-import CalendarDateRangeOutlineSvg from "./outline/calendar-date-range.svg"
-import CalendarDaysOutlineSvg from "./outline/calendar-days.svg"
-import CalendarOutlineSvg from "./outline/calendar.svg"
-import CameraOutlineSvg from "./outline/camera.svg"
-import ChartBarSquareOutlineSvg from "./outline/chart-bar-square.svg"
-import ChartBarOutlineSvg from "./outline/chart-bar.svg"
-import ChartPieOutlineSvg from "./outline/chart-pie.svg"
-import ChatBubbleBottomCenterTextOutlineSvg from "./outline/chat-bubble-bottom-center-text.svg"
-import ChatBubbleBottomCenterOutlineSvg from "./outline/chat-bubble-bottom-center.svg"
-import ChatBubbleLeftEllipsisOutlineSvg from "./outline/chat-bubble-left-ellipsis.svg"
-import ChatBubbleLeftRightOutlineSvg from "./outline/chat-bubble-left-right.svg"
-import ChatBubbleLeftOutlineSvg from "./outline/chat-bubble-left.svg"
-import ChatBubbleOvalLeftEllipsisOutlineSvg from "./outline/chat-bubble-oval-left-ellipsis.svg"
-import ChatBubbleOvalLeftOutlineSvg from "./outline/chat-bubble-oval-left.svg"
-import CheckBadgeOutlineSvg from "./outline/check-badge.svg"
-import CheckCircleOutlineSvg from "./outline/check-circle.svg"
-import CheckOutlineSvg from "./outline/check.svg"
-import ChevronDoubleDownOutlineSvg from "./outline/chevron-double-down.svg"
-import ChevronDoubleLeftOutlineSvg from "./outline/chevron-double-left.svg"
-import ChevronDoubleRightOutlineSvg from "./outline/chevron-double-right.svg"
-import ChevronDoubleUpOutlineSvg from "./outline/chevron-double-up.svg"
-import ChevronDownOutlineSvg from "./outline/chevron-down.svg"
-import ChevronLeftOutlineSvg from "./outline/chevron-left.svg"
-import ChevronRightOutlineSvg from "./outline/chevron-right.svg"
-import ChevronUpDownOutlineSvg from "./outline/chevron-up-down.svg"
-import ChevronUpOutlineSvg from "./outline/chevron-up.svg"
-import CircleStackOutlineSvg from "./outline/circle-stack.svg"
-import ClipboardDocumentCheckOutlineSvg from "./outline/clipboard-document-check.svg"
-import ClipboardDocumentListOutlineSvg from "./outline/clipboard-document-list.svg"
-import ClipboardDocumentOutlineSvg from "./outline/clipboard-document.svg"
-import ClipboardOutlineSvg from "./outline/clipboard.svg"
-import ClockOutlineSvg from "./outline/clock.svg"
-import CloudArrowDownOutlineSvg from "./outline/cloud-arrow-down.svg"
-import CloudArrowUpOutlineSvg from "./outline/cloud-arrow-up.svg"
-import CloudOutlineSvg from "./outline/cloud.svg"
-import CodeBracketSquareOutlineSvg from "./outline/code-bracket-square.svg"
-import CodeBracketOutlineSvg from "./outline/code-bracket.svg"
-import Cog6ToothOutlineSvg from "./outline/cog-6-tooth.svg"
-import Cog8ToothOutlineSvg from "./outline/cog-8-tooth.svg"
-import CogOutlineSvg from "./outline/cog.svg"
-import CommandLineOutlineSvg from "./outline/command-line.svg"
-import ComputerDesktopOutlineSvg from "./outline/computer-desktop.svg"
-import CpuChipOutlineSvg from "./outline/cpu-chip.svg"
-import CreditCardOutlineSvg from "./outline/credit-card.svg"
-import CubeTransparentOutlineSvg from "./outline/cube-transparent.svg"
-import CubeOutlineSvg from "./outline/cube.svg"
-import CurrencyBangladeshiOutlineSvg from "./outline/currency-bangladeshi.svg"
-import CurrencyDollarOutlineSvg from "./outline/currency-dollar.svg"
-import CurrencyEuroOutlineSvg from "./outline/currency-euro.svg"
-import CurrencyPoundOutlineSvg from "./outline/currency-pound.svg"
-import CurrencyRupeeOutlineSvg from "./outline/currency-rupee.svg"
-import CurrencyYenOutlineSvg from "./outline/currency-yen.svg"
-import CursorArrowRaysOutlineSvg from "./outline/cursor-arrow-rays.svg"
-import CursorArrowRippleOutlineSvg from "./outline/cursor-arrow-ripple.svg"
-import DevicePhoneMobileOutlineSvg from "./outline/device-phone-mobile.svg"
-import DeviceTabletOutlineSvg from "./outline/device-tablet.svg"
-import DivideOutlineSvg from "./outline/divide.svg"
-import DocumentArrowDownOutlineSvg from "./outline/document-arrow-down.svg"
-import DocumentArrowUpOutlineSvg from "./outline/document-arrow-up.svg"
-import DocumentChartBarOutlineSvg from "./outline/document-chart-bar.svg"
-import DocumentCheckOutlineSvg from "./outline/document-check.svg"
-import DocumentCurrencyBangladeshiOutlineSvg from "./outline/document-currency-bangladeshi.svg"
-import DocumentCurrencyDollarOutlineSvg from "./outline/document-currency-dollar.svg"
-import DocumentCurrencyEuroOutlineSvg from "./outline/document-currency-euro.svg"
-import DocumentCurrencyPoundOutlineSvg from "./outline/document-currency-pound.svg"
-import DocumentCurrencyRupeeOutlineSvg from "./outline/document-currency-rupee.svg"
-import DocumentCurrencyYenOutlineSvg from "./outline/document-currency-yen.svg"
-import DocumentDuplicateOutlineSvg from "./outline/document-duplicate.svg"
-import DocumentMagnifyingGlassOutlineSvg from "./outline/document-magnifying-glass.svg"
-import DocumentMinusOutlineSvg from "./outline/document-minus.svg"
-import DocumentPlusOutlineSvg from "./outline/document-plus.svg"
-import DocumentTextOutlineSvg from "./outline/document-text.svg"
-import DocumentOutlineSvg from "./outline/document.svg"
-import EllipsisHorizontalCircleOutlineSvg from "./outline/ellipsis-horizontal-circle.svg"
-import EllipsisHorizontalOutlineSvg from "./outline/ellipsis-horizontal.svg"
-import EllipsisVerticalOutlineSvg from "./outline/ellipsis-vertical.svg"
-import EnvelopeOpenOutlineSvg from "./outline/envelope-open.svg"
-import EnvelopeOutlineSvg from "./outline/envelope.svg"
-import EqualsOutlineSvg from "./outline/equals.svg"
-import ExclamationCircleOutlineSvg from "./outline/exclamation-circle.svg"
-import ExclamationTriangleOutlineSvg from "./outline/exclamation-triangle.svg"
-import EyeDropperOutlineSvg from "./outline/eye-dropper.svg"
-import EyeSlashOutlineSvg from "./outline/eye-slash.svg"
-import EyeOutlineSvg from "./outline/eye.svg"
-import FaceFrownOutlineSvg from "./outline/face-frown.svg"
-import FaceSmileOutlineSvg from "./outline/face-smile.svg"
-import FilmOutlineSvg from "./outline/film.svg"
-import FingerPrintOutlineSvg from "./outline/finger-print.svg"
-import FireOutlineSvg from "./outline/fire.svg"
-import FlagOutlineSvg from "./outline/flag.svg"
-import FolderArrowDownOutlineSvg from "./outline/folder-arrow-down.svg"
-import FolderMinusOutlineSvg from "./outline/folder-minus.svg"
-import FolderOpenOutlineSvg from "./outline/folder-open.svg"
-import FolderPlusOutlineSvg from "./outline/folder-plus.svg"
-import FolderOutlineSvg from "./outline/folder.svg"
-import ForwardOutlineSvg from "./outline/forward.svg"
-import FunnelOutlineSvg from "./outline/funnel.svg"
-import GifOutlineSvg from "./outline/gif.svg"
-import GiftTopOutlineSvg from "./outline/gift-top.svg"
-import GiftOutlineSvg from "./outline/gift.svg"
-import GlobeAltOutlineSvg from "./outline/globe-alt.svg"
-import GlobeAmericasOutlineSvg from "./outline/globe-americas.svg"
-import GlobeAsiaAustraliaOutlineSvg from "./outline/globe-asia-australia.svg"
-import GlobeEuropeAfricaOutlineSvg from "./outline/globe-europe-africa.svg"
-import H1OutlineSvg from "./outline/h1.svg"
-import H2OutlineSvg from "./outline/h2.svg"
-import H3OutlineSvg from "./outline/h3.svg"
-import HandRaisedOutlineSvg from "./outline/hand-raised.svg"
-import HandThumbDownOutlineSvg from "./outline/hand-thumb-down.svg"
-import HandThumbUpOutlineSvg from "./outline/hand-thumb-up.svg"
-import HashtagOutlineSvg from "./outline/hashtag.svg"
-import HeartOutlineSvg from "./outline/heart.svg"
-import HomeModernOutlineSvg from "./outline/home-modern.svg"
-import HomeOutlineSvg from "./outline/home.svg"
-import IdentificationOutlineSvg from "./outline/identification.svg"
-import InboxArrowDownOutlineSvg from "./outline/inbox-arrow-down.svg"
-import InboxStackOutlineSvg from "./outline/inbox-stack.svg"
-import InboxOutlineSvg from "./outline/inbox.svg"
-import InformationCircleOutlineSvg from "./outline/information-circle.svg"
-import ItalicOutlineSvg from "./outline/italic.svg"
-import KeyOutlineSvg from "./outline/key.svg"
-import LanguageOutlineSvg from "./outline/language.svg"
-import LifebuoyOutlineSvg from "./outline/lifebuoy.svg"
-import LightBulbOutlineSvg from "./outline/light-bulb.svg"
-import LinkSlashOutlineSvg from "./outline/link-slash.svg"
-import LinkOutlineSvg from "./outline/link.svg"
-import ListBulletOutlineSvg from "./outline/list-bullet.svg"
-import LockClosedOutlineSvg from "./outline/lock-closed.svg"
-import LockOpenOutlineSvg from "./outline/lock-open.svg"
-import MagnifyingGlassCircleOutlineSvg from "./outline/magnifying-glass-circle.svg"
-import MagnifyingGlassMinusOutlineSvg from "./outline/magnifying-glass-minus.svg"
-import MagnifyingGlassPlusOutlineSvg from "./outline/magnifying-glass-plus.svg"
-import MagnifyingGlassOutlineSvg from "./outline/magnifying-glass.svg"
-import MapPinOutlineSvg from "./outline/map-pin.svg"
-import MapOutlineSvg from "./outline/map.svg"
-import MegaphoneOutlineSvg from "./outline/megaphone.svg"
-import MicrophoneOutlineSvg from "./outline/microphone.svg"
-import MinusCircleOutlineSvg from "./outline/minus-circle.svg"
-import MinusSmallOutlineSvg from "./outline/minus-small.svg"
-import MinusOutlineSvg from "./outline/minus.svg"
-import MoonOutlineSvg from "./outline/moon.svg"
-import MusicalNoteOutlineSvg from "./outline/musical-note.svg"
-import NewspaperOutlineSvg from "./outline/newspaper.svg"
-import NoSymbolOutlineSvg from "./outline/no-symbol.svg"
-import NumberedListOutlineSvg from "./outline/numbered-list.svg"
-import PaintBrushOutlineSvg from "./outline/paint-brush.svg"
-import PaperAirplaneOutlineSvg from "./outline/paper-airplane.svg"
-import PaperClipOutlineSvg from "./outline/paper-clip.svg"
-import PauseCircleOutlineSvg from "./outline/pause-circle.svg"
-import PauseOutlineSvg from "./outline/pause.svg"
-import PencilSquareOutlineSvg from "./outline/pencil-square.svg"
-import PencilOutlineSvg from "./outline/pencil.svg"
-import PercentBadgeOutlineSvg from "./outline/percent-badge.svg"
-import PhoneArrowDownLeftOutlineSvg from "./outline/phone-arrow-down-left.svg"
-import PhoneArrowUpRightOutlineSvg from "./outline/phone-arrow-up-right.svg"
-import PhoneXMarkOutlineSvg from "./outline/phone-x-mark.svg"
-import PhoneOutlineSvg from "./outline/phone.svg"
-import PhotoOutlineSvg from "./outline/photo.svg"
-import PlayCircleOutlineSvg from "./outline/play-circle.svg"
-import PlayPauseOutlineSvg from "./outline/play-pause.svg"
-import PlayOutlineSvg from "./outline/play.svg"
-import PlusCircleOutlineSvg from "./outline/plus-circle.svg"
-import PlusSmallOutlineSvg from "./outline/plus-small.svg"
-import PlusOutlineSvg from "./outline/plus.svg"
-import PowerOutlineSvg from "./outline/power.svg"
-import PresentationChartBarOutlineSvg from "./outline/presentation-chart-bar.svg"
-import PresentationChartLineOutlineSvg from "./outline/presentation-chart-line.svg"
-import PrinterOutlineSvg from "./outline/printer.svg"
-import PuzzlePieceOutlineSvg from "./outline/puzzle-piece.svg"
-import QrCodeOutlineSvg from "./outline/qr-code.svg"
-import QuestionMarkCircleOutlineSvg from "./outline/question-mark-circle.svg"
-import QueueListOutlineSvg from "./outline/queue-list.svg"
-import RadioOutlineSvg from "./outline/radio.svg"
-import ReceiptPercentOutlineSvg from "./outline/receipt-percent.svg"
-import ReceiptRefundOutlineSvg from "./outline/receipt-refund.svg"
-import RectangleGroupOutlineSvg from "./outline/rectangle-group.svg"
-import RectangleStackOutlineSvg from "./outline/rectangle-stack.svg"
-import RocketLaunchOutlineSvg from "./outline/rocket-launch.svg"
-import RssOutlineSvg from "./outline/rss.svg"
-import ScaleOutlineSvg from "./outline/scale.svg"
-import ScissorsOutlineSvg from "./outline/scissors.svg"
-import ServerStackOutlineSvg from "./outline/server-stack.svg"
-import ServerOutlineSvg from "./outline/server.svg"
-import ShareOutlineSvg from "./outline/share.svg"
-import ShieldCheckOutlineSvg from "./outline/shield-check.svg"
-import ShieldExclamationOutlineSvg from "./outline/shield-exclamation.svg"
-import ShoppingBagOutlineSvg from "./outline/shopping-bag.svg"
-import ShoppingCartOutlineSvg from "./outline/shopping-cart.svg"
-import SignalSlashOutlineSvg from "./outline/signal-slash.svg"
-import SignalOutlineSvg from "./outline/signal.svg"
-import SlashOutlineSvg from "./outline/slash.svg"
-import SparklesOutlineSvg from "./outline/sparkles.svg"
-import SpeakerWaveOutlineSvg from "./outline/speaker-wave.svg"
-import SpeakerXMarkOutlineSvg from "./outline/speaker-x-mark.svg"
-import Square2StackOutlineSvg from "./outline/square-2-stack.svg"
-import Square3Stack3dOutlineSvg from "./outline/square-3-stack-3d.svg"
-import Squares2x2OutlineSvg from "./outline/squares-2x2.svg"
-import SquaresPlusOutlineSvg from "./outline/squares-plus.svg"
-import StarOutlineSvg from "./outline/star.svg"
-import StopCircleOutlineSvg from "./outline/stop-circle.svg"
-import StopOutlineSvg from "./outline/stop.svg"
-import StrikethroughOutlineSvg from "./outline/strikethrough.svg"
-import SunOutlineSvg from "./outline/sun.svg"
-import SwatchOutlineSvg from "./outline/swatch.svg"
-import TableCellsOutlineSvg from "./outline/table-cells.svg"
-import TagOutlineSvg from "./outline/tag.svg"
-import TicketOutlineSvg from "./outline/ticket.svg"
-import TrashOutlineSvg from "./outline/trash.svg"
-import TrophyOutlineSvg from "./outline/trophy.svg"
-import TruckOutlineSvg from "./outline/truck.svg"
-import TvOutlineSvg from "./outline/tv.svg"
-import UnderlineOutlineSvg from "./outline/underline.svg"
-import UserCircleOutlineSvg from "./outline/user-circle.svg"
-import UserGroupOutlineSvg from "./outline/user-group.svg"
-import UserMinusOutlineSvg from "./outline/user-minus.svg"
-import UserPlusOutlineSvg from "./outline/user-plus.svg"
-import UserOutlineSvg from "./outline/user.svg"
-import UsersOutlineSvg from "./outline/users.svg"
-import VariableOutlineSvg from "./outline/variable.svg"
-import VideoCameraSlashOutlineSvg from "./outline/video-camera-slash.svg"
-import VideoCameraOutlineSvg from "./outline/video-camera.svg"
-import ViewColumnsOutlineSvg from "./outline/view-columns.svg"
-import ViewfinderCircleOutlineSvg from "./outline/viewfinder-circle.svg"
-import WalletOutlineSvg from "./outline/wallet.svg"
-import WifiOutlineSvg from "./outline/wifi.svg"
-import WindowOutlineSvg from "./outline/window.svg"
-import WrenchScrewdriverOutlineSvg from "./outline/wrench-screwdriver.svg"
-import WrenchOutlineSvg from "./outline/wrench.svg"
-import XCircleOutlineSvg from "./outline/x-circle.svg"
-import XMarkOutlineSvg from "./outline/x-mark.svg"
-import AcademicCapSolidSvg from "./solid/academic-cap.svg"
-import AdjustmentsHorizontalSolidSvg from "./solid/adjustments-horizontal.svg"
-import AdjustmentsVerticalSolidSvg from "./solid/adjustments-vertical.svg"
-import ArchiveBoxArrowDownSolidSvg from "./solid/archive-box-arrow-down.svg"
-import ArchiveBoxXMarkSolidSvg from "./solid/archive-box-x-mark.svg"
-import ArchiveBoxSolidSvg from "./solid/archive-box.svg"
-import ArrowDownCircleSolidSvg from "./solid/arrow-down-circle.svg"
-import ArrowDownLeftSolidSvg from "./solid/arrow-down-left.svg"
-import ArrowDownOnSquareStackSolidSvg from "./solid/arrow-down-on-square-stack.svg"
-import ArrowDownOnSquareSolidSvg from "./solid/arrow-down-on-square.svg"
-import ArrowDownRightSolidSvg from "./solid/arrow-down-right.svg"
-import ArrowDownTraySolidSvg from "./solid/arrow-down-tray.svg"
-import ArrowDownSolidSvg from "./solid/arrow-down.svg"
-import ArrowLeftCircleSolidSvg from "./solid/arrow-left-circle.svg"
-import ArrowLeftEndOnRectangleSolidSvg from "./solid/arrow-left-end-on-rectangle.svg"
-import ArrowLeftOnRectangleSolidSvg from "./solid/arrow-left-on-rectangle.svg"
-import ArrowLeftStartOnRectangleSolidSvg from "./solid/arrow-left-start-on-rectangle.svg"
-import ArrowLeftSolidSvg from "./solid/arrow-left.svg"
-import ArrowLongDownSolidSvg from "./solid/arrow-long-down.svg"
-import ArrowLongLeftSolidSvg from "./solid/arrow-long-left.svg"
-import ArrowLongRightSolidSvg from "./solid/arrow-long-right.svg"
-import ArrowLongUpSolidSvg from "./solid/arrow-long-up.svg"
-import ArrowPathRoundedSquareSolidSvg from "./solid/arrow-path-rounded-square.svg"
-import ArrowPathSolidSvg from "./solid/arrow-path.svg"
-import ArrowRightCircleSolidSvg from "./solid/arrow-right-circle.svg"
-import ArrowRightEndOnRectangleSolidSvg from "./solid/arrow-right-end-on-rectangle.svg"
-import ArrowRightOnRectangleSolidSvg from "./solid/arrow-right-on-rectangle.svg"
-import ArrowRightStartOnRectangleSolidSvg from "./solid/arrow-right-start-on-rectangle.svg"
-import ArrowRightSolidSvg from "./solid/arrow-right.svg"
-import ArrowSmallDownSolidSvg from "./solid/arrow-small-down.svg"
-import ArrowSmallLeftSolidSvg from "./solid/arrow-small-left.svg"
-import ArrowSmallRightSolidSvg from "./solid/arrow-small-right.svg"
-import ArrowSmallUpSolidSvg from "./solid/arrow-small-up.svg"
-import ArrowTopRightOnSquareSolidSvg from "./solid/arrow-top-right-on-square.svg"
-import ArrowTrendingDownSolidSvg from "./solid/arrow-trending-down.svg"
-import ArrowTrendingUpSolidSvg from "./solid/arrow-trending-up.svg"
-import ArrowTurnDownLeftSolidSvg from "./solid/arrow-turn-down-left.svg"
-import ArrowTurnDownRightSolidSvg from "./solid/arrow-turn-down-right.svg"
-import ArrowTurnLeftDownSolidSvg from "./solid/arrow-turn-left-down.svg"
-import ArrowTurnLeftUpSolidSvg from "./solid/arrow-turn-left-up.svg"
-import ArrowTurnRightDownSolidSvg from "./solid/arrow-turn-right-down.svg"
-import ArrowTurnRightUpSolidSvg from "./solid/arrow-turn-right-up.svg"
-import ArrowTurnUpLeftSolidSvg from "./solid/arrow-turn-up-left.svg"
-import ArrowTurnUpRightSolidSvg from "./solid/arrow-turn-up-right.svg"
-import ArrowUpCircleSolidSvg from "./solid/arrow-up-circle.svg"
-import ArrowUpLeftSolidSvg from "./solid/arrow-up-left.svg"
-import ArrowUpOnSquareStackSolidSvg from "./solid/arrow-up-on-square-stack.svg"
-import ArrowUpOnSquareSolidSvg from "./solid/arrow-up-on-square.svg"
-import ArrowUpRightSolidSvg from "./solid/arrow-up-right.svg"
-import ArrowUpTraySolidSvg from "./solid/arrow-up-tray.svg"
-import ArrowUpSolidSvg from "./solid/arrow-up.svg"
-import ArrowUturnDownSolidSvg from "./solid/arrow-uturn-down.svg"
-import ArrowUturnLeftSolidSvg from "./solid/arrow-uturn-left.svg"
-import ArrowUturnRightSolidSvg from "./solid/arrow-uturn-right.svg"
-import ArrowUturnUpSolidSvg from "./solid/arrow-uturn-up.svg"
-import ArrowsPointingInSolidSvg from "./solid/arrows-pointing-in.svg"
-import ArrowsPointingOutSolidSvg from "./solid/arrows-pointing-out.svg"
-import ArrowsRightLeftSolidSvg from "./solid/arrows-right-left.svg"
-import ArrowsUpDownSolidSvg from "./solid/arrows-up-down.svg"
-import AtSymbolSolidSvg from "./solid/at-symbol.svg"
-import BackspaceSolidSvg from "./solid/backspace.svg"
-import BackwardSolidSvg from "./solid/backward.svg"
-import BanknotesSolidSvg from "./solid/banknotes.svg"
-import Bars2SolidSvg from "./solid/bars-2.svg"
-import Bars3BottomLeftSolidSvg from "./solid/bars-3-bottom-left.svg"
-import Bars3BottomRightSolidSvg from "./solid/bars-3-bottom-right.svg"
-import Bars3CenterLeftSolidSvg from "./solid/bars-3-center-left.svg"
-import Bars3SolidSvg from "./solid/bars-3.svg"
-import Bars4SolidSvg from "./solid/bars-4.svg"
-import BarsArrowDownSolidSvg from "./solid/bars-arrow-down.svg"
-import BarsArrowUpSolidSvg from "./solid/bars-arrow-up.svg"
-import Battery0SolidSvg from "./solid/battery-0.svg"
-import Battery100SolidSvg from "./solid/battery-100.svg"
-import Battery50SolidSvg from "./solid/battery-50.svg"
-import BeakerSolidSvg from "./solid/beaker.svg"
-import BellAlertSolidSvg from "./solid/bell-alert.svg"
-import BellSlashSolidSvg from "./solid/bell-slash.svg"
-import BellSnoozeSolidSvg from "./solid/bell-snooze.svg"
-import BellSolidSvg from "./solid/bell.svg"
-import BoldSolidSvg from "./solid/bold.svg"
-import BoltSlashSolidSvg from "./solid/bolt-slash.svg"
-import BoltSolidSvg from "./solid/bolt.svg"
-import BookOpenSolidSvg from "./solid/book-open.svg"
-import BookmarkSlashSolidSvg from "./solid/bookmark-slash.svg"
-import BookmarkSquareSolidSvg from "./solid/bookmark-square.svg"
-import BookmarkSolidSvg from "./solid/bookmark.svg"
-import BriefcaseSolidSvg from "./solid/briefcase.svg"
-import BugAntSolidSvg from "./solid/bug-ant.svg"
-import BuildingLibrarySolidSvg from "./solid/building-library.svg"
-import BuildingOffice2SolidSvg from "./solid/building-office-2.svg"
-import BuildingOfficeSolidSvg from "./solid/building-office.svg"
-import BuildingStorefrontSolidSvg from "./solid/building-storefront.svg"
-import CakeSolidSvg from "./solid/cake.svg"
-import CalculatorSolidSvg from "./solid/calculator.svg"
-import CalendarDateRangeSolidSvg from "./solid/calendar-date-range.svg"
-import CalendarDaysSolidSvg from "./solid/calendar-days.svg"
-import CalendarSolidSvg from "./solid/calendar.svg"
-import CameraSolidSvg from "./solid/camera.svg"
-import ChartBarSquareSolidSvg from "./solid/chart-bar-square.svg"
-import ChartBarSolidSvg from "./solid/chart-bar.svg"
-import ChartPieSolidSvg from "./solid/chart-pie.svg"
-import ChatBubbleBottomCenterTextSolidSvg from "./solid/chat-bubble-bottom-center-text.svg"
-import ChatBubbleBottomCenterSolidSvg from "./solid/chat-bubble-bottom-center.svg"
-import ChatBubbleLeftEllipsisSolidSvg from "./solid/chat-bubble-left-ellipsis.svg"
-import ChatBubbleLeftRightSolidSvg from "./solid/chat-bubble-left-right.svg"
-import ChatBubbleLeftSolidSvg from "./solid/chat-bubble-left.svg"
-import ChatBubbleOvalLeftEllipsisSolidSvg from "./solid/chat-bubble-oval-left-ellipsis.svg"
-import ChatBubbleOvalLeftSolidSvg from "./solid/chat-bubble-oval-left.svg"
-import CheckBadgeSolidSvg from "./solid/check-badge.svg"
-import CheckCircleSolidSvg from "./solid/check-circle.svg"
-import CheckSolidSvg from "./solid/check.svg"
-import ChevronDoubleDownSolidSvg from "./solid/chevron-double-down.svg"
-import ChevronDoubleLeftSolidSvg from "./solid/chevron-double-left.svg"
-import ChevronDoubleRightSolidSvg from "./solid/chevron-double-right.svg"
-import ChevronDoubleUpSolidSvg from "./solid/chevron-double-up.svg"
-import ChevronDownSolidSvg from "./solid/chevron-down.svg"
-import ChevronLeftSolidSvg from "./solid/chevron-left.svg"
-import ChevronRightSolidSvg from "./solid/chevron-right.svg"
-import ChevronUpDownSolidSvg from "./solid/chevron-up-down.svg"
-import ChevronUpSolidSvg from "./solid/chevron-up.svg"
-import CircleStackSolidSvg from "./solid/circle-stack.svg"
-import ClipboardDocumentCheckSolidSvg from "./solid/clipboard-document-check.svg"
-import ClipboardDocumentListSolidSvg from "./solid/clipboard-document-list.svg"
-import ClipboardDocumentSolidSvg from "./solid/clipboard-document.svg"
-import ClipboardSolidSvg from "./solid/clipboard.svg"
-import ClockSolidSvg from "./solid/clock.svg"
-import CloudArrowDownSolidSvg from "./solid/cloud-arrow-down.svg"
-import CloudArrowUpSolidSvg from "./solid/cloud-arrow-up.svg"
-import CloudSolidSvg from "./solid/cloud.svg"
-import CodeBracketSquareSolidSvg from "./solid/code-bracket-square.svg"
-import CodeBracketSolidSvg from "./solid/code-bracket.svg"
-import Cog6ToothSolidSvg from "./solid/cog-6-tooth.svg"
-import Cog8ToothSolidSvg from "./solid/cog-8-tooth.svg"
-import CogSolidSvg from "./solid/cog.svg"
-import CommandLineSolidSvg from "./solid/command-line.svg"
-import ComputerDesktopSolidSvg from "./solid/computer-desktop.svg"
-import CpuChipSolidSvg from "./solid/cpu-chip.svg"
-import CreditCardSolidSvg from "./solid/credit-card.svg"
-import CubeTransparentSolidSvg from "./solid/cube-transparent.svg"
-import CubeSolidSvg from "./solid/cube.svg"
-import CurrencyBangladeshiSolidSvg from "./solid/currency-bangladeshi.svg"
-import CurrencyDollarSolidSvg from "./solid/currency-dollar.svg"
-import CurrencyEuroSolidSvg from "./solid/currency-euro.svg"
-import CurrencyPoundSolidSvg from "./solid/currency-pound.svg"
-import CurrencyRupeeSolidSvg from "./solid/currency-rupee.svg"
-import CurrencyYenSolidSvg from "./solid/currency-yen.svg"
-import CursorArrowRaysSolidSvg from "./solid/cursor-arrow-rays.svg"
-import CursorArrowRippleSolidSvg from "./solid/cursor-arrow-ripple.svg"
-import DevicePhoneMobileSolidSvg from "./solid/device-phone-mobile.svg"
-import DeviceTabletSolidSvg from "./solid/device-tablet.svg"
-import DivideSolidSvg from "./solid/divide.svg"
-import DocumentArrowDownSolidSvg from "./solid/document-arrow-down.svg"
-import DocumentArrowUpSolidSvg from "./solid/document-arrow-up.svg"
-import DocumentChartBarSolidSvg from "./solid/document-chart-bar.svg"
-import DocumentCheckSolidSvg from "./solid/document-check.svg"
-import DocumentCurrencyBangladeshiSolidSvg from "./solid/document-currency-bangladeshi.svg"
-import DocumentCurrencyDollarSolidSvg from "./solid/document-currency-dollar.svg"
-import DocumentCurrencyEuroSolidSvg from "./solid/document-currency-euro.svg"
-import DocumentCurrencyPoundSolidSvg from "./solid/document-currency-pound.svg"
-import DocumentCurrencyRupeeSolidSvg from "./solid/document-currency-rupee.svg"
-import DocumentCurrencyYenSolidSvg from "./solid/document-currency-yen.svg"
-import DocumentDuplicateSolidSvg from "./solid/document-duplicate.svg"
-import DocumentMagnifyingGlassSolidSvg from "./solid/document-magnifying-glass.svg"
-import DocumentMinusSolidSvg from "./solid/document-minus.svg"
-import DocumentPlusSolidSvg from "./solid/document-plus.svg"
-import DocumentTextSolidSvg from "./solid/document-text.svg"
-import DocumentSolidSvg from "./solid/document.svg"
-import EllipsisHorizontalCircleSolidSvg from "./solid/ellipsis-horizontal-circle.svg"
-import EllipsisHorizontalSolidSvg from "./solid/ellipsis-horizontal.svg"
-import EllipsisVerticalSolidSvg from "./solid/ellipsis-vertical.svg"
-import EnvelopeOpenSolidSvg from "./solid/envelope-open.svg"
-import EnvelopeSolidSvg from "./solid/envelope.svg"
-import EqualsSolidSvg from "./solid/equals.svg"
-import ExclamationCircleSolidSvg from "./solid/exclamation-circle.svg"
-import ExclamationTriangleSolidSvg from "./solid/exclamation-triangle.svg"
-import EyeDropperSolidSvg from "./solid/eye-dropper.svg"
-import EyeSlashSolidSvg from "./solid/eye-slash.svg"
-import EyeSolidSvg from "./solid/eye.svg"
-import FaceFrownSolidSvg from "./solid/face-frown.svg"
-import FaceSmileSolidSvg from "./solid/face-smile.svg"
-import FilmSolidSvg from "./solid/film.svg"
-import FingerPrintSolidSvg from "./solid/finger-print.svg"
-import FireSolidSvg from "./solid/fire.svg"
-import FlagSolidSvg from "./solid/flag.svg"
-import FolderArrowDownSolidSvg from "./solid/folder-arrow-down.svg"
-import FolderMinusSolidSvg from "./solid/folder-minus.svg"
-import FolderOpenSolidSvg from "./solid/folder-open.svg"
-import FolderPlusSolidSvg from "./solid/folder-plus.svg"
-import FolderSolidSvg from "./solid/folder.svg"
-import ForwardSolidSvg from "./solid/forward.svg"
-import FunnelSolidSvg from "./solid/funnel.svg"
-import GifSolidSvg from "./solid/gif.svg"
-import GiftTopSolidSvg from "./solid/gift-top.svg"
-import GiftSolidSvg from "./solid/gift.svg"
-import GlobeAltSolidSvg from "./solid/globe-alt.svg"
-import GlobeAmericasSolidSvg from "./solid/globe-americas.svg"
-import GlobeAsiaAustraliaSolidSvg from "./solid/globe-asia-australia.svg"
-import GlobeEuropeAfricaSolidSvg from "./solid/globe-europe-africa.svg"
-import H1SolidSvg from "./solid/h1.svg"
-import H2SolidSvg from "./solid/h2.svg"
-import H3SolidSvg from "./solid/h3.svg"
-import HandRaisedSolidSvg from "./solid/hand-raised.svg"
-import HandThumbDownSolidSvg from "./solid/hand-thumb-down.svg"
-import HandThumbUpSolidSvg from "./solid/hand-thumb-up.svg"
-import HashtagSolidSvg from "./solid/hashtag.svg"
-import HeartSolidSvg from "./solid/heart.svg"
-import HomeModernSolidSvg from "./solid/home-modern.svg"
-import HomeSolidSvg from "./solid/home.svg"
-import IdentificationSolidSvg from "./solid/identification.svg"
-import InboxArrowDownSolidSvg from "./solid/inbox-arrow-down.svg"
-import InboxStackSolidSvg from "./solid/inbox-stack.svg"
-import InboxSolidSvg from "./solid/inbox.svg"
-import InformationCircleSolidSvg from "./solid/information-circle.svg"
-import ItalicSolidSvg from "./solid/italic.svg"
-import KeySolidSvg from "./solid/key.svg"
-import LanguageSolidSvg from "./solid/language.svg"
-import LifebuoySolidSvg from "./solid/lifebuoy.svg"
-import LightBulbSolidSvg from "./solid/light-bulb.svg"
-import LinkSlashSolidSvg from "./solid/link-slash.svg"
-import LinkSolidSvg from "./solid/link.svg"
-import ListBulletSolidSvg from "./solid/list-bullet.svg"
-import LockClosedSolidSvg from "./solid/lock-closed.svg"
-import LockOpenSolidSvg from "./solid/lock-open.svg"
-import MagnifyingGlassCircleSolidSvg from "./solid/magnifying-glass-circle.svg"
-import MagnifyingGlassMinusSolidSvg from "./solid/magnifying-glass-minus.svg"
-import MagnifyingGlassPlusSolidSvg from "./solid/magnifying-glass-plus.svg"
-import MagnifyingGlassSolidSvg from "./solid/magnifying-glass.svg"
-import MapPinSolidSvg from "./solid/map-pin.svg"
-import MapSolidSvg from "./solid/map.svg"
-import MegaphoneSolidSvg from "./solid/megaphone.svg"
-import MicrophoneSolidSvg from "./solid/microphone.svg"
-import MinusCircleSolidSvg from "./solid/minus-circle.svg"
-import MinusSmallSolidSvg from "./solid/minus-small.svg"
-import MinusSolidSvg from "./solid/minus.svg"
-import MoonSolidSvg from "./solid/moon.svg"
-import MusicalNoteSolidSvg from "./solid/musical-note.svg"
-import NewspaperSolidSvg from "./solid/newspaper.svg"
-import NoSymbolSolidSvg from "./solid/no-symbol.svg"
-import NumberedListSolidSvg from "./solid/numbered-list.svg"
-import PaintBrushSolidSvg from "./solid/paint-brush.svg"
-import PaperAirplaneSolidSvg from "./solid/paper-airplane.svg"
-import PaperClipSolidSvg from "./solid/paper-clip.svg"
-import PauseCircleSolidSvg from "./solid/pause-circle.svg"
-import PauseSolidSvg from "./solid/pause.svg"
-import PencilSquareSolidSvg from "./solid/pencil-square.svg"
-import PencilSolidSvg from "./solid/pencil.svg"
-import PercentBadgeSolidSvg from "./solid/percent-badge.svg"
-import PhoneArrowDownLeftSolidSvg from "./solid/phone-arrow-down-left.svg"
-import PhoneArrowUpRightSolidSvg from "./solid/phone-arrow-up-right.svg"
-import PhoneXMarkSolidSvg from "./solid/phone-x-mark.svg"
-import PhoneSolidSvg from "./solid/phone.svg"
-import PhotoSolidSvg from "./solid/photo.svg"
-import PlayCircleSolidSvg from "./solid/play-circle.svg"
-import PlayPauseSolidSvg from "./solid/play-pause.svg"
-import PlaySolidSvg from "./solid/play.svg"
-import PlusCircleSolidSvg from "./solid/plus-circle.svg"
-import PlusSmallSolidSvg from "./solid/plus-small.svg"
-import PlusSolidSvg from "./solid/plus.svg"
-import PowerSolidSvg from "./solid/power.svg"
-import PresentationChartBarSolidSvg from "./solid/presentation-chart-bar.svg"
-import PresentationChartLineSolidSvg from "./solid/presentation-chart-line.svg"
-import PrinterSolidSvg from "./solid/printer.svg"
-import PuzzlePieceSolidSvg from "./solid/puzzle-piece.svg"
-import QrCodeSolidSvg from "./solid/qr-code.svg"
-import QuestionMarkCircleSolidSvg from "./solid/question-mark-circle.svg"
-import QueueListSolidSvg from "./solid/queue-list.svg"
-import RadioSolidSvg from "./solid/radio.svg"
-import ReceiptPercentSolidSvg from "./solid/receipt-percent.svg"
-import ReceiptRefundSolidSvg from "./solid/receipt-refund.svg"
-import RectangleGroupSolidSvg from "./solid/rectangle-group.svg"
-import RectangleStackSolidSvg from "./solid/rectangle-stack.svg"
-import RocketLaunchSolidSvg from "./solid/rocket-launch.svg"
-import RssSolidSvg from "./solid/rss.svg"
-import ScaleSolidSvg from "./solid/scale.svg"
-import ScissorsSolidSvg from "./solid/scissors.svg"
-import ServerStackSolidSvg from "./solid/server-stack.svg"
-import ServerSolidSvg from "./solid/server.svg"
-import ShareSolidSvg from "./solid/share.svg"
-import ShieldCheckSolidSvg from "./solid/shield-check.svg"
-import ShieldExclamationSolidSvg from "./solid/shield-exclamation.svg"
-import ShoppingBagSolidSvg from "./solid/shopping-bag.svg"
-import ShoppingCartSolidSvg from "./solid/shopping-cart.svg"
-import SignalSlashSolidSvg from "./solid/signal-slash.svg"
-import SignalSolidSvg from "./solid/signal.svg"
-import SlashSolidSvg from "./solid/slash.svg"
-import SparklesSolidSvg from "./solid/sparkles.svg"
-import SpeakerWaveSolidSvg from "./solid/speaker-wave.svg"
-import SpeakerXMarkSolidSvg from "./solid/speaker-x-mark.svg"
-import Square2StackSolidSvg from "./solid/square-2-stack.svg"
-import Square3Stack3dSolidSvg from "./solid/square-3-stack-3d.svg"
-import Squares2x2SolidSvg from "./solid/squares-2x2.svg"
-import SquaresPlusSolidSvg from "./solid/squares-plus.svg"
-import StarSolidSvg from "./solid/star.svg"
-import StopCircleSolidSvg from "./solid/stop-circle.svg"
-import StopSolidSvg from "./solid/stop.svg"
-import StrikethroughSolidSvg from "./solid/strikethrough.svg"
-import SunSolidSvg from "./solid/sun.svg"
-import SwatchSolidSvg from "./solid/swatch.svg"
-import TableCellsSolidSvg from "./solid/table-cells.svg"
-import TagSolidSvg from "./solid/tag.svg"
-import TicketSolidSvg from "./solid/ticket.svg"
-import TrashSolidSvg from "./solid/trash.svg"
-import TrophySolidSvg from "./solid/trophy.svg"
-import TruckSolidSvg from "./solid/truck.svg"
-import TvSolidSvg from "./solid/tv.svg"
-import UnderlineSolidSvg from "./solid/underline.svg"
-import UserCircleSolidSvg from "./solid/user-circle.svg"
-import UserGroupSolidSvg from "./solid/user-group.svg"
-import UserMinusSolidSvg from "./solid/user-minus.svg"
-import UserPlusSolidSvg from "./solid/user-plus.svg"
-import UserSolidSvg from "./solid/user.svg"
-import UsersSolidSvg from "./solid/users.svg"
-import VariableSolidSvg from "./solid/variable.svg"
-import VideoCameraSlashSolidSvg from "./solid/video-camera-slash.svg"
-import VideoCameraSolidSvg from "./solid/video-camera.svg"
-import ViewColumnsSolidSvg from "./solid/view-columns.svg"
-import ViewfinderCircleSolidSvg from "./solid/viewfinder-circle.svg"
-import WalletSolidSvg from "./solid/wallet.svg"
-import WifiSolidSvg from "./solid/wifi.svg"
-import WindowSolidSvg from "./solid/window.svg"
-import WrenchScrewdriverSolidSvg from "./solid/wrench-screwdriver.svg"
-import WrenchSolidSvg from "./solid/wrench.svg"
-import XCircleSolidSvg from "./solid/x-circle.svg"
-import XMarkSolidSvg from "./solid/x-mark.svg"
+import AcademicCapOutlineSvg from "./outline/academic-cap.svg";
+import AdjustmentsHorizontalOutlineSvg from "./outline/adjustments-horizontal.svg";
+import AdjustmentsVerticalOutlineSvg from "./outline/adjustments-vertical.svg";
+import ArchiveBoxArrowDownOutlineSvg from "./outline/archive-box-arrow-down.svg";
+import ArchiveBoxXMarkOutlineSvg from "./outline/archive-box-x-mark.svg";
+import ArchiveBoxOutlineSvg from "./outline/archive-box.svg";
+import ArrowDownCircleOutlineSvg from "./outline/arrow-down-circle.svg";
+import ArrowDownLeftOutlineSvg from "./outline/arrow-down-left.svg";
+import ArrowDownOnSquareStackOutlineSvg from "./outline/arrow-down-on-square-stack.svg";
+import ArrowDownOnSquareOutlineSvg from "./outline/arrow-down-on-square.svg";
+import ArrowDownRightOutlineSvg from "./outline/arrow-down-right.svg";
+import ArrowDownTrayOutlineSvg from "./outline/arrow-down-tray.svg";
+import ArrowDownOutlineSvg from "./outline/arrow-down.svg";
+import ArrowLeftCircleOutlineSvg from "./outline/arrow-left-circle.svg";
+import ArrowLeftEndOnRectangleOutlineSvg from "./outline/arrow-left-end-on-rectangle.svg";
+import ArrowLeftOnRectangleOutlineSvg from "./outline/arrow-left-on-rectangle.svg";
+import ArrowLeftStartOnRectangleOutlineSvg from "./outline/arrow-left-start-on-rectangle.svg";
+import ArrowLeftOutlineSvg from "./outline/arrow-left.svg";
+import ArrowLongDownOutlineSvg from "./outline/arrow-long-down.svg";
+import ArrowLongLeftOutlineSvg from "./outline/arrow-long-left.svg";
+import ArrowLongRightOutlineSvg from "./outline/arrow-long-right.svg";
+import ArrowLongUpOutlineSvg from "./outline/arrow-long-up.svg";
+import ArrowPathRoundedSquareOutlineSvg from "./outline/arrow-path-rounded-square.svg";
+import ArrowPathOutlineSvg from "./outline/arrow-path.svg";
+import ArrowRightCircleOutlineSvg from "./outline/arrow-right-circle.svg";
+import ArrowRightEndOnRectangleOutlineSvg from "./outline/arrow-right-end-on-rectangle.svg";
+import ArrowRightOnRectangleOutlineSvg from "./outline/arrow-right-on-rectangle.svg";
+import ArrowRightStartOnRectangleOutlineSvg from "./outline/arrow-right-start-on-rectangle.svg";
+import ArrowRightOutlineSvg from "./outline/arrow-right.svg";
+import ArrowSmallDownOutlineSvg from "./outline/arrow-small-down.svg";
+import ArrowSmallLeftOutlineSvg from "./outline/arrow-small-left.svg";
+import ArrowSmallRightOutlineSvg from "./outline/arrow-small-right.svg";
+import ArrowSmallUpOutlineSvg from "./outline/arrow-small-up.svg";
+import ArrowTopRightOnSquareOutlineSvg from "./outline/arrow-top-right-on-square.svg";
+import ArrowTrendingDownOutlineSvg from "./outline/arrow-trending-down.svg";
+import ArrowTrendingUpOutlineSvg from "./outline/arrow-trending-up.svg";
+import ArrowTurnDownLeftOutlineSvg from "./outline/arrow-turn-down-left.svg";
+import ArrowTurnDownRightOutlineSvg from "./outline/arrow-turn-down-right.svg";
+import ArrowTurnLeftDownOutlineSvg from "./outline/arrow-turn-left-down.svg";
+import ArrowTurnLeftUpOutlineSvg from "./outline/arrow-turn-left-up.svg";
+import ArrowTurnRightDownOutlineSvg from "./outline/arrow-turn-right-down.svg";
+import ArrowTurnRightUpOutlineSvg from "./outline/arrow-turn-right-up.svg";
+import ArrowTurnUpLeftOutlineSvg from "./outline/arrow-turn-up-left.svg";
+import ArrowTurnUpRightOutlineSvg from "./outline/arrow-turn-up-right.svg";
+import ArrowUpCircleOutlineSvg from "./outline/arrow-up-circle.svg";
+import ArrowUpLeftOutlineSvg from "./outline/arrow-up-left.svg";
+import ArrowUpOnSquareStackOutlineSvg from "./outline/arrow-up-on-square-stack.svg";
+import ArrowUpOnSquareOutlineSvg from "./outline/arrow-up-on-square.svg";
+import ArrowUpRightOutlineSvg from "./outline/arrow-up-right.svg";
+import ArrowUpTrayOutlineSvg from "./outline/arrow-up-tray.svg";
+import ArrowUpOutlineSvg from "./outline/arrow-up.svg";
+import ArrowUturnDownOutlineSvg from "./outline/arrow-uturn-down.svg";
+import ArrowUturnLeftOutlineSvg from "./outline/arrow-uturn-left.svg";
+import ArrowUturnRightOutlineSvg from "./outline/arrow-uturn-right.svg";
+import ArrowUturnUpOutlineSvg from "./outline/arrow-uturn-up.svg";
+import ArrowsPointingInOutlineSvg from "./outline/arrows-pointing-in.svg";
+import ArrowsPointingOutOutlineSvg from "./outline/arrows-pointing-out.svg";
+import ArrowsRightLeftOutlineSvg from "./outline/arrows-right-left.svg";
+import ArrowsUpDownOutlineSvg from "./outline/arrows-up-down.svg";
+import AtSymbolOutlineSvg from "./outline/at-symbol.svg";
+import BackspaceOutlineSvg from "./outline/backspace.svg";
+import BackwardOutlineSvg from "./outline/backward.svg";
+import BanknotesOutlineSvg from "./outline/banknotes.svg";
+import Bars2OutlineSvg from "./outline/bars-2.svg";
+import Bars3BottomLeftOutlineSvg from "./outline/bars-3-bottom-left.svg";
+import Bars3BottomRightOutlineSvg from "./outline/bars-3-bottom-right.svg";
+import Bars3CenterLeftOutlineSvg from "./outline/bars-3-center-left.svg";
+import Bars3OutlineSvg from "./outline/bars-3.svg";
+import Bars4OutlineSvg from "./outline/bars-4.svg";
+import BarsArrowDownOutlineSvg from "./outline/bars-arrow-down.svg";
+import BarsArrowUpOutlineSvg from "./outline/bars-arrow-up.svg";
+import Battery0OutlineSvg from "./outline/battery-0.svg";
+import Battery100OutlineSvg from "./outline/battery-100.svg";
+import Battery50OutlineSvg from "./outline/battery-50.svg";
+import BeakerOutlineSvg from "./outline/beaker.svg";
+import BellAlertOutlineSvg from "./outline/bell-alert.svg";
+import BellSlashOutlineSvg from "./outline/bell-slash.svg";
+import BellSnoozeOutlineSvg from "./outline/bell-snooze.svg";
+import BellOutlineSvg from "./outline/bell.svg";
+import BoldOutlineSvg from "./outline/bold.svg";
+import BoltSlashOutlineSvg from "./outline/bolt-slash.svg";
+import BoltOutlineSvg from "./outline/bolt.svg";
+import BookOpenOutlineSvg from "./outline/book-open.svg";
+import BookmarkSlashOutlineSvg from "./outline/bookmark-slash.svg";
+import BookmarkSquareOutlineSvg from "./outline/bookmark-square.svg";
+import BookmarkOutlineSvg from "./outline/bookmark.svg";
+import BriefcaseOutlineSvg from "./outline/briefcase.svg";
+import BugAntOutlineSvg from "./outline/bug-ant.svg";
+import BuildingLibraryOutlineSvg from "./outline/building-library.svg";
+import BuildingOffice2OutlineSvg from "./outline/building-office-2.svg";
+import BuildingOfficeOutlineSvg from "./outline/building-office.svg";
+import BuildingStorefrontOutlineSvg from "./outline/building-storefront.svg";
+import CakeOutlineSvg from "./outline/cake.svg";
+import CalculatorOutlineSvg from "./outline/calculator.svg";
+import CalendarDateRangeOutlineSvg from "./outline/calendar-date-range.svg";
+import CalendarDaysOutlineSvg from "./outline/calendar-days.svg";
+import CalendarOutlineSvg from "./outline/calendar.svg";
+import CameraOutlineSvg from "./outline/camera.svg";
+import ChartBarSquareOutlineSvg from "./outline/chart-bar-square.svg";
+import ChartBarOutlineSvg from "./outline/chart-bar.svg";
+import ChartPieOutlineSvg from "./outline/chart-pie.svg";
+import ChatBubbleBottomCenterTextOutlineSvg from "./outline/chat-bubble-bottom-center-text.svg";
+import ChatBubbleBottomCenterOutlineSvg from "./outline/chat-bubble-bottom-center.svg";
+import ChatBubbleLeftEllipsisOutlineSvg from "./outline/chat-bubble-left-ellipsis.svg";
+import ChatBubbleLeftRightOutlineSvg from "./outline/chat-bubble-left-right.svg";
+import ChatBubbleLeftOutlineSvg from "./outline/chat-bubble-left.svg";
+import ChatBubbleOvalLeftEllipsisOutlineSvg from "./outline/chat-bubble-oval-left-ellipsis.svg";
+import ChatBubbleOvalLeftOutlineSvg from "./outline/chat-bubble-oval-left.svg";
+import CheckBadgeOutlineSvg from "./outline/check-badge.svg";
+import CheckCircleOutlineSvg from "./outline/check-circle.svg";
+import CheckOutlineSvg from "./outline/check.svg";
+import ChevronDoubleDownOutlineSvg from "./outline/chevron-double-down.svg";
+import ChevronDoubleLeftOutlineSvg from "./outline/chevron-double-left.svg";
+import ChevronDoubleRightOutlineSvg from "./outline/chevron-double-right.svg";
+import ChevronDoubleUpOutlineSvg from "./outline/chevron-double-up.svg";
+import ChevronDownOutlineSvg from "./outline/chevron-down.svg";
+import ChevronLeftOutlineSvg from "./outline/chevron-left.svg";
+import ChevronRightOutlineSvg from "./outline/chevron-right.svg";
+import ChevronUpDownOutlineSvg from "./outline/chevron-up-down.svg";
+import ChevronUpOutlineSvg from "./outline/chevron-up.svg";
+import CircleStackOutlineSvg from "./outline/circle-stack.svg";
+import ClipboardDocumentCheckOutlineSvg from "./outline/clipboard-document-check.svg";
+import ClipboardDocumentListOutlineSvg from "./outline/clipboard-document-list.svg";
+import ClipboardDocumentOutlineSvg from "./outline/clipboard-document.svg";
+import ClipboardOutlineSvg from "./outline/clipboard.svg";
+import ClockOutlineSvg from "./outline/clock.svg";
+import CloudArrowDownOutlineSvg from "./outline/cloud-arrow-down.svg";
+import CloudArrowUpOutlineSvg from "./outline/cloud-arrow-up.svg";
+import CloudOutlineSvg from "./outline/cloud.svg";
+import CodeBracketSquareOutlineSvg from "./outline/code-bracket-square.svg";
+import CodeBracketOutlineSvg from "./outline/code-bracket.svg";
+import Cog6ToothOutlineSvg from "./outline/cog-6-tooth.svg";
+import Cog8ToothOutlineSvg from "./outline/cog-8-tooth.svg";
+import CogOutlineSvg from "./outline/cog.svg";
+import CommandLineOutlineSvg from "./outline/command-line.svg";
+import ComputerDesktopOutlineSvg from "./outline/computer-desktop.svg";
+import CpuChipOutlineSvg from "./outline/cpu-chip.svg";
+import CreditCardOutlineSvg from "./outline/credit-card.svg";
+import CubeTransparentOutlineSvg from "./outline/cube-transparent.svg";
+import CubeOutlineSvg from "./outline/cube.svg";
+import CurrencyBangladeshiOutlineSvg from "./outline/currency-bangladeshi.svg";
+import CurrencyDollarOutlineSvg from "./outline/currency-dollar.svg";
+import CurrencyEuroOutlineSvg from "./outline/currency-euro.svg";
+import CurrencyPoundOutlineSvg from "./outline/currency-pound.svg";
+import CurrencyRupeeOutlineSvg from "./outline/currency-rupee.svg";
+import CurrencyYenOutlineSvg from "./outline/currency-yen.svg";
+import CursorArrowRaysOutlineSvg from "./outline/cursor-arrow-rays.svg";
+import CursorArrowRippleOutlineSvg from "./outline/cursor-arrow-ripple.svg";
+import DevicePhoneMobileOutlineSvg from "./outline/device-phone-mobile.svg";
+import DeviceTabletOutlineSvg from "./outline/device-tablet.svg";
+import DivideOutlineSvg from "./outline/divide.svg";
+import DocumentArrowDownOutlineSvg from "./outline/document-arrow-down.svg";
+import DocumentArrowUpOutlineSvg from "./outline/document-arrow-up.svg";
+import DocumentChartBarOutlineSvg from "./outline/document-chart-bar.svg";
+import DocumentCheckOutlineSvg from "./outline/document-check.svg";
+import DocumentCurrencyBangladeshiOutlineSvg from "./outline/document-currency-bangladeshi.svg";
+import DocumentCurrencyDollarOutlineSvg from "./outline/document-currency-dollar.svg";
+import DocumentCurrencyEuroOutlineSvg from "./outline/document-currency-euro.svg";
+import DocumentCurrencyPoundOutlineSvg from "./outline/document-currency-pound.svg";
+import DocumentCurrencyRupeeOutlineSvg from "./outline/document-currency-rupee.svg";
+import DocumentCurrencyYenOutlineSvg from "./outline/document-currency-yen.svg";
+import DocumentDuplicateOutlineSvg from "./outline/document-duplicate.svg";
+import DocumentMagnifyingGlassOutlineSvg from "./outline/document-magnifying-glass.svg";
+import DocumentMinusOutlineSvg from "./outline/document-minus.svg";
+import DocumentPlusOutlineSvg from "./outline/document-plus.svg";
+import DocumentTextOutlineSvg from "./outline/document-text.svg";
+import DocumentOutlineSvg from "./outline/document.svg";
+import EllipsisHorizontalCircleOutlineSvg from "./outline/ellipsis-horizontal-circle.svg";
+import EllipsisHorizontalOutlineSvg from "./outline/ellipsis-horizontal.svg";
+import EllipsisVerticalOutlineSvg from "./outline/ellipsis-vertical.svg";
+import EnvelopeOpenOutlineSvg from "./outline/envelope-open.svg";
+import EnvelopeOutlineSvg from "./outline/envelope.svg";
+import EqualsOutlineSvg from "./outline/equals.svg";
+import ExclamationCircleOutlineSvg from "./outline/exclamation-circle.svg";
+import ExclamationTriangleOutlineSvg from "./outline/exclamation-triangle.svg";
+import EyeDropperOutlineSvg from "./outline/eye-dropper.svg";
+import EyeSlashOutlineSvg from "./outline/eye-slash.svg";
+import EyeOutlineSvg from "./outline/eye.svg";
+import FaceFrownOutlineSvg from "./outline/face-frown.svg";
+import FaceSmileOutlineSvg from "./outline/face-smile.svg";
+import FilmOutlineSvg from "./outline/film.svg";
+import FingerPrintOutlineSvg from "./outline/finger-print.svg";
+import FireOutlineSvg from "./outline/fire.svg";
+import FlagOutlineSvg from "./outline/flag.svg";
+import FolderArrowDownOutlineSvg from "./outline/folder-arrow-down.svg";
+import FolderMinusOutlineSvg from "./outline/folder-minus.svg";
+import FolderOpenOutlineSvg from "./outline/folder-open.svg";
+import FolderPlusOutlineSvg from "./outline/folder-plus.svg";
+import FolderOutlineSvg from "./outline/folder.svg";
+import ForwardOutlineSvg from "./outline/forward.svg";
+import FunnelOutlineSvg from "./outline/funnel.svg";
+import GifOutlineSvg from "./outline/gif.svg";
+import GiftTopOutlineSvg from "./outline/gift-top.svg";
+import GiftOutlineSvg from "./outline/gift.svg";
+import GlobeAltOutlineSvg from "./outline/globe-alt.svg";
+import GlobeAmericasOutlineSvg from "./outline/globe-americas.svg";
+import GlobeAsiaAustraliaOutlineSvg from "./outline/globe-asia-australia.svg";
+import GlobeEuropeAfricaOutlineSvg from "./outline/globe-europe-africa.svg";
+import H1OutlineSvg from "./outline/h1.svg";
+import H2OutlineSvg from "./outline/h2.svg";
+import H3OutlineSvg from "./outline/h3.svg";
+import HandRaisedOutlineSvg from "./outline/hand-raised.svg";
+import HandThumbDownOutlineSvg from "./outline/hand-thumb-down.svg";
+import HandThumbUpOutlineSvg from "./outline/hand-thumb-up.svg";
+import HashtagOutlineSvg from "./outline/hashtag.svg";
+import HeartOutlineSvg from "./outline/heart.svg";
+import HomeModernOutlineSvg from "./outline/home-modern.svg";
+import HomeOutlineSvg from "./outline/home.svg";
+import IdentificationOutlineSvg from "./outline/identification.svg";
+import InboxArrowDownOutlineSvg from "./outline/inbox-arrow-down.svg";
+import InboxStackOutlineSvg from "./outline/inbox-stack.svg";
+import InboxOutlineSvg from "./outline/inbox.svg";
+import InformationCircleOutlineSvg from "./outline/information-circle.svg";
+import ItalicOutlineSvg from "./outline/italic.svg";
+import KeyOutlineSvg from "./outline/key.svg";
+import LanguageOutlineSvg from "./outline/language.svg";
+import LifebuoyOutlineSvg from "./outline/lifebuoy.svg";
+import LightBulbOutlineSvg from "./outline/light-bulb.svg";
+import LinkSlashOutlineSvg from "./outline/link-slash.svg";
+import LinkOutlineSvg from "./outline/link.svg";
+import ListBulletOutlineSvg from "./outline/list-bullet.svg";
+import LockClosedOutlineSvg from "./outline/lock-closed.svg";
+import LockOpenOutlineSvg from "./outline/lock-open.svg";
+import MagnifyingGlassCircleOutlineSvg from "./outline/magnifying-glass-circle.svg";
+import MagnifyingGlassMinusOutlineSvg from "./outline/magnifying-glass-minus.svg";
+import MagnifyingGlassPlusOutlineSvg from "./outline/magnifying-glass-plus.svg";
+import MagnifyingGlassOutlineSvg from "./outline/magnifying-glass.svg";
+import MapPinOutlineSvg from "./outline/map-pin.svg";
+import MapOutlineSvg from "./outline/map.svg";
+import MegaphoneOutlineSvg from "./outline/megaphone.svg";
+import MicrophoneOutlineSvg from "./outline/microphone.svg";
+import MinusCircleOutlineSvg from "./outline/minus-circle.svg";
+import MinusSmallOutlineSvg from "./outline/minus-small.svg";
+import MinusOutlineSvg from "./outline/minus.svg";
+import MoonOutlineSvg from "./outline/moon.svg";
+import MusicalNoteOutlineSvg from "./outline/musical-note.svg";
+import NewspaperOutlineSvg from "./outline/newspaper.svg";
+import NoSymbolOutlineSvg from "./outline/no-symbol.svg";
+import NumberedListOutlineSvg from "./outline/numbered-list.svg";
+import PaintBrushOutlineSvg from "./outline/paint-brush.svg";
+import PaperAirplaneOutlineSvg from "./outline/paper-airplane.svg";
+import PaperClipOutlineSvg from "./outline/paper-clip.svg";
+import PauseCircleOutlineSvg from "./outline/pause-circle.svg";
+import PauseOutlineSvg from "./outline/pause.svg";
+import PencilSquareOutlineSvg from "./outline/pencil-square.svg";
+import PencilOutlineSvg from "./outline/pencil.svg";
+import PercentBadgeOutlineSvg from "./outline/percent-badge.svg";
+import PhoneArrowDownLeftOutlineSvg from "./outline/phone-arrow-down-left.svg";
+import PhoneArrowUpRightOutlineSvg from "./outline/phone-arrow-up-right.svg";
+import PhoneXMarkOutlineSvg from "./outline/phone-x-mark.svg";
+import PhoneOutlineSvg from "./outline/phone.svg";
+import PhotoOutlineSvg from "./outline/photo.svg";
+import PlayCircleOutlineSvg from "./outline/play-circle.svg";
+import PlayPauseOutlineSvg from "./outline/play-pause.svg";
+import PlayOutlineSvg from "./outline/play.svg";
+import PlusCircleOutlineSvg from "./outline/plus-circle.svg";
+import PlusSmallOutlineSvg from "./outline/plus-small.svg";
+import PlusOutlineSvg from "./outline/plus.svg";
+import PowerOutlineSvg from "./outline/power.svg";
+import PresentationChartBarOutlineSvg from "./outline/presentation-chart-bar.svg";
+import PresentationChartLineOutlineSvg from "./outline/presentation-chart-line.svg";
+import PrinterOutlineSvg from "./outline/printer.svg";
+import PuzzlePieceOutlineSvg from "./outline/puzzle-piece.svg";
+import QrCodeOutlineSvg from "./outline/qr-code.svg";
+import QuestionMarkCircleOutlineSvg from "./outline/question-mark-circle.svg";
+import QueueListOutlineSvg from "./outline/queue-list.svg";
+import RadioOutlineSvg from "./outline/radio.svg";
+import ReceiptPercentOutlineSvg from "./outline/receipt-percent.svg";
+import ReceiptRefundOutlineSvg from "./outline/receipt-refund.svg";
+import RectangleGroupOutlineSvg from "./outline/rectangle-group.svg";
+import RectangleStackOutlineSvg from "./outline/rectangle-stack.svg";
+import RocketLaunchOutlineSvg from "./outline/rocket-launch.svg";
+import RssOutlineSvg from "./outline/rss.svg";
+import ScaleOutlineSvg from "./outline/scale.svg";
+import ScissorsOutlineSvg from "./outline/scissors.svg";
+import ServerStackOutlineSvg from "./outline/server-stack.svg";
+import ServerOutlineSvg from "./outline/server.svg";
+import ShareOutlineSvg from "./outline/share.svg";
+import ShieldCheckOutlineSvg from "./outline/shield-check.svg";
+import ShieldExclamationOutlineSvg from "./outline/shield-exclamation.svg";
+import ShoppingBagOutlineSvg from "./outline/shopping-bag.svg";
+import ShoppingCartOutlineSvg from "./outline/shopping-cart.svg";
+import SignalSlashOutlineSvg from "./outline/signal-slash.svg";
+import SignalOutlineSvg from "./outline/signal.svg";
+import SlashOutlineSvg from "./outline/slash.svg";
+import SparklesOutlineSvg from "./outline/sparkles.svg";
+import SpeakerWaveOutlineSvg from "./outline/speaker-wave.svg";
+import SpeakerXMarkOutlineSvg from "./outline/speaker-x-mark.svg";
+import Square2StackOutlineSvg from "./outline/square-2-stack.svg";
+import Square3Stack3dOutlineSvg from "./outline/square-3-stack-3d.svg";
+import Squares2x2OutlineSvg from "./outline/squares-2x2.svg";
+import SquaresPlusOutlineSvg from "./outline/squares-plus.svg";
+import StarOutlineSvg from "./outline/star.svg";
+import StopCircleOutlineSvg from "./outline/stop-circle.svg";
+import StopOutlineSvg from "./outline/stop.svg";
+import StrikethroughOutlineSvg from "./outline/strikethrough.svg";
+import SunOutlineSvg from "./outline/sun.svg";
+import SwatchOutlineSvg from "./outline/swatch.svg";
+import TableCellsOutlineSvg from "./outline/table-cells.svg";
+import TagOutlineSvg from "./outline/tag.svg";
+import TicketOutlineSvg from "./outline/ticket.svg";
+import TrashOutlineSvg from "./outline/trash.svg";
+import TrophyOutlineSvg from "./outline/trophy.svg";
+import TruckOutlineSvg from "./outline/truck.svg";
+import TvOutlineSvg from "./outline/tv.svg";
+import UnderlineOutlineSvg from "./outline/underline.svg";
+import UserCircleOutlineSvg from "./outline/user-circle.svg";
+import UserGroupOutlineSvg from "./outline/user-group.svg";
+import UserMinusOutlineSvg from "./outline/user-minus.svg";
+import UserPlusOutlineSvg from "./outline/user-plus.svg";
+import UserOutlineSvg from "./outline/user.svg";
+import UsersOutlineSvg from "./outline/users.svg";
+import VariableOutlineSvg from "./outline/variable.svg";
+import VideoCameraSlashOutlineSvg from "./outline/video-camera-slash.svg";
+import VideoCameraOutlineSvg from "./outline/video-camera.svg";
+import ViewColumnsOutlineSvg from "./outline/view-columns.svg";
+import ViewfinderCircleOutlineSvg from "./outline/viewfinder-circle.svg";
+import WalletOutlineSvg from "./outline/wallet.svg";
+import WifiOutlineSvg from "./outline/wifi.svg";
+import WindowOutlineSvg from "./outline/window.svg";
+import WrenchScrewdriverOutlineSvg from "./outline/wrench-screwdriver.svg";
+import WrenchOutlineSvg from "./outline/wrench.svg";
+import XCircleOutlineSvg from "./outline/x-circle.svg";
+import XMarkOutlineSvg from "./outline/x-mark.svg";
+import AcademicCapSolidSvg from "./solid/academic-cap.svg";
+import AdjustmentsHorizontalSolidSvg from "./solid/adjustments-horizontal.svg";
+import AdjustmentsVerticalSolidSvg from "./solid/adjustments-vertical.svg";
+import ArchiveBoxArrowDownSolidSvg from "./solid/archive-box-arrow-down.svg";
+import ArchiveBoxXMarkSolidSvg from "./solid/archive-box-x-mark.svg";
+import ArchiveBoxSolidSvg from "./solid/archive-box.svg";
+import ArrowDownCircleSolidSvg from "./solid/arrow-down-circle.svg";
+import ArrowDownLeftSolidSvg from "./solid/arrow-down-left.svg";
+import ArrowDownOnSquareStackSolidSvg from "./solid/arrow-down-on-square-stack.svg";
+import ArrowDownOnSquareSolidSvg from "./solid/arrow-down-on-square.svg";
+import ArrowDownRightSolidSvg from "./solid/arrow-down-right.svg";
+import ArrowDownTraySolidSvg from "./solid/arrow-down-tray.svg";
+import ArrowDownSolidSvg from "./solid/arrow-down.svg";
+import ArrowLeftCircleSolidSvg from "./solid/arrow-left-circle.svg";
+import ArrowLeftEndOnRectangleSolidSvg from "./solid/arrow-left-end-on-rectangle.svg";
+import ArrowLeftOnRectangleSolidSvg from "./solid/arrow-left-on-rectangle.svg";
+import ArrowLeftStartOnRectangleSolidSvg from "./solid/arrow-left-start-on-rectangle.svg";
+import ArrowLeftSolidSvg from "./solid/arrow-left.svg";
+import ArrowLongDownSolidSvg from "./solid/arrow-long-down.svg";
+import ArrowLongLeftSolidSvg from "./solid/arrow-long-left.svg";
+import ArrowLongRightSolidSvg from "./solid/arrow-long-right.svg";
+import ArrowLongUpSolidSvg from "./solid/arrow-long-up.svg";
+import ArrowPathRoundedSquareSolidSvg from "./solid/arrow-path-rounded-square.svg";
+import ArrowPathSolidSvg from "./solid/arrow-path.svg";
+import ArrowRightCircleSolidSvg from "./solid/arrow-right-circle.svg";
+import ArrowRightEndOnRectangleSolidSvg from "./solid/arrow-right-end-on-rectangle.svg";
+import ArrowRightOnRectangleSolidSvg from "./solid/arrow-right-on-rectangle.svg";
+import ArrowRightStartOnRectangleSolidSvg from "./solid/arrow-right-start-on-rectangle.svg";
+import ArrowRightSolidSvg from "./solid/arrow-right.svg";
+import ArrowSmallDownSolidSvg from "./solid/arrow-small-down.svg";
+import ArrowSmallLeftSolidSvg from "./solid/arrow-small-left.svg";
+import ArrowSmallRightSolidSvg from "./solid/arrow-small-right.svg";
+import ArrowSmallUpSolidSvg from "./solid/arrow-small-up.svg";
+import ArrowTopRightOnSquareSolidSvg from "./solid/arrow-top-right-on-square.svg";
+import ArrowTrendingDownSolidSvg from "./solid/arrow-trending-down.svg";
+import ArrowTrendingUpSolidSvg from "./solid/arrow-trending-up.svg";
+import ArrowTurnDownLeftSolidSvg from "./solid/arrow-turn-down-left.svg";
+import ArrowTurnDownRightSolidSvg from "./solid/arrow-turn-down-right.svg";
+import ArrowTurnLeftDownSolidSvg from "./solid/arrow-turn-left-down.svg";
+import ArrowTurnLeftUpSolidSvg from "./solid/arrow-turn-left-up.svg";
+import ArrowTurnRightDownSolidSvg from "./solid/arrow-turn-right-down.svg";
+import ArrowTurnRightUpSolidSvg from "./solid/arrow-turn-right-up.svg";
+import ArrowTurnUpLeftSolidSvg from "./solid/arrow-turn-up-left.svg";
+import ArrowTurnUpRightSolidSvg from "./solid/arrow-turn-up-right.svg";
+import ArrowUpCircleSolidSvg from "./solid/arrow-up-circle.svg";
+import ArrowUpLeftSolidSvg from "./solid/arrow-up-left.svg";
+import ArrowUpOnSquareStackSolidSvg from "./solid/arrow-up-on-square-stack.svg";
+import ArrowUpOnSquareSolidSvg from "./solid/arrow-up-on-square.svg";
+import ArrowUpRightSolidSvg from "./solid/arrow-up-right.svg";
+import ArrowUpTraySolidSvg from "./solid/arrow-up-tray.svg";
+import ArrowUpSolidSvg from "./solid/arrow-up.svg";
+import ArrowUturnDownSolidSvg from "./solid/arrow-uturn-down.svg";
+import ArrowUturnLeftSolidSvg from "./solid/arrow-uturn-left.svg";
+import ArrowUturnRightSolidSvg from "./solid/arrow-uturn-right.svg";
+import ArrowUturnUpSolidSvg from "./solid/arrow-uturn-up.svg";
+import ArrowsPointingInSolidSvg from "./solid/arrows-pointing-in.svg";
+import ArrowsPointingOutSolidSvg from "./solid/arrows-pointing-out.svg";
+import ArrowsRightLeftSolidSvg from "./solid/arrows-right-left.svg";
+import ArrowsUpDownSolidSvg from "./solid/arrows-up-down.svg";
+import AtSymbolSolidSvg from "./solid/at-symbol.svg";
+import BackspaceSolidSvg from "./solid/backspace.svg";
+import BackwardSolidSvg from "./solid/backward.svg";
+import BanknotesSolidSvg from "./solid/banknotes.svg";
+import Bars2SolidSvg from "./solid/bars-2.svg";
+import Bars3BottomLeftSolidSvg from "./solid/bars-3-bottom-left.svg";
+import Bars3BottomRightSolidSvg from "./solid/bars-3-bottom-right.svg";
+import Bars3CenterLeftSolidSvg from "./solid/bars-3-center-left.svg";
+import Bars3SolidSvg from "./solid/bars-3.svg";
+import Bars4SolidSvg from "./solid/bars-4.svg";
+import BarsArrowDownSolidSvg from "./solid/bars-arrow-down.svg";
+import BarsArrowUpSolidSvg from "./solid/bars-arrow-up.svg";
+import Battery0SolidSvg from "./solid/battery-0.svg";
+import Battery100SolidSvg from "./solid/battery-100.svg";
+import Battery50SolidSvg from "./solid/battery-50.svg";
+import BeakerSolidSvg from "./solid/beaker.svg";
+import BellAlertSolidSvg from "./solid/bell-alert.svg";
+import BellSlashSolidSvg from "./solid/bell-slash.svg";
+import BellSnoozeSolidSvg from "./solid/bell-snooze.svg";
+import BellSolidSvg from "./solid/bell.svg";
+import BoldSolidSvg from "./solid/bold.svg";
+import BoltSlashSolidSvg from "./solid/bolt-slash.svg";
+import BoltSolidSvg from "./solid/bolt.svg";
+import BookOpenSolidSvg from "./solid/book-open.svg";
+import BookmarkSlashSolidSvg from "./solid/bookmark-slash.svg";
+import BookmarkSquareSolidSvg from "./solid/bookmark-square.svg";
+import BookmarkSolidSvg from "./solid/bookmark.svg";
+import BriefcaseSolidSvg from "./solid/briefcase.svg";
+import BugAntSolidSvg from "./solid/bug-ant.svg";
+import BuildingLibrarySolidSvg from "./solid/building-library.svg";
+import BuildingOffice2SolidSvg from "./solid/building-office-2.svg";
+import BuildingOfficeSolidSvg from "./solid/building-office.svg";
+import BuildingStorefrontSolidSvg from "./solid/building-storefront.svg";
+import CakeSolidSvg from "./solid/cake.svg";
+import CalculatorSolidSvg from "./solid/calculator.svg";
+import CalendarDateRangeSolidSvg from "./solid/calendar-date-range.svg";
+import CalendarDaysSolidSvg from "./solid/calendar-days.svg";
+import CalendarSolidSvg from "./solid/calendar.svg";
+import CameraSolidSvg from "./solid/camera.svg";
+import ChartBarSquareSolidSvg from "./solid/chart-bar-square.svg";
+import ChartBarSolidSvg from "./solid/chart-bar.svg";
+import ChartPieSolidSvg from "./solid/chart-pie.svg";
+import ChatBubbleBottomCenterTextSolidSvg from "./solid/chat-bubble-bottom-center-text.svg";
+import ChatBubbleBottomCenterSolidSvg from "./solid/chat-bubble-bottom-center.svg";
+import ChatBubbleLeftEllipsisSolidSvg from "./solid/chat-bubble-left-ellipsis.svg";
+import ChatBubbleLeftRightSolidSvg from "./solid/chat-bubble-left-right.svg";
+import ChatBubbleLeftSolidSvg from "./solid/chat-bubble-left.svg";
+import ChatBubbleOvalLeftEllipsisSolidSvg from "./solid/chat-bubble-oval-left-ellipsis.svg";
+import ChatBubbleOvalLeftSolidSvg from "./solid/chat-bubble-oval-left.svg";
+import CheckBadgeSolidSvg from "./solid/check-badge.svg";
+import CheckCircleSolidSvg from "./solid/check-circle.svg";
+import CheckSolidSvg from "./solid/check.svg";
+import ChevronDoubleDownSolidSvg from "./solid/chevron-double-down.svg";
+import ChevronDoubleLeftSolidSvg from "./solid/chevron-double-left.svg";
+import ChevronDoubleRightSolidSvg from "./solid/chevron-double-right.svg";
+import ChevronDoubleUpSolidSvg from "./solid/chevron-double-up.svg";
+import ChevronDownSolidSvg from "./solid/chevron-down.svg";
+import ChevronLeftSolidSvg from "./solid/chevron-left.svg";
+import ChevronRightSolidSvg from "./solid/chevron-right.svg";
+import ChevronUpDownSolidSvg from "./solid/chevron-up-down.svg";
+import ChevronUpSolidSvg from "./solid/chevron-up.svg";
+import CircleStackSolidSvg from "./solid/circle-stack.svg";
+import ClipboardDocumentCheckSolidSvg from "./solid/clipboard-document-check.svg";
+import ClipboardDocumentListSolidSvg from "./solid/clipboard-document-list.svg";
+import ClipboardDocumentSolidSvg from "./solid/clipboard-document.svg";
+import ClipboardSolidSvg from "./solid/clipboard.svg";
+import ClockSolidSvg from "./solid/clock.svg";
+import CloudArrowDownSolidSvg from "./solid/cloud-arrow-down.svg";
+import CloudArrowUpSolidSvg from "./solid/cloud-arrow-up.svg";
+import CloudSolidSvg from "./solid/cloud.svg";
+import CodeBracketSquareSolidSvg from "./solid/code-bracket-square.svg";
+import CodeBracketSolidSvg from "./solid/code-bracket.svg";
+import Cog6ToothSolidSvg from "./solid/cog-6-tooth.svg";
+import Cog8ToothSolidSvg from "./solid/cog-8-tooth.svg";
+import CogSolidSvg from "./solid/cog.svg";
+import CommandLineSolidSvg from "./solid/command-line.svg";
+import ComputerDesktopSolidSvg from "./solid/computer-desktop.svg";
+import CpuChipSolidSvg from "./solid/cpu-chip.svg";
+import CreditCardSolidSvg from "./solid/credit-card.svg";
+import CubeTransparentSolidSvg from "./solid/cube-transparent.svg";
+import CubeSolidSvg from "./solid/cube.svg";
+import CurrencyBangladeshiSolidSvg from "./solid/currency-bangladeshi.svg";
+import CurrencyDollarSolidSvg from "./solid/currency-dollar.svg";
+import CurrencyEuroSolidSvg from "./solid/currency-euro.svg";
+import CurrencyPoundSolidSvg from "./solid/currency-pound.svg";
+import CurrencyRupeeSolidSvg from "./solid/currency-rupee.svg";
+import CurrencyYenSolidSvg from "./solid/currency-yen.svg";
+import CursorArrowRaysSolidSvg from "./solid/cursor-arrow-rays.svg";
+import CursorArrowRippleSolidSvg from "./solid/cursor-arrow-ripple.svg";
+import DevicePhoneMobileSolidSvg from "./solid/device-phone-mobile.svg";
+import DeviceTabletSolidSvg from "./solid/device-tablet.svg";
+import DivideSolidSvg from "./solid/divide.svg";
+import DocumentArrowDownSolidSvg from "./solid/document-arrow-down.svg";
+import DocumentArrowUpSolidSvg from "./solid/document-arrow-up.svg";
+import DocumentChartBarSolidSvg from "./solid/document-chart-bar.svg";
+import DocumentCheckSolidSvg from "./solid/document-check.svg";
+import DocumentCurrencyBangladeshiSolidSvg from "./solid/document-currency-bangladeshi.svg";
+import DocumentCurrencyDollarSolidSvg from "./solid/document-currency-dollar.svg";
+import DocumentCurrencyEuroSolidSvg from "./solid/document-currency-euro.svg";
+import DocumentCurrencyPoundSolidSvg from "./solid/document-currency-pound.svg";
+import DocumentCurrencyRupeeSolidSvg from "./solid/document-currency-rupee.svg";
+import DocumentCurrencyYenSolidSvg from "./solid/document-currency-yen.svg";
+import DocumentDuplicateSolidSvg from "./solid/document-duplicate.svg";
+import DocumentMagnifyingGlassSolidSvg from "./solid/document-magnifying-glass.svg";
+import DocumentMinusSolidSvg from "./solid/document-minus.svg";
+import DocumentPlusSolidSvg from "./solid/document-plus.svg";
+import DocumentTextSolidSvg from "./solid/document-text.svg";
+import DocumentSolidSvg from "./solid/document.svg";
+import EllipsisHorizontalCircleSolidSvg from "./solid/ellipsis-horizontal-circle.svg";
+import EllipsisHorizontalSolidSvg from "./solid/ellipsis-horizontal.svg";
+import EllipsisVerticalSolidSvg from "./solid/ellipsis-vertical.svg";
+import EnvelopeOpenSolidSvg from "./solid/envelope-open.svg";
+import EnvelopeSolidSvg from "./solid/envelope.svg";
+import EqualsSolidSvg from "./solid/equals.svg";
+import ExclamationCircleSolidSvg from "./solid/exclamation-circle.svg";
+import ExclamationTriangleSolidSvg from "./solid/exclamation-triangle.svg";
+import EyeDropperSolidSvg from "./solid/eye-dropper.svg";
+import EyeSlashSolidSvg from "./solid/eye-slash.svg";
+import EyeSolidSvg from "./solid/eye.svg";
+import FaceFrownSolidSvg from "./solid/face-frown.svg";
+import FaceSmileSolidSvg from "./solid/face-smile.svg";
+import FilmSolidSvg from "./solid/film.svg";
+import FingerPrintSolidSvg from "./solid/finger-print.svg";
+import FireSolidSvg from "./solid/fire.svg";
+import FlagSolidSvg from "./solid/flag.svg";
+import FolderArrowDownSolidSvg from "./solid/folder-arrow-down.svg";
+import FolderMinusSolidSvg from "./solid/folder-minus.svg";
+import FolderOpenSolidSvg from "./solid/folder-open.svg";
+import FolderPlusSolidSvg from "./solid/folder-plus.svg";
+import FolderSolidSvg from "./solid/folder.svg";
+import ForwardSolidSvg from "./solid/forward.svg";
+import FunnelSolidSvg from "./solid/funnel.svg";
+import GifSolidSvg from "./solid/gif.svg";
+import GiftTopSolidSvg from "./solid/gift-top.svg";
+import GiftSolidSvg from "./solid/gift.svg";
+import GlobeAltSolidSvg from "./solid/globe-alt.svg";
+import GlobeAmericasSolidSvg from "./solid/globe-americas.svg";
+import GlobeAsiaAustraliaSolidSvg from "./solid/globe-asia-australia.svg";
+import GlobeEuropeAfricaSolidSvg from "./solid/globe-europe-africa.svg";
+import H1SolidSvg from "./solid/h1.svg";
+import H2SolidSvg from "./solid/h2.svg";
+import H3SolidSvg from "./solid/h3.svg";
+import HandRaisedSolidSvg from "./solid/hand-raised.svg";
+import HandThumbDownSolidSvg from "./solid/hand-thumb-down.svg";
+import HandThumbUpSolidSvg from "./solid/hand-thumb-up.svg";
+import HashtagSolidSvg from "./solid/hashtag.svg";
+import HeartSolidSvg from "./solid/heart.svg";
+import HomeModernSolidSvg from "./solid/home-modern.svg";
+import HomeSolidSvg from "./solid/home.svg";
+import IdentificationSolidSvg from "./solid/identification.svg";
+import InboxArrowDownSolidSvg from "./solid/inbox-arrow-down.svg";
+import InboxStackSolidSvg from "./solid/inbox-stack.svg";
+import InboxSolidSvg from "./solid/inbox.svg";
+import InformationCircleSolidSvg from "./solid/information-circle.svg";
+import ItalicSolidSvg from "./solid/italic.svg";
+import KeySolidSvg from "./solid/key.svg";
+import LanguageSolidSvg from "./solid/language.svg";
+import LifebuoySolidSvg from "./solid/lifebuoy.svg";
+import LightBulbSolidSvg from "./solid/light-bulb.svg";
+import LinkSlashSolidSvg from "./solid/link-slash.svg";
+import LinkSolidSvg from "./solid/link.svg";
+import ListBulletSolidSvg from "./solid/list-bullet.svg";
+import LockClosedSolidSvg from "./solid/lock-closed.svg";
+import LockOpenSolidSvg from "./solid/lock-open.svg";
+import MagnifyingGlassCircleSolidSvg from "./solid/magnifying-glass-circle.svg";
+import MagnifyingGlassMinusSolidSvg from "./solid/magnifying-glass-minus.svg";
+import MagnifyingGlassPlusSolidSvg from "./solid/magnifying-glass-plus.svg";
+import MagnifyingGlassSolidSvg from "./solid/magnifying-glass.svg";
+import MapPinSolidSvg from "./solid/map-pin.svg";
+import MapSolidSvg from "./solid/map.svg";
+import MegaphoneSolidSvg from "./solid/megaphone.svg";
+import MicrophoneSolidSvg from "./solid/microphone.svg";
+import MinusCircleSolidSvg from "./solid/minus-circle.svg";
+import MinusSmallSolidSvg from "./solid/minus-small.svg";
+import MinusSolidSvg from "./solid/minus.svg";
+import MoonSolidSvg from "./solid/moon.svg";
+import MusicalNoteSolidSvg from "./solid/musical-note.svg";
+import NewspaperSolidSvg from "./solid/newspaper.svg";
+import NoSymbolSolidSvg from "./solid/no-symbol.svg";
+import NumberedListSolidSvg from "./solid/numbered-list.svg";
+import PaintBrushSolidSvg from "./solid/paint-brush.svg";
+import PaperAirplaneSolidSvg from "./solid/paper-airplane.svg";
+import PaperClipSolidSvg from "./solid/paper-clip.svg";
+import PauseCircleSolidSvg from "./solid/pause-circle.svg";
+import PauseSolidSvg from "./solid/pause.svg";
+import PencilSquareSolidSvg from "./solid/pencil-square.svg";
+import PencilSolidSvg from "./solid/pencil.svg";
+import PercentBadgeSolidSvg from "./solid/percent-badge.svg";
+import PhoneArrowDownLeftSolidSvg from "./solid/phone-arrow-down-left.svg";
+import PhoneArrowUpRightSolidSvg from "./solid/phone-arrow-up-right.svg";
+import PhoneXMarkSolidSvg from "./solid/phone-x-mark.svg";
+import PhoneSolidSvg from "./solid/phone.svg";
+import PhotoSolidSvg from "./solid/photo.svg";
+import PlayCircleSolidSvg from "./solid/play-circle.svg";
+import PlayPauseSolidSvg from "./solid/play-pause.svg";
+import PlaySolidSvg from "./solid/play.svg";
+import PlusCircleSolidSvg from "./solid/plus-circle.svg";
+import PlusSmallSolidSvg from "./solid/plus-small.svg";
+import PlusSolidSvg from "./solid/plus.svg";
+import PowerSolidSvg from "./solid/power.svg";
+import PresentationChartBarSolidSvg from "./solid/presentation-chart-bar.svg";
+import PresentationChartLineSolidSvg from "./solid/presentation-chart-line.svg";
+import PrinterSolidSvg from "./solid/printer.svg";
+import PuzzlePieceSolidSvg from "./solid/puzzle-piece.svg";
+import QrCodeSolidSvg from "./solid/qr-code.svg";
+import QuestionMarkCircleSolidSvg from "./solid/question-mark-circle.svg";
+import QueueListSolidSvg from "./solid/queue-list.svg";
+import RadioSolidSvg from "./solid/radio.svg";
+import ReceiptPercentSolidSvg from "./solid/receipt-percent.svg";
+import ReceiptRefundSolidSvg from "./solid/receipt-refund.svg";
+import RectangleGroupSolidSvg from "./solid/rectangle-group.svg";
+import RectangleStackSolidSvg from "./solid/rectangle-stack.svg";
+import RocketLaunchSolidSvg from "./solid/rocket-launch.svg";
+import RssSolidSvg from "./solid/rss.svg";
+import ScaleSolidSvg from "./solid/scale.svg";
+import ScissorsSolidSvg from "./solid/scissors.svg";
+import ServerStackSolidSvg from "./solid/server-stack.svg";
+import ServerSolidSvg from "./solid/server.svg";
+import ShareSolidSvg from "./solid/share.svg";
+import ShieldCheckSolidSvg from "./solid/shield-check.svg";
+import ShieldExclamationSolidSvg from "./solid/shield-exclamation.svg";
+import ShoppingBagSolidSvg from "./solid/shopping-bag.svg";
+import ShoppingCartSolidSvg from "./solid/shopping-cart.svg";
+import SignalSlashSolidSvg from "./solid/signal-slash.svg";
+import SignalSolidSvg from "./solid/signal.svg";
+import SlashSolidSvg from "./solid/slash.svg";
+import SparklesSolidSvg from "./solid/sparkles.svg";
+import SpeakerWaveSolidSvg from "./solid/speaker-wave.svg";
+import SpeakerXMarkSolidSvg from "./solid/speaker-x-mark.svg";
+import Square2StackSolidSvg from "./solid/square-2-stack.svg";
+import Square3Stack3dSolidSvg from "./solid/square-3-stack-3d.svg";
+import Squares2x2SolidSvg from "./solid/squares-2x2.svg";
+import SquaresPlusSolidSvg from "./solid/squares-plus.svg";
+import StarSolidSvg from "./solid/star.svg";
+import StopCircleSolidSvg from "./solid/stop-circle.svg";
+import StopSolidSvg from "./solid/stop.svg";
+import StrikethroughSolidSvg from "./solid/strikethrough.svg";
+import SunSolidSvg from "./solid/sun.svg";
+import SwatchSolidSvg from "./solid/swatch.svg";
+import TableCellsSolidSvg from "./solid/table-cells.svg";
+import TagSolidSvg from "./solid/tag.svg";
+import TicketSolidSvg from "./solid/ticket.svg";
+import TrashSolidSvg from "./solid/trash.svg";
+import TrophySolidSvg from "./solid/trophy.svg";
+import TruckSolidSvg from "./solid/truck.svg";
+import TvSolidSvg from "./solid/tv.svg";
+import UnderlineSolidSvg from "./solid/underline.svg";
+import UserCircleSolidSvg from "./solid/user-circle.svg";
+import UserGroupSolidSvg from "./solid/user-group.svg";
+import UserMinusSolidSvg from "./solid/user-minus.svg";
+import UserPlusSolidSvg from "./solid/user-plus.svg";
+import UserSolidSvg from "./solid/user.svg";
+import UsersSolidSvg from "./solid/users.svg";
+import VariableSolidSvg from "./solid/variable.svg";
+import VideoCameraSlashSolidSvg from "./solid/video-camera-slash.svg";
+import VideoCameraSolidSvg from "./solid/video-camera.svg";
+import ViewColumnsSolidSvg from "./solid/view-columns.svg";
+import ViewfinderCircleSolidSvg from "./solid/viewfinder-circle.svg";
+import WalletSolidSvg from "./solid/wallet.svg";
+import WifiSolidSvg from "./solid/wifi.svg";
+import WindowSolidSvg from "./solid/window.svg";
+import WrenchScrewdriverSolidSvg from "./solid/wrench-screwdriver.svg";
+import WrenchSolidSvg from "./solid/wrench.svg";
+import XCircleSolidSvg from "./solid/x-circle.svg";
+import XMarkSolidSvg from "./solid/x-mark.svg";
 import type { SvgProps } from "react-native-svg";
 
+type IconProps = SvgProps & {
+  size?: number; // single size for width & height
+  color?: string; // applies to fill and stroke
+};
 
-                 type IconProps = SvgProps & {
-                     size?: number;        // single size for width & height
-                     color?: string;       // applies to fill and stroke
-                };
-    
-
-                     export const AcademicCapOutline: React.FC<IconProps> = ({
+export const AcademicCapOutline: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -674,11 +672,10 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const AdjustmentsHorizontalOutline: React.FC<IconProps> = ({
+export const AdjustmentsHorizontalOutline: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -690,11 +687,10 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const AdjustmentsVerticalOutline: React.FC<IconProps> = ({
+export const AdjustmentsVerticalOutline: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -706,11 +702,10 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const ArchiveBoxArrowDownOutline: React.FC<IconProps> = ({
+export const ArchiveBoxArrowDownOutline: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -722,11 +717,10 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const ArchiveBoxXMarkOutline: React.FC<IconProps> = ({
+export const ArchiveBoxXMarkOutline: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -738,11 +732,10 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const ArchiveBoxOutline: React.FC<IconProps> = ({
+export const ArchiveBoxOutline: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -754,11 +747,10 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const ArrowDownCircleOutline: React.FC<IconProps> = ({
+export const ArrowDownCircleOutline: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -770,11 +762,10 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const ArrowDownLeftOutline: React.FC<IconProps> = ({
+export const ArrowDownLeftOutline: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -786,11 +777,10 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const ArrowDownOnSquareStackOutline: React.FC<IconProps> = ({
+export const ArrowDownOnSquareStackOutline: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -802,11 +792,10 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const ArrowDownOnSquareOutline: React.FC<IconProps> = ({
+export const ArrowDownOnSquareOutline: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -818,11 +807,10 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const ArrowDownRightOutline: React.FC<IconProps> = ({
+export const ArrowDownRightOutline: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -834,11 +822,10 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const ArrowDownTrayOutline: React.FC<IconProps> = ({
+export const ArrowDownTrayOutline: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -850,27 +837,20 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const ArrowDownOutline: React.FC<IconProps> = ({
+export const ArrowDownOutline: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
-    <ArrowDownOutlineSvg
-      width={size}
-      height={size}
-      stroke={color}
-      {...props}
-    />
+    <ArrowDownOutlineSvg width={size} height={size} stroke={color} {...props} />
   );
 };
-                     
 
-                     export const ArrowLeftCircleOutline: React.FC<IconProps> = ({
+export const ArrowLeftCircleOutline: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -882,11 +862,10 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const ArrowLeftEndOnRectangleOutline: React.FC<IconProps> = ({
+export const ArrowLeftEndOnRectangleOutline: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -898,11 +877,10 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const ArrowLeftOnRectangleOutline: React.FC<IconProps> = ({
+export const ArrowLeftOnRectangleOutline: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -914,11 +892,10 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const ArrowLeftStartOnRectangleOutline: React.FC<IconProps> = ({
+export const ArrowLeftStartOnRectangleOutline: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -930,27 +907,20 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const ArrowLeftOutline: React.FC<IconProps> = ({
+export const ArrowLeftOutline: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
-    <ArrowLeftOutlineSvg
-      width={size}
-      height={size}
-      stroke={color}
-      {...props}
-    />
+    <ArrowLeftOutlineSvg width={size} height={size} stroke={color} {...props} />
   );
 };
-                     
 
-                     export const ArrowLongDownOutline: React.FC<IconProps> = ({
+export const ArrowLongDownOutline: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -962,11 +932,10 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const ArrowLongLeftOutline: React.FC<IconProps> = ({
+export const ArrowLongLeftOutline: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -978,11 +947,10 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const ArrowLongRightOutline: React.FC<IconProps> = ({
+export const ArrowLongRightOutline: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -994,11 +962,10 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const ArrowLongUpOutline: React.FC<IconProps> = ({
+export const ArrowLongUpOutline: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -1010,11 +977,10 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const ArrowPathRoundedSquareOutline: React.FC<IconProps> = ({
+export const ArrowPathRoundedSquareOutline: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -1026,27 +992,20 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const ArrowPathOutline: React.FC<IconProps> = ({
+export const ArrowPathOutline: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
-    <ArrowPathOutlineSvg
-      width={size}
-      height={size}
-      stroke={color}
-      {...props}
-    />
+    <ArrowPathOutlineSvg width={size} height={size} stroke={color} {...props} />
   );
 };
-                     
 
-                     export const ArrowRightCircleOutline: React.FC<IconProps> = ({
+export const ArrowRightCircleOutline: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -1058,11 +1017,10 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const ArrowRightEndOnRectangleOutline: React.FC<IconProps> = ({
+export const ArrowRightEndOnRectangleOutline: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -1074,11 +1032,10 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const ArrowRightOnRectangleOutline: React.FC<IconProps> = ({
+export const ArrowRightOnRectangleOutline: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -1090,11 +1047,10 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const ArrowRightStartOnRectangleOutline: React.FC<IconProps> = ({
+export const ArrowRightStartOnRectangleOutline: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -1106,11 +1062,10 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const ArrowRightOutline: React.FC<IconProps> = ({
+export const ArrowRightOutline: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -1122,11 +1077,10 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const ArrowSmallDownOutline: React.FC<IconProps> = ({
+export const ArrowSmallDownOutline: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -1138,11 +1092,10 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const ArrowSmallLeftOutline: React.FC<IconProps> = ({
+export const ArrowSmallLeftOutline: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -1154,11 +1107,10 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const ArrowSmallRightOutline: React.FC<IconProps> = ({
+export const ArrowSmallRightOutline: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -1170,11 +1122,10 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const ArrowSmallUpOutline: React.FC<IconProps> = ({
+export const ArrowSmallUpOutline: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -1186,11 +1137,10 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const ArrowTopRightOnSquareOutline: React.FC<IconProps> = ({
+export const ArrowTopRightOnSquareOutline: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -1202,11 +1152,10 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const ArrowTrendingDownOutline: React.FC<IconProps> = ({
+export const ArrowTrendingDownOutline: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -1218,11 +1167,10 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const ArrowTrendingUpOutline: React.FC<IconProps> = ({
+export const ArrowTrendingUpOutline: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -1234,11 +1182,10 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const ArrowTurnDownLeftOutline: React.FC<IconProps> = ({
+export const ArrowTurnDownLeftOutline: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -1250,11 +1197,10 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const ArrowTurnDownRightOutline: React.FC<IconProps> = ({
+export const ArrowTurnDownRightOutline: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -1266,11 +1212,10 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const ArrowTurnLeftDownOutline: React.FC<IconProps> = ({
+export const ArrowTurnLeftDownOutline: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -1282,11 +1227,10 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const ArrowTurnLeftUpOutline: React.FC<IconProps> = ({
+export const ArrowTurnLeftUpOutline: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -1298,11 +1242,10 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const ArrowTurnRightDownOutline: React.FC<IconProps> = ({
+export const ArrowTurnRightDownOutline: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -1314,11 +1257,10 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const ArrowTurnRightUpOutline: React.FC<IconProps> = ({
+export const ArrowTurnRightUpOutline: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -1330,11 +1272,10 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const ArrowTurnUpLeftOutline: React.FC<IconProps> = ({
+export const ArrowTurnUpLeftOutline: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -1346,11 +1287,10 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const ArrowTurnUpRightOutline: React.FC<IconProps> = ({
+export const ArrowTurnUpRightOutline: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -1362,11 +1302,10 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const ArrowUpCircleOutline: React.FC<IconProps> = ({
+export const ArrowUpCircleOutline: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -1378,11 +1317,10 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const ArrowUpLeftOutline: React.FC<IconProps> = ({
+export const ArrowUpLeftOutline: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -1394,11 +1332,10 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const ArrowUpOnSquareStackOutline: React.FC<IconProps> = ({
+export const ArrowUpOnSquareStackOutline: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -1410,11 +1347,10 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const ArrowUpOnSquareOutline: React.FC<IconProps> = ({
+export const ArrowUpOnSquareOutline: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -1426,11 +1362,10 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const ArrowUpRightOutline: React.FC<IconProps> = ({
+export const ArrowUpRightOutline: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -1442,11 +1377,10 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const ArrowUpTrayOutline: React.FC<IconProps> = ({
+export const ArrowUpTrayOutline: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -1458,27 +1392,20 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const ArrowUpOutline: React.FC<IconProps> = ({
+export const ArrowUpOutline: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
-    <ArrowUpOutlineSvg
-      width={size}
-      height={size}
-      stroke={color}
-      {...props}
-    />
+    <ArrowUpOutlineSvg width={size} height={size} stroke={color} {...props} />
   );
 };
-                     
 
-                     export const ArrowUturnDownOutline: React.FC<IconProps> = ({
+export const ArrowUturnDownOutline: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -1490,11 +1417,10 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const ArrowUturnLeftOutline: React.FC<IconProps> = ({
+export const ArrowUturnLeftOutline: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -1506,11 +1432,10 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const ArrowUturnRightOutline: React.FC<IconProps> = ({
+export const ArrowUturnRightOutline: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -1522,11 +1447,10 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const ArrowUturnUpOutline: React.FC<IconProps> = ({
+export const ArrowUturnUpOutline: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -1538,11 +1462,10 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const ArrowsPointingInOutline: React.FC<IconProps> = ({
+export const ArrowsPointingInOutline: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -1554,11 +1477,10 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const ArrowsPointingOutOutline: React.FC<IconProps> = ({
+export const ArrowsPointingOutOutline: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -1570,11 +1492,10 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const ArrowsRightLeftOutline: React.FC<IconProps> = ({
+export const ArrowsRightLeftOutline: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -1586,11 +1507,10 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const ArrowsUpDownOutline: React.FC<IconProps> = ({
+export const ArrowsUpDownOutline: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -1602,91 +1522,60 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const AtSymbolOutline: React.FC<IconProps> = ({
+export const AtSymbolOutline: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
-    <AtSymbolOutlineSvg
-      width={size}
-      height={size}
-      stroke={color}
-      {...props}
-    />
+    <AtSymbolOutlineSvg width={size} height={size} stroke={color} {...props} />
   );
 };
-                     
 
-                     export const BackspaceOutline: React.FC<IconProps> = ({
+export const BackspaceOutline: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
-    <BackspaceOutlineSvg
-      width={size}
-      height={size}
-      stroke={color}
-      {...props}
-    />
+    <BackspaceOutlineSvg width={size} height={size} stroke={color} {...props} />
   );
 };
-                     
 
-                     export const BackwardOutline: React.FC<IconProps> = ({
+export const BackwardOutline: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
-    <BackwardOutlineSvg
-      width={size}
-      height={size}
-      stroke={color}
-      {...props}
-    />
+    <BackwardOutlineSvg width={size} height={size} stroke={color} {...props} />
   );
 };
-                     
 
-                     export const BanknotesOutline: React.FC<IconProps> = ({
+export const BanknotesOutline: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
-    <BanknotesOutlineSvg
-      width={size}
-      height={size}
-      stroke={color}
-      {...props}
-    />
+    <BanknotesOutlineSvg width={size} height={size} stroke={color} {...props} />
   );
 };
-                     
 
-                     export const Bars2Outline: React.FC<IconProps> = ({
+export const Bars2Outline: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
-    <Bars2OutlineSvg
-      width={size}
-      height={size}
-      stroke={color}
-      {...props}
-    />
+    <Bars2OutlineSvg width={size} height={size} stroke={color} {...props} />
   );
 };
-                     
 
-                     export const Bars3BottomLeftOutline: React.FC<IconProps> = ({
+export const Bars3BottomLeftOutline: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -1698,11 +1587,10 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const Bars3BottomRightOutline: React.FC<IconProps> = ({
+export const Bars3BottomRightOutline: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -1714,11 +1602,10 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const Bars3CenterLeftOutline: React.FC<IconProps> = ({
+export const Bars3CenterLeftOutline: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -1730,43 +1617,30 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const Bars3Outline: React.FC<IconProps> = ({
+export const Bars3Outline: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
-    <Bars3OutlineSvg
-      width={size}
-      height={size}
-      stroke={color}
-      {...props}
-    />
+    <Bars3OutlineSvg width={size} height={size} stroke={color} {...props} />
   );
 };
-                     
 
-                     export const Bars4Outline: React.FC<IconProps> = ({
+export const Bars4Outline: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
-    <Bars4OutlineSvg
-      width={size}
-      height={size}
-      stroke={color}
-      {...props}
-    />
+    <Bars4OutlineSvg width={size} height={size} stroke={color} {...props} />
   );
 };
-                     
 
-                     export const BarsArrowDownOutline: React.FC<IconProps> = ({
+export const BarsArrowDownOutline: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -1778,11 +1652,10 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const BarsArrowUpOutline: React.FC<IconProps> = ({
+export const BarsArrowUpOutline: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -1794,27 +1667,20 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const Battery0Outline: React.FC<IconProps> = ({
+export const Battery0Outline: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
-    <Battery0OutlineSvg
-      width={size}
-      height={size}
-      stroke={color}
-      {...props}
-    />
+    <Battery0OutlineSvg width={size} height={size} stroke={color} {...props} />
   );
 };
-                     
 
-                     export const Battery100Outline: React.FC<IconProps> = ({
+export const Battery100Outline: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -1826,75 +1692,50 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const Battery50Outline: React.FC<IconProps> = ({
+export const Battery50Outline: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
-    <Battery50OutlineSvg
-      width={size}
-      height={size}
-      stroke={color}
-      {...props}
-    />
+    <Battery50OutlineSvg width={size} height={size} stroke={color} {...props} />
   );
 };
-                     
 
-                     export const BeakerOutline: React.FC<IconProps> = ({
+export const BeakerOutline: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
-    <BeakerOutlineSvg
-      width={size}
-      height={size}
-      stroke={color}
-      {...props}
-    />
+    <BeakerOutlineSvg width={size} height={size} stroke={color} {...props} />
   );
 };
-                     
 
-                     export const BellAlertOutline: React.FC<IconProps> = ({
+export const BellAlertOutline: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
-    <BellAlertOutlineSvg
-      width={size}
-      height={size}
-      stroke={color}
-      {...props}
-    />
+    <BellAlertOutlineSvg width={size} height={size} stroke={color} {...props} />
   );
 };
-                     
 
-                     export const BellSlashOutline: React.FC<IconProps> = ({
+export const BellSlashOutline: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
-    <BellSlashOutlineSvg
-      width={size}
-      height={size}
-      stroke={color}
-      {...props}
-    />
+    <BellSlashOutlineSvg width={size} height={size} stroke={color} {...props} />
   );
 };
-                     
 
-                     export const BellSnoozeOutline: React.FC<IconProps> = ({
+export const BellSnoozeOutline: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -1906,91 +1747,60 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const BellOutline: React.FC<IconProps> = ({
+export const BellOutline: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
-    <BellOutlineSvg
-      width={size}
-      height={size}
-      stroke={color}
-      {...props}
-    />
+    <BellOutlineSvg width={size} height={size} stroke={color} {...props} />
   );
 };
-                     
 
-                     export const BoldOutline: React.FC<IconProps> = ({
+export const BoldOutline: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
-    <BoldOutlineSvg
-      width={size}
-      height={size}
-      stroke={color}
-      {...props}
-    />
+    <BoldOutlineSvg width={size} height={size} stroke={color} {...props} />
   );
 };
-                     
 
-                     export const BoltSlashOutline: React.FC<IconProps> = ({
+export const BoltSlashOutline: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
-    <BoltSlashOutlineSvg
-      width={size}
-      height={size}
-      stroke={color}
-      {...props}
-    />
+    <BoltSlashOutlineSvg width={size} height={size} stroke={color} {...props} />
   );
 };
-                     
 
-                     export const BoltOutline: React.FC<IconProps> = ({
+export const BoltOutline: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
-    <BoltOutlineSvg
-      width={size}
-      height={size}
-      stroke={color}
-      {...props}
-    />
+    <BoltOutlineSvg width={size} height={size} stroke={color} {...props} />
   );
 };
-                     
 
-                     export const BookOpenOutline: React.FC<IconProps> = ({
+export const BookOpenOutline: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
-    <BookOpenOutlineSvg
-      width={size}
-      height={size}
-      stroke={color}
-      {...props}
-    />
+    <BookOpenOutlineSvg width={size} height={size} stroke={color} {...props} />
   );
 };
-                     
 
-                     export const BookmarkSlashOutline: React.FC<IconProps> = ({
+export const BookmarkSlashOutline: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -2002,11 +1812,10 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const BookmarkSquareOutline: React.FC<IconProps> = ({
+export const BookmarkSquareOutline: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -2018,59 +1827,40 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const BookmarkOutline: React.FC<IconProps> = ({
+export const BookmarkOutline: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
-    <BookmarkOutlineSvg
-      width={size}
-      height={size}
-      stroke={color}
-      {...props}
-    />
+    <BookmarkOutlineSvg width={size} height={size} stroke={color} {...props} />
   );
 };
-                     
 
-                     export const BriefcaseOutline: React.FC<IconProps> = ({
+export const BriefcaseOutline: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
-    <BriefcaseOutlineSvg
-      width={size}
-      height={size}
-      stroke={color}
-      {...props}
-    />
+    <BriefcaseOutlineSvg width={size} height={size} stroke={color} {...props} />
   );
 };
-                     
 
-                     export const BugAntOutline: React.FC<IconProps> = ({
+export const BugAntOutline: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
-    <BugAntOutlineSvg
-      width={size}
-      height={size}
-      stroke={color}
-      {...props}
-    />
+    <BugAntOutlineSvg width={size} height={size} stroke={color} {...props} />
   );
 };
-                     
 
-                     export const BuildingLibraryOutline: React.FC<IconProps> = ({
+export const BuildingLibraryOutline: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -2082,11 +1872,10 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const BuildingOffice2Outline: React.FC<IconProps> = ({
+export const BuildingOffice2Outline: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -2098,11 +1887,10 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const BuildingOfficeOutline: React.FC<IconProps> = ({
+export const BuildingOfficeOutline: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -2114,11 +1902,10 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const BuildingStorefrontOutline: React.FC<IconProps> = ({
+export const BuildingStorefrontOutline: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -2130,27 +1917,20 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const CakeOutline: React.FC<IconProps> = ({
+export const CakeOutline: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
-    <CakeOutlineSvg
-      width={size}
-      height={size}
-      stroke={color}
-      {...props}
-    />
+    <CakeOutlineSvg width={size} height={size} stroke={color} {...props} />
   );
 };
-                     
 
-                     export const CalculatorOutline: React.FC<IconProps> = ({
+export const CalculatorOutline: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -2162,11 +1942,10 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const CalendarDateRangeOutline: React.FC<IconProps> = ({
+export const CalendarDateRangeOutline: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -2178,11 +1957,10 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const CalendarDaysOutline: React.FC<IconProps> = ({
+export const CalendarDaysOutline: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -2194,43 +1972,30 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const CalendarOutline: React.FC<IconProps> = ({
+export const CalendarOutline: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
-    <CalendarOutlineSvg
-      width={size}
-      height={size}
-      stroke={color}
-      {...props}
-    />
+    <CalendarOutlineSvg width={size} height={size} stroke={color} {...props} />
   );
 };
-                     
 
-                     export const CameraOutline: React.FC<IconProps> = ({
+export const CameraOutline: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
-    <CameraOutlineSvg
-      width={size}
-      height={size}
-      stroke={color}
-      {...props}
-    />
+    <CameraOutlineSvg width={size} height={size} stroke={color} {...props} />
   );
 };
-                     
 
-                     export const ChartBarSquareOutline: React.FC<IconProps> = ({
+export const ChartBarSquareOutline: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -2242,43 +2007,30 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const ChartBarOutline: React.FC<IconProps> = ({
+export const ChartBarOutline: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
-    <ChartBarOutlineSvg
-      width={size}
-      height={size}
-      stroke={color}
-      {...props}
-    />
+    <ChartBarOutlineSvg width={size} height={size} stroke={color} {...props} />
   );
 };
-                     
 
-                     export const ChartPieOutline: React.FC<IconProps> = ({
+export const ChartPieOutline: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
-    <ChartPieOutlineSvg
-      width={size}
-      height={size}
-      stroke={color}
-      {...props}
-    />
+    <ChartPieOutlineSvg width={size} height={size} stroke={color} {...props} />
   );
 };
-                     
 
-                     export const ChatBubbleBottomCenterTextOutline: React.FC<IconProps> = ({
+export const ChatBubbleBottomCenterTextOutline: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -2290,11 +2042,10 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const ChatBubbleBottomCenterOutline: React.FC<IconProps> = ({
+export const ChatBubbleBottomCenterOutline: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -2306,11 +2057,10 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const ChatBubbleLeftEllipsisOutline: React.FC<IconProps> = ({
+export const ChatBubbleLeftEllipsisOutline: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -2322,11 +2072,10 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const ChatBubbleLeftRightOutline: React.FC<IconProps> = ({
+export const ChatBubbleLeftRightOutline: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -2338,11 +2087,10 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const ChatBubbleLeftOutline: React.FC<IconProps> = ({
+export const ChatBubbleLeftOutline: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -2354,11 +2102,10 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const ChatBubbleOvalLeftEllipsisOutline: React.FC<IconProps> = ({
+export const ChatBubbleOvalLeftEllipsisOutline: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -2370,11 +2117,10 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const ChatBubbleOvalLeftOutline: React.FC<IconProps> = ({
+export const ChatBubbleOvalLeftOutline: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -2386,11 +2132,10 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const CheckBadgeOutline: React.FC<IconProps> = ({
+export const CheckBadgeOutline: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -2402,11 +2147,10 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const CheckCircleOutline: React.FC<IconProps> = ({
+export const CheckCircleOutline: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -2418,27 +2162,20 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const CheckOutline: React.FC<IconProps> = ({
+export const CheckOutline: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
-    <CheckOutlineSvg
-      width={size}
-      height={size}
-      stroke={color}
-      {...props}
-    />
+    <CheckOutlineSvg width={size} height={size} stroke={color} {...props} />
   );
 };
-                     
 
-                     export const ChevronDoubleDownOutline: React.FC<IconProps> = ({
+export const ChevronDoubleDownOutline: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -2450,11 +2187,10 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const ChevronDoubleLeftOutline: React.FC<IconProps> = ({
+export const ChevronDoubleLeftOutline: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -2466,11 +2202,10 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const ChevronDoubleRightOutline: React.FC<IconProps> = ({
+export const ChevronDoubleRightOutline: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -2482,11 +2217,10 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const ChevronDoubleUpOutline: React.FC<IconProps> = ({
+export const ChevronDoubleUpOutline: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -2498,11 +2232,10 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const ChevronDownOutline: React.FC<IconProps> = ({
+export const ChevronDownOutline: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -2514,11 +2247,10 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const ChevronLeftOutline: React.FC<IconProps> = ({
+export const ChevronLeftOutline: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -2530,11 +2262,10 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const ChevronRightOutline: React.FC<IconProps> = ({
+export const ChevronRightOutline: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -2546,11 +2277,10 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const ChevronUpDownOutline: React.FC<IconProps> = ({
+export const ChevronUpDownOutline: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -2562,27 +2292,20 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const ChevronUpOutline: React.FC<IconProps> = ({
+export const ChevronUpOutline: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
-    <ChevronUpOutlineSvg
-      width={size}
-      height={size}
-      stroke={color}
-      {...props}
-    />
+    <ChevronUpOutlineSvg width={size} height={size} stroke={color} {...props} />
   );
 };
-                     
 
-                     export const CircleStackOutline: React.FC<IconProps> = ({
+export const CircleStackOutline: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -2594,11 +2317,10 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const ClipboardDocumentCheckOutline: React.FC<IconProps> = ({
+export const ClipboardDocumentCheckOutline: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -2610,11 +2332,10 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const ClipboardDocumentListOutline: React.FC<IconProps> = ({
+export const ClipboardDocumentListOutline: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -2626,11 +2347,10 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const ClipboardDocumentOutline: React.FC<IconProps> = ({
+export const ClipboardDocumentOutline: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -2642,43 +2362,30 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const ClipboardOutline: React.FC<IconProps> = ({
+export const ClipboardOutline: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
-    <ClipboardOutlineSvg
-      width={size}
-      height={size}
-      stroke={color}
-      {...props}
-    />
+    <ClipboardOutlineSvg width={size} height={size} stroke={color} {...props} />
   );
 };
-                     
 
-                     export const ClockOutline: React.FC<IconProps> = ({
+export const ClockOutline: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
-    <ClockOutlineSvg
-      width={size}
-      height={size}
-      stroke={color}
-      {...props}
-    />
+    <ClockOutlineSvg width={size} height={size} stroke={color} {...props} />
   );
 };
-                     
 
-                     export const CloudArrowDownOutline: React.FC<IconProps> = ({
+export const CloudArrowDownOutline: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -2690,11 +2397,10 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const CloudArrowUpOutline: React.FC<IconProps> = ({
+export const CloudArrowUpOutline: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -2706,27 +2412,20 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const CloudOutline: React.FC<IconProps> = ({
+export const CloudOutline: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
-    <CloudOutlineSvg
-      width={size}
-      height={size}
-      stroke={color}
-      {...props}
-    />
+    <CloudOutlineSvg width={size} height={size} stroke={color} {...props} />
   );
 };
-                     
 
-                     export const CodeBracketSquareOutline: React.FC<IconProps> = ({
+export const CodeBracketSquareOutline: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -2738,11 +2437,10 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const CodeBracketOutline: React.FC<IconProps> = ({
+export const CodeBracketOutline: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -2754,59 +2452,38 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const Cog6ToothOutline: React.FC<IconProps> = ({
+export const Cog6ToothOutline: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
-    <Cog6ToothOutlineSvg
-      width={size}
-      height={size}
-      stroke={color}
-      {...props}
-    />
+    <Cog6ToothOutlineSvg width={size} height={size} stroke={color} {...props} />
   );
 };
-                     
 
-                     export const Cog8ToothOutline: React.FC<IconProps> = ({
+export const Cog8ToothOutline: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
-    <Cog8ToothOutlineSvg
-      width={size}
-      height={size}
-      stroke={color}
-      {...props}
-    />
+    <Cog8ToothOutlineSvg width={size} height={size} stroke={color} {...props} />
   );
 };
-                     
 
-                     export const CogOutline: React.FC<IconProps> = ({
+export const CogOutline: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
-  return (
-    <CogOutlineSvg
-      width={size}
-      height={size}
-      stroke={color}
-      {...props}
-    />
-  );
+  return <CogOutlineSvg width={size} height={size} stroke={color} {...props} />;
 };
-                     
 
-                     export const CommandLineOutline: React.FC<IconProps> = ({
+export const CommandLineOutline: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -2818,11 +2495,10 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const ComputerDesktopOutline: React.FC<IconProps> = ({
+export const ComputerDesktopOutline: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -2834,27 +2510,20 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const CpuChipOutline: React.FC<IconProps> = ({
+export const CpuChipOutline: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
-    <CpuChipOutlineSvg
-      width={size}
-      height={size}
-      stroke={color}
-      {...props}
-    />
+    <CpuChipOutlineSvg width={size} height={size} stroke={color} {...props} />
   );
 };
-                     
 
-                     export const CreditCardOutline: React.FC<IconProps> = ({
+export const CreditCardOutline: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -2866,11 +2535,10 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const CubeTransparentOutline: React.FC<IconProps> = ({
+export const CubeTransparentOutline: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -2882,27 +2550,20 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const CubeOutline: React.FC<IconProps> = ({
+export const CubeOutline: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
-    <CubeOutlineSvg
-      width={size}
-      height={size}
-      stroke={color}
-      {...props}
-    />
+    <CubeOutlineSvg width={size} height={size} stroke={color} {...props} />
   );
 };
-                     
 
-                     export const CurrencyBangladeshiOutline: React.FC<IconProps> = ({
+export const CurrencyBangladeshiOutline: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -2914,11 +2575,10 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const CurrencyDollarOutline: React.FC<IconProps> = ({
+export const CurrencyDollarOutline: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -2930,11 +2590,10 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const CurrencyEuroOutline: React.FC<IconProps> = ({
+export const CurrencyEuroOutline: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -2946,11 +2605,10 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const CurrencyPoundOutline: React.FC<IconProps> = ({
+export const CurrencyPoundOutline: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -2962,11 +2620,10 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const CurrencyRupeeOutline: React.FC<IconProps> = ({
+export const CurrencyRupeeOutline: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -2978,11 +2635,10 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const CurrencyYenOutline: React.FC<IconProps> = ({
+export const CurrencyYenOutline: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -2994,11 +2650,10 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const CursorArrowRaysOutline: React.FC<IconProps> = ({
+export const CursorArrowRaysOutline: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -3010,11 +2665,10 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const CursorArrowRippleOutline: React.FC<IconProps> = ({
+export const CursorArrowRippleOutline: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -3026,11 +2680,10 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const DevicePhoneMobileOutline: React.FC<IconProps> = ({
+export const DevicePhoneMobileOutline: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -3042,11 +2695,10 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const DeviceTabletOutline: React.FC<IconProps> = ({
+export const DeviceTabletOutline: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -3058,27 +2710,20 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const DivideOutline: React.FC<IconProps> = ({
+export const DivideOutline: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
-    <DivideOutlineSvg
-      width={size}
-      height={size}
-      stroke={color}
-      {...props}
-    />
+    <DivideOutlineSvg width={size} height={size} stroke={color} {...props} />
   );
 };
-                     
 
-                     export const DocumentArrowDownOutline: React.FC<IconProps> = ({
+export const DocumentArrowDownOutline: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -3090,11 +2735,10 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const DocumentArrowUpOutline: React.FC<IconProps> = ({
+export const DocumentArrowUpOutline: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -3106,11 +2750,10 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const DocumentChartBarOutline: React.FC<IconProps> = ({
+export const DocumentChartBarOutline: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -3122,11 +2765,10 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const DocumentCheckOutline: React.FC<IconProps> = ({
+export const DocumentCheckOutline: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -3138,11 +2780,10 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const DocumentCurrencyBangladeshiOutline: React.FC<IconProps> = ({
+export const DocumentCurrencyBangladeshiOutline: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -3154,11 +2795,10 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const DocumentCurrencyDollarOutline: React.FC<IconProps> = ({
+export const DocumentCurrencyDollarOutline: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -3170,11 +2810,10 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const DocumentCurrencyEuroOutline: React.FC<IconProps> = ({
+export const DocumentCurrencyEuroOutline: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -3186,11 +2825,10 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const DocumentCurrencyPoundOutline: React.FC<IconProps> = ({
+export const DocumentCurrencyPoundOutline: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -3202,11 +2840,10 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const DocumentCurrencyRupeeOutline: React.FC<IconProps> = ({
+export const DocumentCurrencyRupeeOutline: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -3218,11 +2855,10 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const DocumentCurrencyYenOutline: React.FC<IconProps> = ({
+export const DocumentCurrencyYenOutline: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -3234,11 +2870,10 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const DocumentDuplicateOutline: React.FC<IconProps> = ({
+export const DocumentDuplicateOutline: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -3250,11 +2885,10 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const DocumentMagnifyingGlassOutline: React.FC<IconProps> = ({
+export const DocumentMagnifyingGlassOutline: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -3266,11 +2900,10 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const DocumentMinusOutline: React.FC<IconProps> = ({
+export const DocumentMinusOutline: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -3282,11 +2915,10 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const DocumentPlusOutline: React.FC<IconProps> = ({
+export const DocumentPlusOutline: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -3298,11 +2930,10 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const DocumentTextOutline: React.FC<IconProps> = ({
+export const DocumentTextOutline: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -3314,27 +2945,20 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const DocumentOutline: React.FC<IconProps> = ({
+export const DocumentOutline: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
-    <DocumentOutlineSvg
-      width={size}
-      height={size}
-      stroke={color}
-      {...props}
-    />
+    <DocumentOutlineSvg width={size} height={size} stroke={color} {...props} />
   );
 };
-                     
 
-                     export const EllipsisHorizontalCircleOutline: React.FC<IconProps> = ({
+export const EllipsisHorizontalCircleOutline: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -3346,11 +2970,10 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const EllipsisHorizontalOutline: React.FC<IconProps> = ({
+export const EllipsisHorizontalOutline: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -3362,11 +2985,10 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const EllipsisVerticalOutline: React.FC<IconProps> = ({
+export const EllipsisVerticalOutline: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -3378,11 +3000,10 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const EnvelopeOpenOutline: React.FC<IconProps> = ({
+export const EnvelopeOpenOutline: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -3394,43 +3015,30 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const EnvelopeOutline: React.FC<IconProps> = ({
+export const EnvelopeOutline: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
-    <EnvelopeOutlineSvg
-      width={size}
-      height={size}
-      stroke={color}
-      {...props}
-    />
+    <EnvelopeOutlineSvg width={size} height={size} stroke={color} {...props} />
   );
 };
-                     
 
-                     export const EqualsOutline: React.FC<IconProps> = ({
+export const EqualsOutline: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
-    <EqualsOutlineSvg
-      width={size}
-      height={size}
-      stroke={color}
-      {...props}
-    />
+    <EqualsOutlineSvg width={size} height={size} stroke={color} {...props} />
   );
 };
-                     
 
-                     export const ExclamationCircleOutline: React.FC<IconProps> = ({
+export const ExclamationCircleOutline: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -3442,11 +3050,10 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const ExclamationTriangleOutline: React.FC<IconProps> = ({
+export const ExclamationTriangleOutline: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -3458,11 +3065,10 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const EyeDropperOutline: React.FC<IconProps> = ({
+export const EyeDropperOutline: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -3474,91 +3080,58 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const EyeSlashOutline: React.FC<IconProps> = ({
+export const EyeSlashOutline: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
-    <EyeSlashOutlineSvg
-      width={size}
-      height={size}
-      stroke={color}
-      {...props}
-    />
+    <EyeSlashOutlineSvg width={size} height={size} stroke={color} {...props} />
   );
 };
-                     
 
-                     export const EyeOutline: React.FC<IconProps> = ({
+export const EyeOutline: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
+  ...props
+}) => {
+  return <EyeOutlineSvg width={size} height={size} stroke={color} {...props} />;
+};
+
+export const FaceFrownOutline: React.FC<IconProps> = ({
+  size = 24,
+  color = "black",
   ...props
 }) => {
   return (
-    <EyeOutlineSvg
-      width={size}
-      height={size}
-      stroke={color}
-      {...props}
-    />
+    <FaceFrownOutlineSvg width={size} height={size} stroke={color} {...props} />
   );
 };
-                     
 
-                     export const FaceFrownOutline: React.FC<IconProps> = ({
+export const FaceSmileOutline: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
-    <FaceFrownOutlineSvg
-      width={size}
-      height={size}
-      stroke={color}
-      {...props}
-    />
+    <FaceSmileOutlineSvg width={size} height={size} stroke={color} {...props} />
   );
 };
-                     
 
-                     export const FaceSmileOutline: React.FC<IconProps> = ({
+export const FilmOutline: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
-    <FaceSmileOutlineSvg
-      width={size}
-      height={size}
-      stroke={color}
-      {...props}
-    />
+    <FilmOutlineSvg width={size} height={size} stroke={color} {...props} />
   );
 };
-                     
 
-                     export const FilmOutline: React.FC<IconProps> = ({
+export const FingerPrintOutline: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
-  ...props
-}) => {
-  return (
-    <FilmOutlineSvg
-      width={size}
-      height={size}
-      stroke={color}
-      {...props}
-    />
-  );
-};
-                     
-
-                     export const FingerPrintOutline: React.FC<IconProps> = ({
-  size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -3570,43 +3143,30 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const FireOutline: React.FC<IconProps> = ({
+export const FireOutline: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
-    <FireOutlineSvg
-      width={size}
-      height={size}
-      stroke={color}
-      {...props}
-    />
+    <FireOutlineSvg width={size} height={size} stroke={color} {...props} />
   );
 };
-                     
 
-                     export const FlagOutline: React.FC<IconProps> = ({
+export const FlagOutline: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
-    <FlagOutlineSvg
-      width={size}
-      height={size}
-      stroke={color}
-      {...props}
-    />
+    <FlagOutlineSvg width={size} height={size} stroke={color} {...props} />
   );
 };
-                     
 
-                     export const FolderArrowDownOutline: React.FC<IconProps> = ({
+export const FolderArrowDownOutline: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -3618,11 +3178,10 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const FolderMinusOutline: React.FC<IconProps> = ({
+export const FolderMinusOutline: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -3634,11 +3193,10 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const FolderOpenOutline: React.FC<IconProps> = ({
+export const FolderOpenOutline: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -3650,11 +3208,10 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const FolderPlusOutline: React.FC<IconProps> = ({
+export const FolderPlusOutline: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -3666,123 +3223,78 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const FolderOutline: React.FC<IconProps> = ({
+export const FolderOutline: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
-    <FolderOutlineSvg
-      width={size}
-      height={size}
-      stroke={color}
-      {...props}
-    />
+    <FolderOutlineSvg width={size} height={size} stroke={color} {...props} />
   );
 };
-                     
 
-                     export const ForwardOutline: React.FC<IconProps> = ({
+export const ForwardOutline: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
-    <ForwardOutlineSvg
-      width={size}
-      height={size}
-      stroke={color}
-      {...props}
-    />
+    <ForwardOutlineSvg width={size} height={size} stroke={color} {...props} />
   );
 };
-                     
 
-                     export const FunnelOutline: React.FC<IconProps> = ({
+export const FunnelOutline: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
-    <FunnelOutlineSvg
-      width={size}
-      height={size}
-      stroke={color}
-      {...props}
-    />
+    <FunnelOutlineSvg width={size} height={size} stroke={color} {...props} />
   );
 };
-                     
 
-                     export const GifOutline: React.FC<IconProps> = ({
+export const GifOutline: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
+  ...props
+}) => {
+  return <GifOutlineSvg width={size} height={size} stroke={color} {...props} />;
+};
+
+export const GiftTopOutline: React.FC<IconProps> = ({
+  size = 24,
+  color = "black",
   ...props
 }) => {
   return (
-    <GifOutlineSvg
-      width={size}
-      height={size}
-      stroke={color}
-      {...props}
-    />
+    <GiftTopOutlineSvg width={size} height={size} stroke={color} {...props} />
   );
 };
-                     
 
-                     export const GiftTopOutline: React.FC<IconProps> = ({
+export const GiftOutline: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
-    <GiftTopOutlineSvg
-      width={size}
-      height={size}
-      stroke={color}
-      {...props}
-    />
+    <GiftOutlineSvg width={size} height={size} stroke={color} {...props} />
   );
 };
-                     
 
-                     export const GiftOutline: React.FC<IconProps> = ({
+export const GlobeAltOutline: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
-    <GiftOutlineSvg
-      width={size}
-      height={size}
-      stroke={color}
-      {...props}
-    />
+    <GlobeAltOutlineSvg width={size} height={size} stroke={color} {...props} />
   );
 };
-                     
 
-                     export const GlobeAltOutline: React.FC<IconProps> = ({
+export const GlobeAmericasOutline: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
-  ...props
-}) => {
-  return (
-    <GlobeAltOutlineSvg
-      width={size}
-      height={size}
-      stroke={color}
-      {...props}
-    />
-  );
-};
-                     
-
-                     export const GlobeAmericasOutline: React.FC<IconProps> = ({
-  size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -3794,11 +3306,10 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const GlobeAsiaAustraliaOutline: React.FC<IconProps> = ({
+export const GlobeAsiaAustraliaOutline: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -3810,11 +3321,10 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const GlobeEuropeAfricaOutline: React.FC<IconProps> = ({
+export const GlobeEuropeAfricaOutline: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -3826,59 +3336,34 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const H1Outline: React.FC<IconProps> = ({
+export const H1Outline: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
-  return (
-    <H1OutlineSvg
-      width={size}
-      height={size}
-      stroke={color}
-      {...props}
-    />
-  );
+  return <H1OutlineSvg width={size} height={size} stroke={color} {...props} />;
 };
-                     
 
-                     export const H2Outline: React.FC<IconProps> = ({
+export const H2Outline: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
-  return (
-    <H2OutlineSvg
-      width={size}
-      height={size}
-      stroke={color}
-      {...props}
-    />
-  );
+  return <H2OutlineSvg width={size} height={size} stroke={color} {...props} />;
 };
-                     
 
-                     export const H3Outline: React.FC<IconProps> = ({
+export const H3Outline: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
-  return (
-    <H3OutlineSvg
-      width={size}
-      height={size}
-      stroke={color}
-      {...props}
-    />
-  );
+  return <H3OutlineSvg width={size} height={size} stroke={color} {...props} />;
 };
-                     
 
-                     export const HandRaisedOutline: React.FC<IconProps> = ({
+export const HandRaisedOutline: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -3890,11 +3375,10 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const HandThumbDownOutline: React.FC<IconProps> = ({
+export const HandThumbDownOutline: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -3906,11 +3390,10 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const HandThumbUpOutline: React.FC<IconProps> = ({
+export const HandThumbUpOutline: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -3922,43 +3405,30 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const HashtagOutline: React.FC<IconProps> = ({
+export const HashtagOutline: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
-    <HashtagOutlineSvg
-      width={size}
-      height={size}
-      stroke={color}
-      {...props}
-    />
+    <HashtagOutlineSvg width={size} height={size} stroke={color} {...props} />
   );
 };
-                     
 
-                     export const HeartOutline: React.FC<IconProps> = ({
+export const HeartOutline: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
-    <HeartOutlineSvg
-      width={size}
-      height={size}
-      stroke={color}
-      {...props}
-    />
+    <HeartOutlineSvg width={size} height={size} stroke={color} {...props} />
   );
 };
-                     
 
-                     export const HomeModernOutline: React.FC<IconProps> = ({
+export const HomeModernOutline: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -3970,27 +3440,20 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const HomeOutline: React.FC<IconProps> = ({
+export const HomeOutline: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
-    <HomeOutlineSvg
-      width={size}
-      height={size}
-      stroke={color}
-      {...props}
-    />
+    <HomeOutlineSvg width={size} height={size} stroke={color} {...props} />
   );
 };
-                     
 
-                     export const IdentificationOutline: React.FC<IconProps> = ({
+export const IdentificationOutline: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -4002,11 +3465,10 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const InboxArrowDownOutline: React.FC<IconProps> = ({
+export const InboxArrowDownOutline: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -4018,11 +3480,10 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const InboxStackOutline: React.FC<IconProps> = ({
+export const InboxStackOutline: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -4034,27 +3495,20 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const InboxOutline: React.FC<IconProps> = ({
+export const InboxOutline: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
-    <InboxOutlineSvg
-      width={size}
-      height={size}
-      stroke={color}
-      {...props}
-    />
+    <InboxOutlineSvg width={size} height={size} stroke={color} {...props} />
   );
 };
-                     
 
-                     export const InformationCircleOutline: React.FC<IconProps> = ({
+export const InformationCircleOutline: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -4066,123 +3520,78 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const ItalicOutline: React.FC<IconProps> = ({
+export const ItalicOutline: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
-    <ItalicOutlineSvg
-      width={size}
-      height={size}
-      stroke={color}
-      {...props}
-    />
+    <ItalicOutlineSvg width={size} height={size} stroke={color} {...props} />
   );
 };
-                     
 
-                     export const KeyOutline: React.FC<IconProps> = ({
+export const KeyOutline: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
+  ...props
+}) => {
+  return <KeyOutlineSvg width={size} height={size} stroke={color} {...props} />;
+};
+
+export const LanguageOutline: React.FC<IconProps> = ({
+  size = 24,
+  color = "black",
   ...props
 }) => {
   return (
-    <KeyOutlineSvg
-      width={size}
-      height={size}
-      stroke={color}
-      {...props}
-    />
+    <LanguageOutlineSvg width={size} height={size} stroke={color} {...props} />
   );
 };
-                     
 
-                     export const LanguageOutline: React.FC<IconProps> = ({
+export const LifebuoyOutline: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
-    <LanguageOutlineSvg
-      width={size}
-      height={size}
-      stroke={color}
-      {...props}
-    />
+    <LifebuoyOutlineSvg width={size} height={size} stroke={color} {...props} />
   );
 };
-                     
 
-                     export const LifebuoyOutline: React.FC<IconProps> = ({
+export const LightBulbOutline: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
-    <LifebuoyOutlineSvg
-      width={size}
-      height={size}
-      stroke={color}
-      {...props}
-    />
+    <LightBulbOutlineSvg width={size} height={size} stroke={color} {...props} />
   );
 };
-                     
 
-                     export const LightBulbOutline: React.FC<IconProps> = ({
+export const LinkSlashOutline: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
-    <LightBulbOutlineSvg
-      width={size}
-      height={size}
-      stroke={color}
-      {...props}
-    />
+    <LinkSlashOutlineSvg width={size} height={size} stroke={color} {...props} />
   );
 };
-                     
 
-                     export const LinkSlashOutline: React.FC<IconProps> = ({
+export const LinkOutline: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
-    <LinkSlashOutlineSvg
-      width={size}
-      height={size}
-      stroke={color}
-      {...props}
-    />
+    <LinkOutlineSvg width={size} height={size} stroke={color} {...props} />
   );
 };
-                     
 
-                     export const LinkOutline: React.FC<IconProps> = ({
+export const ListBulletOutline: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
-  ...props
-}) => {
-  return (
-    <LinkOutlineSvg
-      width={size}
-      height={size}
-      stroke={color}
-      {...props}
-    />
-  );
-};
-                     
-
-                     export const ListBulletOutline: React.FC<IconProps> = ({
-  size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -4194,11 +3603,10 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const LockClosedOutline: React.FC<IconProps> = ({
+export const LockClosedOutline: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -4210,27 +3618,20 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const LockOpenOutline: React.FC<IconProps> = ({
+export const LockOpenOutline: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
-    <LockOpenOutlineSvg
-      width={size}
-      height={size}
-      stroke={color}
-      {...props}
-    />
+    <LockOpenOutlineSvg width={size} height={size} stroke={color} {...props} />
   );
 };
-                     
 
-                     export const MagnifyingGlassCircleOutline: React.FC<IconProps> = ({
+export const MagnifyingGlassCircleOutline: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -4242,11 +3643,10 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const MagnifyingGlassMinusOutline: React.FC<IconProps> = ({
+export const MagnifyingGlassMinusOutline: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -4258,11 +3658,10 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const MagnifyingGlassPlusOutline: React.FC<IconProps> = ({
+export const MagnifyingGlassPlusOutline: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -4274,11 +3673,10 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const MagnifyingGlassOutline: React.FC<IconProps> = ({
+export const MagnifyingGlassOutline: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -4290,59 +3688,38 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const MapPinOutline: React.FC<IconProps> = ({
+export const MapPinOutline: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
-    <MapPinOutlineSvg
-      width={size}
-      height={size}
-      stroke={color}
-      {...props}
-    />
+    <MapPinOutlineSvg width={size} height={size} stroke={color} {...props} />
   );
 };
-                     
 
-                     export const MapOutline: React.FC<IconProps> = ({
+export const MapOutline: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
+  ...props
+}) => {
+  return <MapOutlineSvg width={size} height={size} stroke={color} {...props} />;
+};
+
+export const MegaphoneOutline: React.FC<IconProps> = ({
+  size = 24,
+  color = "black",
   ...props
 }) => {
   return (
-    <MapOutlineSvg
-      width={size}
-      height={size}
-      stroke={color}
-      {...props}
-    />
+    <MegaphoneOutlineSvg width={size} height={size} stroke={color} {...props} />
   );
 };
-                     
 
-                     export const MegaphoneOutline: React.FC<IconProps> = ({
+export const MicrophoneOutline: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
-  ...props
-}) => {
-  return (
-    <MegaphoneOutlineSvg
-      width={size}
-      height={size}
-      stroke={color}
-      {...props}
-    />
-  );
-};
-                     
-
-                     export const MicrophoneOutline: React.FC<IconProps> = ({
-  size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -4354,11 +3731,10 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const MinusCircleOutline: React.FC<IconProps> = ({
+export const MinusCircleOutline: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -4370,11 +3746,10 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const MinusSmallOutline: React.FC<IconProps> = ({
+export const MinusSmallOutline: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -4386,43 +3761,30 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const MinusOutline: React.FC<IconProps> = ({
+export const MinusOutline: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
-    <MinusOutlineSvg
-      width={size}
-      height={size}
-      stroke={color}
-      {...props}
-    />
+    <MinusOutlineSvg width={size} height={size} stroke={color} {...props} />
   );
 };
-                     
 
-                     export const MoonOutline: React.FC<IconProps> = ({
+export const MoonOutline: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
-    <MoonOutlineSvg
-      width={size}
-      height={size}
-      stroke={color}
-      {...props}
-    />
+    <MoonOutlineSvg width={size} height={size} stroke={color} {...props} />
   );
 };
-                     
 
-                     export const MusicalNoteOutline: React.FC<IconProps> = ({
+export const MusicalNoteOutline: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -4434,43 +3796,30 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const NewspaperOutline: React.FC<IconProps> = ({
+export const NewspaperOutline: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
-    <NewspaperOutlineSvg
-      width={size}
-      height={size}
-      stroke={color}
-      {...props}
-    />
+    <NewspaperOutlineSvg width={size} height={size} stroke={color} {...props} />
   );
 };
-                     
 
-                     export const NoSymbolOutline: React.FC<IconProps> = ({
+export const NoSymbolOutline: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
-    <NoSymbolOutlineSvg
-      width={size}
-      height={size}
-      stroke={color}
-      {...props}
-    />
+    <NoSymbolOutlineSvg width={size} height={size} stroke={color} {...props} />
   );
 };
-                     
 
-                     export const NumberedListOutline: React.FC<IconProps> = ({
+export const NumberedListOutline: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -4482,11 +3831,10 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const PaintBrushOutline: React.FC<IconProps> = ({
+export const PaintBrushOutline: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -4498,11 +3846,10 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const PaperAirplaneOutline: React.FC<IconProps> = ({
+export const PaperAirplaneOutline: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -4514,27 +3861,20 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const PaperClipOutline: React.FC<IconProps> = ({
+export const PaperClipOutline: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
-    <PaperClipOutlineSvg
-      width={size}
-      height={size}
-      stroke={color}
-      {...props}
-    />
+    <PaperClipOutlineSvg width={size} height={size} stroke={color} {...props} />
   );
 };
-                     
 
-                     export const PauseCircleOutline: React.FC<IconProps> = ({
+export const PauseCircleOutline: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -4546,27 +3886,20 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const PauseOutline: React.FC<IconProps> = ({
+export const PauseOutline: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
-    <PauseOutlineSvg
-      width={size}
-      height={size}
-      stroke={color}
-      {...props}
-    />
+    <PauseOutlineSvg width={size} height={size} stroke={color} {...props} />
   );
 };
-                     
 
-                     export const PencilSquareOutline: React.FC<IconProps> = ({
+export const PencilSquareOutline: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -4578,27 +3911,20 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const PencilOutline: React.FC<IconProps> = ({
+export const PencilOutline: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
-    <PencilOutlineSvg
-      width={size}
-      height={size}
-      stroke={color}
-      {...props}
-    />
+    <PencilOutlineSvg width={size} height={size} stroke={color} {...props} />
   );
 };
-                     
 
-                     export const PercentBadgeOutline: React.FC<IconProps> = ({
+export const PercentBadgeOutline: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -4610,11 +3936,10 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const PhoneArrowDownLeftOutline: React.FC<IconProps> = ({
+export const PhoneArrowDownLeftOutline: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -4626,11 +3951,10 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const PhoneArrowUpRightOutline: React.FC<IconProps> = ({
+export const PhoneArrowUpRightOutline: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -4642,11 +3966,10 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const PhoneXMarkOutline: React.FC<IconProps> = ({
+export const PhoneXMarkOutline: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -4658,43 +3981,30 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const PhoneOutline: React.FC<IconProps> = ({
+export const PhoneOutline: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
-    <PhoneOutlineSvg
-      width={size}
-      height={size}
-      stroke={color}
-      {...props}
-    />
+    <PhoneOutlineSvg width={size} height={size} stroke={color} {...props} />
   );
 };
-                     
 
-                     export const PhotoOutline: React.FC<IconProps> = ({
+export const PhotoOutline: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
-    <PhotoOutlineSvg
-      width={size}
-      height={size}
-      stroke={color}
-      {...props}
-    />
+    <PhotoOutlineSvg width={size} height={size} stroke={color} {...props} />
   );
 };
-                     
 
-                     export const PlayCircleOutline: React.FC<IconProps> = ({
+export const PlayCircleOutline: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -4706,43 +4016,30 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const PlayPauseOutline: React.FC<IconProps> = ({
+export const PlayPauseOutline: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
-    <PlayPauseOutlineSvg
-      width={size}
-      height={size}
-      stroke={color}
-      {...props}
-    />
+    <PlayPauseOutlineSvg width={size} height={size} stroke={color} {...props} />
   );
 };
-                     
 
-                     export const PlayOutline: React.FC<IconProps> = ({
+export const PlayOutline: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
-    <PlayOutlineSvg
-      width={size}
-      height={size}
-      stroke={color}
-      {...props}
-    />
+    <PlayOutlineSvg width={size} height={size} stroke={color} {...props} />
   );
 };
-                     
 
-                     export const PlusCircleOutline: React.FC<IconProps> = ({
+export const PlusCircleOutline: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -4754,59 +4051,40 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const PlusSmallOutline: React.FC<IconProps> = ({
+export const PlusSmallOutline: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
-    <PlusSmallOutlineSvg
-      width={size}
-      height={size}
-      stroke={color}
-      {...props}
-    />
+    <PlusSmallOutlineSvg width={size} height={size} stroke={color} {...props} />
   );
 };
-                     
 
-                     export const PlusOutline: React.FC<IconProps> = ({
+export const PlusOutline: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
-    <PlusOutlineSvg
-      width={size}
-      height={size}
-      stroke={color}
-      {...props}
-    />
+    <PlusOutlineSvg width={size} height={size} stroke={color} {...props} />
   );
 };
-                     
 
-                     export const PowerOutline: React.FC<IconProps> = ({
+export const PowerOutline: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
-    <PowerOutlineSvg
-      width={size}
-      height={size}
-      stroke={color}
-      {...props}
-    />
+    <PowerOutlineSvg width={size} height={size} stroke={color} {...props} />
   );
 };
-                     
 
-                     export const PresentationChartBarOutline: React.FC<IconProps> = ({
+export const PresentationChartBarOutline: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -4818,11 +4096,10 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const PresentationChartLineOutline: React.FC<IconProps> = ({
+export const PresentationChartLineOutline: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -4834,27 +4111,20 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const PrinterOutline: React.FC<IconProps> = ({
+export const PrinterOutline: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
-    <PrinterOutlineSvg
-      width={size}
-      height={size}
-      stroke={color}
-      {...props}
-    />
+    <PrinterOutlineSvg width={size} height={size} stroke={color} {...props} />
   );
 };
-                     
 
-                     export const PuzzlePieceOutline: React.FC<IconProps> = ({
+export const PuzzlePieceOutline: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -4866,27 +4136,20 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const QrCodeOutline: React.FC<IconProps> = ({
+export const QrCodeOutline: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
-    <QrCodeOutlineSvg
-      width={size}
-      height={size}
-      stroke={color}
-      {...props}
-    />
+    <QrCodeOutlineSvg width={size} height={size} stroke={color} {...props} />
   );
 };
-                     
 
-                     export const QuestionMarkCircleOutline: React.FC<IconProps> = ({
+export const QuestionMarkCircleOutline: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -4898,43 +4161,30 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const QueueListOutline: React.FC<IconProps> = ({
+export const QueueListOutline: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
-    <QueueListOutlineSvg
-      width={size}
-      height={size}
-      stroke={color}
-      {...props}
-    />
+    <QueueListOutlineSvg width={size} height={size} stroke={color} {...props} />
   );
 };
-                     
 
-                     export const RadioOutline: React.FC<IconProps> = ({
+export const RadioOutline: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
-    <RadioOutlineSvg
-      width={size}
-      height={size}
-      stroke={color}
-      {...props}
-    />
+    <RadioOutlineSvg width={size} height={size} stroke={color} {...props} />
   );
 };
-                     
 
-                     export const ReceiptPercentOutline: React.FC<IconProps> = ({
+export const ReceiptPercentOutline: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -4946,11 +4196,10 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const ReceiptRefundOutline: React.FC<IconProps> = ({
+export const ReceiptRefundOutline: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -4962,11 +4211,10 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const RectangleGroupOutline: React.FC<IconProps> = ({
+export const RectangleGroupOutline: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -4978,11 +4226,10 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const RectangleStackOutline: React.FC<IconProps> = ({
+export const RectangleStackOutline: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -4994,11 +4241,10 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const RocketLaunchOutline: React.FC<IconProps> = ({
+export const RocketLaunchOutline: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -5010,59 +4256,38 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const RssOutline: React.FC<IconProps> = ({
+export const RssOutline: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
+  ...props
+}) => {
+  return <RssOutlineSvg width={size} height={size} stroke={color} {...props} />;
+};
+
+export const ScaleOutline: React.FC<IconProps> = ({
+  size = 24,
+  color = "black",
   ...props
 }) => {
   return (
-    <RssOutlineSvg
-      width={size}
-      height={size}
-      stroke={color}
-      {...props}
-    />
+    <ScaleOutlineSvg width={size} height={size} stroke={color} {...props} />
   );
 };
-                     
 
-                     export const ScaleOutline: React.FC<IconProps> = ({
+export const ScissorsOutline: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
-    <ScaleOutlineSvg
-      width={size}
-      height={size}
-      stroke={color}
-      {...props}
-    />
+    <ScissorsOutlineSvg width={size} height={size} stroke={color} {...props} />
   );
 };
-                     
 
-                     export const ScissorsOutline: React.FC<IconProps> = ({
+export const ServerStackOutline: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
-  ...props
-}) => {
-  return (
-    <ScissorsOutlineSvg
-      width={size}
-      height={size}
-      stroke={color}
-      {...props}
-    />
-  );
-};
-                     
-
-                     export const ServerStackOutline: React.FC<IconProps> = ({
-  size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -5074,43 +4299,30 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const ServerOutline: React.FC<IconProps> = ({
+export const ServerOutline: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
-    <ServerOutlineSvg
-      width={size}
-      height={size}
-      stroke={color}
-      {...props}
-    />
+    <ServerOutlineSvg width={size} height={size} stroke={color} {...props} />
   );
 };
-                     
 
-                     export const ShareOutline: React.FC<IconProps> = ({
+export const ShareOutline: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
-    <ShareOutlineSvg
-      width={size}
-      height={size}
-      stroke={color}
-      {...props}
-    />
+    <ShareOutlineSvg width={size} height={size} stroke={color} {...props} />
   );
 };
-                     
 
-                     export const ShieldCheckOutline: React.FC<IconProps> = ({
+export const ShieldCheckOutline: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -5122,11 +4334,10 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const ShieldExclamationOutline: React.FC<IconProps> = ({
+export const ShieldExclamationOutline: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -5138,11 +4349,10 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const ShoppingBagOutline: React.FC<IconProps> = ({
+export const ShoppingBagOutline: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -5154,11 +4364,10 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const ShoppingCartOutline: React.FC<IconProps> = ({
+export const ShoppingCartOutline: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -5170,11 +4379,10 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const SignalSlashOutline: React.FC<IconProps> = ({
+export const SignalSlashOutline: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -5186,59 +4394,40 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const SignalOutline: React.FC<IconProps> = ({
+export const SignalOutline: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
-    <SignalOutlineSvg
-      width={size}
-      height={size}
-      stroke={color}
-      {...props}
-    />
+    <SignalOutlineSvg width={size} height={size} stroke={color} {...props} />
   );
 };
-                     
 
-                     export const SlashOutline: React.FC<IconProps> = ({
+export const SlashOutline: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
-    <SlashOutlineSvg
-      width={size}
-      height={size}
-      stroke={color}
-      {...props}
-    />
+    <SlashOutlineSvg width={size} height={size} stroke={color} {...props} />
   );
 };
-                     
 
-                     export const SparklesOutline: React.FC<IconProps> = ({
+export const SparklesOutline: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
-    <SparklesOutlineSvg
-      width={size}
-      height={size}
-      stroke={color}
-      {...props}
-    />
+    <SparklesOutlineSvg width={size} height={size} stroke={color} {...props} />
   );
 };
-                     
 
-                     export const SpeakerWaveOutline: React.FC<IconProps> = ({
+export const SpeakerWaveOutline: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -5250,11 +4439,10 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const SpeakerXMarkOutline: React.FC<IconProps> = ({
+export const SpeakerXMarkOutline: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -5266,11 +4454,10 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const Square2StackOutline: React.FC<IconProps> = ({
+export const Square2StackOutline: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -5282,11 +4469,10 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const Square3Stack3dOutline: React.FC<IconProps> = ({
+export const Square3Stack3dOutline: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -5298,11 +4484,10 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const Squares2x2Outline: React.FC<IconProps> = ({
+export const Squares2x2Outline: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -5314,11 +4499,10 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const SquaresPlusOutline: React.FC<IconProps> = ({
+export const SquaresPlusOutline: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -5330,27 +4514,20 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const StarOutline: React.FC<IconProps> = ({
+export const StarOutline: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
-    <StarOutlineSvg
-      width={size}
-      height={size}
-      stroke={color}
-      {...props}
-    />
+    <StarOutlineSvg width={size} height={size} stroke={color} {...props} />
   );
 };
-                     
 
-                     export const StopCircleOutline: React.FC<IconProps> = ({
+export const StopCircleOutline: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -5362,27 +4539,20 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const StopOutline: React.FC<IconProps> = ({
+export const StopOutline: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
-    <StopOutlineSvg
-      width={size}
-      height={size}
-      stroke={color}
-      {...props}
-    />
+    <StopOutlineSvg width={size} height={size} stroke={color} {...props} />
   );
 };
-                     
 
-                     export const StrikethroughOutline: React.FC<IconProps> = ({
+export const StrikethroughOutline: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -5394,43 +4564,28 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const SunOutline: React.FC<IconProps> = ({
+export const SunOutline: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
+  ...props
+}) => {
+  return <SunOutlineSvg width={size} height={size} stroke={color} {...props} />;
+};
+
+export const SwatchOutline: React.FC<IconProps> = ({
+  size = 24,
+  color = "black",
   ...props
 }) => {
   return (
-    <SunOutlineSvg
-      width={size}
-      height={size}
-      stroke={color}
-      {...props}
-    />
+    <SwatchOutlineSvg width={size} height={size} stroke={color} {...props} />
   );
 };
-                     
 
-                     export const SwatchOutline: React.FC<IconProps> = ({
+export const TableCellsOutline: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
-  ...props
-}) => {
-  return (
-    <SwatchOutlineSvg
-      width={size}
-      height={size}
-      stroke={color}
-      {...props}
-    />
-  );
-};
-                     
-
-                     export const TableCellsOutline: React.FC<IconProps> = ({
-  size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -5442,123 +4597,76 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const TagOutline: React.FC<IconProps> = ({
+export const TagOutline: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
+  ...props
+}) => {
+  return <TagOutlineSvg width={size} height={size} stroke={color} {...props} />;
+};
+
+export const TicketOutline: React.FC<IconProps> = ({
+  size = 24,
+  color = "black",
   ...props
 }) => {
   return (
-    <TagOutlineSvg
-      width={size}
-      height={size}
-      stroke={color}
-      {...props}
-    />
+    <TicketOutlineSvg width={size} height={size} stroke={color} {...props} />
   );
 };
-                     
 
-                     export const TicketOutline: React.FC<IconProps> = ({
+export const TrashOutline: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
-    <TicketOutlineSvg
-      width={size}
-      height={size}
-      stroke={color}
-      {...props}
-    />
+    <TrashOutlineSvg width={size} height={size} stroke={color} {...props} />
   );
 };
-                     
 
-                     export const TrashOutline: React.FC<IconProps> = ({
+export const TrophyOutline: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
-    <TrashOutlineSvg
-      width={size}
-      height={size}
-      stroke={color}
-      {...props}
-    />
+    <TrophyOutlineSvg width={size} height={size} stroke={color} {...props} />
   );
 };
-                     
 
-                     export const TrophyOutline: React.FC<IconProps> = ({
+export const TruckOutline: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
-    <TrophyOutlineSvg
-      width={size}
-      height={size}
-      stroke={color}
-      {...props}
-    />
+    <TruckOutlineSvg width={size} height={size} stroke={color} {...props} />
   );
 };
-                     
 
-                     export const TruckOutline: React.FC<IconProps> = ({
+export const TvOutline: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
+  ...props
+}) => {
+  return <TvOutlineSvg width={size} height={size} stroke={color} {...props} />;
+};
+
+export const UnderlineOutline: React.FC<IconProps> = ({
+  size = 24,
+  color = "black",
   ...props
 }) => {
   return (
-    <TruckOutlineSvg
-      width={size}
-      height={size}
-      stroke={color}
-      {...props}
-    />
+    <UnderlineOutlineSvg width={size} height={size} stroke={color} {...props} />
   );
 };
-                     
 
-                     export const TvOutline: React.FC<IconProps> = ({
+export const UserCircleOutline: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
-  ...props
-}) => {
-  return (
-    <TvOutlineSvg
-      width={size}
-      height={size}
-      stroke={color}
-      {...props}
-    />
-  );
-};
-                     
-
-                     export const UnderlineOutline: React.FC<IconProps> = ({
-  size = 24,
-  color = 'black',
-  ...props
-}) => {
-  return (
-    <UnderlineOutlineSvg
-      width={size}
-      height={size}
-      stroke={color}
-      {...props}
-    />
-  );
-};
-                     
-
-                     export const UserCircleOutline: React.FC<IconProps> = ({
-  size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -5570,107 +4678,70 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const UserGroupOutline: React.FC<IconProps> = ({
+export const UserGroupOutline: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
-    <UserGroupOutlineSvg
-      width={size}
-      height={size}
-      stroke={color}
-      {...props}
-    />
+    <UserGroupOutlineSvg width={size} height={size} stroke={color} {...props} />
   );
 };
-                     
 
-                     export const UserMinusOutline: React.FC<IconProps> = ({
+export const UserMinusOutline: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
-    <UserMinusOutlineSvg
-      width={size}
-      height={size}
-      stroke={color}
-      {...props}
-    />
+    <UserMinusOutlineSvg width={size} height={size} stroke={color} {...props} />
   );
 };
-                     
 
-                     export const UserPlusOutline: React.FC<IconProps> = ({
+export const UserPlusOutline: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
-    <UserPlusOutlineSvg
-      width={size}
-      height={size}
-      stroke={color}
-      {...props}
-    />
+    <UserPlusOutlineSvg width={size} height={size} stroke={color} {...props} />
   );
 };
-                     
 
-                     export const UserOutline: React.FC<IconProps> = ({
+export const UserOutline: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
-    <UserOutlineSvg
-      width={size}
-      height={size}
-      stroke={color}
-      {...props}
-    />
+    <UserOutlineSvg width={size} height={size} stroke={color} {...props} />
   );
 };
-                     
 
-                     export const UsersOutline: React.FC<IconProps> = ({
+export const UsersOutline: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
-    <UsersOutlineSvg
-      width={size}
-      height={size}
-      stroke={color}
-      {...props}
-    />
+    <UsersOutlineSvg width={size} height={size} stroke={color} {...props} />
   );
 };
-                     
 
-                     export const VariableOutline: React.FC<IconProps> = ({
+export const VariableOutline: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
-    <VariableOutlineSvg
-      width={size}
-      height={size}
-      stroke={color}
-      {...props}
-    />
+    <VariableOutlineSvg width={size} height={size} stroke={color} {...props} />
   );
 };
-                     
 
-                     export const VideoCameraSlashOutline: React.FC<IconProps> = ({
+export const VideoCameraSlashOutline: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -5682,11 +4753,10 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const VideoCameraOutline: React.FC<IconProps> = ({
+export const VideoCameraOutline: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -5698,11 +4768,10 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const ViewColumnsOutline: React.FC<IconProps> = ({
+export const ViewColumnsOutline: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -5714,11 +4783,10 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const ViewfinderCircleOutline: React.FC<IconProps> = ({
+export const ViewfinderCircleOutline: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -5730,59 +4798,40 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const WalletOutline: React.FC<IconProps> = ({
+export const WalletOutline: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
-    <WalletOutlineSvg
-      width={size}
-      height={size}
-      stroke={color}
-      {...props}
-    />
+    <WalletOutlineSvg width={size} height={size} stroke={color} {...props} />
   );
 };
-                     
 
-                     export const WifiOutline: React.FC<IconProps> = ({
+export const WifiOutline: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
-    <WifiOutlineSvg
-      width={size}
-      height={size}
-      stroke={color}
-      {...props}
-    />
+    <WifiOutlineSvg width={size} height={size} stroke={color} {...props} />
   );
 };
-                     
 
-                     export const WindowOutline: React.FC<IconProps> = ({
+export const WindowOutline: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
-    <WindowOutlineSvg
-      width={size}
-      height={size}
-      stroke={color}
-      {...props}
-    />
+    <WindowOutlineSvg width={size} height={size} stroke={color} {...props} />
   );
 };
-                     
 
-                     export const WrenchScrewdriverOutline: React.FC<IconProps> = ({
+export const WrenchScrewdriverOutline: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -5794,59 +4843,40 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const WrenchOutline: React.FC<IconProps> = ({
+export const WrenchOutline: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
-    <WrenchOutlineSvg
-      width={size}
-      height={size}
-      stroke={color}
-      {...props}
-    />
+    <WrenchOutlineSvg width={size} height={size} stroke={color} {...props} />
   );
 };
-                     
 
-                     export const XCircleOutline: React.FC<IconProps> = ({
+export const XCircleOutline: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
-    <XCircleOutlineSvg
-      width={size}
-      height={size}
-      stroke={color}
-      {...props}
-    />
+    <XCircleOutlineSvg width={size} height={size} stroke={color} {...props} />
   );
 };
-                     
 
-                     export const XMarkOutline: React.FC<IconProps> = ({
+export const XMarkOutline: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
-    <XMarkOutlineSvg
-      width={size}
-      height={size}
-      stroke={color}
-      {...props}
-    />
+    <XMarkOutlineSvg width={size} height={size} stroke={color} {...props} />
   );
 };
-                     
 
-                     export const AcademicCapSolid: React.FC<IconProps> = ({
+export const AcademicCapSolid: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -5859,11 +4889,10 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const AdjustmentsHorizontalSolid: React.FC<IconProps> = ({
+export const AdjustmentsHorizontalSolid: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -5876,11 +4905,10 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const AdjustmentsVerticalSolid: React.FC<IconProps> = ({
+export const AdjustmentsVerticalSolid: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -5893,11 +4921,10 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const ArchiveBoxArrowDownSolid: React.FC<IconProps> = ({
+export const ArchiveBoxArrowDownSolid: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -5910,11 +4937,10 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const ArchiveBoxXMarkSolid: React.FC<IconProps> = ({
+export const ArchiveBoxXMarkSolid: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -5927,11 +4953,10 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const ArchiveBoxSolid: React.FC<IconProps> = ({
+export const ArchiveBoxSolid: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -5944,11 +4969,10 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const ArrowDownCircleSolid: React.FC<IconProps> = ({
+export const ArrowDownCircleSolid: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -5961,11 +4985,10 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const ArrowDownLeftSolid: React.FC<IconProps> = ({
+export const ArrowDownLeftSolid: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -5978,11 +5001,10 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const ArrowDownOnSquareStackSolid: React.FC<IconProps> = ({
+export const ArrowDownOnSquareStackSolid: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -5995,11 +5017,10 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const ArrowDownOnSquareSolid: React.FC<IconProps> = ({
+export const ArrowDownOnSquareSolid: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -6012,11 +5033,10 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const ArrowDownRightSolid: React.FC<IconProps> = ({
+export const ArrowDownRightSolid: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -6029,11 +5049,10 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const ArrowDownTraySolid: React.FC<IconProps> = ({
+export const ArrowDownTraySolid: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -6046,11 +5065,10 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const ArrowDownSolid: React.FC<IconProps> = ({
+export const ArrowDownSolid: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -6063,11 +5081,10 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const ArrowLeftCircleSolid: React.FC<IconProps> = ({
+export const ArrowLeftCircleSolid: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -6080,11 +5097,10 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const ArrowLeftEndOnRectangleSolid: React.FC<IconProps> = ({
+export const ArrowLeftEndOnRectangleSolid: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -6097,11 +5113,10 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const ArrowLeftOnRectangleSolid: React.FC<IconProps> = ({
+export const ArrowLeftOnRectangleSolid: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -6114,11 +5129,10 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const ArrowLeftStartOnRectangleSolid: React.FC<IconProps> = ({
+export const ArrowLeftStartOnRectangleSolid: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -6131,11 +5145,10 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const ArrowLeftSolid: React.FC<IconProps> = ({
+export const ArrowLeftSolid: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -6148,11 +5161,10 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const ArrowLongDownSolid: React.FC<IconProps> = ({
+export const ArrowLongDownSolid: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -6165,11 +5177,10 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const ArrowLongLeftSolid: React.FC<IconProps> = ({
+export const ArrowLongLeftSolid: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -6182,11 +5193,10 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const ArrowLongRightSolid: React.FC<IconProps> = ({
+export const ArrowLongRightSolid: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -6199,11 +5209,10 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const ArrowLongUpSolid: React.FC<IconProps> = ({
+export const ArrowLongUpSolid: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -6216,11 +5225,10 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const ArrowPathRoundedSquareSolid: React.FC<IconProps> = ({
+export const ArrowPathRoundedSquareSolid: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -6233,11 +5241,10 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const ArrowPathSolid: React.FC<IconProps> = ({
+export const ArrowPathSolid: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -6250,11 +5257,10 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const ArrowRightCircleSolid: React.FC<IconProps> = ({
+export const ArrowRightCircleSolid: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -6267,11 +5273,10 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const ArrowRightEndOnRectangleSolid: React.FC<IconProps> = ({
+export const ArrowRightEndOnRectangleSolid: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -6284,11 +5289,10 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const ArrowRightOnRectangleSolid: React.FC<IconProps> = ({
+export const ArrowRightOnRectangleSolid: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -6301,11 +5305,10 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const ArrowRightStartOnRectangleSolid: React.FC<IconProps> = ({
+export const ArrowRightStartOnRectangleSolid: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -6318,11 +5321,10 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const ArrowRightSolid: React.FC<IconProps> = ({
+export const ArrowRightSolid: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -6335,11 +5337,10 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const ArrowSmallDownSolid: React.FC<IconProps> = ({
+export const ArrowSmallDownSolid: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -6352,11 +5353,10 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const ArrowSmallLeftSolid: React.FC<IconProps> = ({
+export const ArrowSmallLeftSolid: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -6369,11 +5369,10 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const ArrowSmallRightSolid: React.FC<IconProps> = ({
+export const ArrowSmallRightSolid: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -6386,11 +5385,10 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const ArrowSmallUpSolid: React.FC<IconProps> = ({
+export const ArrowSmallUpSolid: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -6403,11 +5401,10 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const ArrowTopRightOnSquareSolid: React.FC<IconProps> = ({
+export const ArrowTopRightOnSquareSolid: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -6420,11 +5417,10 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const ArrowTrendingDownSolid: React.FC<IconProps> = ({
+export const ArrowTrendingDownSolid: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -6437,11 +5433,10 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const ArrowTrendingUpSolid: React.FC<IconProps> = ({
+export const ArrowTrendingUpSolid: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -6454,11 +5449,10 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const ArrowTurnDownLeftSolid: React.FC<IconProps> = ({
+export const ArrowTurnDownLeftSolid: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -6471,11 +5465,10 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const ArrowTurnDownRightSolid: React.FC<IconProps> = ({
+export const ArrowTurnDownRightSolid: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -6488,11 +5481,10 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const ArrowTurnLeftDownSolid: React.FC<IconProps> = ({
+export const ArrowTurnLeftDownSolid: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -6505,11 +5497,10 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const ArrowTurnLeftUpSolid: React.FC<IconProps> = ({
+export const ArrowTurnLeftUpSolid: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -6522,11 +5513,10 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const ArrowTurnRightDownSolid: React.FC<IconProps> = ({
+export const ArrowTurnRightDownSolid: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -6539,11 +5529,10 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const ArrowTurnRightUpSolid: React.FC<IconProps> = ({
+export const ArrowTurnRightUpSolid: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -6556,11 +5545,10 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const ArrowTurnUpLeftSolid: React.FC<IconProps> = ({
+export const ArrowTurnUpLeftSolid: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -6573,11 +5561,10 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const ArrowTurnUpRightSolid: React.FC<IconProps> = ({
+export const ArrowTurnUpRightSolid: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -6590,11 +5577,10 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const ArrowUpCircleSolid: React.FC<IconProps> = ({
+export const ArrowUpCircleSolid: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -6607,11 +5593,10 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const ArrowUpLeftSolid: React.FC<IconProps> = ({
+export const ArrowUpLeftSolid: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -6624,11 +5609,10 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const ArrowUpOnSquareStackSolid: React.FC<IconProps> = ({
+export const ArrowUpOnSquareStackSolid: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -6641,11 +5625,10 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const ArrowUpOnSquareSolid: React.FC<IconProps> = ({
+export const ArrowUpOnSquareSolid: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -6658,11 +5641,10 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const ArrowUpRightSolid: React.FC<IconProps> = ({
+export const ArrowUpRightSolid: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -6675,11 +5657,10 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const ArrowUpTraySolid: React.FC<IconProps> = ({
+export const ArrowUpTraySolid: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -6692,11 +5673,10 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const ArrowUpSolid: React.FC<IconProps> = ({
+export const ArrowUpSolid: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -6709,11 +5689,10 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const ArrowUturnDownSolid: React.FC<IconProps> = ({
+export const ArrowUturnDownSolid: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -6726,11 +5705,10 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const ArrowUturnLeftSolid: React.FC<IconProps> = ({
+export const ArrowUturnLeftSolid: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -6743,11 +5721,10 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const ArrowUturnRightSolid: React.FC<IconProps> = ({
+export const ArrowUturnRightSolid: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -6760,11 +5737,10 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const ArrowUturnUpSolid: React.FC<IconProps> = ({
+export const ArrowUturnUpSolid: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -6777,11 +5753,10 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const ArrowsPointingInSolid: React.FC<IconProps> = ({
+export const ArrowsPointingInSolid: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -6794,11 +5769,10 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const ArrowsPointingOutSolid: React.FC<IconProps> = ({
+export const ArrowsPointingOutSolid: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -6811,11 +5785,10 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const ArrowsRightLeftSolid: React.FC<IconProps> = ({
+export const ArrowsRightLeftSolid: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -6828,11 +5801,10 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const ArrowsUpDownSolid: React.FC<IconProps> = ({
+export const ArrowsUpDownSolid: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -6845,11 +5817,10 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const AtSymbolSolid: React.FC<IconProps> = ({
+export const AtSymbolSolid: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -6862,11 +5833,10 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const BackspaceSolid: React.FC<IconProps> = ({
+export const BackspaceSolid: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -6879,11 +5849,10 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const BackwardSolid: React.FC<IconProps> = ({
+export const BackwardSolid: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -6896,11 +5865,10 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const BanknotesSolid: React.FC<IconProps> = ({
+export const BanknotesSolid: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -6913,11 +5881,10 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const Bars2Solid: React.FC<IconProps> = ({
+export const Bars2Solid: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -6930,11 +5897,10 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const Bars3BottomLeftSolid: React.FC<IconProps> = ({
+export const Bars3BottomLeftSolid: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -6947,11 +5913,10 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const Bars3BottomRightSolid: React.FC<IconProps> = ({
+export const Bars3BottomRightSolid: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -6964,11 +5929,10 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const Bars3CenterLeftSolid: React.FC<IconProps> = ({
+export const Bars3CenterLeftSolid: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -6981,11 +5945,10 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const Bars3Solid: React.FC<IconProps> = ({
+export const Bars3Solid: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -6998,11 +5961,10 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const Bars4Solid: React.FC<IconProps> = ({
+export const Bars4Solid: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -7015,11 +5977,10 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const BarsArrowDownSolid: React.FC<IconProps> = ({
+export const BarsArrowDownSolid: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -7032,11 +5993,10 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const BarsArrowUpSolid: React.FC<IconProps> = ({
+export const BarsArrowUpSolid: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -7049,11 +6009,10 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const Battery0Solid: React.FC<IconProps> = ({
+export const Battery0Solid: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -7066,11 +6025,10 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const Battery100Solid: React.FC<IconProps> = ({
+export const Battery100Solid: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -7083,11 +6041,10 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const Battery50Solid: React.FC<IconProps> = ({
+export const Battery50Solid: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -7100,11 +6057,10 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const BeakerSolid: React.FC<IconProps> = ({
+export const BeakerSolid: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -7117,11 +6073,10 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const BellAlertSolid: React.FC<IconProps> = ({
+export const BellAlertSolid: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -7134,11 +6089,10 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const BellSlashSolid: React.FC<IconProps> = ({
+export const BellSlashSolid: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -7151,11 +6105,10 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const BellSnoozeSolid: React.FC<IconProps> = ({
+export const BellSnoozeSolid: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -7168,11 +6121,10 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const BellSolid: React.FC<IconProps> = ({
+export const BellSolid: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -7185,11 +6137,10 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const BoldSolid: React.FC<IconProps> = ({
+export const BoldSolid: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -7202,11 +6153,10 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const BoltSlashSolid: React.FC<IconProps> = ({
+export const BoltSlashSolid: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -7219,11 +6169,10 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const BoltSolid: React.FC<IconProps> = ({
+export const BoltSolid: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -7236,11 +6185,10 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const BookOpenSolid: React.FC<IconProps> = ({
+export const BookOpenSolid: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -7253,11 +6201,10 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const BookmarkSlashSolid: React.FC<IconProps> = ({
+export const BookmarkSlashSolid: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -7270,11 +6217,10 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const BookmarkSquareSolid: React.FC<IconProps> = ({
+export const BookmarkSquareSolid: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -7287,11 +6233,10 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const BookmarkSolid: React.FC<IconProps> = ({
+export const BookmarkSolid: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -7304,11 +6249,10 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const BriefcaseSolid: React.FC<IconProps> = ({
+export const BriefcaseSolid: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -7321,11 +6265,10 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const BugAntSolid: React.FC<IconProps> = ({
+export const BugAntSolid: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -7338,11 +6281,10 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const BuildingLibrarySolid: React.FC<IconProps> = ({
+export const BuildingLibrarySolid: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -7355,11 +6297,10 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const BuildingOffice2Solid: React.FC<IconProps> = ({
+export const BuildingOffice2Solid: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -7372,11 +6313,10 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const BuildingOfficeSolid: React.FC<IconProps> = ({
+export const BuildingOfficeSolid: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -7389,11 +6329,10 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const BuildingStorefrontSolid: React.FC<IconProps> = ({
+export const BuildingStorefrontSolid: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -7406,11 +6345,10 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const CakeSolid: React.FC<IconProps> = ({
+export const CakeSolid: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -7423,11 +6361,10 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const CalculatorSolid: React.FC<IconProps> = ({
+export const CalculatorSolid: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -7440,11 +6377,10 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const CalendarDateRangeSolid: React.FC<IconProps> = ({
+export const CalendarDateRangeSolid: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -7457,11 +6393,10 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const CalendarDaysSolid: React.FC<IconProps> = ({
+export const CalendarDaysSolid: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -7474,11 +6409,10 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const CalendarSolid: React.FC<IconProps> = ({
+export const CalendarSolid: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -7491,11 +6425,10 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const CameraSolid: React.FC<IconProps> = ({
+export const CameraSolid: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -7508,11 +6441,10 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const ChartBarSquareSolid: React.FC<IconProps> = ({
+export const ChartBarSquareSolid: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -7525,11 +6457,10 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const ChartBarSolid: React.FC<IconProps> = ({
+export const ChartBarSolid: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -7542,11 +6473,10 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const ChartPieSolid: React.FC<IconProps> = ({
+export const ChartPieSolid: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -7559,11 +6489,10 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const ChatBubbleBottomCenterTextSolid: React.FC<IconProps> = ({
+export const ChatBubbleBottomCenterTextSolid: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -7576,11 +6505,10 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const ChatBubbleBottomCenterSolid: React.FC<IconProps> = ({
+export const ChatBubbleBottomCenterSolid: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -7593,11 +6521,10 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const ChatBubbleLeftEllipsisSolid: React.FC<IconProps> = ({
+export const ChatBubbleLeftEllipsisSolid: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -7610,11 +6537,10 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const ChatBubbleLeftRightSolid: React.FC<IconProps> = ({
+export const ChatBubbleLeftRightSolid: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -7627,11 +6553,10 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const ChatBubbleLeftSolid: React.FC<IconProps> = ({
+export const ChatBubbleLeftSolid: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -7644,11 +6569,10 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const ChatBubbleOvalLeftEllipsisSolid: React.FC<IconProps> = ({
+export const ChatBubbleOvalLeftEllipsisSolid: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -7661,11 +6585,10 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const ChatBubbleOvalLeftSolid: React.FC<IconProps> = ({
+export const ChatBubbleOvalLeftSolid: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -7678,11 +6601,10 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const CheckBadgeSolid: React.FC<IconProps> = ({
+export const CheckBadgeSolid: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -7695,11 +6617,10 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const CheckCircleSolid: React.FC<IconProps> = ({
+export const CheckCircleSolid: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -7712,11 +6633,10 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const CheckSolid: React.FC<IconProps> = ({
+export const CheckSolid: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -7729,11 +6649,10 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const ChevronDoubleDownSolid: React.FC<IconProps> = ({
+export const ChevronDoubleDownSolid: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -7746,11 +6665,10 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const ChevronDoubleLeftSolid: React.FC<IconProps> = ({
+export const ChevronDoubleLeftSolid: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -7763,11 +6681,10 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const ChevronDoubleRightSolid: React.FC<IconProps> = ({
+export const ChevronDoubleRightSolid: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -7780,11 +6697,10 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const ChevronDoubleUpSolid: React.FC<IconProps> = ({
+export const ChevronDoubleUpSolid: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -7797,11 +6713,10 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const ChevronDownSolid: React.FC<IconProps> = ({
+export const ChevronDownSolid: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -7814,11 +6729,10 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const ChevronLeftSolid: React.FC<IconProps> = ({
+export const ChevronLeftSolid: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -7831,11 +6745,10 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const ChevronRightSolid: React.FC<IconProps> = ({
+export const ChevronRightSolid: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -7848,11 +6761,10 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const ChevronUpDownSolid: React.FC<IconProps> = ({
+export const ChevronUpDownSolid: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -7865,11 +6777,10 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const ChevronUpSolid: React.FC<IconProps> = ({
+export const ChevronUpSolid: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -7882,11 +6793,10 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const CircleStackSolid: React.FC<IconProps> = ({
+export const CircleStackSolid: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -7899,11 +6809,10 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const ClipboardDocumentCheckSolid: React.FC<IconProps> = ({
+export const ClipboardDocumentCheckSolid: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -7916,11 +6825,10 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const ClipboardDocumentListSolid: React.FC<IconProps> = ({
+export const ClipboardDocumentListSolid: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -7933,11 +6841,10 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const ClipboardDocumentSolid: React.FC<IconProps> = ({
+export const ClipboardDocumentSolid: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -7950,11 +6857,10 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const ClipboardSolid: React.FC<IconProps> = ({
+export const ClipboardSolid: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -7967,11 +6873,10 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const ClockSolid: React.FC<IconProps> = ({
+export const ClockSolid: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -7984,11 +6889,10 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const CloudArrowDownSolid: React.FC<IconProps> = ({
+export const CloudArrowDownSolid: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -8001,11 +6905,10 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const CloudArrowUpSolid: React.FC<IconProps> = ({
+export const CloudArrowUpSolid: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -8018,11 +6921,10 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const CloudSolid: React.FC<IconProps> = ({
+export const CloudSolid: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -8035,11 +6937,10 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const CodeBracketSquareSolid: React.FC<IconProps> = ({
+export const CodeBracketSquareSolid: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -8052,11 +6953,10 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const CodeBracketSolid: React.FC<IconProps> = ({
+export const CodeBracketSolid: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -8069,11 +6969,10 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const Cog6ToothSolid: React.FC<IconProps> = ({
+export const Cog6ToothSolid: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -8086,11 +6985,10 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const Cog8ToothSolid: React.FC<IconProps> = ({
+export const Cog8ToothSolid: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -8103,11 +7001,10 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const CogSolid: React.FC<IconProps> = ({
+export const CogSolid: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -8120,11 +7017,10 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const CommandLineSolid: React.FC<IconProps> = ({
+export const CommandLineSolid: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -8137,11 +7033,10 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const ComputerDesktopSolid: React.FC<IconProps> = ({
+export const ComputerDesktopSolid: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -8154,11 +7049,10 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const CpuChipSolid: React.FC<IconProps> = ({
+export const CpuChipSolid: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -8171,11 +7065,10 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const CreditCardSolid: React.FC<IconProps> = ({
+export const CreditCardSolid: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -8188,11 +7081,10 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const CubeTransparentSolid: React.FC<IconProps> = ({
+export const CubeTransparentSolid: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -8205,11 +7097,10 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const CubeSolid: React.FC<IconProps> = ({
+export const CubeSolid: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -8222,11 +7113,10 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const CurrencyBangladeshiSolid: React.FC<IconProps> = ({
+export const CurrencyBangladeshiSolid: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -8239,11 +7129,10 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const CurrencyDollarSolid: React.FC<IconProps> = ({
+export const CurrencyDollarSolid: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -8256,11 +7145,10 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const CurrencyEuroSolid: React.FC<IconProps> = ({
+export const CurrencyEuroSolid: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -8273,11 +7161,10 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const CurrencyPoundSolid: React.FC<IconProps> = ({
+export const CurrencyPoundSolid: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -8290,11 +7177,10 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const CurrencyRupeeSolid: React.FC<IconProps> = ({
+export const CurrencyRupeeSolid: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -8307,11 +7193,10 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const CurrencyYenSolid: React.FC<IconProps> = ({
+export const CurrencyYenSolid: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -8324,11 +7209,10 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const CursorArrowRaysSolid: React.FC<IconProps> = ({
+export const CursorArrowRaysSolid: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -8341,11 +7225,10 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const CursorArrowRippleSolid: React.FC<IconProps> = ({
+export const CursorArrowRippleSolid: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -8358,11 +7241,10 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const DevicePhoneMobileSolid: React.FC<IconProps> = ({
+export const DevicePhoneMobileSolid: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -8375,11 +7257,10 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const DeviceTabletSolid: React.FC<IconProps> = ({
+export const DeviceTabletSolid: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -8392,11 +7273,10 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const DivideSolid: React.FC<IconProps> = ({
+export const DivideSolid: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -8409,11 +7289,10 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const DocumentArrowDownSolid: React.FC<IconProps> = ({
+export const DocumentArrowDownSolid: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -8426,11 +7305,10 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const DocumentArrowUpSolid: React.FC<IconProps> = ({
+export const DocumentArrowUpSolid: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -8443,11 +7321,10 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const DocumentChartBarSolid: React.FC<IconProps> = ({
+export const DocumentChartBarSolid: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -8460,11 +7337,10 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const DocumentCheckSolid: React.FC<IconProps> = ({
+export const DocumentCheckSolid: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -8477,11 +7353,10 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const DocumentCurrencyBangladeshiSolid: React.FC<IconProps> = ({
+export const DocumentCurrencyBangladeshiSolid: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -8494,11 +7369,10 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const DocumentCurrencyDollarSolid: React.FC<IconProps> = ({
+export const DocumentCurrencyDollarSolid: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -8511,11 +7385,10 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const DocumentCurrencyEuroSolid: React.FC<IconProps> = ({
+export const DocumentCurrencyEuroSolid: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -8528,11 +7401,10 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const DocumentCurrencyPoundSolid: React.FC<IconProps> = ({
+export const DocumentCurrencyPoundSolid: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -8545,11 +7417,10 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const DocumentCurrencyRupeeSolid: React.FC<IconProps> = ({
+export const DocumentCurrencyRupeeSolid: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -8562,11 +7433,10 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const DocumentCurrencyYenSolid: React.FC<IconProps> = ({
+export const DocumentCurrencyYenSolid: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -8579,11 +7449,10 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const DocumentDuplicateSolid: React.FC<IconProps> = ({
+export const DocumentDuplicateSolid: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -8596,11 +7465,10 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const DocumentMagnifyingGlassSolid: React.FC<IconProps> = ({
+export const DocumentMagnifyingGlassSolid: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -8613,11 +7481,10 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const DocumentMinusSolid: React.FC<IconProps> = ({
+export const DocumentMinusSolid: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -8630,11 +7497,10 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const DocumentPlusSolid: React.FC<IconProps> = ({
+export const DocumentPlusSolid: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -8647,11 +7513,10 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const DocumentTextSolid: React.FC<IconProps> = ({
+export const DocumentTextSolid: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -8664,11 +7529,10 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const DocumentSolid: React.FC<IconProps> = ({
+export const DocumentSolid: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -8681,11 +7545,10 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const EllipsisHorizontalCircleSolid: React.FC<IconProps> = ({
+export const EllipsisHorizontalCircleSolid: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -8698,11 +7561,10 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const EllipsisHorizontalSolid: React.FC<IconProps> = ({
+export const EllipsisHorizontalSolid: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -8715,11 +7577,10 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const EllipsisVerticalSolid: React.FC<IconProps> = ({
+export const EllipsisVerticalSolid: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -8732,11 +7593,10 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const EnvelopeOpenSolid: React.FC<IconProps> = ({
+export const EnvelopeOpenSolid: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -8749,11 +7609,10 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const EnvelopeSolid: React.FC<IconProps> = ({
+export const EnvelopeSolid: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -8766,11 +7625,10 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const EqualsSolid: React.FC<IconProps> = ({
+export const EqualsSolid: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -8783,11 +7641,10 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const ExclamationCircleSolid: React.FC<IconProps> = ({
+export const ExclamationCircleSolid: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -8800,11 +7657,10 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const ExclamationTriangleSolid: React.FC<IconProps> = ({
+export const ExclamationTriangleSolid: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -8817,11 +7673,10 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const EyeDropperSolid: React.FC<IconProps> = ({
+export const EyeDropperSolid: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -8834,11 +7689,10 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const EyeSlashSolid: React.FC<IconProps> = ({
+export const EyeSlashSolid: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -8851,11 +7705,10 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const EyeSolid: React.FC<IconProps> = ({
+export const EyeSolid: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -8868,11 +7721,10 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const FaceFrownSolid: React.FC<IconProps> = ({
+export const FaceFrownSolid: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -8885,11 +7737,10 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const FaceSmileSolid: React.FC<IconProps> = ({
+export const FaceSmileSolid: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -8902,11 +7753,10 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const FilmSolid: React.FC<IconProps> = ({
+export const FilmSolid: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -8919,11 +7769,10 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const FingerPrintSolid: React.FC<IconProps> = ({
+export const FingerPrintSolid: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -8936,11 +7785,10 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const FireSolid: React.FC<IconProps> = ({
+export const FireSolid: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -8953,11 +7801,10 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const FlagSolid: React.FC<IconProps> = ({
+export const FlagSolid: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -8970,11 +7817,10 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const FolderArrowDownSolid: React.FC<IconProps> = ({
+export const FolderArrowDownSolid: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -8987,11 +7833,10 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const FolderMinusSolid: React.FC<IconProps> = ({
+export const FolderMinusSolid: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -9004,11 +7849,10 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const FolderOpenSolid: React.FC<IconProps> = ({
+export const FolderOpenSolid: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -9021,11 +7865,10 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const FolderPlusSolid: React.FC<IconProps> = ({
+export const FolderPlusSolid: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -9038,11 +7881,10 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const FolderSolid: React.FC<IconProps> = ({
+export const FolderSolid: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -9055,11 +7897,10 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const ForwardSolid: React.FC<IconProps> = ({
+export const ForwardSolid: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -9072,11 +7913,10 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const FunnelSolid: React.FC<IconProps> = ({
+export const FunnelSolid: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -9089,11 +7929,10 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const GifSolid: React.FC<IconProps> = ({
+export const GifSolid: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -9106,11 +7945,10 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const GiftTopSolid: React.FC<IconProps> = ({
+export const GiftTopSolid: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -9123,11 +7961,10 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const GiftSolid: React.FC<IconProps> = ({
+export const GiftSolid: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -9140,11 +7977,10 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const GlobeAltSolid: React.FC<IconProps> = ({
+export const GlobeAltSolid: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -9157,11 +7993,10 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const GlobeAmericasSolid: React.FC<IconProps> = ({
+export const GlobeAmericasSolid: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -9174,11 +8009,10 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const GlobeAsiaAustraliaSolid: React.FC<IconProps> = ({
+export const GlobeAsiaAustraliaSolid: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -9191,11 +8025,10 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const GlobeEuropeAfricaSolid: React.FC<IconProps> = ({
+export const GlobeEuropeAfricaSolid: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -9208,11 +8041,10 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const H1Solid: React.FC<IconProps> = ({
+export const H1Solid: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -9225,11 +8057,10 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const H2Solid: React.FC<IconProps> = ({
+export const H2Solid: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -9242,11 +8073,10 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const H3Solid: React.FC<IconProps> = ({
+export const H3Solid: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -9259,11 +8089,10 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const HandRaisedSolid: React.FC<IconProps> = ({
+export const HandRaisedSolid: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -9276,11 +8105,10 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const HandThumbDownSolid: React.FC<IconProps> = ({
+export const HandThumbDownSolid: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -9293,11 +8121,10 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const HandThumbUpSolid: React.FC<IconProps> = ({
+export const HandThumbUpSolid: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -9310,11 +8137,10 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const HashtagSolid: React.FC<IconProps> = ({
+export const HashtagSolid: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -9327,11 +8153,10 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const HeartSolid: React.FC<IconProps> = ({
+export const HeartSolid: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -9344,11 +8169,10 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const HomeModernSolid: React.FC<IconProps> = ({
+export const HomeModernSolid: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -9361,11 +8185,10 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const HomeSolid: React.FC<IconProps> = ({
+export const HomeSolid: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -9378,11 +8201,10 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const IdentificationSolid: React.FC<IconProps> = ({
+export const IdentificationSolid: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -9395,11 +8217,10 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const InboxArrowDownSolid: React.FC<IconProps> = ({
+export const InboxArrowDownSolid: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -9412,11 +8233,10 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const InboxStackSolid: React.FC<IconProps> = ({
+export const InboxStackSolid: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -9429,11 +8249,10 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const InboxSolid: React.FC<IconProps> = ({
+export const InboxSolid: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -9446,11 +8265,10 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const InformationCircleSolid: React.FC<IconProps> = ({
+export const InformationCircleSolid: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -9463,11 +8281,10 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const ItalicSolid: React.FC<IconProps> = ({
+export const ItalicSolid: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -9480,11 +8297,10 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const KeySolid: React.FC<IconProps> = ({
+export const KeySolid: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -9497,11 +8313,10 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const LanguageSolid: React.FC<IconProps> = ({
+export const LanguageSolid: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -9514,11 +8329,10 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const LifebuoySolid: React.FC<IconProps> = ({
+export const LifebuoySolid: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -9531,11 +8345,10 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const LightBulbSolid: React.FC<IconProps> = ({
+export const LightBulbSolid: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -9548,11 +8361,10 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const LinkSlashSolid: React.FC<IconProps> = ({
+export const LinkSlashSolid: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -9565,11 +8377,10 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const LinkSolid: React.FC<IconProps> = ({
+export const LinkSolid: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -9582,11 +8393,10 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const ListBulletSolid: React.FC<IconProps> = ({
+export const ListBulletSolid: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -9599,11 +8409,10 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const LockClosedSolid: React.FC<IconProps> = ({
+export const LockClosedSolid: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -9616,11 +8425,10 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const LockOpenSolid: React.FC<IconProps> = ({
+export const LockOpenSolid: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -9633,11 +8441,10 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const MagnifyingGlassCircleSolid: React.FC<IconProps> = ({
+export const MagnifyingGlassCircleSolid: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -9650,11 +8457,10 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const MagnifyingGlassMinusSolid: React.FC<IconProps> = ({
+export const MagnifyingGlassMinusSolid: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -9667,11 +8473,10 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const MagnifyingGlassPlusSolid: React.FC<IconProps> = ({
+export const MagnifyingGlassPlusSolid: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -9684,11 +8489,10 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const MagnifyingGlassSolid: React.FC<IconProps> = ({
+export const MagnifyingGlassSolid: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -9701,11 +8505,10 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const MapPinSolid: React.FC<IconProps> = ({
+export const MapPinSolid: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -9718,11 +8521,10 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const MapSolid: React.FC<IconProps> = ({
+export const MapSolid: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -9735,11 +8537,10 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const MegaphoneSolid: React.FC<IconProps> = ({
+export const MegaphoneSolid: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -9752,11 +8553,10 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const MicrophoneSolid: React.FC<IconProps> = ({
+export const MicrophoneSolid: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -9769,11 +8569,10 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const MinusCircleSolid: React.FC<IconProps> = ({
+export const MinusCircleSolid: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -9786,11 +8585,10 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const MinusSmallSolid: React.FC<IconProps> = ({
+export const MinusSmallSolid: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -9803,11 +8601,10 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const MinusSolid: React.FC<IconProps> = ({
+export const MinusSolid: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -9820,11 +8617,10 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const MoonSolid: React.FC<IconProps> = ({
+export const MoonSolid: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -9837,11 +8633,10 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const MusicalNoteSolid: React.FC<IconProps> = ({
+export const MusicalNoteSolid: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -9854,11 +8649,10 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const NewspaperSolid: React.FC<IconProps> = ({
+export const NewspaperSolid: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -9871,11 +8665,10 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const NoSymbolSolid: React.FC<IconProps> = ({
+export const NoSymbolSolid: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -9888,11 +8681,10 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const NumberedListSolid: React.FC<IconProps> = ({
+export const NumberedListSolid: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -9905,11 +8697,10 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const PaintBrushSolid: React.FC<IconProps> = ({
+export const PaintBrushSolid: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -9922,11 +8713,10 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const PaperAirplaneSolid: React.FC<IconProps> = ({
+export const PaperAirplaneSolid: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -9939,11 +8729,10 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const PaperClipSolid: React.FC<IconProps> = ({
+export const PaperClipSolid: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -9956,11 +8745,10 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const PauseCircleSolid: React.FC<IconProps> = ({
+export const PauseCircleSolid: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -9973,11 +8761,10 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const PauseSolid: React.FC<IconProps> = ({
+export const PauseSolid: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -9990,11 +8777,10 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const PencilSquareSolid: React.FC<IconProps> = ({
+export const PencilSquareSolid: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -10007,11 +8793,10 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const PencilSolid: React.FC<IconProps> = ({
+export const PencilSolid: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -10024,11 +8809,10 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const PercentBadgeSolid: React.FC<IconProps> = ({
+export const PercentBadgeSolid: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -10041,11 +8825,10 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const PhoneArrowDownLeftSolid: React.FC<IconProps> = ({
+export const PhoneArrowDownLeftSolid: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -10058,11 +8841,10 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const PhoneArrowUpRightSolid: React.FC<IconProps> = ({
+export const PhoneArrowUpRightSolid: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -10075,11 +8857,10 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const PhoneXMarkSolid: React.FC<IconProps> = ({
+export const PhoneXMarkSolid: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -10092,11 +8873,10 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const PhoneSolid: React.FC<IconProps> = ({
+export const PhoneSolid: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -10109,11 +8889,10 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const PhotoSolid: React.FC<IconProps> = ({
+export const PhotoSolid: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -10126,11 +8905,10 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const PlayCircleSolid: React.FC<IconProps> = ({
+export const PlayCircleSolid: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -10143,11 +8921,10 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const PlayPauseSolid: React.FC<IconProps> = ({
+export const PlayPauseSolid: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -10160,11 +8937,10 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const PlaySolid: React.FC<IconProps> = ({
+export const PlaySolid: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -10177,11 +8953,10 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const PlusCircleSolid: React.FC<IconProps> = ({
+export const PlusCircleSolid: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -10194,11 +8969,10 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const PlusSmallSolid: React.FC<IconProps> = ({
+export const PlusSmallSolid: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -10211,11 +8985,10 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const PlusSolid: React.FC<IconProps> = ({
+export const PlusSolid: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -10228,11 +9001,10 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const PowerSolid: React.FC<IconProps> = ({
+export const PowerSolid: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -10245,11 +9017,10 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const PresentationChartBarSolid: React.FC<IconProps> = ({
+export const PresentationChartBarSolid: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -10262,11 +9033,10 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const PresentationChartLineSolid: React.FC<IconProps> = ({
+export const PresentationChartLineSolid: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -10279,11 +9049,10 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const PrinterSolid: React.FC<IconProps> = ({
+export const PrinterSolid: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -10296,11 +9065,10 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const PuzzlePieceSolid: React.FC<IconProps> = ({
+export const PuzzlePieceSolid: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -10313,11 +9081,10 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const QrCodeSolid: React.FC<IconProps> = ({
+export const QrCodeSolid: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -10330,11 +9097,10 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const QuestionMarkCircleSolid: React.FC<IconProps> = ({
+export const QuestionMarkCircleSolid: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -10347,11 +9113,10 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const QueueListSolid: React.FC<IconProps> = ({
+export const QueueListSolid: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -10364,11 +9129,10 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const RadioSolid: React.FC<IconProps> = ({
+export const RadioSolid: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -10381,11 +9145,10 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const ReceiptPercentSolid: React.FC<IconProps> = ({
+export const ReceiptPercentSolid: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -10398,11 +9161,10 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const ReceiptRefundSolid: React.FC<IconProps> = ({
+export const ReceiptRefundSolid: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -10415,11 +9177,10 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const RectangleGroupSolid: React.FC<IconProps> = ({
+export const RectangleGroupSolid: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -10432,11 +9193,10 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const RectangleStackSolid: React.FC<IconProps> = ({
+export const RectangleStackSolid: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -10449,11 +9209,10 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const RocketLaunchSolid: React.FC<IconProps> = ({
+export const RocketLaunchSolid: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -10466,11 +9225,10 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const RssSolid: React.FC<IconProps> = ({
+export const RssSolid: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -10483,11 +9241,10 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const ScaleSolid: React.FC<IconProps> = ({
+export const ScaleSolid: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -10500,11 +9257,10 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const ScissorsSolid: React.FC<IconProps> = ({
+export const ScissorsSolid: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -10517,11 +9273,10 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const ServerStackSolid: React.FC<IconProps> = ({
+export const ServerStackSolid: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -10534,11 +9289,10 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const ServerSolid: React.FC<IconProps> = ({
+export const ServerSolid: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -10551,11 +9305,10 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const ShareSolid: React.FC<IconProps> = ({
+export const ShareSolid: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -10568,11 +9321,10 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const ShieldCheckSolid: React.FC<IconProps> = ({
+export const ShieldCheckSolid: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -10585,11 +9337,10 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const ShieldExclamationSolid: React.FC<IconProps> = ({
+export const ShieldExclamationSolid: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -10602,11 +9353,10 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const ShoppingBagSolid: React.FC<IconProps> = ({
+export const ShoppingBagSolid: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -10619,11 +9369,10 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const ShoppingCartSolid: React.FC<IconProps> = ({
+export const ShoppingCartSolid: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -10636,11 +9385,10 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const SignalSlashSolid: React.FC<IconProps> = ({
+export const SignalSlashSolid: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -10653,11 +9401,10 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const SignalSolid: React.FC<IconProps> = ({
+export const SignalSolid: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -10670,11 +9417,10 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const SlashSolid: React.FC<IconProps> = ({
+export const SlashSolid: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -10687,11 +9433,10 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const SparklesSolid: React.FC<IconProps> = ({
+export const SparklesSolid: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -10704,11 +9449,10 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const SpeakerWaveSolid: React.FC<IconProps> = ({
+export const SpeakerWaveSolid: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -10721,11 +9465,10 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const SpeakerXMarkSolid: React.FC<IconProps> = ({
+export const SpeakerXMarkSolid: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -10738,11 +9481,10 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const Square2StackSolid: React.FC<IconProps> = ({
+export const Square2StackSolid: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -10755,11 +9497,10 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const Square3Stack3dSolid: React.FC<IconProps> = ({
+export const Square3Stack3dSolid: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -10772,11 +9513,10 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const Squares2x2Solid: React.FC<IconProps> = ({
+export const Squares2x2Solid: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -10789,11 +9529,10 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const SquaresPlusSolid: React.FC<IconProps> = ({
+export const SquaresPlusSolid: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -10806,11 +9545,10 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const StarSolid: React.FC<IconProps> = ({
+export const StarSolid: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -10823,11 +9561,10 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const StopCircleSolid: React.FC<IconProps> = ({
+export const StopCircleSolid: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -10840,11 +9577,10 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const StopSolid: React.FC<IconProps> = ({
+export const StopSolid: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -10857,11 +9593,10 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const StrikethroughSolid: React.FC<IconProps> = ({
+export const StrikethroughSolid: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -10874,11 +9609,10 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const SunSolid: React.FC<IconProps> = ({
+export const SunSolid: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -10891,11 +9625,10 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const SwatchSolid: React.FC<IconProps> = ({
+export const SwatchSolid: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -10908,11 +9641,10 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const TableCellsSolid: React.FC<IconProps> = ({
+export const TableCellsSolid: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -10925,11 +9657,10 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const TagSolid: React.FC<IconProps> = ({
+export const TagSolid: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -10942,11 +9673,10 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const TicketSolid: React.FC<IconProps> = ({
+export const TicketSolid: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -10959,11 +9689,10 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const TrashSolid: React.FC<IconProps> = ({
+export const TrashSolid: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -10976,11 +9705,10 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const TrophySolid: React.FC<IconProps> = ({
+export const TrophySolid: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -10993,11 +9721,10 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const TruckSolid: React.FC<IconProps> = ({
+export const TruckSolid: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -11010,11 +9737,10 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const TvSolid: React.FC<IconProps> = ({
+export const TvSolid: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -11027,11 +9753,10 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const UnderlineSolid: React.FC<IconProps> = ({
+export const UnderlineSolid: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -11044,11 +9769,10 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const UserCircleSolid: React.FC<IconProps> = ({
+export const UserCircleSolid: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -11061,11 +9785,10 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const UserGroupSolid: React.FC<IconProps> = ({
+export const UserGroupSolid: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -11078,11 +9801,10 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const UserMinusSolid: React.FC<IconProps> = ({
+export const UserMinusSolid: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -11095,11 +9817,10 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const UserPlusSolid: React.FC<IconProps> = ({
+export const UserPlusSolid: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -11112,11 +9833,10 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const UserSolid: React.FC<IconProps> = ({
+export const UserSolid: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -11129,11 +9849,10 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const UsersSolid: React.FC<IconProps> = ({
+export const UsersSolid: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -11146,11 +9865,10 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const VariableSolid: React.FC<IconProps> = ({
+export const VariableSolid: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -11163,11 +9881,10 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const VideoCameraSlashSolid: React.FC<IconProps> = ({
+export const VideoCameraSlashSolid: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -11180,11 +9897,10 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const VideoCameraSolid: React.FC<IconProps> = ({
+export const VideoCameraSolid: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -11197,11 +9913,10 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const ViewColumnsSolid: React.FC<IconProps> = ({
+export const ViewColumnsSolid: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -11214,11 +9929,10 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const ViewfinderCircleSolid: React.FC<IconProps> = ({
+export const ViewfinderCircleSolid: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -11231,11 +9945,10 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const WalletSolid: React.FC<IconProps> = ({
+export const WalletSolid: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -11248,11 +9961,10 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const WifiSolid: React.FC<IconProps> = ({
+export const WifiSolid: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -11265,11 +9977,10 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const WindowSolid: React.FC<IconProps> = ({
+export const WindowSolid: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -11282,11 +9993,10 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const WrenchScrewdriverSolid: React.FC<IconProps> = ({
+export const WrenchScrewdriverSolid: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -11299,11 +10009,10 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const WrenchSolid: React.FC<IconProps> = ({
+export const WrenchSolid: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -11316,11 +10025,10 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const XCircleSolid: React.FC<IconProps> = ({
+export const XCircleSolid: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -11333,11 +10041,10 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     
 
-                     export const XMarkSolid: React.FC<IconProps> = ({
+export const XMarkSolid: React.FC<IconProps> = ({
   size = 24,
-  color = 'black',
+  color = "black",
   ...props
 }) => {
   return (
@@ -11350,4 +10057,3 @@ import type { SvgProps } from "react-native-svg";
     />
   );
 };
-                     

@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import BackgroundView from "@/components/BackgroundView";
 import globalStyles from "@/styles/globalStyles";
 import { useRouter } from "expo-router";
-import TextButton from "@/components/TextButton";
+import TextButton from "@/components/button/TextButton";
 import theme from "@/styles/theme";
 import StyledModal from "@/components/StyledModal";
 import Toast from "react-native-toast-message";
@@ -102,9 +102,6 @@ const SurveyScreen = () => {
     <BackgroundView withSafeArea>
       <KeyboardAvoidingScrollView>
         <View style={globalStyles.screenPadding}>
-          <ThemedText style={[globalStyles.header1]}>Survey</ThemedText>
-          <SizedBox height={30} />
-
           {/* Focus Rating Slider */}
           <ThemedText style={styles.sliderLabel}>Focus Rating: {focusRating}</ThemedText>
           <StyledSlider
