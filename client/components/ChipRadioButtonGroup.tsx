@@ -82,10 +82,10 @@ const styles = StyleSheet.create({
   },
   radioOption: {
     paddingVertical: theme.spacing.sm,
-    paddingHorizontal: theme.spacing.md,
-    borderRadius: theme.radii.md,
+    paddingHorizontal: theme.spacing.lg,
+    borderRadius: theme.radii.full,
     borderWidth: 2,
-    borderColor: theme.colors.textMuted,
+    borderColor: theme.colors.border,
     backgroundColor: "transparent",
   },
   radioSelected: {
