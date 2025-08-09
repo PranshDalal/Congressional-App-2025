@@ -28,7 +28,8 @@ function getFontWeightFromStyle(
   // style can be an array or object
   const stylesArray = Array.isArray(style) ? style : [style];
 
-  for (const s of stylesArray.reverse()) {
+  // Create a copy before reversing to avoid mutating frozen objects
+  for (const s of [...stylesArray].reverse()) {
     // check fontWeight property, React Native uses strings or numbers
     if (s && s.fontWeight) {
       return typeof s.fontWeight === "string"

@@ -42,7 +42,7 @@ const SessionScreen = () => {
   const [motionReadings, setMotionReadings] = useState<number[]>([]);
   const [lightReadings, setLightReadings] = useState<number[]>([]);
 
-  const intervalRef = useRef<NodeJS.Timeout | null>(null);
+  const intervalRef = useRef<ReturnType<typeof setInterval> | null>(null);
   const startTimeRef = useRef<number>(Date.now());
 
   const { "microphone-enabled": microphoneEnabled } = useLocalSearchParams();

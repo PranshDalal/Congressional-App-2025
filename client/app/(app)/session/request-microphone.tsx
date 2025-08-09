@@ -17,8 +17,8 @@ import BouncingCircles from "@/components/BouncingCircles";
 import SizedBox from "@/components/SizedBox";
 import theme from "@/styles/theme";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { Ionicons, MaterialIcons } from "@expo/vector-icons";
 import ThemedText from "@/components/ThemedText";
+import { MicrophoneSolid } from "@/assets/icons/heroicons";
 
 const getMicrophonePermissionType = () =>
   Platform.select({
@@ -73,7 +73,7 @@ const AskMicrophonePermissionScreen = () => {
   return (
     <BackgroundView style={globalStyles.centered}>
       <View style={styles.circle}>
-        <Ionicons name="mic" size={100} color={theme.colors.primary} />
+        <MicrophoneSolid size={100} color={theme.colors.primary} />
       </View>
       <SizedBox height={50} />
       <ThemedText style={globalStyles.header3}>MICROPHONE</ThemedText>
