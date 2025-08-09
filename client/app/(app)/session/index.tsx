@@ -8,13 +8,13 @@ import theme from "@/styles/theme";
 import BouncingCircles from "@/components/BouncingCircles";
 import RNSoundLevel from "react-native-sound-level";
 import StyledModal from "@/components/StyledModal";
-import { SafeAreaView } from "react-native-safe-area-context";
+import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { Accelerometer } from "expo-sensors";
 import { CameraView, useCameraPermissions } from "expo-camera";
 import { getAuth } from "@react-native-firebase/auth";
 import axios from "axios";
 import { PauseSolid, PlaySolid } from "@/assets/icons/heroicons";
-import { useKeepAwake } from 'expo-keep-awake';
+import { useKeepAwake } from "expo-keep-awake";
 import ThemedText from "@/components/ThemedText";
 
 const SessionScreen = () => {
@@ -383,14 +383,19 @@ const SessionScreen = () => {
         )}
       </View>
 
-      <SafeAreaView edges={["bottom"]} style={styles.bottomStickyView}>
+      <View
+        style={[
+          styles.bottomStickyView,
+          { paddingBottom: useSafeAreaInsets().bottom },
+        ]}
+      >
         <TextButton
           title=""
           icon={
             isStopwatchRunning ? (
               <PauseSolid size={18} color={theme.colors.text} />
-              // <Ionicons name="pause" size={18} color={theme.colors.text} />
             ) : (
+              // <Ionicons name="pause" size={18} color={theme.colors.text} />
               <PlaySolid size={18} color={theme.colors.text} />
               // <Ionicons name="play" size={18} color={theme.colors.text} />
             )
@@ -404,7 +409,7 @@ const SessionScreen = () => {
           onPress={() => setEndSessionModalVisible(true)}
           width="45%"
         />
-      </SafeAreaView>
+      </View>
 
       <StyledModal
         title={"End Session"}
