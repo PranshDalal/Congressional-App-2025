@@ -8,6 +8,8 @@ import {
 import React, { forwardRef } from "react";
 import theme from "@/styles/theme";
 import SizedBox from "./SizedBox";
+import globalStyles from "@/styles/globalStyles";
+import ThemedText from "./ThemedText";
 
 type StyledTextInputProps = TextInputProps & {
   width?: any;
@@ -27,7 +29,7 @@ const StyledTextInput = forwardRef<TextInput, StyledTextInputProps>(
           {...rest}
         />
         {error ? (
-          <><SizedBox height={5} /><Text style={{ color: theme.colors.danger }}>{error}</Text></>
+          <><SizedBox height={5} /><ThemedText style={{ color: theme.colors.danger }}>{error}</ThemedText></>
         ) : null}
       </View>
     );
@@ -38,15 +40,15 @@ export default StyledTextInput;
 
 const styles = StyleSheet.create({
   base: {
-    fontSize: theme.fontSize.base,
-    color: theme.colors.text,
+    ...globalStyles.bodyText,
+    fontWeight: theme.fontWeight.semibold,
     paddingVertical: theme.spacing.md,
     paddingHorizontal: theme.spacing.md,
-    borderRadius: theme.radii.sm,
+    borderRadius: theme.radii.lg,
   },
   default: {
-    borderWidth: 1,
-    borderColor: theme.colors.border,
+    // borderWidth: 1,
+    // borderColor: theme.colors.border,
     backgroundColor: theme.colors.bgLight,
   },
 });

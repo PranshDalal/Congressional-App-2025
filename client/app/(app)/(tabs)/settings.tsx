@@ -9,6 +9,7 @@ import TextButton from "@/components/TextButton";
 import { getAuth } from "@react-native-firebase/auth";
 import StyledModal from "@/components/StyledModal";
 import Toast from "react-native-toast-message";
+import ThemedText from "@/components/ThemedText";
 
 const settings = () => {
   const [signOutModalVisible, setSignOutModalVisible] = useState(false);
@@ -24,7 +25,7 @@ const settings = () => {
 
   return (
     <BackgroundView withScreenPadding withSafeArea>
-      <Text style={globalStyles.header1}>Settings</Text>
+      <ThemedText style={globalStyles.header1}>Settings</ThemedText>
       <SizedBox height={50} />
       <TextButton
         title="Sign Out"
@@ -75,14 +76,14 @@ export default settings;
 //   if (error) {
 //     return (
 //       <View style={styles.container}>
-//         <Text style={styles.errorText}>{error}</Text>
+//         <ThemedText style={styles.errorText}>{error}</ThemedText>
 //       </View>
 //     );
 //   }
 
 //   return (
 //     <View style={styles.container}>
-//       <Text style={styles.messageText}>{message}</Text>
+//       <ThemedText style={styles.messageText}>{message}</ThemedText>
 //     </View>
 //   );
 // }

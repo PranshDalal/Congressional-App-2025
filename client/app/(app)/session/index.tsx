@@ -15,6 +15,7 @@ import { getAuth } from "@react-native-firebase/auth";
 import axios from "axios";
 import { PauseSolid, PlaySolid } from "@/assets/icons/heroicons";
 import { useKeepAwake } from 'expo-keep-awake';
+import ThemedText from "@/components/ThemedText";
 
 const SessionScreen = () => {
   useKeepAwake(); // Stops screen from sleeping
@@ -353,25 +354,25 @@ const SessionScreen = () => {
       )}
       <BouncingCircles paused={!isStopwatchRunning} />
       <View style={styles.content}>
-        <Text style={[globalStyles.header1, styles.stopwatchText]}>
+        <ThemedText style={[styles.stopwatchText, globalStyles.header1]}>
           {formatTime(elapsed)}
-        </Text>
-        <Text style={globalStyles.mutedText}>
+        </ThemedText>
+        <ThemedText style={globalStyles.mutedText}>
           {isStopwatchRunning ? "Collecting ambient data..." : "Paused"}
-        </Text>
-        <Text style={globalStyles.mutedText}>
+        </ThemedText>
+        <ThemedText style={globalStyles.mutedText}>
           {isStopwatchRunning && fakeRenderDB !== -1
             ? "Sound level: " + fakeRenderDB + " dB"
             : ""}
-        </Text>
-        <Text style={globalStyles.mutedText}>
+        </ThemedText>
+        <ThemedText style={globalStyles.mutedText}>
           {isStopwatchRunning
             ? `Motion magnitude: ${motionMagnitude.toFixed(3)}`
             : ""}
-        </Text>
-        <Text style={globalStyles.mutedText}>
+        </ThemedText>
+        <ThemedText style={globalStyles.mutedText}>
           {lighting !== null ? `Lighting: ${lighting}/100` : ""}
-        </Text>
+        </ThemedText>
         {!permission?.granted && (
           <TextButton
             title="Enable Camera for Lighting"
