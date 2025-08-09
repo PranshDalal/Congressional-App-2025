@@ -18,6 +18,7 @@ import SizedBox from "@/components/SizedBox";
 import theme from "@/styles/theme";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { Ionicons, MaterialIcons } from "@expo/vector-icons";
+import ThemedText from "@/components/ThemedText";
 
 const getMicrophonePermissionType = () =>
   Platform.select({
@@ -75,13 +76,13 @@ const AskMicrophonePermissionScreen = () => {
         <Ionicons name="mic" size={100} color={theme.colors.primary} />
       </View>
       <SizedBox height={50} />
-      <Text style={globalStyles.header3}>MICROPHONE</Text>
+      <ThemedText style={globalStyles.header3}>MICROPHONE</ThemedText>
       <SizedBox height={25} />
-      <Text style={styles.paragraph}>
+      <ThemedText style={styles.paragraph}>
         Enable microphone access so we can analyze ambient noise during your
         focus session. This allows us to create more accurate focus
         reccomendations.
-      </Text>
+      </ThemedText>
       <SafeAreaView style={styles.bottomStickyView} edges={["bottom"]}>
         {microphoneStatus === RESULTS.BLOCKED && !openedSettings ? (
           <TextButton
@@ -119,7 +120,6 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
   paragraph: {
-    ...globalStyles.bodyText,
     textAlign: "center",
     lineHeight: globalStyles.bodyText.fontSize + 8,
     paddingHorizontal: theme.spacing.xl,

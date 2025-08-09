@@ -14,6 +14,7 @@ import axios from "axios";
 import StyledSlider from "@/components/StyledSlider";
 import KeyboardAvoidingScrollView from "@/components/KeyboardAvoidingScrollView";
 import ChipRadioButtonGroup from "@/components/ChipRadioButtonGroup";
+import ThemedText from "@/components/ThemedText";
 
 const SurveyScreen = () => {
   const router = useRouter();
@@ -101,11 +102,11 @@ const SurveyScreen = () => {
     <BackgroundView withSafeArea>
       <KeyboardAvoidingScrollView>
         <View style={globalStyles.screenPadding}>
-          <Text style={[globalStyles.header1]}>Survey</Text>
+          <ThemedText style={[globalStyles.header1]}>Survey</ThemedText>
           <SizedBox height={30} />
 
           {/* Focus Rating Slider */}
-          <Text style={styles.sliderLabel}>Focus Rating: {focusRating}</Text>
+          <ThemedText style={styles.sliderLabel}>Focus Rating: {focusRating}</ThemedText>
           <StyledSlider
             minimumValue={1}
             maximumValue={10}
@@ -115,17 +116,17 @@ const SurveyScreen = () => {
             showBounds={true}
           />
           {/* <View style={styles.sliderLabels}>
-              <Text style={styles.sliderEndLabel}>1</Text>
-              <Text style={styles.sliderEndLabel}>10</Text>
+              <ThemedText style={styles.sliderEndLabel}>1</ThemedText>
+              <ThemedText style={styles.sliderEndLabel}>10</ThemedText>
             </View> */}
 
           <SizedBox height={20} />
 
           {/* Music/Headphones Question */}
           <View style={styles.questionContainer}>
-            <Text style={styles.questionLabel}>
+            <ThemedText style={styles.questionLabel}>
               Did you have music or headphones on?
-            </Text>
+            </ThemedText>
             <ChipRadioButtonGroup
               labels={Object.values(HeadphonesStatus)}
               onSelect={(index) => {
@@ -138,9 +139,9 @@ const SurveyScreen = () => {
 
           {/* Ventilation Question */}
           <View style={styles.questionContainer}>
-            <Text style={styles.questionLabel}>
+            <ThemedText style={styles.questionLabel}>
               What kind of ventilation was in the room?
-            </Text>
+            </ThemedText>
             <ChipRadioButtonGroup
               scrollable={true}
               labels={Object.values(VentilationStatus)}
@@ -156,7 +157,7 @@ const SurveyScreen = () => {
 
           {/* Task Type Question */}
           <View style={styles.questionContainer}>
-            <Text style={styles.questionLabel}>Task Type</Text>
+            <ThemedText style={styles.questionLabel}>Task Type</ThemedText>
             <StyledTextInput
               placeholder="e.g., Studying, Work, Reading..."
               value={taskType}
@@ -169,7 +170,7 @@ const SurveyScreen = () => {
 
           {/* Location Questions */}
           <View style={styles.questionContainer}>
-            <Text style={styles.questionLabel}>Location</Text>
+            <ThemedText style={styles.questionLabel}>Location</ThemedText>
             <StyledTextInput
               placeholder="Where did this take place?"
               value={location}

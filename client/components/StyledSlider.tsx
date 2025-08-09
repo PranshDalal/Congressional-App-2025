@@ -4,6 +4,7 @@ import theme from "@/styles/theme";
 import { StyleSheet, View, ViewStyle, Text } from "react-native";
 import globalStyles from "@/styles/globalStyles";
 import SizedBox from "./SizedBox";
+import ThemedText from "./ThemedText";
 
 type StyledSliderProps = SliderProps & {
   value?: number;
@@ -36,7 +37,7 @@ const StyledSlider = ({
 
   return (
     <View style={[styles.slider, styles.viewStyle, style]}>
-      {/* {showBounds && <Text style={globalStyles.mutedText}>{minimumValue}</Text>} */}
+      {/* {showBounds && <ThemedText style={globalStyles.mutedText}>{minimumValue}</ThemedText>} */}
       <Slider
         style={[styles.slider, style]}
         minimumValue={minimumValue}
@@ -50,12 +51,12 @@ const StyledSlider = ({
         {...props}
       />
 
-      {/* {showBounds && <Text style={globalStyles.mutedText}>{maximumValue}</Text>} */}
+      {/* {showBounds && <ThemedText style={globalStyles.mutedText}>{maximumValue}</ThemedText>} */}
 
       {showBounds && (
         <View style={{ width: "100%", flex: 1, flexDirection: "row", justifyContent: "space-between" }}>
-          <Text style={globalStyles.mutedText}>{minimumValue}</Text>
-          <Text style={globalStyles.mutedText}>{maximumValue}</Text>
+          <ThemedText style={globalStyles.mutedText}>{minimumValue}</ThemedText>
+          <ThemedText style={globalStyles.mutedText}>{maximumValue}</ThemedText>
         </View>
       )}
     </View>

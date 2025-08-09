@@ -23,6 +23,11 @@ export default function TabLayout() {
           },
           default: {},
         }),
+        tabBarShowLabel: false,
+        tabBarIconStyle: {
+          paddingTop: 10, // Move icons down
+          height: 60, // Increase height to accommodate
+        }
       }}
     >
       <Tabs.Screen
@@ -30,8 +35,8 @@ export default function TabLayout() {
         options={{
           title: "Home",
           tabBarIcon: ({ color, focused }) => (
-            focused ? <HomeSolid size={26} color={color} />
-            : <HomeOutline size={26} color={color} />
+            focused ? <HomeSolid size={28} color={color} />
+            : <HomeOutline size={28} color={color} />
           ),
         }}
       />
@@ -40,8 +45,8 @@ export default function TabLayout() {
         options={{
           title: "Stats",
           tabBarIcon: ({ color, focused }) => (
-            focused ? <ChartBarSolid size={26} color={color} />
-            : <ChartBarOutline size={26} color={color} />
+            focused ? <ChartBarSolid size={28} color={color} />
+            : <ChartBarOutline size={28} color={color} />
           ),
         }}
       />
@@ -50,8 +55,8 @@ export default function TabLayout() {
         options={{
           title: "Settings",
           tabBarIcon: ({ color, focused }) => (
-            focused ? <Cog6ToothSolid size={26} color={color} />
-            : <Cog6ToothOutline size={26} color={color} />
+            focused ? <Cog6ToothSolid size={28} color={color} />
+            : <Cog6ToothOutline size={28} color={color} />
           ),
         }}
       />

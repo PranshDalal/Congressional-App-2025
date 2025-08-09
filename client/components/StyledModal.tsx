@@ -11,6 +11,7 @@ import SizedBox from "./SizedBox";
 import TextButton from "./TextButton";
 import theme from "@/styles/theme";
 import { BlurView } from "expo-blur";
+import ThemedText from "./ThemedText";
 
 type StyledModalProps = {
   title: string;
@@ -56,9 +57,9 @@ const StyledModal = ({
         >
           <View style={styles.background}>
             <View style={globalStyles.centered}>
-              <Text style={globalStyles.header2}>{title}</Text>
+              <ThemedText style={globalStyles.header2}>{title}</ThemedText>
               <SizedBox height={theme.spacing.sm} />
-              <Text style={globalStyles.mutedText}>{body}</Text>
+              <ThemedText style={globalStyles.mutedText}>{body}</ThemedText>
             </View>
             <View>
               <SizedBox height={theme.spacing.lg} />
