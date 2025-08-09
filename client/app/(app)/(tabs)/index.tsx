@@ -6,6 +6,7 @@ import globalStyles from "@/styles/globalStyles";
 import { getAuth } from "@react-native-firebase/auth";
 import { useStartSession } from "@/hooks/useStartSession";
 import SizedBox from "@/components/SizedBox";
+import ThemedText from "@/components/ThemedText";
 
 const IndexScreen = () => {
   const user = getAuth().currentUser;
@@ -13,12 +14,12 @@ const IndexScreen = () => {
 
   return (
     <BackgroundView withSafeArea withScreenPadding>
-      <Text style={[globalStyles.header1]}>
+      <ThemedText style={[globalStyles.header1]}>
         Welcome back, {user?.displayName}
-      </Text>
+      </ThemedText>
       <SizedBox height={25} />
       {/* <View style={{ alignItems: "center" }}> */}
-      <Text style={globalStyles.bodyText}>Ready to lock in?</Text>
+      <ThemedText>Ready to lock in?</ThemedText>
       <TextButton title="Start Session" onPress={startSession} />
       {/* </View> */}
     </BackgroundView>

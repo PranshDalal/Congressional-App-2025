@@ -11,6 +11,7 @@ import theme from "@/styles/theme";
 import globalStyles from "@/styles/globalStyles";
 import * as Haptics from "expo-haptics";
 import BouncingDots from "./BouncingDots";
+import ThemedText from "./ThemedText";
 
 type ButtonProps = {
   title: string;
@@ -81,7 +82,7 @@ export default function TextButton({
                 {icon}
               </View>
             )}
-            <Text style={[globalStyles.bodyText, textStyle]}>{title}</Text>
+            <ThemedText style={[{fontWeight: theme.fontWeight.bold}, textStyle ?? {}]}>{title}</ThemedText>
           </React.Fragment>
         )}
       </View>
@@ -93,7 +94,7 @@ const styles = StyleSheet.create({
   base: {
     paddingVertical: theme.spacing.md,
     paddingHorizontal: theme.spacing.lg,
-    borderRadius: theme.radii.md,
+    borderRadius: theme.radii.xl,
     alignItems: "center",
   },
   primary: {
@@ -101,10 +102,10 @@ const styles = StyleSheet.create({
   },
   secondary: {
     backgroundColor: theme.colors.bgLight,
-    borderWidth: 1,
+    // borderWidth: 1,
     borderColor: theme.colors.border,
-    paddingVertical: theme.spacing.md - 1,
-    paddingHorizontal: theme.spacing.lg - 1,
+    paddingVertical: theme.spacing.md,// - 1,
+    paddingHorizontal: theme.spacing.lg,// - 1,
   },
   pressed: {
     opacity: 0.8,

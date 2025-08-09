@@ -9,6 +9,8 @@ import theme from "@/styles/theme";
 import { Link } from "expo-router";
 import { useSignIn } from "@/hooks/auth/useSignIn";
 import { useForgotPassword } from "@/hooks/auth/useForgotPassword";
+import { StyleSheet } from "react-native";
+import ThemedText from "@/components/ThemedText";
 
 const SigninScreen = () => {
   const [loading, setLoading] = useState(false);
@@ -39,19 +41,21 @@ const SigninScreen = () => {
     <BackgroundView withSafeArea withScreenPadding>
       <View style={{ flex: 1, alignItems: "center" }}>
         <SizedBox height={100} />
-        <Text style={globalStyles.header1}>Welcome Back!</Text>
-        <Text style={globalStyles.mutedText}>Please sign in to continue</Text>
-        <SizedBox height={25} />
+        <ThemedText style={globalStyles.header1}>Welcome Back!</ThemedText>
+        <ThemedText style={globalStyles.mutedText}>Please sign in to continue</ThemedText>
+        <SizedBox height={theme.spacing.lg} />
+        <ThemedText style={styles.inputTitle}>Email</ThemedText>
         <StyledTextInput
           value={email}
           onSubmitEditing={() => inputPasswordRef.current?.focus()}
-          placeholder="Email"
+          placeholder="Your email"
           keyboardType="email-address"
           onChangeText={setEmail}
           enterKeyHint="next"
           error={emailError}
         />
-        <SizedBox height={10} />
+        <SizedBox height={theme.spacing.md} />
+        <ThemedText style={styles.inputTitle}>Password</ThemedText>
         <StyledTextInput
           value={password}
           onSubmitEditing={handleSignIn}
@@ -64,19 +68,19 @@ const SigninScreen = () => {
         />
         <SizedBox height={5} />
         <Pressable onPress={forgotPassword} style={{ alignSelf: "flex-start" }}>
-          <Text style={globalStyles.linkText}>Forgot your password?</Text>
+          <ThemedText style={globalStyles.linkText}>Forgot your password?</ThemedText>
         </Pressable>
-        <SizedBox height={20} />
+        <SizedBox height={theme.spacing.md} />
         <TextButton
           title="Sign In"
           onPress={handleSignIn}
           width="100%"
-          textStyle={{ fontWeight: theme.fontWeight.semibold }}
+          textStyle={{ fontSize: theme.fontSize.lg }}
           showLoading={loading}
         />
         <SizedBox height={25} />
         <View style={{ flexDirection: "row" }}>
-          <Text style={globalStyles.mutedText}>Don't have an account? </Text>
+          <ThemedText style={globalStyles.mutedText}>Don't have an account? </ThemedText>
           <Link href="/sign-up" style={globalStyles.linkText} replace>
             Sign Up
           </Link>
@@ -87,3 +91,12 @@ const SigninScreen = () => {
 };
 
 export default SigninScreen;
+
+const styles = StyleSheet.create({
+  inputTitle: {
+    fontSize: theme.fontSize.lg,
+    alignSelf: "flex-start",
+    paddingBottom: theme.spacing.sm,
+    fontWeight: 500,
+  },
+});
