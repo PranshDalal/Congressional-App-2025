@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from "react";
-import { View, Text, ScrollView, StyleSheet } from "react-native";
+import { View, ScrollView, StyleSheet } from "react-native";
 import BackgroundView from "@/components/BackgroundView";
 import SizedBox from "@/components/SizedBox";
 import TextButton from "@/components/TextButton";
 import { getAuth } from "@react-native-firebase/auth";
 import axios from "axios";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
+import ThemedText from "@/components/ThemedText";
 
 const getRecommendationDetails = (key: string, value: any) => {
     let icon: keyof typeof MaterialCommunityIcons.glyphMap = "information-outline";
@@ -123,10 +124,10 @@ const FocusZonesScreen = () => {
     return (
         <BackgroundView withSafeArea withScreenPadding style={styles.background}>
             <View style={styles.container}>
-                <Text style={styles.title}>Focus Zones</Text>
-                <Text style={styles.subtitle}>
+                <ThemedText style={styles.title}>Focus Zones</ThemedText>
+                <ThemedText style={styles.subtitle}>
                     Your optimal environment conditions based on past high-focus sessions.
-                </Text>
+                </ThemedText>
                 <SizedBox height={20} />
                 <TextButton
                     title={loading ? "Loading..." : "Refresh Recommendations"}
@@ -136,11 +137,11 @@ const FocusZonesScreen = () => {
                     textStyle={styles.buttonText}
                 />
 
-                {error && <Text style={styles.errorText}>{error}</Text>}
+                {error && <ThemedText style={styles.errorText}>{error}</ThemedText>}
 
                 {recommendationsData && (
                     <View style={styles.recommendationsContainer}>
-                        <Text style={styles.messageText}>{recommendationsData.message}</Text>
+                        <ThemedText style={styles.messageText}>{recommendationsData.message}</ThemedText>
 
                         {recommendationsData.recommendations ? (
                             <ScrollView style={styles.recommendationsList}>
@@ -156,13 +157,13 @@ const FocusZonesScreen = () => {
                                                 style={{ marginRight: 8 }}
                                             />
                                             <View>
-                                                <Text style={styles.recommendationText}>
+                                                <ThemedText style={styles.recommendationText}>
                                                     {key.replace(/_/g, " ")}: {displayValue}
-                                                </Text>
+                                                </ThemedText>
                                                 {description && (
-                                                    <Text style={styles.recommendationDescription}>
+                                                    <ThemedText style={styles.recommendationDescription}>
                                                         {description}
-                                                    </Text>
+                                                    </ThemedText>
                                                 )}
                                             </View>
                                         </View>
@@ -170,7 +171,7 @@ const FocusZonesScreen = () => {
                                 })}
                             </ScrollView>
                         ) : (
-                            <Text style={styles.infoText}>No specific recommendations available.</Text>
+                            <ThemedText style={styles.infoText}>No specific recommendations available.</ThemedText>
                         )}
                     </View>
                 )}
