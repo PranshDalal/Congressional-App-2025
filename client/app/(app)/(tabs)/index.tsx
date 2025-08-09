@@ -4,6 +4,7 @@ import TextButton from "@/components/button/TextButton";
 import { useStartSession } from "@/hooks/useStartSession";
 import SizedBox from "@/components/SizedBox";
 import ThemedText from "@/components/ThemedText";
+import globalStyles from "@/styles/globalStyles";
 
 const IndexScreen = () => {
   const startSession = useStartSession();
@@ -12,8 +13,12 @@ const IndexScreen = () => {
     <BackgroundView withSafeArea withScreenPadding>
       <SizedBox height={25} />
       {/* <View style={{ alignItems: "center" }}> */}
-      <ThemedText>Ready to lock in?</ThemedText>
-      <TextButton title="Start Session" onPress={startSession} />
+      <ThemedText style={globalStyles.header3}>Ready to lock in?</ThemedText>
+      <TextButton
+        title="Start Session"
+        textStyle={{ fontWeight: 700 }}
+        onPress={startSession}
+      />
       {/* </View> */}
     </BackgroundView>
   );
