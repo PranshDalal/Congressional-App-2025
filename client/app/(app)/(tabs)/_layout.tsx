@@ -46,6 +46,16 @@ export default function TabLayout() {
         }}
       />
       <Tabs.Screen
+        name="focusZones"
+        options={{
+          title: "Focus Zones",
+          tabBarIcon: ({ color, focused }) => (
+            focused ? <DevicePhoneMobileOutline size={26} color={color} />
+            : <DevicePhoneMobileOutline size={26} color={color} />
+          ),
+        }}
+      />
+      <Tabs.Screen
         name="settings"
         options={{
           title: "Settings",
