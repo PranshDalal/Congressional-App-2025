@@ -3,7 +3,7 @@ import BackgroundView from "@/components/BackgroundView";
 import globalStyles from "@/styles/globalStyles";
 import StyledTextInput from "@/components/StyledTextInput";
 import SizedBox from "@/components/SizedBox";
-import TextButton from "@/components/TextButton";
+import TextButton from "@/components/button/TextButton";
 import theme from "@/styles/theme";
 import { Link } from "expo-router";
 import { useSignUp } from "@/hooks/auth/useSignUp";
@@ -38,7 +38,7 @@ const SignupScreen = () => {
       <View style={{ flex: 1, alignItems: "center" }}>
         <SizedBox height={100} />
         <ThemedText style={globalStyles.header1}>Welcome!</ThemedText>
-        <ThemedText style={globalStyles.mutedText}>Please sign up</ThemedText>
+        <ThemedText style={globalStyles.mutedText}>Please create an account to continue</ThemedText>
         <SizedBox height={theme.spacing.xl} />
         <ThemedText style={styles.inputTitle}>Your Name</ThemedText>
         <StyledTextInput
@@ -87,7 +87,7 @@ const SignupScreen = () => {
         />
         <SizedBox height={20} />
         <TextButton
-          title="Sign Up"
+          title="Create Account"
           onPress={handleSignUp}
           textStyle={{
             fontSize: theme.fontSize.lg,

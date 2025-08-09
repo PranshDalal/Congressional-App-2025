@@ -40,6 +40,7 @@ type BackgroundViewProps = ViewProps & {
   withSafeArea?: boolean;
   withScreenPadding?: boolean;
   disableDismiss?: boolean;
+  pageHasHeader?: boolean;
 };
 
 export default function BackgroundView({
@@ -47,6 +48,7 @@ export default function BackgroundView({
   withSafeArea,
   withScreenPadding,
   disableDismiss = false,
+  pageHasHeader = true,
   ...props
 }: BackgroundViewProps) {
   const insets = useSafeAreaInsets();
@@ -63,7 +65,7 @@ export default function BackgroundView({
     paddingHorizontal: withSafeArea
       ? screenPaddingHorizontal + insets.left + insets.right
       : screenPaddingHorizontal,
-    paddingTop: screenPaddingTop + safeAreaPaddingTop,
+    paddingTop: pageHasHeader ? 0 : screenPaddingTop + safeAreaPaddingTop,
     paddingBottom: withSafeArea ? insets.bottom : 0,
   };
 

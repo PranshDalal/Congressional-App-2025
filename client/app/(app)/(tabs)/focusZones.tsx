@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { View, ScrollView, StyleSheet } from "react-native";
 import BackgroundView from "@/components/BackgroundView";
 import SizedBox from "@/components/SizedBox";
-import TextButton from "@/components/TextButton";
+import TextButton from "@/components/button/TextButton";
 import { getAuth } from "@react-native-firebase/auth";
 import axios from "axios";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
@@ -124,7 +124,6 @@ const FocusZonesScreen = () => {
     return (
         <BackgroundView withSafeArea withScreenPadding style={styles.background}>
             <View style={styles.container}>
-                <ThemedText style={styles.title}>Focus Zones</ThemedText>
                 <ThemedText style={styles.subtitle}>
                     Your optimal environment conditions based on past high-focus sessions.
                 </ThemedText>

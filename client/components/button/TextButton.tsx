@@ -10,8 +10,8 @@ import React from "react";
 import theme from "@/styles/theme";
 import globalStyles from "@/styles/globalStyles";
 import * as Haptics from "expo-haptics";
-import BouncingDots from "./BouncingDots";
-import ThemedText from "./ThemedText";
+import BouncingDots from "../BouncingDots";
+import ThemedText from "../ThemedText";
 
 import { MotiPressable } from "moti/interactions";
 

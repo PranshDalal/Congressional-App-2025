@@ -12,7 +12,7 @@ import {
 import { useLocalSearchParams, useRouter } from "expo-router";
 import BackgroundView from "@/components/BackgroundView";
 import globalStyles from "@/styles/globalStyles";
-import TextButton from "@/components/TextButton";
+import TextButton from "@/components/button/TextButton";
 import BouncingCircles from "@/components/BouncingCircles";
 import SizedBox from "@/components/SizedBox";
 import theme from "@/styles/theme";
@@ -85,11 +85,20 @@ const AskMicrophonePermissionScreen = () => {
       </ThemedText>
       <SafeAreaView style={styles.bottomStickyView} edges={["bottom"]}>
         {microphoneStatus === RESULTS.BLOCKED && !openedSettings ? (
-          <TextButton
-            title="Open Settings"
-            onPress={requestPermissionThroughSettings}
-            width={"90%"}
-          />
+          <>
+            <TextButton
+              title="Open Settings"
+              onPress={requestPermissionThroughSettings}
+              width={"90%"}
+            />
+            <SizedBox height={theme.spacing.sm} />
+            <TextButton
+              title="Continue"
+              onPress={() => routeToSession("false")}
+              width={"90%"}
+              variant="secondary"
+            />
+          </>
         ) : microphoneStatus === RESULTS.DENIED && !openedSettings ? (
           <TextButton
             title="Continue"

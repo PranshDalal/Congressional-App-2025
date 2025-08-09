@@ -3,7 +3,7 @@ import React from "react";
 import BackgroundView from "@/components/BackgroundView";
 import { StyleSheet } from "react-native";
 import globalStyles from "@/styles/globalStyles";
-import TextButton from "@/components/TextButton";
+import TextButton from "@/components/button/TextButton";
 import { useRouter } from "expo-router";
 import { theme } from "@/styles/theme";
 import ThemedText from "@/components/ThemedText";

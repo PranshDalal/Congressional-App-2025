@@ -8,7 +8,7 @@ import {
 import React from "react";
 import globalStyles from "@/styles/globalStyles";
 import SizedBox from "./SizedBox";
-import TextButton from "./TextButton";
+import TextButton from "./button/TextButton";
 import theme from "@/styles/theme";
 import { BlurView } from "expo-blur";
 import ThemedText from "./ThemedText";
