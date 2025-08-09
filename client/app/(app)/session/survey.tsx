@@ -1,10 +1,4 @@
-import {
-  View,
-  Text,
-  StyleSheet,
-  Pressable,
-  ScrollView,
-} from "react-native";
+import { View, Text, StyleSheet, Pressable, ScrollView } from "react-native";
 import React, { useState } from "react";
 import BackgroundView from "@/components/BackgroundView";
 import globalStyles from "@/styles/globalStyles";
@@ -19,6 +13,7 @@ import { useLocalSearchParams } from "expo-router";
 import axios from "axios";
 import StyledSlider from "@/components/StyledSlider";
 import KeyboardAvoidingScrollView from "@/components/KeyboardAvoidingScrollView";
+import ChipRadioButtonGroup from "@/components/ChipRadioButtonGroup";
 
 const SurveyScreen = () => {
   const router = useRouter();
@@ -29,8 +24,14 @@ const SurveyScreen = () => {
   const [hadMusicOrHeadphones, setHadMusicOrHeadphones] = useState<
     boolean | null
   >(null);
+  const [musicHeadphonesIndex, setMusicHeadphonesIndex] = useState<
+    number | null
+  >(null);
   const [taskType, setTaskType] = useState("");
   const [location, setLocation] = useState("");
+  const [ventilationStatusIndex, setVentilationStatusIndex] = useState<
+    number | null
+  >(null);
   const [ventilationStatus, setVentilationStatus] = useState<string | null>(
     null
   );
@@ -120,49 +121,19 @@ const SurveyScreen = () => {
 
           <SizedBox height={20} />
 
-          <SizedBox height={20} />
-
-          <SizedBox height={30} />
-
           {/* Music/Headphones Question */}
           <View style={styles.questionContainer}>
             <Text style={styles.questionLabel}>
               Did you have music or headphones on?
             </Text>
-            <View style={styles.radioGroup}>
-              <Pressable
-                style={[
-                  styles.radioOption,
-                  hadMusicOrHeadphones === true && styles.radioSelected,
-                ]}
-                onPress={() => setHadMusicOrHeadphones(true)}
-              >
-                <Text
-                  style={[
-                    styles.radioText,
-                    hadMusicOrHeadphones === true && styles.radioTextSelected,
-                  ]}
-                >
-                  Yes
-                </Text>
-              </Pressable>
-              <Pressable
-                style={[
-                  styles.radioOption,
-                  hadMusicOrHeadphones === false && styles.radioSelected,
-                ]}
-                onPress={() => setHadMusicOrHeadphones(false)}
-              >
-                <Text
-                  style={[
-                    styles.radioText,
-                    hadMusicOrHeadphones === false && styles.radioTextSelected,
-                  ]}
-                >
-                  No
-                </Text>
-              </Pressable>
-            </View>
+            <ChipRadioButtonGroup
+              labels={Object.values(HeadphonesStatus)}
+              onSelect={(index) => {
+                setMusicHeadphonesIndex(index);
+                setHadMusicOrHeadphones(index === 0);
+              }}
+              selectedIndex={musicHeadphonesIndex}
+            />
           </View>
 
           {/* Ventilation Question */}
@@ -170,40 +141,16 @@ const SurveyScreen = () => {
             <Text style={styles.questionLabel}>
               What kind of ventilation was in the room?
             </Text>
-            <ScrollView
-              horizontal
-              showsHorizontalScrollIndicator={false}
-              contentContainerStyle={{ flexDirection: "row", gap: 12 }}
-            >
-              {[
-                "Closed room (no ventilation)",
-                "Air conditioning (AC)",
-                "Open window",
-                "Fan on",
-                "Other",
-              ].map((option) => (
-                <Pressable
-                  key={option}
-                  style={[
-                    styles.radioOption,
-                    ventilationStatus === option && styles.radioSelected,
-                  ]}
-                  onPress={() => setVentilationStatus(option)}
-                >
-                  <Text
-                    style={[
-                      styles.radioText,
-                      ventilationStatus === option && styles.radioTextSelected,
-                    ]}
-                  >
-                    {option}
-                  </Text>
-                </Pressable>
-              ))}
-            </ScrollView>
+            <ChipRadioButtonGroup
+              scrollable={true}
+              labels={Object.values(VentilationStatus)}
+              onSelect={(index) => {
+                setVentilationStatus(Object.values(VentilationStatus)[index]);
+                setVentilationStatusIndex(index);
+              }}
+              selectedIndex={ventilationStatusIndex}
+            />
           </View>
-
-          <SizedBox height={25} />
 
           <SizedBox height={25} />
 
@@ -259,9 +206,6 @@ const SurveyScreen = () => {
 export default SurveyScreen;
 
 const styles = StyleSheet.create({
-  scrollContent: {
-    // paddingBottom: 120,
-  },
   bottomStickyView: {
     flexDirection: "row",
     justifyContent: "space-evenly",
@@ -282,19 +226,6 @@ const styles = StyleSheet.create({
     color: theme.colors.text,
     marginBottom: theme.spacing.sm,
   },
-  slider: {
-    width: "100%",
-    height: 40,
-  },
-  sliderLabels: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    marginTop: 5,
-  },
-  sliderEndLabel: {
-    fontSize: theme.fontSize.sm,
-    color: theme.colors.textMuted,
-  },
   questionContainer: {
     marginBottom: theme.spacing.md,
   },
@@ -303,31 +234,6 @@ const styles = StyleSheet.create({
     fontWeight: theme.fontWeight.semibold,
     color: theme.colors.text,
     marginBottom: theme.spacing.sm,
-  },
-  radioGroup: {
-    flexDirection: "row",
-    gap: theme.spacing.sm,
-  },
-  radioOption: {
-    paddingVertical: theme.spacing.sm,
-    paddingHorizontal: theme.spacing.md,
-    borderRadius: theme.radii.md,
-    borderWidth: 2,
-    borderColor: theme.colors.textMuted,
-    backgroundColor: "transparent",
-  },
-  radioSelected: {
-    borderColor: theme.colors.primary,
-    backgroundColor: theme.colors.primary,
-  },
-  radioText: {
-    fontSize: theme.fontSize.base,
-    color: theme.colors.text,
-    textAlign: "center",
-  },
-  radioTextSelected: {
-    color: "#fff",
-    fontWeight: theme.fontWeight.semibold,
   },
   checkboxGroup: {
     flexDirection: "row",
@@ -358,3 +264,17 @@ const styles = StyleSheet.create({
     width: "100%",
   },
 });
+
+enum HeadphonesStatus {
+  Yes = "Yes",
+  No = "No",
+}
+
+enum VentilationStatus {
+  ClosedRoom = "No Ventilation",
+  AirConditioning = "Air Conditioning",
+  Outside = "Outside",
+  OpenWindow = "Open Window",
+  FanOn = "Fan On",
+  Other = "Other",
+}
