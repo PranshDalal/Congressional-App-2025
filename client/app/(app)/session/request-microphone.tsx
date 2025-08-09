@@ -93,7 +93,7 @@ const AskMicrophonePermissionScreen = () => {
             />
             <SizedBox height={theme.spacing.sm} />
             <TextButton
-              title="Continue"
+              title="Skip"
               onPress={() => routeToSession("false")}
               width={"90%"}
               variant="secondary"
