@@ -18,6 +18,7 @@ import {
 } from "@/assets/icons/heroicons";
 import { headerPreset } from "@/components/Header";
 import { getAuth } from "@react-native-firebase/auth";
+import ThemedText from "@/components/ThemedText";
 import IconButton from "@/components/button/IconButton";
 
 export default function TabLayout() {
@@ -47,7 +48,21 @@ export default function TabLayout() {
       <Tabs.Screen
         name="index"
         options={{
-          title: "Welcome back, " + user?.displayName,
+          headerTitle: () => (
+            <ThemedText
+              style={{
+                color: "#a75cff",
+                fontFamily: "Nunito_700Bold",
+                fontSize: 30,
+                letterSpacing: 0.5,
+                textShadowColor: "#a75cff55",
+                textShadowOffset: { width: 0, height: 2 },
+                textShadowRadius: 8,
+              }}
+            >
+              {`Welcome back${user?.displayName ? ", " + user.displayName : ""}`}
+            </ThemedText>
+          ),
           tabBarIcon: ({ color, focused }) =>
             focused ? (
               <HomeSolid size={28} color={color} />
@@ -56,7 +71,7 @@ export default function TabLayout() {
             ),
           headerRight: () => (
             <IconButton
-              color={theme.colors.text}
+              color="#a75cff"
               size={28}
               icon={<UserCircleOutline />}
               onPress={() => {
@@ -107,7 +122,6 @@ export default function TabLayout() {
       <Tabs.Screen
         name="settings"
         options={{
-          href: null,
           title: "Settings",
           tabBarIcon: ({ color, focused }) =>
             focused ? (
