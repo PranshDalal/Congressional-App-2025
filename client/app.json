@@ -14,8 +14,9 @@
       "googleServicesFile": "./GoogleService-Info.plist",
       "infoPlist": {
         "ITSAppUsesNonExemptEncryption": false,
-        "NSMicrophoneUsageDescription": "This app needs your microphone to measure ambient noise levels.",
-        "NSCameraUsageDescription": "This app needs access to the camera to measure ambient lighting conditions during focus sessions."
+        "NSMicrophoneUsageDescription": "We use the microphone to measure ambient noise levels during focus sessions.",
+        "NSCameraUsageDescription": "We use the camera to measure ambient lighting conditions during focus sessions.",
+        "NSMotionUsageDescription": "We use motion data to detect activity during focus sessions."
       }
     },
     "android": {
@@ -28,7 +29,8 @@
       "googleServicesFile": "./google-services.json",
       "permissions": [
         "RECORD_AUDIO",
-        "CAMERA"
+        "CAMERA",
+        "BODY_SENSORS"
       ]
     },
     "web": {
