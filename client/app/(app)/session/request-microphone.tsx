@@ -1,19 +1,16 @@
-import { View, Text, Platform, StyleSheet } from "react-native";
-import React, { useEffect, useState } from "react";
+import { View, Platform, StyleSheet } from "react-native";
+import React, { useState } from "react";
 
 import {
-  check,
   request,
   RESULTS,
   PERMISSIONS,
   openSettings,
-  PermissionStatus,
 } from "react-native-permissions";
 import { useLocalSearchParams, useRouter } from "expo-router";
 import BackgroundView from "@/components/BackgroundView";
 import globalStyles from "@/styles/globalStyles";
 import TextButton from "@/components/button/TextButton";
-import BouncingCircles from "@/components/BouncingCircles";
 import SizedBox from "@/components/SizedBox";
 import theme from "@/styles/theme";
 import { SafeAreaView } from "react-native-safe-area-context";
