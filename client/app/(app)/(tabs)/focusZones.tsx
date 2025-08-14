@@ -7,6 +7,7 @@ import { getAuth } from "@react-native-firebase/auth";
 import axios from "axios";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import ThemedText from "@/components/ThemedText";
+import Animated, { FadeInDown, FadeInRight } from "react-native-reanimated";
 
 const getRecommendationDetails = (key: string, value: any) => {
   let icon: keyof typeof MaterialCommunityIcons.glyphMap =
@@ -146,10 +147,12 @@ const FocusZonesScreen = () => {
         {error && <ThemedText style={styles.errorText}>{error}</ThemedText>}
 
         {recommendationsData && (
-          <View style={styles.recommendationsContainer}>
-            <ThemedText style={styles.messageText}>
-              {recommendationsData.message}
-            </ThemedText>
+          <Animated.View style={styles.recommendationsContainer} entering={FadeInDown.duration(500)}>
+            <Animated.View entering={FadeInDown.duration(500).delay(250)}>
+                <ThemedText style={styles.messageText}>
+                {recommendationsData.message}
+                </ThemedText>
+            </Animated.View>
 
             {recommendationsData.recommendations ? (
               <ScrollView style={styles.recommendationsList}>
@@ -159,7 +162,11 @@ const FocusZonesScreen = () => {
                       getRecommendationDetails(key, value);
 
                     return (
-                      <View key={key} style={styles.recommendationItem}>
+                      <Animated.View
+                        key={key}
+                        style={styles.recommendationItem}
+                        entering={FadeInDown.duration(500).delay(400)}
+                      >
                         <MaterialCommunityIcons
                           name={icon}
                           size={24}
@@ -178,7 +185,7 @@ const FocusZonesScreen = () => {
                             </ThemedText>
                           )}
                         </View>
-                      </View>
+                      </Animated.View>
                     );
                   }
                 )}
@@ -188,7 +195,7 @@ const FocusZonesScreen = () => {
                 No specific recommendations available.
               </ThemedText>
             )}
-          </View>
+          </Animated.View>
         )}
       </View>
     </BackgroundView>
