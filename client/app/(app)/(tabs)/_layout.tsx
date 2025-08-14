@@ -20,6 +20,7 @@ import { headerPreset } from "@/components/Header";
 import { getAuth } from "@react-native-firebase/auth";
 import ThemedText from "@/components/ThemedText";
 import IconButton from "@/components/button/IconButton";
+import globalStyles from "@/styles/globalStyles";
 
 export default function TabLayout() {
   const user = getAuth().currentUser;
@@ -49,18 +50,10 @@ export default function TabLayout() {
         name="index"
         options={{
           headerTitle: () => (
-            <ThemedText
-              style={{
-                color: "#a75cff",
-                fontFamily: "Nunito_700Bold",
-                fontSize: 30,
-                letterSpacing: 0.5,
-                textShadowColor: "#a75cff55",
-                textShadowOffset: { width: 0, height: 2 },
-                textShadowRadius: 8,
-              }}
-            >
-              {`Welcome back${user?.displayName ? ", " + user.displayName : ""}`}
+            <ThemedText style={globalStyles.header1}>
+              {`Welcome back${
+                user?.displayName ? ", " + user.displayName : ""
+              }`}
             </ThemedText>
           ),
           tabBarIcon: ({ color, focused }) =>
