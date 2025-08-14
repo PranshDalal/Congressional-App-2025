@@ -12,6 +12,7 @@ import TextButton from "./button/TextButton";
 import theme from "@/styles/theme";
 import { BlurView } from "expo-blur";
 import ThemedText from "./ThemedText";
+import Animated, { FadeInDown, FadeInUp, FadeOutDown } from "react-native-reanimated";
 
 type StyledModalProps = {
   title: string;
@@ -55,7 +56,7 @@ const StyledModal = ({
           style={[globalStyles.centered, { flex: 1 }]}
           experimentalBlurMethod="dimezisBlurView"
         >
-          <View style={styles.background}>
+          <Animated.View style={styles.background} entering={FadeInUp.duration(150).springify()} exiting={FadeOutDown.duration(150)}>
             <View style={globalStyles.centered}>
               <ThemedText style={globalStyles.header2}>{title}</ThemedText>
               <SizedBox height={theme.spacing.sm} />
@@ -79,7 +80,7 @@ const StyledModal = ({
                 variant="secondary"
               />
             </View>
-          </View>
+          </Animated.View>
         </BlurView>
       </TouchableWithoutFeedback>
     </Modal>
