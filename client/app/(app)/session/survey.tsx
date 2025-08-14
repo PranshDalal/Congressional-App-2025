@@ -79,7 +79,7 @@ const SurveyScreen = () => {
         text2: "Session data saved successfully",
       });
 
-      router.push("/");
+      router.push({pathname: "/", params: {"completed_session": "true"}});
     } catch (error) {
       Toast.show({
         type: "error",
