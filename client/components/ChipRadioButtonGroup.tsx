@@ -24,6 +24,29 @@ const ChipRadioButtonGroup = ({
     onSelect?.(index);
   };
 
+  const getChipStyle = (index: number, pressed: boolean) => [
+    styles.radioOption,
+    selectedIndex === index && styles.radioSelected,
+    pressed && selectedIndex !== index && styles.radioPressed, // Add pressed state
+  ];
+
+  const getTextStyle = (index: number) => [
+    styles.radioText,
+    selectedIndex === index && styles.radioTextSelected,
+  ];
+
+  const renderChip = (label: string, index: number) => (
+    <Pressable
+      key={index}
+      style={({ pressed }) => getChipStyle(index, pressed)}
+      onPress={() => onPress(index)}
+    >
+      <ThemedText style={getTextStyle(index)}>
+        {label}
+      </ThemedText>
+    </Pressable>
+  );
+
   return (
     <>
       {scrollable ? (
@@ -33,47 +56,11 @@ const ChipRadioButtonGroup = ({
           showsHorizontalScrollIndicator={false}
           contentContainerStyle={{ flexDirection: "row", gap: 12 }}
         >
-          {labels.map((label, index) => (
-            <Pressable
-              key={index}
-              style={[
-                styles.radioOption,
-                selectedIndex === index && styles.radioSelected,
-              ]}
-              onPress={() => onPress(index)}
-            >
-              <ThemedText
-                style={[
-                  styles.radioText,
-                  selectedIndex === index && styles.radioTextSelected,
-                ]}
-              >
-                {label}
-              </ThemedText>
-            </Pressable>
-          ))}
+          {labels.map((label, index) => renderChip(label, index))}
         </ScrollView>
       ) : (
         <View style={styles.radioGroup}>
-          {labels.map((label, index) => (
-            <Pressable
-              key={index}
-              style={[
-                styles.radioOption,
-                selectedIndex === index && styles.radioSelected,
-              ]}
-              onPress={() => onPress(index)}
-            >
-              <ThemedText
-                style={[
-                  styles.radioText,
-                  selectedIndex === index && styles.radioTextSelected,
-                ]}
-              >
-                {label}
-              </ThemedText>
-            </Pressable>
-          ))}
+          {labels.map((label, index) => renderChip(label, index))}
         </View>
       )}
     </>
@@ -91,13 +78,18 @@ const styles = StyleSheet.create({
     paddingVertical: theme.spacing.sm * 1.5,
     paddingHorizontal: theme.spacing.lg,
     borderRadius: theme.radii.full,
-    // borderWidth: 2,
-    // borderColor: theme.colors.border,
     backgroundColor: theme.colors.bgLight,
+    // Add transition properties for smooth hover
+    transitionDuration: "150ms",
   },
   radioSelected: {
-    // borderColor: theme.colors.primary,
     backgroundColor: theme.colors.primary,
+  },
+  // Add pressed/hover state
+  radioPressed: {
+    // backgroundColor: theme.colors.bgDark,
+    opacity: 0.8,
+    transform: [{ scale: 0.98 }],
   },
   radioText: {
     // fontSize: theme.fontSize.base,

@@ -37,11 +37,13 @@ import { Nunito_600SemiBold_Italic } from "@expo-google-fonts/nunito/600SemiBold
 import { Nunito_700Bold_Italic } from "@expo-google-fonts/nunito/700Bold_Italic";
 import { Nunito_800ExtraBold_Italic } from "@expo-google-fonts/nunito/800ExtraBold_Italic";
 import { Nunito_900Black_Italic } from "@expo-google-fonts/nunito/900Black_Italic";
+import { useSafeAreaInsets } from "react-native-safe-area-context";
 
 SplashScreen.preventAutoHideAsync();
 
 export default function RootLayout() {
   const colorScheme = useColorScheme();
+  const safeAreaInsets = useSafeAreaInsets();
 
   let [fontsLoaded] = useFonts({
     Nunito_200ExtraLight,
@@ -96,15 +98,15 @@ export default function RootLayout() {
     <ThemeProvider value={DarkTheme}>
       {/* value={colorScheme === "dark" ? DarkTheme : DefaultTheme}> */}
       <Stack>
-        <Protected guard={user === null}>
-          <Stack.Screen name="(auth)" options={{ headerShown: false }} />
-        </Protected>
-        <Protected guard={user !== null}>
-          <Stack.Screen name="(app)" options={{ headerShown: false }} />
-        </Protected>
-        <Stack.Screen name="+not-found" />
+      <Protected guard={user === null}>
+        <Stack.Screen name="(auth)" options={{ headerShown: false }} />
+      </Protected>
+      <Protected guard={user !== null}>
+        <Stack.Screen name="(app)" options={{ headerShown: false }} />
+      </Protected>
+      <Stack.Screen name="+not-found" />
       </Stack>
-      <Toast config={toastConfig} topOffset={55} />
+      <Toast config={toastConfig} topOffset={safeAreaInsets.top} />
       <StatusBar style="light" />
     </ThemeProvider>
   );

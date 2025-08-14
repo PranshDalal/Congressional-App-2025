@@ -21,13 +21,6 @@ export function HapticTab(props: BottomTabBarButtonProps) {
     "worklet";
     opacity.value = withTiming(0.5, { duration: 100 });
 
-    // Use runOnJS to call haptics from worklet
-    runOnJS(() => {
-      if (process.env.EXPO_OS === "ios") {
-        console.log("Tab pressed");
-      }
-    })();
-
     // Call original onPressIn
     if (props.onPressIn) {
       runOnJS(props.onPressIn)(ev);
