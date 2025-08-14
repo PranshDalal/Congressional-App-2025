@@ -5,6 +5,7 @@ import { StyleSheet, View, ViewStyle, Text } from "react-native";
 import globalStyles from "@/styles/globalStyles";
 import SizedBox from "./SizedBox";
 import ThemedText from "./ThemedText";
+import * as Haptics from 'expo-haptics';
 
 type StyledSliderProps = SliderProps & {
   value?: number;
@@ -30,6 +31,7 @@ const StyledSlider = ({
 
   const handleValueChange = (val: number) => {
     setValue(val);
+    Haptics.selectionAsync();
     if (onValueChange) {
       onValueChange(val);
     }

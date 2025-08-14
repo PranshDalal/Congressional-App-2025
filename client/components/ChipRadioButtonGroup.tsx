@@ -4,6 +4,7 @@ import theme from "@/styles/theme";
 import { StyleSheet } from "react-native";
 import globalStyles from "@/styles/globalStyles";
 import ThemedText from "./ThemedText";
+import * as Haptics from 'expo-haptics';
 
 type ChipRadioButtonGroupProps = {
   labels: string[];
@@ -18,6 +19,11 @@ const ChipRadioButtonGroup = ({
   scrollable = false,
   onSelect,
 }: ChipRadioButtonGroupProps) => {
+  const onPress = (index: number) => {
+    Haptics.selectionAsync();
+    onSelect?.(index);
+  };
+
   return (
     <>
       {scrollable ? (
@@ -34,7 +40,7 @@ const ChipRadioButtonGroup = ({
                 styles.radioOption,
                 selectedIndex === index && styles.radioSelected,
               ]}
-              onPress={() => onSelect?.(index)}
+              onPress={() => onPress(index)}
             >
               <ThemedText
                 style={[
@@ -56,7 +62,7 @@ const ChipRadioButtonGroup = ({
                 styles.radioOption,
                 selectedIndex === index && styles.radioSelected,
               ]}
-              onPress={() => onSelect?.(index)}
+              onPress={() => onPress(index)}
             >
               <ThemedText
                 style={[
