@@ -20,6 +20,7 @@
     "@react-navigation/bottom-tabs": "^7.3.10",
     "@react-navigation/elements": "^2.3.8",
     "@react-navigation/native": "^7.1.6",
+    "@shopify/react-native-skia": "^2.2.3",
     "axios": "^1.11.0",
     "expo": "53.0.20",
     "expo-blur": "~14.1.5",
@@ -44,6 +45,7 @@
     "react-dom": "19.0.0",
     "react-native": "0.79.5",
     "react-native-chart-kit": "^6.12.0",
+    "react-native-fast-confetti": "^1.1.0",
     "react-native-gesture-handler": "~2.24.0",
     "react-native-keyboard-controller": "^1.18.3",
     "react-native-permissions": "^5.4.1",
@@ -54,7 +56,8 @@
     "react-native-svg": "15.11.2",
     "react-native-toast-message": "^2.3.3",
     "react-native-web": "~0.20.0",
-    "react-native-webview": "13.13.5"
+    "react-native-webview": "13.13.5",
+    "victory-native": "^41.19.2"
   },
   "devDependencies": {
     "@babel/core": "^7.25.2",
