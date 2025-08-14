@@ -13,3 +13,6 @@ expo-env.d.ts
 .env.production.local
 
 android/local.properties
+
+android/
+ios/
