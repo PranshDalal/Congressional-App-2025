@@ -73,38 +73,28 @@ export default function TextButton({
           style,
         ]}
       >
-        <View
-          style={{
-            flexDirection: "row",
-            alignItems: "center",
-            justifyContent: "center",
-          }}
-        >
-          {showLoading ? (
-            <View
-              style={{
-                height:
-                  textStyle?.fontSize ?? globalStyles.bodyText.fontSize * 1.2,
-                alignItems: "center",
-                justifyContent: "center",
-              }}
-            >
-              <BouncingDots />
+        <View style={styles.buttonContentView}>
+          {icon && (
+            <View style={{ marginRight: title.length != 0 ? 8 : 0 }}>
+              {icon}
             </View>
-          ) : (
-            <React.Fragment>
-              {icon && (
-                <View style={{ marginRight: title.length != 0 ? 8 : 0 }}>
-                  {icon}
-                </View>
-              )}
-              <ThemedText
-                style={[{ fontWeight: theme.fontWeight.bold }, textStyle ?? {}]}
-              >
-                {title}
-              </ThemedText>
-            </React.Fragment>
           )}
+          <View style={{ position: "relative" }}>
+            <ThemedText
+              style={[
+                { fontWeight: theme.fontWeight.bold },
+                textStyle ?? {},
+                { opacity: showLoading ? 0 : 1 },
+              ]}
+            >
+              {title}
+            </ThemedText>
+            {showLoading && (
+              <View style={styles.bouncingDotsView}>
+                <BouncingDots />
+              </View>
+            )}
+          </View>
         </View>
       </MotiPressable>
     </View>
@@ -130,5 +120,20 @@ const styles = StyleSheet.create({
   },
   pressed: {
     opacity: 0.8,
+  },
+  bouncingDotsView: {
+    flex: 1,
+    position: "absolute",
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  buttonContentView: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "center",
   },
 });

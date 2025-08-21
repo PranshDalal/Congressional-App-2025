@@ -7,7 +7,8 @@ const darkColors = {
   border: "#363636", // 0°, 0%, 21%
   text: "#f2f2f2", // 0°, 0%, 95%
   textMuted: "#919191", // 0°, 0%, 57%
-  primary: "#7906d0", // 274°, 94%, 42%
+  primary: "#a855f7", // 274°, 94%, 42%
+  // primary color ideas: bb86fc, 
   link: "#4b81fa",
   danger: "#f00726",
 };

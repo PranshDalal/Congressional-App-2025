@@ -10,6 +10,7 @@ import { View, Image, Dimensions } from "react-native";
 import { SpeakerWaveOutline, SunOutline } from "@/assets/icons/heroicons";
 import { Confetti, ConfettiMethods } from "react-native-fast-confetti";
 import { useLocalSearchParams } from "expo-router";
+import theme from "@/styles/theme";
 
 const { width } = Dimensions.get("window");
 
@@ -51,7 +52,7 @@ const IndexScreen = () => {
               globalStyles.header2,
               {
                 textAlign: "center",
-                color: "#8a7fe8",
+                color: theme.colors.primary,
                 fontWeight: "bold",
                 fontSize: 28,
                 textShadowColor: "rgba(138, 127, 232, 0.3)",
@@ -68,7 +69,7 @@ const IndexScreen = () => {
           <ThemedText
             style={{
               textAlign: "center",
-              color: "#b3afdb",
+              color: theme.colors.textMuted,
               fontSize: 18,
               marginHorizontal: 10,
               fontWeight: "600",
@@ -92,14 +93,14 @@ const IndexScreen = () => {
             <View style={{ alignItems: "center", width: 60 }}>
               <SunOutline
                 size={45}
-                color="#b3afdb"
+                color={theme.colors.textMuted}
                 style={{
                   opacity: 0.7,
                 }}
               />
               <ThemedText
                 style={{
-                  color: "#b3afdb",
+                  color: theme.colors.textMuted,
                   fontSize: 12,
                   marginTop: 6,
                   fontWeight: "600",
@@ -112,14 +113,14 @@ const IndexScreen = () => {
             <View style={{ alignItems: "center", width: 60 }}>
               <SpeakerWaveOutline
                 size={45}
-                color="#b3afdb"
+                color={theme.colors.textMuted}
                 style={{
                   opacity: 0.7,
                 }}
               />
               <ThemedText
                 style={{
-                  color: "#b3afdb",
+                  color: theme.colors.textMuted,
                   fontSize: 12,
                   marginTop: 6,
                   fontWeight: "600",
@@ -214,18 +215,16 @@ const IndexScreen = () => {
           <TextButton
             title="Start Session"
             textStyle={{
-              fontWeight: "700",
-              fontSize: 20,
-              color: "#121126",
-              textShadowColor: "transparent",
+              fontWeight: 700,
+              fontSize: theme.fontSize.xl,
+              color: theme.colors.text,
             }}
             onPress={startSession}
             style={{
-              paddingVertical: 16,
               paddingHorizontal: 60,
-              borderRadius: 30,
-              backgroundColor: "#8a7fe8",
-              shadowColor: "#8a7fe8",
+              borderRadius: theme.radii.full,
+              backgroundColor: theme.colors.primary,
+              shadowColor: theme.colors.primary,
               shadowOffset: { width: 0, height: 5 },
               shadowOpacity: 0.4,
               shadowRadius: 8,
@@ -234,7 +233,9 @@ const IndexScreen = () => {
           />
         </View>
       </BackgroundView>
-      {completedSession && <Confetti />}
+      {completedSession && (
+        <Confetti isInfinite={false} fadeOutOnEnd={true} count={100} />
+      )}
     </>
   );
 };
