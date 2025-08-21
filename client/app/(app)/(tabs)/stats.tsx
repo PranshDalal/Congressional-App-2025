@@ -8,8 +8,11 @@ import {
   StatsLoadingState,
   StatsOverview,
   RecentSessions,
-  WeeklyFocusChart
+  WeeklyFocusChart,
 } from "@/components/stats";
+import ThemedText from "@/components/ThemedText";
+import theme from "@/styles/theme";
+import { StyleSheet } from "react-native";
 
 const StatsScreen = () => {
   const { sessions, loading, error, stats, recentSessions } = useStatsData();
@@ -27,20 +30,19 @@ const StatsScreen = () => {
         showsVerticalScrollIndicator={true}
       >
         <StatsLoadingState loading={loading} error={error} />
-        
+
         {!loading && !error && (
           <>
+            <ThemedText style={styles.headerText}>Overview</ThemedText>
             <StatsOverview stats={stats} />
-            
-            <SizedBox height={30} />
-            
+
+            <ThemedText style={styles.headerText}>Recent Sessions</ThemedText>
             <RecentSessions recentSessions={recentSessions} />
-            
-            <SizedBox height={40} />
-            
+
+            <ThemedText style={styles.headerText}>Weekly Focus</ThemedText>
             <WeeklyFocusChart sessions={sessions} />
-            
-            <SizedBox height={60} />
+
+            <SizedBox height={30} />
           </>
         )}
       </ScrollView>
@@ -49,3 +51,12 @@ const StatsScreen = () => {
 };
 
 export default StatsScreen;
+
+const styles = StyleSheet.create({
+  headerText: {
+    ...globalStyles.header2,
+    marginBottom: theme.spacing.sm,
+    marginTop: theme.spacing.md,
+    color: theme.colors.textMuted,
+  },
+});

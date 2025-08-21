@@ -8,6 +8,8 @@ import axios from "axios";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import ThemedText from "@/components/ThemedText";
 import Animated, { FadeInDown, FadeInRight } from "react-native-reanimated";
+import globalStyles from "@/styles/globalStyles";
+import theme from "@/styles/theme";
 
 const getRecommendationDetails = (key: string, value: any) => {
   let icon: keyof typeof MaterialCommunityIcons.glyphMap =
@@ -130,74 +132,76 @@ const FocusZonesScreen = () => {
   };
 
   return (
-    <BackgroundView withSafeArea withScreenPadding style={styles.background}>
-      <View style={styles.container}>
-        <ThemedText style={styles.subtitle}>
-          Your optimal environment conditions based on past high-focus sessions.
-        </ThemedText>
-        <SizedBox height={20} />
-        <TextButton
-          title={loading ? "Loading..." : "Refresh Recommendations"}
-          onPress={fetchFocusZones}
-          showLoading={loading}
-          style={styles.button}
-          textStyle={styles.buttonText}
-        />
+    <BackgroundView withSafeArea withScreenPadding>
+      <ThemedText style={globalStyles.mutedText}>
+        Your optimal environment conditions based on past high-focus sessions.
+      </ThemedText>
+      <SizedBox height={25} />
+      <TextButton
+        title="Refresh Recommendations"
+        onPress={fetchFocusZones}
+        showLoading={loading}
+        textStyle={styles.buttonText}
+      />
 
-        {error && <ThemedText style={styles.errorText}>{error}</ThemedText>}
+      {error && <ThemedText style={styles.errorText}>{error}</ThemedText>}
 
-        {recommendationsData && (
-          <Animated.View style={styles.recommendationsContainer} entering={FadeInDown.duration(500)}>
-            <Animated.View entering={FadeInDown.duration(500).delay(250)}>
-                <ThemedText style={styles.messageText}>
-                {recommendationsData.message}
-                </ThemedText>
-            </Animated.View>
+      {recommendationsData && (
+        <Animated.View
+          style={styles.recommendationsContainer}
+          entering={FadeInDown.duration(500)}
+        >
+          <Animated.View entering={FadeInDown.duration(500).delay(250)}>
+            <ThemedText
+              style={[globalStyles.header3, { marginBottom: theme.spacing.md }]}
+            >
+              {recommendationsData.message}
+            </ThemedText>
+          </Animated.View>
 
-            {recommendationsData.recommendations ? (
-              <ScrollView style={styles.recommendationsList}>
-                {Object.entries(recommendationsData.recommendations).map(
-                  ([key, value]) => {
-                    const { icon, displayValue, description } =
-                      getRecommendationDetails(key, value);
+          {recommendationsData.recommendations ? (
+            <ScrollView style={styles.recommendationsList}>
+              {Object.entries(recommendationsData.recommendations).map(
+                ([key, value]) => {
+                  const { icon, displayValue, description } =
+                    getRecommendationDetails(key, value);
 
-                    return (
-                      <Animated.View
-                        key={key}
-                        style={styles.recommendationItem}
-                        entering={FadeInDown.duration(500).delay(400)}
-                      >
-                        <MaterialCommunityIcons
-                          name={icon}
-                          size={24}
-                          color="#9b5de5"
-                          style={{ marginRight: 8 }}
-                        />
-                        <View>
-                          <ThemedText style={styles.recommendationText}>
-                            {key.replace(/_/g, " ")}: {displayValue}
+                  return (
+                    <Animated.View
+                      key={key}
+                      style={styles.recommendationItem}
+                      entering={FadeInDown.duration(500).delay(400)}
+                    >
+                      <MaterialCommunityIcons
+                        name={icon}
+                        size={24}
+                        color={theme.colors.primary}
+                        style={{ marginRight: 8 }}
+                      />
+                      <View>
+                        <ThemedText style={styles.recommendationText}>
+                          {key.replace(/_/g, " ")}: {displayValue}
+                        </ThemedText>
+                        {description && (
+                          <ThemedText style={styles.recommendationDescription}>
+                            {description}
                           </ThemedText>
-                          {description && (
-                            <ThemedText
-                              style={styles.recommendationDescription}
-                            >
-                              {description}
-                            </ThemedText>
-                          )}
-                        </View>
-                      </Animated.View>
-                    );
-                  }
-                )}
-              </ScrollView>
-            ) : (
+                        )}
+                      </View>
+                    </Animated.View>
+                  );
+                }
+              )}
+            </ScrollView>
+          ) : (
+            <Animated.View entering={FadeInDown.duration(500).delay(400)}>
               <ThemedText style={styles.infoText}>
                 No specific recommendations available.
               </ThemedText>
-            )}
-          </Animated.View>
-        )}
-      </View>
+            </Animated.View>
+          )}
+        </Animated.View>
+      )}
     </BackgroundView>
   );
 };
@@ -205,44 +209,15 @@ const FocusZonesScreen = () => {
 export default FocusZonesScreen;
 
 const styles = StyleSheet.create({
-  background: {
-    backgroundColor: "#121212",
-  },
-  container: {
-    flex: 1,
-  },
-  title: {
-    fontSize: 26,
-    fontWeight: "bold",
-    color: "#ffffff",
-    marginBottom: 8,
-  },
-  subtitle: {
-    fontSize: 14,
-    color: "#aaaaaa",
-    marginBottom: 16,
-  },
-  button: {
-    backgroundColor: "#9b5de5",
-    paddingVertical: 12,
-    borderRadius: 8,
-  },
   buttonText: {
-    color: "#ffffff",
-    fontWeight: "bold",
+    fontWeight: 700,
     fontSize: 16,
   },
   recommendationsContainer: {
-    marginTop: 24,
-    padding: 16,
-    backgroundColor: "#1e1e1e",
-    borderRadius: 8,
-  },
-  messageText: {
-    fontSize: 16,
-    marginBottom: 16,
-    fontWeight: "500",
-    color: "#e0e0e0",
+    marginTop: theme.spacing.lg,
+    padding: theme.spacing.md,
+    backgroundColor: theme.colors.bg,
+    borderRadius: theme.radii.md,
   },
   recommendationsList: {
     marginTop: 8,
@@ -254,21 +229,19 @@ const styles = StyleSheet.create({
   },
   recommendationText: {
     fontSize: 16,
-    color: "#ffffff",
     textTransform: "capitalize",
   },
   recommendationDescription: {
     fontSize: 14,
-    color: "#aaaaaa",
+    color: theme.colors.textMuted,
   },
   errorText: {
     marginTop: 16,
-    color: "#ff4d4d",
+    color: theme.colors.danger,
     fontSize: 16,
   },
   infoText: {
     fontSize: 16,
-    color: "#aaaaaa",
-    fontStyle: "italic",
+    color: theme.colors.textMuted,
   },
 });

@@ -14,6 +14,8 @@ import ThemedText from "@/components/ThemedText";
 const settings = () => {
   const [signOutModalVisible, setSignOutModalVisible] = useState(false);
 
+  const [loading, setLoading] = useState(false);
+
   const signOut = async () => {
     await getAuth().signOut();
 
@@ -31,6 +33,15 @@ const settings = () => {
         title="Sign Out"
         onPress={() => setSignOutModalVisible(true)}
         variant="secondary"
+      />
+      <TextButton title="Set loading" onPress={() => setLoading(!loading)} />
+      <SizedBox height={10} />
+      <TextButton
+        title="Testing button"
+        onPress={() => {
+          setLoading(true);
+        }}
+        showLoading={loading}
       />
       <StyledModal
         title="Sign Out"

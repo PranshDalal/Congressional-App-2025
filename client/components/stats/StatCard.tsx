@@ -2,6 +2,7 @@ import React from "react";
 import { View } from "react-native";
 import ThemedText from "@/components/ThemedText";
 import globalStyles from "@/styles/globalStyles";
+import theme from "@/styles/theme";
 
 interface StatCardProps {
   label: string;
@@ -13,15 +14,20 @@ export default function StatCard({ label, value }: StatCardProps) {
     <View
       style={{
         width: "48%",
-        backgroundColor: "#1e1e2f",
-        borderRadius: 12,
-        padding: 16,
-        marginBottom: 16,
+        backgroundColor: theme.colors.bg,
+        borderWidth: 1,
+        borderColor: theme.colors.border,
+        borderRadius: theme.radii.lg,
+        padding: theme.spacing.md,
+        marginBottom: theme.spacing.md,
       }}
     >
-      <ThemedText style={{ color: "#bb86fc" }}>{label}</ThemedText>
+      <ThemedText style={{ color: theme.colors.text }}>{label}</ThemedText>
       <ThemedText
-        style={[globalStyles.header3, { marginTop: 4, color: "#ffffff" }]}
+        style={[
+          globalStyles.bodyText,
+          { marginTop: 4, color: theme.colors.textMuted },
+        ]}
       >
         {value}
       </ThemedText>
