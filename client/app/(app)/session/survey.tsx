@@ -11,6 +11,7 @@ import SizedBox from "@/components/SizedBox";
 import StyledTextInput from "@/components/StyledTextInput";
 import { useLocalSearchParams } from "expo-router";
 import axios from "axios";
+import { endSession } from "@/services/sessionService";
 import StyledSlider from "@/components/StyledSlider";
 import KeyboardAvoidingScrollView from "@/components/KeyboardAvoidingScrollView";
 import ChipRadioButtonGroup from "@/components/ChipRadioButtonGroup";
@@ -62,16 +63,7 @@ const SurveyScreen = () => {
         return;
       }
 
-      const response = await axios.post(
-        `${process.env.EXPO_PUBLIC_API_BASE_URL}/api/end_session`,
-        completeSessionData,
-        {
-          timeout: 10000,
-          headers: {
-            "Content-Type": "application/json",
-          },
-        }
-      );
+      const response = await endSession(completeSessionData);
 
       Toast.show({
         type: "success",

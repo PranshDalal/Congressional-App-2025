@@ -12,6 +12,7 @@ import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { Accelerometer } from "expo-sensors";
 import { CameraView, useCameraPermissions } from "expo-camera";
 import { getAuth } from "@react-native-firebase/auth";
+import { startSession as apiStartSession } from "@/services/sessionService";
 import axios from "axios";
 import { PauseSolid, PlaySolid } from "@/assets/icons/heroicons";
 import { useKeepAwake } from "expo-keep-awake";
@@ -61,15 +62,12 @@ const SessionScreen = () => {
 
         console.log("Starting session for user:", currentUser.uid);
 
-        const response = await axios.post(
-          `${process.env.EXPO_PUBLIC_API_BASE_URL}/api/start_session`,
-          {
-            user_id: currentUser.uid,
-          }
-        );
+        const response = await apiStartSession({
+          user_id: currentUser.uid,
+        });
 
-        setSessionId(response.data.session_id);
-        console.log("Session started:", response.data.session_id);
+        setSessionId(response.session_id);
+        console.log("Session started:", response.session_id);
       } catch (error) {
         if (axios.isAxiosError(error)) {
           console.error(
