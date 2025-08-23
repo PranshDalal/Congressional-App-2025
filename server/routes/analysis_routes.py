@@ -5,10 +5,17 @@ import pandas as pd
 
 analysis_bp = Blueprint('analysis', __name__)
 
-def fetch_user_sessions(user_id):
+
+def fetch_user_sessions(user_id, fields=None, status=None, limit=None):
     db = firestore.client()
-    sessions_ref = db.collection(f'users/{user_id}/sessions')
-    sessions = sessions_ref.stream()
+    ref = db.collection(f'users/{user_id}/sessions')
+    if fields:
+        ref = ref.select(fields)
+    if status:
+        ref = ref.where('status', '==', status)
+    if limit:
+        ref = ref.order_by('start_time', direction=firestore.Query.DESCENDING).limit(limit)
+    sessions = ref.stream()
     session_list = [doc.to_dict() for doc in sessions]
     return pd.DataFrame(session_list) if session_list else None
 
@@ -39,7 +46,14 @@ def interpret_correlation(feature, value):
 
 @analysis_bp.route('/recommendations/<user_id>', methods=['GET'])
 def get_recommendations(user_id):
-    df = fetch_user_sessions(user_id)
+    df = fetch_user_sessions(
+        user_id,
+        fields=[
+            'focus_rating', 'noise_level', 'light_level', 'motion_level', 'headphones', 'ventilation', 'start_time', 'status'
+        ],
+        status='completed',
+        limit=20
+    )
     if df is None or len(df) < 5:
         return jsonify({'message': 'Not enough session data to generate recommendations.'}), 200
 

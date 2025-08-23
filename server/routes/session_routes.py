@@ -64,11 +64,22 @@ def end_session():
 
 @session_bp.route('/session/<user_id>', methods=['GET'])
 def get_sessions(user_id):
-    from firebase_admin import firestore  
-    db = firestore.client() 
-    sessions_ref = db.collection('users').document(user_id).collection('sessions')
-    sessions_docs = sessions_ref.stream()
+    from firebase_admin import firestore
+    db = firestore.client()
+    ref = db.collection('users').document(user_id).collection('sessions')
+    
+    status = request.args.get('status')
+    limit = request.args.get('limit', type=int)
+    fields = request.args.get('fields')
+    if fields:
+        field_list = [f.strip() for f in fields.split(',') if f.strip()]
+        ref = ref.select(field_list)
+    if status:
+        ref = ref.where('status', '==', status)
+    if limit:
+        ref = ref.order_by('start_time', direction=firestore.Query.DESCENDING).limit(limit)
 
+    sessions_docs = ref.stream()
     sessions = {}
     for doc in sessions_docs:
         sessions[doc.id] = doc.to_dict()
