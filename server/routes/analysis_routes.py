@@ -2,6 +2,7 @@ from flask import Blueprint, request, jsonify
 from firebase_admin import firestore
 import numpy as np
 import pandas as pd
+from datetime import datetime
 
 analysis_bp = Blueprint('analysis', __name__)
 
@@ -9,14 +10,18 @@ analysis_bp = Blueprint('analysis', __name__)
 def fetch_user_sessions(user_id, fields=None, status=None, limit=None):
     db = firestore.client()
     ref = db.collection(f'users/{user_id}/sessions')
+
     if fields:
         ref = ref.select(fields)
-    if status:
-        ref = ref.where('status', '==', status)
     if limit:
         ref = ref.order_by('start_time', direction=firestore.Query.DESCENDING).limit(limit)
+
     sessions = ref.stream()
     session_list = [doc.to_dict() for doc in sessions]
+
+    if status:
+        session_list = [s for s in session_list if s.get('status') == status]
+
     return pd.DataFrame(session_list) if session_list else None
 
 
@@ -46,6 +51,7 @@ def interpret_correlation(feature, value):
 
 @analysis_bp.route('/recommendations/<user_id>', methods=['GET'])
 def get_recommendations(user_id):
+    db = firestore.client()
     df = fetch_user_sessions(
         user_id,
         fields=[
@@ -98,6 +104,10 @@ def get_recommendations(user_id):
     message = "We've analyzed your past high-focus sessions and found your ideal environment settings."
     if insights:
         message += " Here’s what we learned: " + " ".join(insights)
+
+    pref_ref = db.collection("users").document(user_id).collection("preferences").document("environment")
+    recommended['updated_at'] = datetime.utcnow().isoformat()
+    pref_ref.set(recommended, merge=True)
 
     return jsonify({
         'message': message,

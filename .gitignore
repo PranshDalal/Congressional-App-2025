@@ -6,3 +6,4 @@ server/routes/__pycache__/
 .vscode/
 .expo/
 client/.env
+server/.env

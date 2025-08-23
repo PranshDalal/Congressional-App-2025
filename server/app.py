@@ -5,6 +5,7 @@ from firebase_admin import credentials
 from firebase_admin import firestore
 from routes.session_routes import session_bp
 from routes.analysis_routes import analysis_bp 
+from routes.nudge_routes import nudge_bp
 
 def create_app():
     app = Flask(__name__)
@@ -17,6 +18,7 @@ def create_app():
 
     app.register_blueprint(session_bp, url_prefix='/api')
     app.register_blueprint(analysis_bp, url_prefix='/api')
+    app.register_blueprint(nudge_bp, url_prefix='/api')
 
     @app.route('/api/hello', methods=['GET'])
     def hello():

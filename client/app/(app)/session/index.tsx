@@ -1,4 +1,4 @@
-import { View, Text, StyleSheet } from "react-native";
+import { View, Text, StyleSheet, Alert } from "react-native";
 import React, { useEffect, useRef, useState } from "react";
 import BackgroundView from "@/components/BackgroundView";
 import globalStyles from "@/styles/globalStyles";
@@ -17,6 +17,92 @@ import axios from "axios";
 import { PauseSolid, PlaySolid } from "@/assets/icons/heroicons";
 import { useKeepAwake } from "expo-keep-awake";
 import ThemedText from "@/components/ThemedText";
+
+function useNudgePolling({ //the sigmaest thing every omg
+  userId,
+  getEnvData,
+}: {
+  userId: string | undefined | null;
+  getEnvData: () => {
+    light: number | null;
+    noise: number | null;
+    motion: number | null;
+    session_length: number;
+  };
+}) {
+  const cooldownRef = useRef<{ [userId: string]: number }>({});
+  const pollingRef = useRef<NodeJS.Timeout | null>(null);
+  const getEnvDataRef = useRef(getEnvData);
+
+  useEffect(() => {
+    getEnvDataRef.current = getEnvData;
+  }, [getEnvData]);
+
+  useEffect(() => {
+    if (!userId || typeof userId !== "string") return;
+    function pollNudge() {
+      const now = Date.now();
+      const key = String(userId);
+      const lastNudge = cooldownRef.current[key] || 0;
+      /*       if (now - lastNudge < 3 * 60 * 1000) return;  */
+      console.log("Polling nudge for user:", userId);
+      const env = getEnvDataRef.current();
+      fetch(`${process.env.EXPO_PUBLIC_API_BASE_URL}/api/get_nudge`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          user_id: userId,
+          light: env.light,
+          noise: env.noise,
+          motion: env.motion,
+          session_length: env.session_length,
+        }),
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          if (data && data.nudge && typeof data.nudge === "string") {
+            cooldownRef.current[key] = Date.now();
+            Alert.alert(
+              "Nudge",
+              data.nudge,
+              [
+                {
+                  text: "Yes",
+                  onPress: () => sendFeedback("Yes"),
+                },
+                {
+                  text: "Snooze",
+                  onPress: () => sendFeedback("Snooze"),
+                },
+                {
+                  text: "Not Now",
+                  style: "cancel",
+                  onPress: () => sendFeedback("Not Now"),
+                },
+              ],
+              { cancelable: true }
+            );
+            function sendFeedback(response: string) {
+              fetch(`${process.env.EXPO_PUBLIC_API_BASE_URL}/api/feedback`, {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({
+                  user_id: userId,
+                  nudge_text: data.nudge,
+                  response,
+                }),
+              });
+            }
+          }
+        })
+        .catch(() => {});
+    }
+    pollingRef.current = setInterval(pollNudge, 30000);
+    return () => {
+      if (pollingRef.current) clearInterval(pollingRef.current);
+    };
+  }, [userId]);
+}
 
 const SessionScreen = () => {
   useKeepAwake(); // Stops screen from sleeping
@@ -82,6 +168,23 @@ const SessionScreen = () => {
 
     startSession();
   }, []);
+
+  const uid = currentUser?.uid;
+
+  useNudgePolling({
+    userId: uid,
+    getEnvData: () => {
+      const env = {
+        light: lighting,
+        noise: fakeRenderDB !== -1 ? fakeRenderDB : null,
+        motion: motionMagnitude,
+        session_length: Math.floor(elapsed / 1000),
+      };
+      console.log("getEnvData called:", env);
+      return env;
+    },
+  });
+
 
   useEffect(() => {
     console.log("Camera permission state:", permission);
@@ -325,6 +428,8 @@ const SessionScreen = () => {
     return smallestSize;
   };
   // #endregion
+
+
 
   return (
     <BackgroundView>
