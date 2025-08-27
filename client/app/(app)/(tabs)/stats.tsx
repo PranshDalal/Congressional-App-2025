@@ -1,6 +1,6 @@
 import React from "react";
 import { ScrollView } from "react-native";
-import BackgroundView from "@/components/BackgroundView";
+import BackgroundView from "@/components/view/BackgroundView";
 import globalStyles from "@/styles/globalStyles";
 import SizedBox from "@/components/SizedBox";
 import { useStatsData } from "@/hooks/stats/useStatsData";

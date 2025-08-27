@@ -7,11 +7,11 @@ import {
 } from "react-native";
 import React from "react";
 import globalStyles from "@/styles/globalStyles";
-import SizedBox from "./SizedBox";
-import TextButton from "./button/TextButton";
+import SizedBox from "../SizedBox";
+import TextButton from "../button/TextButton";
 import theme from "@/styles/theme";
 import { BlurView } from "expo-blur";
-import ThemedText from "./ThemedText";
+import ThemedText from "../ThemedText";
 import Animated, { FadeInDown, FadeInUp, FadeOutDown } from "react-native-reanimated";
 
 type StyledModalProps = {

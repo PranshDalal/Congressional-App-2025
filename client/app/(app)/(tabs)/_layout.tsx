@@ -2,7 +2,7 @@ import { Tabs, useRouter } from "expo-router";
 import React from "react";
 import { Platform } from "react-native";
 
-import { HapticTab } from "@/components/HapticTab";
+import { HapticTab } from "@/components/navigation/HapticTab";
 import TabBarBackground from "@/components/ui/TabBarBackground";
 import theme from "@/styles/theme";
 import {
@@ -16,7 +16,7 @@ import {
   HomeSolid,
   UserCircleOutline,
 } from "@/assets/icons/heroicons";
-import { headerPreset } from "@/components/Header";
+import { headerPreset } from "@/components/navigation/Header";
 import { getAuth } from "@react-native-firebase/auth";
 import ThemedText from "@/components/ThemedText";
 import IconButton from "@/components/button/IconButton";

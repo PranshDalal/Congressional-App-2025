@@ -8,7 +8,7 @@ import {
   openSettings,
 } from "react-native-permissions";
 import { useLocalSearchParams, useRouter } from "expo-router";
-import BackgroundView from "@/components/BackgroundView";
+import BackgroundView from "@/components/view/BackgroundView";
 import globalStyles from "@/styles/globalStyles";
 import TextButton from "@/components/button/TextButton";
 import SizedBox from "@/components/SizedBox";

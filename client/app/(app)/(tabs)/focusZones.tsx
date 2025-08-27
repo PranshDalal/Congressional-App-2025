@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { View, ScrollView, StyleSheet } from "react-native";
-import BackgroundView from "@/components/BackgroundView";
+import BackgroundView from "@/components/view/BackgroundView";
 import SizedBox from "@/components/SizedBox";
 import TextButton from "@/components/button/TextButton";
 import { getAuth } from "@react-native-firebase/auth";

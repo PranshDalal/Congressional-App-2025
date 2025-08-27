@@ -1,6 +1,6 @@
 import { View, Text } from "react-native";
 import React from "react";
-import BackgroundView from "@/components/BackgroundView";
+import BackgroundView from "@/components/view/BackgroundView";
 import { StyleSheet } from "react-native";
 import globalStyles from "@/styles/globalStyles";
 import TextButton from "@/components/button/TextButton";
