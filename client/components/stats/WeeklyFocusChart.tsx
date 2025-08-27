@@ -55,6 +55,9 @@ export default function WeeklyFocusChart({ sessions }: WeeklyFocusChartProps) {
         padding: theme.spacing.sm,
       }}
     >
+      {/* <CartesianChart data={focusByDay}>
+        
+      </CartesianChart> */}
       <LineChart
         data={{ labels, datasets: [{ data }] }}
         width={screenWidth}

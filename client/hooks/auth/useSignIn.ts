@@ -2,7 +2,7 @@ import { FirebaseError } from "firebase/app";
 import { useRef, useState } from "react";
 import { useFirebaseErrorHandler } from "../useFirebaseErrorHandler";
 import { TextInput } from "react-native";
-import { signIn } from "@/services/authService";
+import { signIn } from "@/services/firebaseAuthService";
 import Toast from "react-native-toast-message";
 
 export function useSignIn(

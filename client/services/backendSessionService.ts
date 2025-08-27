@@ -49,16 +49,3 @@ export async function getUserSessions(userId: string): Promise<SessionData[]> {
   const response = await axios.get(`${API_BASE_URL}/api/session/${userId}`);
   return Object.values(response.data) as SessionData[];
 }
-
-// Generic session CRUD operations
-export async function createSession(sessionData: any) {
-  return axios.post(`${API_BASE_URL}/session`, sessionData);
-}
-
-export async function updateSession(sessionId: string, sessionData: any) {
-  return axios.put(`${API_BASE_URL}/api/session/${sessionId}`, sessionData);
-}
-
-export async function deleteSession(sessionId: string) {
-  return axios.delete(`${API_BASE_URL}/api/session/${sessionId}`);
-}

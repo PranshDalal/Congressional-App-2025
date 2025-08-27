@@ -12,7 +12,7 @@ import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { Accelerometer } from "expo-sensors";
 import { CameraView, useCameraPermissions } from "expo-camera";
 import { getAuth } from "@react-native-firebase/auth";
-import { startSession as apiStartSession } from "@/services/sessionService";
+import { startSession as apiStartSession } from "@/services/backendSessionService";
 import axios from "axios";
 import { PauseSolid, PlaySolid } from "@/assets/icons/heroicons";
 import { useKeepAwake } from "expo-keep-awake";

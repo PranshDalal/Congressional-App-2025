@@ -11,7 +11,7 @@ import SizedBox from "@/components/SizedBox";
 import StyledTextInput from "@/components/StyledTextInput";
 import { useLocalSearchParams } from "expo-router";
 import axios from "axios";
-import { endSession } from "@/services/sessionService";
+import { endSession } from "@/services/backendSessionService";
 import StyledSlider from "@/components/StyledSlider";
 import KeyboardAvoidingScrollView from "@/components/KeyboardAvoidingScrollView";
 import ChipRadioButtonGroup from "@/components/ChipRadioButtonGroup";
