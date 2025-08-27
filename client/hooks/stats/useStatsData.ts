@@ -1,14 +1,9 @@
 import { useState, useEffect, useCallback } from 'react';
 import auth from '@react-native-firebase/auth';
-import { getUserSessions, SessionData as BackendSessionData } from '@/services/backendSessionService';
-
-export interface SessionData {
-  session_id: string;
-  start_time: string;
-  end_time?: string;
-  status: string;
-  focus_rating?: number;
-}
+// import { getUserSessions } from '@/services/backendSessionService';
+import { SessionData } from '@/types/types';
+import { getSessions } from '@/services/firebaseSessionService';
+import { Timestamp } from '@react-native-firebase/firestore';
 
 export interface StatsData {
   totalSessions: number;
@@ -48,12 +43,12 @@ export function useStatsData(): UseStatsDataReturn {
         return;
       }
 
-      const sessionData = await getUserSessions(currentUser.uid);
+      const sessionData = await getSessions();
 
       // Sort sessions by start time (most recent first)
       sessionData.sort(
         (a, b) =>
-          new Date(b.start_time).getTime() - new Date(a.start_time).getTime()
+          a.start_time > b.start_time ? -1 : b.start_time > a.start_time ? 1 : 0
       );
       
       setSessions(sessionData);
@@ -75,16 +70,18 @@ export function useStatsData(): UseStatsDataReturn {
     let lastSessionDate: string | null = null;
 
     sessions.forEach((session) => {
+      // console.log(session);
       if (session.status === "completed" && session.start_time && session.end_time) {
         completed++;
-        const start = new Date(session.start_time);
-        const end = new Date(session.end_time);
-        const diff = (end.getTime() - start.getTime()) / (1000 * 60);
+        const start = session.start_time.seconds;
+        const end = session.end_time.seconds;
+        const diff = (end - start) / 60;
         totalMinutes += diff;
 
         if (session.focus_rating) focusSum += Number(session.focus_rating);
 
-        const sessionDate = session.start_time.split("T")[0];
+        const sessionDate = session.start_time.toDate().toISOString().split("T")[0];
+        // const sessionDate = session.start_time.split("T")[0];
         if (sessionDate !== lastSessionDate) {
           streak++;
           lastSessionDate = sessionDate;
@@ -103,14 +100,14 @@ export function useStatsData(): UseStatsDataReturn {
   const getRecentSessions = useCallback((): RecentSessionData[] => {
     return sessions.slice(0, 5).map((session, index) => ({
       id: session.session_id || `session-${index}`,
-      date: new Date(session.start_time).toLocaleDateString(undefined, {
+      date: session.start_time.toDate().toLocaleDateString(undefined, {
         month: "short",
         day: "numeric",
       }),
       duration: session.end_time
         ? `${Math.round(
-            (new Date(session.end_time).getTime() - new Date(session.start_time).getTime()) /
-              (1000 * 60)
+            (session.end_time.seconds - session.start_time.seconds) /
+              60
           )} min`
         : "N/A",
     }));

@@ -17,7 +17,7 @@ const getMicrophonePermissionType = () =>
     android: PERMISSIONS.ANDROID.RECORD_AUDIO,
   });
 
-export function useStartSession() {
+export function useGetStartSessionPermissions() {
   const router = useRouter();
   return useCallback(async () => {
     const type = getMicrophonePermissionType();
