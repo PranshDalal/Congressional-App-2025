@@ -46,8 +46,10 @@ def detect_drifts(current, preferred, tolerance=0.2):
         except ValueError:
             drifts.append("Motion value invalid")
 
-    if int(current.get("session_length")) > 30:
-        drifts.append(f"Session length is {current.get('session_length')} min, exceeding preferred 30 min")
+    session_length_seconds = int(current.get("session_length", 0))
+    session_length_minutes = session_length_seconds // 60
+    if session_length_minutes > 30:
+        drifts.append(f"Session length is {session_length_minutes} min, exceeding preferred 30 min")
 
     return drifts
 
