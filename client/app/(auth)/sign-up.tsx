@@ -1,5 +1,5 @@
 import { View, Text } from "react-native";
-import BackgroundView from "@/components/BackgroundView";
+import BackgroundView from "@/components/view/BackgroundView";
 import globalStyles from "@/styles/globalStyles";
 import StyledTextInput from "@/components/StyledTextInput";
 import SizedBox from "@/components/SizedBox";

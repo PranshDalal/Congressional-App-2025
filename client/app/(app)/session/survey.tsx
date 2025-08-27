@@ -1,11 +1,11 @@
 import { View, Text, StyleSheet, Pressable, ScrollView } from "react-native";
 import React, { useState } from "react";
-import BackgroundView from "@/components/BackgroundView";
+import BackgroundView from "@/components/view/BackgroundView";
 import globalStyles from "@/styles/globalStyles";
 import { useRouter } from "expo-router";
 import TextButton from "@/components/button/TextButton";
 import theme from "@/styles/theme";
-import StyledModal from "@/components/StyledModal";
+import StyledModal from "@/components/view/StyledModal";
 import Toast from "react-native-toast-message";
 import SizedBox from "@/components/SizedBox";
 import StyledTextInput from "@/components/StyledTextInput";
@@ -13,8 +13,8 @@ import { useLocalSearchParams } from "expo-router";
 import axios from "axios";
 import { endSession } from "@/services/backendSessionService";
 import StyledSlider from "@/components/StyledSlider";
-import KeyboardAvoidingScrollView from "@/components/KeyboardAvoidingScrollView";
-import ChipRadioButtonGroup from "@/components/ChipRadioButtonGroup";
+import KeyboardAvoidingScrollView from "@/components/view/KeyboardAvoidingScrollView";
+import ChipRadioButtonGroup from "@/components/button/ChipRadioButtonGroup";
 import ThemedText from "@/components/ThemedText";
 
 const SurveyScreen = () => {

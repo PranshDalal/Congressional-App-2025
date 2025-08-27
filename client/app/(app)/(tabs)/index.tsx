@@ -1,5 +1,5 @@
 import React from "react";
-import BackgroundView from "@/components/BackgroundView";
+import BackgroundView from "@/components/view/BackgroundView";
 import TextButton from "@/components/button/TextButton";
 import { useStartSession } from "@/hooks/useStartSession";
 import SizedBox from "@/components/SizedBox";

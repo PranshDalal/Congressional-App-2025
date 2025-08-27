@@ -3,7 +3,7 @@ import React from "react";
 import theme from "@/styles/theme";
 import { StyleSheet } from "react-native";
 import globalStyles from "@/styles/globalStyles";
-import ThemedText from "./ThemedText";
+import ThemedText from "../ThemedText";
 import * as Haptics from 'expo-haptics';
 
 type ChipRadioButtonGroupProps = {

@@ -1,4 +1,4 @@
-import { headerPreset } from "@/components/Header";
+import { headerPreset } from "@/components/navigation/Header";
 import { Stack } from "expo-router";
 
 export default function SessionLayout() {

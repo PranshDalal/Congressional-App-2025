@@ -1,13 +1,13 @@
 import { View, Text, StyleSheet, Alert } from "react-native";
 import React, { useEffect, useRef, useState } from "react";
-import BackgroundView from "@/components/BackgroundView";
+import BackgroundView from "@/components/view/BackgroundView";
 import globalStyles from "@/styles/globalStyles";
 import { useLocalSearchParams, useRouter } from "expo-router";
 import TextButton from "@/components/button/TextButton";
 import theme from "@/styles/theme";
 import BouncingCircles from "@/components/BouncingCircles";
 import RNSoundLevel from "react-native-sound-level";
-import StyledModal from "@/components/StyledModal";
+import StyledModal from "@/components/view/StyledModal";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { Accelerometer } from "expo-sensors";
 import { CameraView, useCameraPermissions } from "expo-camera";
