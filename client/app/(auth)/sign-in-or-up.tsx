@@ -7,12 +7,13 @@ import TextButton from "@/components/button/TextButton";
 import { useRouter } from "expo-router";
 import { theme } from "@/styles/theme";
 import ThemedText from "@/components/ThemedText";
-
+import BouncingCircles from "@/components/BouncingCircles";
 
 const SignInOrUpScreen = () => {
   const router = useRouter();
   return (
     <BackgroundView withSafeArea withScreenPadding>
+      <BouncingCircles />
       <View style={{ flex: 1, alignItems: "center" }}>
         <ThemedText style={styles.header}>Welcome to Ambien 👋</ThemedText>
         <ThemedText style={globalStyles.mutedText}>
@@ -23,13 +24,19 @@ const SignInOrUpScreen = () => {
         title="Create an Account"
         onPress={() => router.push("/sign-up")}
         style={{ marginBottom: 12 }}
-        textStyle={{ fontWeight: theme.fontWeight.bold, fontSize: theme.fontSize.lg }}
+        textStyle={{
+          fontWeight: theme.fontWeight.bold,
+          fontSize: theme.fontSize.lg,
+        }}
       />
       <TextButton
         title="Sign in"
         onPress={() => router.push("/sign-in")}
         variant="secondary"
-        textStyle={{ fontWeight: theme.fontWeight.bold, fontSize: theme.fontSize.lg }}
+        textStyle={{
+          fontWeight: theme.fontWeight.bold,
+          fontSize: theme.fontSize.lg,
+        }}
       />
     </BackgroundView>
   );

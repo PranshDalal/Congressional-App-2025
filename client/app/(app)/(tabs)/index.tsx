@@ -1,7 +1,7 @@
 import React from "react";
 import BackgroundView from "@/components/view/BackgroundView";
 import TextButton from "@/components/button/TextButton";
-import { useStartSession } from "@/hooks/useStartSession";
+import { useGetStartSessionPermissions } from "@/hooks/useGetStartSessionPermissions";
 import SizedBox from "@/components/SizedBox";
 import ThemedText from "@/components/ThemedText";
 import globalStyles from "@/styles/globalStyles";
@@ -15,7 +15,7 @@ import theme from "@/styles/theme";
 const { width } = Dimensions.get("window");
 
 const IndexScreen = () => {
-  const startSession = useStartSession();
+  const startSession = useGetStartSessionPermissions();
   const searchParams = useLocalSearchParams();
   const completedSession = searchParams["completed_session"] === "true";
 

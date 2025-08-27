@@ -3,7 +3,7 @@ import { View, Dimensions } from "react-native";
 import { CartesianChart, Bar } from "victory-native";
 import ThemedText from "@/components/ThemedText";
 import globalStyles from "@/styles/globalStyles";
-import { SessionData } from "@/hooks/stats/useStatsData";
+import { SessionData } from "@/types/types";
 import { LineChart } from "react-native-chart-kit";
 import { theme } from "@/styles/theme";
 
@@ -22,7 +22,8 @@ export default function WeeklyFocusChart({ sessions }: WeeklyFocusChartProps) {
       session.focus_rating &&
       session.start_time
     ) {
-      const date = new Date(session.start_time).toISOString().split("T")[0];
+      // const date = new Date(session.start_time).toISOString().split("T")[0];
+      const date = session.start_time.toDate().toISOString().split("T")[0];
       if (!focusByDay[date]) focusByDay[date] = [];
       focusByDay[date].push(Number(session.focus_rating));
     }

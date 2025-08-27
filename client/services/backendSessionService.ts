@@ -1,14 +1,7 @@
+import { SessionData } from '@/types/types';
 import axios from 'axios';
 
 const API_BASE_URL = process.env.EXPO_PUBLIC_API_BASE_URL;
-
-export interface SessionData {
-  session_id: string;
-  start_time: string;
-  end_time?: string;
-  status: string;
-  focus_rating?: number;
-}
 
 export interface StartSessionRequest {
   user_id: string;
@@ -45,7 +38,7 @@ export async function endSession(data: EndSessionRequest) {
 }
 
 // Session data retrieval functions
-export async function getUserSessions(userId: string): Promise<SessionData[]> {
-  const response = await axios.get(`${API_BASE_URL}/api/session/${userId}`);
-  return Object.values(response.data) as SessionData[];
-}
+// export async function getUserSessions(userId: string): Promise<SessionData[]> {
+//   const response = await axios.get(`${API_BASE_URL}/api/session/${userId}`);
+//   return Object.values(response.data) as SessionData[];
+// }
