@@ -1,6 +1,6 @@
 import { useState, useEffect, useCallback } from 'react';
 import auth from '@react-native-firebase/auth';
-import { getUserSessions, SessionData as BackendSessionData } from '@/services/sessionService';
+import { getUserSessions, SessionData as BackendSessionData } from '@/services/backendSessionService';
 
 export interface SessionData {
   session_id: string;
