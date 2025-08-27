@@ -30,7 +30,7 @@ const settings = () => {
       <TextButton
         title="Sign Out"
         onPress={() => setSignOutModalVisible(true)}
-        variant="secondary"
+        variant="danger"
       />
       <StyledModal
         title="Sign Out"

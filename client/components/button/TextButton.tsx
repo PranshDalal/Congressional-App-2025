@@ -18,7 +18,7 @@ import { MotiPressable } from "moti/interactions";
 type ButtonProps = {
   title: string;
   onPress: () => void;
-  variant?: "primary" | "secondary";
+  variant?: "primary" | "secondary" | "danger";
   style?: ViewStyle;
   textStyle?: TextStyle;
   width?: any;
@@ -42,7 +42,7 @@ export default function TextButton({
 
   const buttonPressed = () => {
     if (isInteractable()) {
-      if (variant === "primary") {
+      if (variant === "primary" || variant === "danger") {
         Haptics.selectionAsync();
       }
 
@@ -69,7 +69,7 @@ export default function TextButton({
         style={[
           styles.base,
           { justifyContent: "center" },
-          variant === "primary" ? styles.primary : styles.secondary,
+          variant === "primary" ? styles.primary : variant === "secondary" ? styles.secondary : styles.danger,
           style,
         ]}
       >
@@ -117,6 +117,9 @@ const styles = StyleSheet.create({
     borderColor: theme.colors.border,
     paddingVertical: theme.spacing.md, // - 1,
     paddingHorizontal: theme.spacing.lg, // - 1,
+  },
+  danger: {
+    backgroundColor: theme.colors.danger,
   },
   pressed: {
     opacity: 0.8,
