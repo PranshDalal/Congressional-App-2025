@@ -1,5 +1,5 @@
 import { View, Text } from "react-native";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import BackgroundView from "@/components/view/BackgroundView";
 import globalStyles from "@/styles/globalStyles";
 import SizedBox from "@/components/SizedBox";
@@ -12,9 +12,22 @@ import { PreferencesService } from "@/services/firebasePreferencesService";
 
 const settings = () => {
   const [signOutModalVisible, setSignOutModalVisible] = useState(false);
-  const [nudgeFrequency, setNudgeFrequency] = useState<"Low" | "Mid" | "High">(
-    "Mid"
-  );
+  const [nudgeFrequency, setNudgeFrequency] = useState<"Low" | "Mid" | "High">("Mid");
+  
+  useEffect(() => {
+    const fetchNudgeFrequency = async () => {
+      try {
+        const frequency = await PreferencesService.getNudgeFrequency();
+        if (frequency) {
+          setNudgeFrequency(frequency);
+        }
+      } catch (error) {
+        console.error("Failed to get nudge frequency:", error);
+      }
+    };
+    
+    fetchNudgeFrequency();
+  }, []);
 
   const updateNudgeFrequency = async (frequency: "Low" | "Mid" | "High") => {
     try {
