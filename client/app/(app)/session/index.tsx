@@ -17,6 +17,9 @@ import axios from "axios";
 import { PauseSolid, PlaySolid } from "@/assets/icons/heroicons";
 import { useKeepAwake } from "expo-keep-awake";
 import ThemedText from "@/components/ThemedText";
+import { PreferencesService } from "@/services/firebasePreferencesService";
+import { feedbackNudge } from "@/services/firebaseNudgesService";
+import firestore from "@react-native-firebase/firestore";
 
 function useNudgePolling({ //the sigmaest thing every omg
   userId,
@@ -33,6 +36,22 @@ function useNudgePolling({ //the sigmaest thing every omg
   const cooldownRef = useRef<{ [userId: string]: number }>({});
   const pollingRef = useRef<NodeJS.Timeout | null>(null);
   const getEnvDataRef = useRef(getEnvData);
+  const [timeInterval, setTimeInterval] = useState(300000); 
+  
+  useEffect(() => {
+    const fetchNudgeFrequency = async () => {
+      try {
+        const nudgesFrequency = await PreferencesService.getNudgeFrequency();
+        const interval = nudgesFrequency === "High" ?  60000: nudgesFrequency === "Mid" ? 180000 : 300000;
+        console.log("The user has a nudge frequency of ", interval);
+        setTimeInterval(interval);
+      } catch (error) {
+        console.error("Failed to get nudge frequency:", error);
+      }
+    };
+    
+    fetchNudgeFrequency();
+  }, []);
 
   useEffect(() => {
     getEnvDataRef.current = getEnvData;
@@ -44,7 +63,7 @@ function useNudgePolling({ //the sigmaest thing every omg
       const now = Date.now();
       const key = String(userId);
       const lastNudge = cooldownRef.current[key] || 0;
-      /*       if (now - lastNudge < 3 * 60 * 1000) return;  */
+/*       if (now - lastNudge < 3 * 60 * 1000) return; */
       console.log("Polling nudge for user:", userId);
       const env = getEnvDataRef.current();
       fetch(`${process.env.EXPO_PUBLIC_API_BASE_URL}/api/get_nudge`, {
@@ -83,25 +102,26 @@ function useNudgePolling({ //the sigmaest thing every omg
               { cancelable: true }
             );
             function sendFeedback(response: string) {
-              fetch(`${process.env.EXPO_PUBLIC_API_BASE_URL}/api/feedback`, {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({
-                  user_id: userId,
+              try {
+                feedbackNudge({
                   nudge_text: data.nudge,
-                  response,
-                }),
-              });
+                  response: response,
+                  timestamp: firestore.FieldValue.serverTimestamp() as any, 
+                });
+              } catch (error) {
+                console.error("Error sending feedback:", error);
+              }
             }
           }
         })
         .catch(() => {});
     }
-    pollingRef.current = setInterval(pollNudge, 30000);
+
+    pollingRef.current = setInterval(pollNudge, timeInterval);
     return () => {
       if (pollingRef.current) clearInterval(pollingRef.current);
     };
-  }, [userId]);
+  }, [userId, timeInterval]);
 }
 
 const SessionScreen = () => {
@@ -235,7 +255,7 @@ const SessionScreen = () => {
           )
         : lighting;
 
-    console.log("📊 Session averages calculated:", {
+    console.log("Session averages calculated:", {
       noise: { readings: noiseReadings.length, average: avgNoiseLevel },
       motion: { readings: motionReadings.length, average: avgMotionLevel },
       light: { readings: lightReadings.length, average: avgLightLevel },

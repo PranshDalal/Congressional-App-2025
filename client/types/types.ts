@@ -14,3 +14,9 @@ export interface SessionData {
   ventilation?: string;
   focus_rating?: number;
 }
+
+export interface NudgeData {
+  nudge_text: string;
+  response: string;
+  timestamp: Timestamp;
+}
