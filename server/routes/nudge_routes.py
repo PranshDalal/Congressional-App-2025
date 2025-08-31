@@ -121,17 +121,18 @@ def get_nudge():
         return jsonify({"error": str(e)}), 500
 
 
-@nudge_bp.route("/feedback", methods=["POST"])
-def feedback():
-    db = firestore.client()
-    data = request.json
-    user_id = data.get("user_id")
+# NOTE: Added to client
+# @nudge_bp.route("/feedback", methods=["POST"])
+# def feedback():
+#     db = firestore.client()
+#     data = request.json
+#     user_id = data.get("user_id")
 
-    fb_ref = db.collection("users").document(user_id).collection("feedback").document()
-    fb_ref.set({
-        "nudge_text": data.get("nudge_text"),
-        "response": data.get("response"),
-        "timestamp": datetime.utcnow().isoformat()
-    })
+#     fb_ref = db.collection("users").document(user_id).collection("feedback").document()
+#     fb_ref.set({
+#         "nudge_text": data.get("nudge_text"),
+#         "response": data.get("response"),
+#         "timestamp": datetime.utcnow().isoformat()
+#     })
 
-    return jsonify({"status": "ok"})
+#     return jsonify({"status": "ok"})
