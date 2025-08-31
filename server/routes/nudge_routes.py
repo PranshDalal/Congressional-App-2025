@@ -48,7 +48,7 @@ def detect_drifts(current, preferred, tolerance=0.2):
 
     session_length_seconds = int(current.get("session_length", 0))
     session_length_minutes = session_length_seconds // 60
-    if session_length_minutes > 30:
+    if session_length_minutes > 1:
         drifts.append(f"Session length is {session_length_minutes} min, exceeding preferred 30 min")
 
     return drifts
