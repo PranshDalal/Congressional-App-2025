@@ -85,7 +85,7 @@ def get_recommendations(user_id):
 
     for col in categorical_features:
         if col in high_focus.columns and not high_focus[col].dropna().empty:
-            recommended[col] = high_focus[col].mode().iloc[0]
+            recommended[col] = bool(high_focus[col].mode().iloc[0])
 
     correlations = {}
     for col in numeric_features + categorical_features:
