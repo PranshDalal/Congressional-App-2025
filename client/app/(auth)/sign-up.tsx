@@ -17,6 +17,7 @@ import { useSignUp } from "@/hooks/auth/useSignUp";
 import { useState, useRef } from "react";
 import ThemedText from "@/components/ThemedText";
 import * as Animatable from "react-native-animatable";
+import Toast from "react-native-toast-message";
 
 const SignupScreen = () => {
   const [loading, setLoading] = useState(false);
@@ -41,19 +42,23 @@ const SignupScreen = () => {
     inputEmailRef,
     inputPasswordRef,
     inputPasswordVerificationRef,
+    verifyName,
+    verifyEmail,
+    verifyPassword,
+    verifyPasswordVerification,
   } = useSignUp(loading, setLoading);
 
   const nextStep = () => {
-    if (step === 1 && !name.trim()) {
-      Alert.alert("Wait a second", "Please enter your name.");
+    if (step === 1 && !verifyName(name)) {
       return;
     }
-    if (step === 2 && !email.trim()) {
-      Alert.alert("Wait a second", "Please enter your email.");
+    if (step === 2 && !verifyEmail(email)) {
       return;
     }
-    if (step === 3 && !password.trim()) {
-      Alert.alert("Wait a second", "Please enter a password.");
+    if (step === 3 && !verifyPassword(password)) {
+      return;
+    }
+    if (step === 4 && !verifyPasswordVerification(passwordVerification)) {
       return;
     }
 
@@ -83,7 +88,7 @@ const SignupScreen = () => {
   );
 
   return (
-    <BackgroundView withSafeArea>
+    <BackgroundView withSafeArea pageHasHeader={false}>
       <KeyboardAvoidingView
         behavior={Platform.OS === "ios" ? "padding" : "height"}
         style={styles.container}
@@ -107,7 +112,7 @@ const SignupScreen = () => {
                 onChangeText={setName}
                 enterKeyHint="next"
                 error={nameError}
-                autoFocus
+                // autoFocus
               />
             </>
           )}
@@ -126,7 +131,7 @@ const SignupScreen = () => {
                 onChangeText={setEmail}
                 enterKeyHint="next"
                 error={emailError}
-                autoFocus
+                // autoFocus
               />
             </>
           )}
@@ -145,7 +150,7 @@ const SignupScreen = () => {
                 onChangeText={setPassword}
                 enterKeyHint="next"
                 error={passwordError}
-                autoFocus
+                // autoFocus
               />
             </>
           )}
@@ -164,7 +169,7 @@ const SignupScreen = () => {
                 onChangeText={setPasswordVerification}
                 enterKeyHint="done"
                 error={passwordVerificationError}
-                autoFocus
+                // autoFocus
               />
             </>
           )}
@@ -173,29 +178,48 @@ const SignupScreen = () => {
         <View style={styles.footer}>
           <View style={styles.buttonContainer}>
             {step > 1 && (
-              <TouchableOpacity style={styles.navButton} onPress={prevStep}>
-                <ThemedText style={styles.buttonText}>Back</ThemedText>
-              </TouchableOpacity>
+              <TextButton
+                title="Back"
+                onPress={prevStep}
+                variant="secondary"
+                width="48%"
+                style={{ borderRadius: theme.radii.full }}
+              />
+              // <TouchableOpacity style={styles.navButton} onPress={prevStep}>
+              //   <ThemedText style={styles.buttonText}>Back</ThemedText>
+              // </TouchableOpacity>
             )}
             {step < totalSteps && (
-              <TouchableOpacity
-                style={[styles.navButton, styles.nextButton]}
+              <TextButton
+                title="Next"
                 onPress={nextStep}
-              >
-                <ThemedText style={[styles.buttonText, { color: "white" }]}>
-                  Next
-                </ThemedText>
-              </TouchableOpacity>
+                width={ step == 1 ? "100%" : "48%"}
+                style={{ borderRadius: theme.radii.full }}
+              />
+              // <TouchableOpacity
+              //   style={[styles.navButton, styles.nextButton]}
+              //   onPress={nextStep}
+              // >
+              //   <ThemedText style={[styles.buttonText, { color: "white" }]}>
+              //     Next
+              //   </ThemedText>
+              // </TouchableOpacity>
             )}
             {step === totalSteps && (
-              <TouchableOpacity
-                style={[styles.navButton, styles.nextButton]}
+              // <TouchableOpacity
+              //   style={[styles.navButton, styles.nextButton]}
+              //   onPress={handleSignUp}
+              // >
+              //   <ThemedText style={[styles.buttonText, { color: "white" }]}>
+              //     Create Account
+              //   </ThemedText>
+              // </TouchableOpacity>
+              <TextButton
+                title="Create Account"
                 onPress={handleSignUp}
-              >
-                <ThemedText style={[styles.buttonText, { color: "white" }]}>
-                  Create Account
-                </ThemedText>
-              </TouchableOpacity>
+                width={"48%"}
+                style={{ borderRadius: theme.radii.full }}
+              />
             )}
           </View>
           <SizedBox height={25} />
@@ -247,22 +271,22 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-between",
   },
-  navButton: {
-    paddingVertical: 15,
-    paddingHorizontal: 30,
-    borderRadius: 30,
-    borderWidth: 1,
-    borderColor: theme.colors.primary,
-    flex: 1,
-    marginHorizontal: 5,
-  },
-  nextButton: {
-    backgroundColor: theme.colors.primary,
-  },
-  buttonText: {
-    color: theme.colors.primary,
-    fontSize: 16,
-    fontWeight: "bold",
-    textAlign: "center",
-  },
+  // navButton: {
+  //   paddingVertical: 15,
+  //   paddingHorizontal: 30,
+  //   borderRadius: 30,
+  //   borderWidth: 1,
+  //   borderColor: theme.colors.primary,
+  //   flex: 1,
+  //   marginHorizontal: 5,
+  // },
+  // nextButton: {
+  //   backgroundColor: theme.colors.primary,
+  // },
+  // buttonText: {
+  //   color: theme.colors.primary,
+  //   fontSize: 16,
+  //   fontWeight: "bold",
+  //   textAlign: "center",
+  // },
 });
