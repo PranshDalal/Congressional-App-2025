@@ -57,7 +57,6 @@ const SignupScreen = () => {
     }, [])
   );
 
-  const viewRef = useRef<Animatable.View & View>(null);
   const totalSteps = 4;
 
   const {
@@ -100,9 +99,6 @@ const SignupScreen = () => {
     if (step < totalSteps) {
       setCurrentDirection("right");
       setStep(step + 1);
-      // viewRef.current?.fadeOut(300).then(() => {
-      //   viewRef.current?.fadeIn(300);
-      // });
     }
   };
 
@@ -110,9 +106,6 @@ const SignupScreen = () => {
     if (step > 0) {
       setCurrentDirection("left");
       setStep(step - 1);
-      // viewRef.current?.fadeOut(300).then(() => {
-      //   viewRef.current?.fadeIn(300);
-      // });
     }
   };
 
@@ -123,10 +116,7 @@ const SignupScreen = () => {
     const enteringAnimationDuration = 300;
     const exitingAnimationDuration = 200;
 
-    // console.log("currentDirection", currentDirection);
-
     if (type === "entering") {
-      // return FadeIn.duration(enteringAnimationDuration);
       return direction === "right"
         ? SlideInRight.duration(enteringAnimationDuration)
         : SlideInLeft.duration(enteringAnimationDuration);
@@ -157,7 +147,7 @@ const SignupScreen = () => {
         <SizedBox height={50} />
       </View>
 
-      <Animatable.View ref={viewRef} style={styles.contentContainer}>
+      <View style={styles.contentContainer}>
         {step === 1 && (
           <>
             <Animated.View
@@ -257,7 +247,7 @@ const SignupScreen = () => {
             </Animated.View>
           </>
         )}
-      </Animatable.View>
+      </View>
 
       <View style={styles.footer}>
         <View style={styles.buttonContainer}>
@@ -280,26 +270,11 @@ const SignupScreen = () => {
               width={step == 1 ? "100%" : "48%"}
               style={{ borderRadius: theme.radii.full }}
             />
-            // <TouchableOpacity
-            //   style={[styles.navButton, styles.nextButton]}
-            //   onPress={nextStep}
-            // >
-            //   <ThemedText style={[styles.buttonText, { color: "white" }]}>
-            //     Next
-            //   </ThemedText>
-            // </TouchableOpacity>
           )}
           {step === totalSteps && (
-            // <TouchableOpacity
-            //   style={[styles.navButton, styles.nextButton]}
-            //   onPress={handleSignUp}
-            // >
-            //   <ThemedText style={[styles.buttonText, { color: "white" }]}>
-            //     Create Account
-            //   </ThemedText>
-            // </TouchableOpacity>
             <TextButton
               title="Create Account"
+              showLoading={loading}
               onPress={handleSignUp}
               width={"48%"}
               style={{ borderRadius: theme.radii.full }}
@@ -361,22 +336,4 @@ const styles = StyleSheet.create({
     width: "100%",
     alignItems: "center",
   },
-  // navButton: {
-  //   paddingVertical: 15,
-  //   paddingHorizontal: 30,
-  //   borderRadius: 30,
-  //   borderWidth: 1,
-  //   borderColor: theme.colors.primary,
-  //   flex: 1,
-  //   marginHorizontal: 5,
-  // },
-  // nextButton: {
-  //   backgroundColor: theme.colors.primary,
-  // },
-  // buttonText: {
-  //   color: theme.colors.primary,
-  //   fontSize: 16,
-  //   fontWeight: "bold",
-  //   textAlign: "center",
-  // },
 });
