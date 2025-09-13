@@ -16,6 +16,7 @@ import StyledSlider from "@/components/StyledSlider";
 import KeyboardAvoidingScrollView from "@/components/view/KeyboardAvoidingScrollView";
 import ChipRadioButtonGroup from "@/components/button/ChipRadioButtonGroup";
 import ThemedText from "@/components/ThemedText";
+import { KeyboardAwareScrollView } from "react-native-keyboard-controller";
 
 const SurveyScreen = () => {
   const router = useRouter();
@@ -92,7 +93,7 @@ const SurveyScreen = () => {
 
   return (
     <BackgroundView withSafeArea>
-      <KeyboardAvoidingScrollView>
+      <KeyboardAwareScrollView bottomOffset={48} style={{ flex: 1, marginBottom: 48 }}>
         <View style={globalStyles.screenPadding}>
           {/* Focus Rating Slider */}
           <ThemedText style={styles.sliderLabel}>Focus Rating: {focusRating}</ThemedText>
@@ -104,10 +105,6 @@ const SurveyScreen = () => {
             step={1}
             showBounds={true}
           />
-          {/* <View style={styles.sliderLabels}>
-              <ThemedText style={styles.sliderEndLabel}>1</ThemedText>
-              <ThemedText style={styles.sliderEndLabel}>10</ThemedText>
-            </View> */}
 
           <SizedBox height={20} />
 
@@ -169,7 +166,7 @@ const SurveyScreen = () => {
           </View>
         </View>
         {/* <SizedBox height={500} /> */}
-      </KeyboardAvoidingScrollView>
+      </KeyboardAwareScrollView>
 
       <View style={styles.bottomStickyView}>
         <TextButton

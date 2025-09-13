@@ -38,6 +38,7 @@ import { Nunito_700Bold_Italic } from "@expo-google-fonts/nunito/700Bold_Italic"
 import { Nunito_800ExtraBold_Italic } from "@expo-google-fonts/nunito/800ExtraBold_Italic";
 import { Nunito_900Black_Italic } from "@expo-google-fonts/nunito/900Black_Italic";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
+import { KeyboardProvider } from "react-native-keyboard-controller";
 
 SplashScreen.preventAutoHideAsync();
 
@@ -96,18 +97,20 @@ export default function RootLayout() {
 
   return (
     <ThemeProvider value={DarkTheme}>
-      {/* value={colorScheme === "dark" ? DarkTheme : DefaultTheme}> */}
-      <Stack>
-      <Protected guard={user === null}>
-        <Stack.Screen name="(auth)" options={{ headerShown: false }} />
-      </Protected>
-      <Protected guard={user !== null}>
-        <Stack.Screen name="(app)" options={{ headerShown: false }} />
-      </Protected>
-      <Stack.Screen name="+not-found" />
-      </Stack>
-      <Toast config={toastConfig} topOffset={safeAreaInsets.top} />
-      <StatusBar style="light" />
+      <KeyboardProvider>
+        {/* value={colorScheme === "dark" ? DarkTheme : DefaultTheme}> */}
+        <Stack>
+          <Protected guard={user === null}>
+            <Stack.Screen name="(auth)" options={{ headerShown: false }} />
+          </Protected>
+          <Protected guard={user !== null}>
+            <Stack.Screen name="(app)" options={{ headerShown: false }} />
+          </Protected>
+          <Stack.Screen name="+not-found" />
+        </Stack>
+        <Toast config={toastConfig} topOffset={safeAreaInsets.top} />
+        <StatusBar style="light" />
+      </KeyboardProvider>
     </ThemeProvider>
   );
 }
