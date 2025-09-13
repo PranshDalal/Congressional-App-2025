@@ -13,7 +13,6 @@ import { useLocalSearchParams } from "expo-router";
 import axios from "axios";
 import { endSession } from "@/services/backendSessionService";
 import StyledSlider from "@/components/StyledSlider";
-import KeyboardAvoidingScrollView from "@/components/view/KeyboardAvoidingScrollView";
 import ChipRadioButtonGroup from "@/components/button/ChipRadioButtonGroup";
 import ThemedText from "@/components/ThemedText";
 import { KeyboardAwareScrollView } from "react-native-keyboard-controller";
