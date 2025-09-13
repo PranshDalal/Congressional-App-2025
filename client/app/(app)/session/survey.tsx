@@ -19,6 +19,7 @@ import { KeyboardAwareScrollView } from "react-native-keyboard-controller";
 
 const SurveyScreen = () => {
   const router = useRouter();
+  
   const [deleteModalVisible, setDeleteModalVisible] = useState(false);
   const { sessionData } = useLocalSearchParams();
   const [focusRating, setFocusRating] = useState(5);
