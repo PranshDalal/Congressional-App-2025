@@ -1,4 +1,4 @@
-import { View, Text } from "react-native";
+import { View } from "react-native";
 import React from "react";
 import BackgroundView from "@/components/view/BackgroundView";
 import { StyleSheet } from "react-native";
@@ -9,7 +9,6 @@ import { theme } from "@/styles/theme";
 import ThemedText from "@/components/ThemedText";
 import BouncingCircles from "@/components/BouncingCircles";
 import Animated, {
-  FadeIn,
   FadeInDown,
   FadeInUp,
 } from "react-native-reanimated";
