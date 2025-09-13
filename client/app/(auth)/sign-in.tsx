@@ -11,9 +11,19 @@ import { useSignIn } from "@/hooks/auth/useSignIn";
 import { useForgotPassword } from "@/hooks/auth/useForgotPassword";
 import { StyleSheet } from "react-native";
 import ThemedText from "@/components/ThemedText";
+import useKeyboardGradualAnimation from "@/hooks/useKeyboardGradualAnimation";
+import Animated, { useAnimatedStyle } from "react-native-reanimated";
 
 const SigninScreen = () => {
   const [loading, setLoading] = useState(false);
+
+  const { keyboardHeight } = useKeyboardGradualAnimation();
+
+  const fakeView = useAnimatedStyle(() => {
+    return {
+      height: Math.abs(keyboardHeight.value),
+    };
+  }, []);
 
   const {
     email,
@@ -38,11 +48,13 @@ const SigninScreen = () => {
   );
 
   return (
-    <BackgroundView withSafeArea withScreenPadding>
-      <View style={{ flex: 1, alignItems: "center" }}>
-        <SizedBox height={100} />
+    <BackgroundView withSafeArea withScreenPadding pageHasHeader={false}>
+      <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
         <ThemedText style={globalStyles.header1}>Welcome Back!</ThemedText>
-        <ThemedText style={globalStyles.mutedText}>Please sign in to continue</ThemedText>
+        <ThemedText style={globalStyles.mutedText}>
+          Please sign in to continue
+        </ThemedText>
+        {/* <SizedBox height={25} /> */}
         <SizedBox height={theme.spacing.lg} />
         <ThemedText style={styles.inputTitle}>Email</ThemedText>
         <StyledTextInput
@@ -68,7 +80,9 @@ const SigninScreen = () => {
         />
         <SizedBox height={5} />
         <Pressable onPress={forgotPassword} style={{ alignSelf: "flex-start" }}>
-          <ThemedText style={globalStyles.linkText}>Forgot your password?</ThemedText>
+          <ThemedText style={globalStyles.linkText}>
+            Forgot your password?
+          </ThemedText>
         </Pressable>
         <SizedBox height={theme.spacing.md} />
         <TextButton
@@ -80,12 +94,15 @@ const SigninScreen = () => {
         />
         <SizedBox height={25} />
         <View style={{ flexDirection: "row" }}>
-          <ThemedText style={globalStyles.mutedText}>Don't have an account? </ThemedText>
+          <ThemedText style={globalStyles.mutedText}>
+            Don't have an account?{" "}
+          </ThemedText>
           <Link href="/sign-up" style={globalStyles.linkText} replace>
             Sign Up
           </Link>
         </View>
       </View>
+      <Animated.View style={fakeView} />
     </BackgroundView>
   );
 };

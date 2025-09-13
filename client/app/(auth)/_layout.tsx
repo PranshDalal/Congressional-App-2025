@@ -5,6 +5,8 @@ export default function AuthLayout() {
     <Stack
       screenOptions={{
         headerShown: false,
+        gestureEnabled: true,
+        keyboardHandlingEnabled: true,
       }}
     >
       <Stack.Screen name="sign-in-or-up" options={{ headerShown: false }} />
