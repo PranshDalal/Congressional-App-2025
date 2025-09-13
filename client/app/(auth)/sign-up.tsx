@@ -176,6 +176,7 @@ const SignupScreen = () => {
                 onChangeText={setName}
                 enterKeyHint="next"
                 error={nameError}
+                autoCapitalize="words"
                 // autoFocus
               />
             </Animated.View>
