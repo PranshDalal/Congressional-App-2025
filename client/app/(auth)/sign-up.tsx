@@ -5,6 +5,7 @@ import {
   Platform,
   TouchableOpacity,
   Alert,
+  Keyboard,
 } from "react-native";
 import BackgroundView from "@/components/view/BackgroundView";
 import globalStyles from "@/styles/globalStyles";
@@ -12,9 +13,9 @@ import StyledTextInput from "@/components/StyledTextInput";
 import SizedBox from "@/components/SizedBox";
 import TextButton from "@/components/button/TextButton";
 import theme from "@/styles/theme";
-import { Link, useRouter } from "expo-router";
+import { Link, useFocusEffect, useRouter } from "expo-router";
 import { useSignUp } from "@/hooks/auth/useSignUp";
-import { useState, useRef } from "react";
+import { useState, useRef, useCallback, useEffect } from "react";
 import ThemedText from "@/components/ThemedText";
 import * as Animatable from "react-native-animatable";
 import Toast from "react-native-toast-message";
@@ -26,6 +27,7 @@ import Animated, {
   SlideInRight,
   SlideOutLeft,
   SlideOutRight,
+  useAnimatedStyle,
 } from "react-native-reanimated";
 import useKeyboardGradualAnimation from "@/hooks/useKeyboardGradualAnimation";
 
@@ -39,6 +41,21 @@ const SignupScreen = () => {
   );
 
   const { keyboardHeight } = useKeyboardGradualAnimation();
+  
+  const fakeView = useAnimatedStyle(() => {
+    return {
+      height: Math.abs(keyboardHeight.value),
+    };
+  }, []);
+
+  // Dismiss keyboard when navigating away
+  useFocusEffect(
+    useCallback(() => {
+      return () => {
+        Keyboard.dismiss();
+      };
+    }, [])
+  );
 
   const viewRef = useRef<Animatable.View & View>(null);
   const totalSteps = 4;
@@ -184,7 +201,7 @@ const SignupScreen = () => {
                 onChangeText={setEmail}
                 enterKeyHint="next"
                 error={emailError}
-                // autoFocus
+                autoFocus
               />
             </Animated.View>
           </>
@@ -209,7 +226,7 @@ const SignupScreen = () => {
                 onChangeText={setPassword}
                 enterKeyHint="next"
                 error={passwordError}
-                // autoFocus
+                autoFocus
               />
             </Animated.View>
           </>
@@ -234,7 +251,7 @@ const SignupScreen = () => {
                 onChangeText={setPasswordVerification}
                 enterKeyHint="done"
                 error={passwordVerificationError}
-                // autoFocus
+                autoFocus
               />
             </Animated.View>
           </>
@@ -299,6 +316,7 @@ const SignupScreen = () => {
         </View>
       </View>
       {/* </KeyboardAvoidingView> */}
+      <Animated.View style={fakeView} />
     </BackgroundView>
   );
 };
