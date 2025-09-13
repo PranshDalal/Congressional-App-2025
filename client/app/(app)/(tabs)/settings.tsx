@@ -1,7 +1,6 @@
-import { View, Text } from "react-native";
+import { View } from "react-native";
 import React, { useState, useEffect } from "react";
 import BackgroundView from "@/components/view/BackgroundView";
-import globalStyles from "@/styles/globalStyles";
 import SizedBox from "@/components/SizedBox";
 import TextButton from "@/components/button/TextButton";
 import { getAuth } from "@react-native-firebase/auth";

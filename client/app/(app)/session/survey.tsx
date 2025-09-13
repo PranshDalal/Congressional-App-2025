@@ -1,4 +1,4 @@
-import { View, Text, StyleSheet, Pressable, ScrollView } from "react-native";
+import { View, StyleSheet } from "react-native";
 import React, { useState } from "react";
 import BackgroundView from "@/components/view/BackgroundView";
 import globalStyles from "@/styles/globalStyles";
@@ -10,7 +10,6 @@ import Toast from "react-native-toast-message";
 import SizedBox from "@/components/SizedBox";
 import StyledTextInput from "@/components/StyledTextInput";
 import { useLocalSearchParams } from "expo-router";
-import axios from "axios";
 import { endSession } from "@/services/backendSessionService";
 import StyledSlider from "@/components/StyledSlider";
 import ChipRadioButtonGroup from "@/components/button/ChipRadioButtonGroup";

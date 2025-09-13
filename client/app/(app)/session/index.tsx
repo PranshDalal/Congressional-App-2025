@@ -1,4 +1,4 @@
-import { View, Text, StyleSheet, Alert } from "react-native";
+import { View, StyleSheet, Alert } from "react-native";
 import React, { useEffect, useRef, useState } from "react";
 import BackgroundView from "@/components/view/BackgroundView";
 import globalStyles from "@/styles/globalStyles";

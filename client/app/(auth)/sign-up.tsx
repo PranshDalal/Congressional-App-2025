@@ -1,10 +1,6 @@
 import {
   View,
   StyleSheet,
-  KeyboardAvoidingView,
-  Platform,
-  TouchableOpacity,
-  Alert,
   Keyboard,
 } from "react-native";
 import BackgroundView from "@/components/view/BackgroundView";
@@ -15,18 +11,12 @@ import TextButton from "@/components/button/TextButton";
 import theme from "@/styles/theme";
 import { Link, useFocusEffect, useRouter } from "expo-router";
 import { useSignUp } from "@/hooks/auth/useSignUp";
-import { useState, useRef, useCallback, useEffect } from "react";
+import { useState, useCallback } from "react";
 import ThemedText from "@/components/ThemedText";
-import * as Animatable from "react-native-animatable";
-import Toast from "react-native-toast-message";
 import Animated, {
-  FadeIn,
-  FadeInLeft,
   FadeOut,
   SlideInLeft,
   SlideInRight,
-  SlideOutLeft,
-  SlideOutRight,
   useAnimatedStyle,
 } from "react-native-reanimated";
 import useKeyboardGradualAnimation from "@/hooks/useKeyboardGradualAnimation";
