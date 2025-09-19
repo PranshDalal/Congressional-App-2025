@@ -34,8 +34,18 @@ export async function connectToWearable(onMessage: (msg: string) => void): Promi
               global.Toast.show({ type: 'info', text1: 'Started scanning for ADHD_Wearable' });
             }
             const scannedDevice = await new Promise<Device>((res, rej) => {
+              let timeout: NodeJS.Timeout | null = setTimeout(() => {
+                bleManager.stopDeviceScan();
+                console.log('Stopped scanning for ADHD_Wearable (timeout)');
+                if (typeof global !== 'undefined' && global.Toast) {
+                  global.Toast.show({ type: 'error', text1: 'Device not found. Stopped scanning.' });
+                }
+                rej(new Error('Device not found within timeout'));
+              }, 15000); 
+
               const scanSub = bleManager.startDeviceScan(null, null, (error, device) => {
                 if (error) {
+                  if (timeout) clearTimeout(timeout);
                   bleManager.stopDeviceScan();
                   console.log('Stopped scanning for ADHD_Wearable');
                   if (typeof global !== 'undefined' && global.Toast) {
@@ -44,6 +54,7 @@ export async function connectToWearable(onMessage: (msg: string) => void): Promi
                   return rej(error);
                 }
                 if (device && device.name === DEVICE_NAME) {
+                  if (timeout) clearTimeout(timeout);
                   bleManager.stopDeviceScan();
                   console.log('Stopped scanning for ADHD_Wearable');
                   if (typeof global !== 'undefined' && global.Toast) {
