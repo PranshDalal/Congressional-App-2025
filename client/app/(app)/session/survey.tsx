@@ -1,4 +1,4 @@
-import { View, Text, StyleSheet, Pressable, ScrollView } from "react-native";
+import { View, StyleSheet } from "react-native";
 import React, { useState } from "react";
 import BackgroundView from "@/components/view/BackgroundView";
 import globalStyles from "@/styles/globalStyles";
@@ -10,15 +10,15 @@ import Toast from "react-native-toast-message";
 import SizedBox from "@/components/SizedBox";
 import StyledTextInput from "@/components/StyledTextInput";
 import { useLocalSearchParams } from "expo-router";
-import axios from "axios";
 import { endSession } from "@/services/backendSessionService";
 import StyledSlider from "@/components/StyledSlider";
-import KeyboardAvoidingScrollView from "@/components/view/KeyboardAvoidingScrollView";
 import ChipRadioButtonGroup from "@/components/button/ChipRadioButtonGroup";
 import ThemedText from "@/components/ThemedText";
+import { KeyboardAwareScrollView } from "react-native-keyboard-controller";
 
 const SurveyScreen = () => {
   const router = useRouter();
+  
   const [deleteModalVisible, setDeleteModalVisible] = useState(false);
   const { sessionData } = useLocalSearchParams();
   const [focusRating, setFocusRating] = useState(5);
@@ -92,7 +92,7 @@ const SurveyScreen = () => {
 
   return (
     <BackgroundView withSafeArea>
-      <KeyboardAvoidingScrollView>
+      <KeyboardAwareScrollView bottomOffset={48} style={{ flex: 1, marginBottom: 48 }}>
         <View style={globalStyles.screenPadding}>
           {/* Focus Rating Slider */}
           <ThemedText style={styles.sliderLabel}>Focus Rating: {focusRating}</ThemedText>
@@ -104,10 +104,6 @@ const SurveyScreen = () => {
             step={1}
             showBounds={true}
           />
-          {/* <View style={styles.sliderLabels}>
-              <ThemedText style={styles.sliderEndLabel}>1</ThemedText>
-              <ThemedText style={styles.sliderEndLabel}>10</ThemedText>
-            </View> */}
 
           <SizedBox height={20} />
 
@@ -169,7 +165,7 @@ const SurveyScreen = () => {
           </View>
         </View>
         {/* <SizedBox height={500} /> */}
-      </KeyboardAvoidingScrollView>
+      </KeyboardAwareScrollView>
 
       <View style={styles.bottomStickyView}>
         <TextButton

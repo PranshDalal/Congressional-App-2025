@@ -1,10 +1,7 @@
 import {
   View,
   StyleSheet,
-  KeyboardAvoidingView,
-  Platform,
-  TouchableOpacity,
-  Alert,
+  Keyboard,
 } from "react-native";
 import BackgroundView from "@/components/view/BackgroundView";
 import globalStyles from "@/styles/globalStyles";
@@ -12,16 +9,44 @@ import StyledTextInput from "@/components/StyledTextInput";
 import SizedBox from "@/components/SizedBox";
 import TextButton from "@/components/button/TextButton";
 import theme from "@/styles/theme";
-import { Link, useRouter } from "expo-router";
+import { Link, useFocusEffect, useRouter } from "expo-router";
 import { useSignUp } from "@/hooks/auth/useSignUp";
-import { useState, useRef } from "react";
+import { useState, useCallback } from "react";
 import ThemedText from "@/components/ThemedText";
-import * as Animatable from "react-native-animatable";
+import Animated, {
+  FadeOut,
+  SlideInLeft,
+  SlideInRight,
+  useAnimatedStyle,
+} from "react-native-reanimated";
+import useKeyboardGradualAnimation from "@/hooks/useKeyboardGradualAnimation";
 
 const SignupScreen = () => {
   const [loading, setLoading] = useState(false);
+  const router = useRouter();
+
   const [step, setStep] = useState(1);
-  const viewRef = useRef<Animatable.View & View>(null);
+  const [currentDirection, setCurrentDirection] = useState<"left" | "right">(
+    "right"
+  );
+
+  const { keyboardHeight } = useKeyboardGradualAnimation();
+  
+  const fakeView = useAnimatedStyle(() => {
+    return {
+      height: Math.abs(keyboardHeight.value),
+    };
+  }, []);
+
+  // Dismiss keyboard when navigating away
+  useFocusEffect(
+    useCallback(() => {
+      return () => {
+        Keyboard.dismiss();
+      };
+    }, [])
+  );
+
   const totalSteps = 4;
 
   const {
@@ -41,36 +66,55 @@ const SignupScreen = () => {
     inputEmailRef,
     inputPasswordRef,
     inputPasswordVerificationRef,
+    verifyName,
+    verifyEmail,
+    verifyPassword,
+    verifyPasswordVerification,
   } = useSignUp(loading, setLoading);
 
   const nextStep = () => {
-    if (step === 1 && !name.trim()) {
-      Alert.alert("Wait a second", "Please enter your name.");
+    if (step === 1 && !verifyName(name)) {
       return;
     }
-    if (step === 2 && !email.trim()) {
-      Alert.alert("Wait a second", "Please enter your email.");
+    if (step === 2 && !verifyEmail(email)) {
       return;
     }
-    if (step === 3 && !password.trim()) {
-      Alert.alert("Wait a second", "Please enter a password.");
+    if (step === 3 && !verifyPassword(password)) {
+      return;
+    }
+    if (step === 4 && !verifyPasswordVerification(passwordVerification)) {
       return;
     }
 
     if (step < totalSteps) {
-      viewRef.current?.fadeOut(300).then(() => {
-        setStep(step + 1);
-        viewRef.current?.fadeIn(300);
-      });
+      setCurrentDirection("right");
+      setStep(step + 1);
     }
   };
 
   const prevStep = () => {
-    if (step > 1) {
-      viewRef.current?.fadeOut(300).then(() => {
-        setStep(step - 1);
-        viewRef.current?.fadeIn(300);
-      });
+    if (step > 0) {
+      setCurrentDirection("left");
+      setStep(step - 1);
+    }
+  };
+
+  const determineAnimation = (
+    type: "entering" | "exiting",
+    direction: "left" | "right"
+  ) => {
+    const enteringAnimationDuration = 300;
+    const exitingAnimationDuration = 200;
+
+    if (type === "entering") {
+      return direction === "right"
+        ? SlideInRight.duration(enteringAnimationDuration)
+        : SlideInLeft.duration(enteringAnimationDuration);
+    } else {
+      return FadeOut.duration(exitingAnimationDuration);
+      // return direction === "right"
+      //   ? SlideOutLeft.duration(animationDuration)
+      //   : SlideOutRight.duration(animationDuration);
     }
   };
 
@@ -83,19 +127,24 @@ const SignupScreen = () => {
   );
 
   return (
-    <BackgroundView withSafeArea>
-      <KeyboardAvoidingView
+    <BackgroundView withSafeArea pageHasHeader={false}>
+      {/* <KeyboardAvoidingView
         behavior={Platform.OS === "ios" ? "padding" : "height"}
         style={styles.container}
-      >
-        <View style={styles.header}>
-          <ProgressBar />
-          <SizedBox height={50} />
-        </View>
+      > */}
+      <View style={styles.header}>
+        <ProgressBar />
+        <SizedBox height={50} />
+      </View>
 
-        <Animatable.View ref={viewRef} style={styles.contentContainer}>
-          {step === 1 && (
-            <>
+      <View style={styles.contentContainer}>
+        {step === 1 && (
+          <>
+            <Animated.View
+              style={styles.questionContainer}
+              entering={determineAnimation("entering", currentDirection)}
+              exiting={determineAnimation("exiting", currentDirection)}
+            >
               <ThemedText style={globalStyles.header1}>
                 What's your name?
               </ThemedText>
@@ -107,12 +156,19 @@ const SignupScreen = () => {
                 onChangeText={setName}
                 enterKeyHint="next"
                 error={nameError}
-                autoFocus
+                autoCapitalize="words"
+                // autoFocus
               />
-            </>
-          )}
-          {step === 2 && (
-            <>
+            </Animated.View>
+          </>
+        )}
+        {step === 2 && (
+          <>
+            <Animated.View
+              style={styles.questionContainer}
+              entering={determineAnimation("entering", currentDirection)}
+              exiting={determineAnimation("exiting", currentDirection)}
+            >
               <ThemedText style={globalStyles.header1}>
                 And your email?
               </ThemedText>
@@ -128,10 +184,16 @@ const SignupScreen = () => {
                 error={emailError}
                 autoFocus
               />
-            </>
-          )}
-          {step === 3 && (
-            <>
+            </Animated.View>
+          </>
+        )}
+        {step === 3 && (
+          <>
+            <Animated.View
+              style={styles.questionContainer}
+              entering={determineAnimation("entering", currentDirection)}
+              exiting={determineAnimation("exiting", currentDirection)}
+            >
               <ThemedText style={globalStyles.header1}>
                 Create a password
               </ThemedText>
@@ -147,10 +209,16 @@ const SignupScreen = () => {
                 error={passwordError}
                 autoFocus
               />
-            </>
-          )}
-          {step === 4 && (
-            <>
+            </Animated.View>
+          </>
+        )}
+        {step === 4 && (
+          <>
+            <Animated.View
+              style={styles.questionContainer}
+              entering={determineAnimation("entering", currentDirection)}
+              exiting={determineAnimation("exiting", currentDirection)}
+            >
               <ThemedText style={globalStyles.header1}>
                 Confirm your password
               </ThemedText>
@@ -166,49 +234,55 @@ const SignupScreen = () => {
                 error={passwordVerificationError}
                 autoFocus
               />
-            </>
-          )}
-        </Animatable.View>
+            </Animated.View>
+          </>
+        )}
+      </View>
 
-        <View style={styles.footer}>
-          <View style={styles.buttonContainer}>
-            {step > 1 && (
-              <TouchableOpacity style={styles.navButton} onPress={prevStep}>
-                <ThemedText style={styles.buttonText}>Back</ThemedText>
-              </TouchableOpacity>
-            )}
-            {step < totalSteps && (
-              <TouchableOpacity
-                style={[styles.navButton, styles.nextButton]}
-                onPress={nextStep}
-              >
-                <ThemedText style={[styles.buttonText, { color: "white" }]}>
-                  Next
-                </ThemedText>
-              </TouchableOpacity>
-            )}
-            {step === totalSteps && (
-              <TouchableOpacity
-                style={[styles.navButton, styles.nextButton]}
-                onPress={handleSignUp}
-              >
-                <ThemedText style={[styles.buttonText, { color: "white" }]}>
-                  Create Account
-                </ThemedText>
-              </TouchableOpacity>
-            )}
-          </View>
-          <SizedBox height={25} />
-          <View style={{ flexDirection: "row", justifyContent: "center" }}>
-            <ThemedText style={globalStyles.mutedText}>
-              Already have an account?{" "}
-            </ThemedText>
-            <Link href="/sign-in" style={globalStyles.linkText} replace>
-              Sign In
-            </Link>
-          </View>
+      <View style={styles.footer}>
+        <View style={styles.buttonContainer}>
+          {step > 1 && (
+            <TextButton
+              title="Back"
+              onPress={prevStep}
+              variant="secondary"
+              width="48%"
+              style={{ borderRadius: theme.radii.full }}
+            />
+            // <TouchableOpacity style={styles.navButton} onPress={prevStep}>
+            //   <ThemedText style={styles.buttonText}>Back</ThemedText>
+            // </TouchableOpacity>
+          )}
+          {step < totalSteps && (
+            <TextButton
+              title="Next"
+              onPress={nextStep}
+              width={step == 1 ? "100%" : "48%"}
+              style={{ borderRadius: theme.radii.full }}
+            />
+          )}
+          {step === totalSteps && (
+            <TextButton
+              title="Create Account"
+              showLoading={loading}
+              onPress={handleSignUp}
+              width={"48%"}
+              style={{ borderRadius: theme.radii.full }}
+            />
+          )}
         </View>
-      </KeyboardAvoidingView>
+        <SizedBox height={25} />
+        <View style={{ flexDirection: "row", justifyContent: "center" }}>
+          <ThemedText style={globalStyles.mutedText}>
+            Already have an account?{" "}
+          </ThemedText>
+          <Link href="/sign-in" style={globalStyles.linkText} replace>
+            Sign In
+          </Link>
+        </View>
+      </View>
+      {/* </KeyboardAvoidingView> */}
+      <Animated.View style={fakeView} />
     </BackgroundView>
   );
 };
@@ -246,23 +320,10 @@ const styles = StyleSheet.create({
   buttonContainer: {
     flexDirection: "row",
     justifyContent: "space-between",
+    paddingHorizontal: theme.spacing.md,
   },
-  navButton: {
-    paddingVertical: 15,
-    paddingHorizontal: 30,
-    borderRadius: 30,
-    borderWidth: 1,
-    borderColor: theme.colors.primary,
-    flex: 1,
-    marginHorizontal: 5,
-  },
-  nextButton: {
-    backgroundColor: theme.colors.primary,
-  },
-  buttonText: {
-    color: theme.colors.primary,
-    fontSize: 16,
-    fontWeight: "bold",
-    textAlign: "center",
+  questionContainer: {
+    width: "100%",
+    alignItems: "center",
   },
 });

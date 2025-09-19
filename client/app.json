@@ -28,11 +28,7 @@
       "edgeToEdgeEnabled": true,
       "package": "com.pranshdalal.client",
       "googleServicesFile": "./google-services.json",
-      "permissions": [
-        "RECORD_AUDIO",
-        "CAMERA",
-        "BODY_SENSORS"
-      ]
+      "permissions": ["RECORD_AUDIO", "CAMERA", "BODY_SENSORS"]
     },
     "web": {
       "bundler": "metro",
@@ -52,9 +48,7 @@
       [
         "react-native-permissions",
         {
-          "iosPermissions": [
-            "Microphone"
-          ]
+          "iosPermissions": ["Microphone"]
         }
       ],
       "@react-native-firebase/app",
@@ -69,7 +63,8 @@
         }
       ],
       "expo-web-browser",
-      "expo-font"
+      "expo-font",
+      "react-native-ble-plx"
     ],
     "experiments": {
       "typedRoutes": true
