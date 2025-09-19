@@ -25,6 +25,56 @@ export function useSignUp(
   const inputPasswordRef = useRef<TextInput>(null);
   const inputPasswordVerificationRef = useRef<TextInput>(null);
 
+  const verifyName = (name: string) => {
+    if (loading) return;
+    clearErrors();
+    if (!name.trim()) {
+      setNameError("Please enter your name");
+      return false;
+    }
+
+    return true;
+  };
+
+  const verifyEmail = (email: string) => {
+    if (loading) return;
+    clearErrors();
+    const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailPattern.test(email)) {
+      setEmailError("Please enter a valid email address");
+      return false;
+    }
+    return true;
+  };
+
+  const verifyPassword = (pwd: string) => {
+    if (loading) return;
+    clearErrors();
+    if (!password) {
+      setPasswordError("You need a password!");
+      return false;
+    }
+    if (pwd.length < 6) {
+      setPasswordError("The password must be at least 6 characters long!");
+      return false;
+    }
+    if (pwd.length > 4096) {
+      setPasswordError("The password is too long!");
+      return false;
+    }
+    return true;
+  };
+
+  const verifyPasswordVerification = (pwdVer: string) => {
+    if (loading) return;
+    clearErrors();
+    if (pwdVer !== password) {
+      setPasswordVerificationError("The passwords don't match!");
+      return false;
+    }
+    return true;
+  };
+
   const handleSignUp = async () => {
     if (loading) return;
     clearErrors();
@@ -86,5 +136,9 @@ export function useSignUp(
     inputEmailRef,
     inputPasswordRef,
     inputPasswordVerificationRef,
+    verifyName,
+    verifyEmail,
+    verifyPassword,
+    verifyPasswordVerification,
   };
 }
