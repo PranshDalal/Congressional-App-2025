@@ -9,9 +9,11 @@ import StyledModal from "@/components/view/StyledModal";
 import Toast from "react-native-toast-message";
 import ThemedText from "@/components/ThemedText";
 import { PreferencesService } from "@/services/firebasePreferencesService";
+import { connectToWearable } from "../(ble)/bleClient";
 
 const settings = () => {
   const [signOutModalVisible, setSignOutModalVisible] = useState(false);
+  const [connectModalVisible, setConnectModalVisible] = useState(false);
   const [nudgeFrequency, setNudgeFrequency] = useState<"Low" | "Mid" | "High">("Mid");
   
   useEffect(() => {
@@ -75,6 +77,15 @@ const settings = () => {
         <ThemedText>Current: {nudgeFrequency}</ThemedText>
       </View>
 
+
+      <TextButton
+        title="Connect to Wearable"
+        onPress={() => setConnectModalVisible(true)}
+        variant="primary"
+      />
+
+      <SizedBox height={10} />
+
       <TextButton
         title="Sign Out"
         onPress={() => setSignOutModalVisible(true)}
@@ -89,6 +100,21 @@ const settings = () => {
         visible={signOutModalVisible}
         onSubmit={signOut}
         setModalVisibleCallback={setSignOutModalVisible}
+      />
+
+      <StyledModal
+        title="Connect to Wearable"
+        body="Are you sure you want to connect to the wearable device?"
+        type="ask"
+        submitButtonText="Connect"
+        visible={connectModalVisible}
+        onSubmit={() => {
+          connectToWearable((msg) => {
+            Toast.show({ type: "success", text1: `Received: ${msg}` });
+          });
+          setConnectModalVisible(false);
+        }}
+        setModalVisibleCallback={setConnectModalVisible}
       />
     </BackgroundView>
   );

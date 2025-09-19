@@ -16,7 +16,8 @@
         "ITSAppUsesNonExemptEncryption": false,
         "NSMicrophoneUsageDescription": "We use the microphone to measure ambient noise levels during focus sessions.",
         "NSCameraUsageDescription": "We use the camera to measure ambient lighting conditions during focus sessions.",
-        "NSMotionUsageDescription": "We use motion data to detect activity during focus sessions."
+        "NSMotionUsageDescription": "We use motion data to detect activity during focus sessions.",
+        "NSBluetoothAlwaysUsageDescription": "App needs Bluetooth to connect to wearable device"
       }
     },
     "android": {
