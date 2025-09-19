@@ -20,6 +20,8 @@ import * as SplashScreen from "expo-splash-screen";
 import Toast from "react-native-toast-message";
 import toastConfig from "@/components/toast/ToastConfig";
 
+import { BottomSheetModalProvider } from "@gorhom/bottom-sheet";
+
 import { useFonts } from "expo-font";
 import { Nunito_200ExtraLight } from "@expo-google-fonts/nunito/200ExtraLight";
 import { Nunito_300Light } from "@expo-google-fonts/nunito/300Light";
@@ -39,6 +41,7 @@ import { Nunito_800ExtraBold_Italic } from "@expo-google-fonts/nunito/800ExtraBo
 import { Nunito_900Black_Italic } from "@expo-google-fonts/nunito/900Black_Italic";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { KeyboardProvider } from "react-native-keyboard-controller";
+import { GestureHandlerRootView } from "react-native-gesture-handler";
 
 SplashScreen.preventAutoHideAsync();
 
@@ -98,18 +101,22 @@ export default function RootLayout() {
   return (
     <ThemeProvider value={DarkTheme}>
       <KeyboardProvider>
-        {/* value={colorScheme === "dark" ? DarkTheme : DefaultTheme}> */}
-        <Stack>
-          <Protected guard={user === null}>
-            <Stack.Screen name="(auth)" options={{ headerShown: false }} />
-          </Protected>
-          <Protected guard={user !== null}>
-            <Stack.Screen name="(app)" options={{ headerShown: false }} />
-          </Protected>
-          <Stack.Screen name="+not-found" />
-        </Stack>
-        <Toast config={toastConfig} topOffset={safeAreaInsets.top} />
-        <StatusBar style="light" />
+        <GestureHandlerRootView>
+          <BottomSheetModalProvider>
+            {/* value={colorScheme === "dark" ? DarkTheme : DefaultTheme}> */}
+            <Stack>
+              <Protected guard={user === null}>
+                <Stack.Screen name="(auth)" options={{ headerShown: false }} />
+              </Protected>
+              <Protected guard={user !== null}>
+                <Stack.Screen name="(app)" options={{ headerShown: false }} />
+              </Protected>
+              <Stack.Screen name="+not-found" />
+            </Stack>
+            <Toast config={toastConfig} topOffset={safeAreaInsets.top} />
+            <StatusBar style="light" />
+          </BottomSheetModalProvider>
+        </GestureHandlerRootView>
       </KeyboardProvider>
     </ThemeProvider>
   );
