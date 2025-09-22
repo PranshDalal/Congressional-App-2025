@@ -35,7 +35,7 @@ const IndexScreen = () => {
 
   const startSessionButtonPressed = () => {
     bottomSheetRef.current?.dismiss();
-    startSession();
+    startSession(deviceType);
   };
 
   return (
