@@ -19,19 +19,25 @@ const getMicrophonePermissionType = () =>
 
 export function useGetStartSessionPermissions() {
   const router = useRouter();
-  return useCallback(async () => {
+  return useCallback(async (deviceType: "phone" | "bluetooth") => {
     const type = getMicrophonePermissionType();
     const result = await check(type!);
 
     if (result === RESULTS.GRANTED) {
       router.push({
         pathname: "/session",
-        params: { "microphone-enabled": "true" },
+        params: { 
+          "microphone-enabled": "true",
+          "device-type": deviceType 
+        },
       });
     } else {
       router.push({
         pathname: "/session/request-microphone",
-        params: { "microphone-status": result },
+        params: { 
+          "microphone-status": result,
+          "device-type": deviceType 
+        },
       });
     }
   }, []);
