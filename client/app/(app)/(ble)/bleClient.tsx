@@ -87,7 +87,7 @@ export async function connectToWearable(
             if (!service) throw new Error("Service not found");
 
             const characteristics = await connected.characteristicsForService(service.uuid);
-            console.log("📡 Characteristics:", characteristics.map(c => c.uuid));
+            console.log("Characteristics:", characteristics.map(c => c.uuid));
 
             const characteristic = characteristics.find(c =>
               c.uuid.toLowerCase().includes(
