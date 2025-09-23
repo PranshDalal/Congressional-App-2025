@@ -49,17 +49,24 @@ void loop() {
     int lightLevel = analogRead(lightPin);
     int soundLevel = analogRead(micPin);
 
-    // I couldn't figure out the accelerometer so its a dummy one for now 
-    // float x = 0.01, y = 0.02, z = 0.98;
     float x = 0.0, y = 0.0, z = 0.0;
 
     if (IMU.accelerationAvailable()) {
       IMU.readAcceleration(x, y, z);
     }
 
-    String payload = "light:" + String(lightLevel) +
-                     ",sound:" + String(soundLevel) +
-                     ",accel:" + String(x, 2) + "|" + String(y, 2) + "|" + String(z, 2);
+    // String oldPayload = "light:" + String(lightLevel) +
+    //                  ",sound:" + String(soundLevel) +
+    //                  ",accel:" + String(x, 2) + "|" + String(y, 2) + "|" + String(z, 2);
+
+    String payload = "{";
+    payload += "\"light\":" + String(lightLevel) + ",";
+    payload += "\"sound\":" + String(soundLevel) + ",";
+    payload += "\"accel\":{";
+    payload += "\"x\":" + String(x, 2) + ",";
+    payload += "\"y\":" + String(y, 2) + ",";
+    payload += "\"z\":" + String(z, 2);
+    payload += "}}";
 
     dataChar.writeValue(payload.c_str());
     Serial.println("Sent: " + payload);
