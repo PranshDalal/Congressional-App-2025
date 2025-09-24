@@ -15,6 +15,8 @@ import StyledBottomSheet from "@/components/StyledBottomSheet";
 import { BottomSheetModal } from "@gorhom/bottom-sheet";
 import SettingsButton from "@/components/button/SettingsButton";
 import TimeRangePicker from "@/components/TimeRangePicker";
+import { usePermissionsStore } from "@/utils/permissionStore";
+import { useSessionSettingsState } from "@/utils/sessionSettingsStore";
 
 const { width } = Dimensions.get("window");
 
@@ -23,9 +25,13 @@ const IndexScreen = () => {
   const searchParams = useLocalSearchParams();
   const completedSession = searchParams["completed_session"] === "true";
 
-  const [deviceType, setDeviceType] = useState<"phone" | "bluetooth">("phone");
-  const [sessionType, setSessionType] = useState<"timed" | "untimed">("timed");
-  const [durationInMinutes, setDurationInMinutes] = useState<number>(30);
+  // const [deviceType, setDeviceType] = useState<"phone" | "bluetooth">("phone");
+  // const [sessionType, setSessionType] = useState<"timed" | "untimed">("timed");
+  // const [durationInMinutes, setDurationInMinutes] = useState<number>(30);
+
+  const { requested, setRequested } = usePermissionsStore();
+  const { sessionDevice, setSessionDevice, sessionType, setSessionType, sessionDuration, setSessionDuration } =
+    useSessionSettingsState();
 
   const bottomSheetRef = useRef<BottomSheetModal>(null);
 
@@ -35,7 +41,8 @@ const IndexScreen = () => {
 
   const startSessionButtonPressed = () => {
     bottomSheetRef.current?.dismiss();
-    startSession(deviceType);
+    console.log("Session Device: ", sessionDevice);
+    startSession(sessionDevice);
   };
 
   return (
@@ -70,12 +77,12 @@ const IndexScreen = () => {
               rightVariant="arrow"
               rightCustomComponent={
                 <ThemedText style={{ color: theme.colors.textMuted }}>
-                  {deviceType === "phone" ? "Phone" : "Bluetooth"}
+                  {sessionDevice === "phone" ? "Phone" : "Bluetooth"}
                 </ThemedText>
               }
               onPress={() =>
-                setDeviceType((prev) =>
-                  prev === "phone" ? "bluetooth" : "phone"
+                setSessionDevice(
+                  sessionDevice === "phone" ? "bluetooth" : "phone"
                 )
               }
             />
@@ -89,9 +96,7 @@ const IndexScreen = () => {
                 </ThemedText>
               }
               onPress={() =>
-                setSessionType((prev) =>
-                  prev === "timed" ? "untimed" : "timed"
-                )
+                setSessionType(sessionType === "timed" ? "untimed" : "timed")
               }
             />
             {sessionType === "timed" && (
@@ -102,8 +107,11 @@ const IndexScreen = () => {
                   rightVariant="custom"
                   rightCustomComponent={
                     <TimeRangePicker
-                      value={durationInMinutes}
-                      onChange={setDurationInMinutes}
+                      value={sessionDuration || 30}
+                      onChange={(newValue) => {
+                        const value = typeof newValue === 'function' ? newValue(sessionDuration || 30) : newValue;
+                        setSessionDuration(value);
+                      }}
                       minDurationInMinutes={5}
                       maxDurationInMinutes={300}
                       stepInMinutes={5}
