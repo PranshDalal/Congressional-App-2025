@@ -1,44 +1,27 @@
+import { usePermissionsStore } from "@/utils/permissionStore";
+import { useSessionSettingsState } from "@/utils/sessionSettingsStore";
 import { useRouter } from "expo-router";
 import { useCallback } from "react";
-import { Platform } from "react-native";
-
-import {
-  check,
-  request,
-  RESULTS,
-  PERMISSIONS,
-  openSettings,
-  PermissionStatus,
-} from "react-native-permissions";
-
-const getMicrophonePermissionType = () =>
-  Platform.select({
-    ios: PERMISSIONS.IOS.MICROPHONE,
-    android: PERMISSIONS.ANDROID.RECORD_AUDIO,
-  });
 
 export function useGetStartSessionPermissions() {
+  const { requested } = usePermissionsStore();
+  const { setSessionDevice } = useSessionSettingsState();
   const router = useRouter();
-  return useCallback(async (deviceType: "phone" | "bluetooth") => {
-    const type = getMicrophonePermissionType();
-    const result = await check(type!);
 
-    if (result === RESULTS.GRANTED) {
-      router.push({
-        pathname: "/session",
-        params: { 
-          "microphone-enabled": "true",
-          "device-type": deviceType 
-        },
-      });
-    } else {
-      router.push({
-        pathname: "/session/request-microphone",
-        params: { 
-          "microphone-status": result,
-          "device-type": deviceType 
-        },
-      });
+  return useCallback(async (deviceType: "phone" | "bluetooth") => {
+    setSessionDevice(deviceType);
+
+    if (deviceType === "bluetooth") {
+      router.push("/session/connectingToBluetooth");
+    } else if (deviceType === "phone") {
+      if (requested.microphone && requested.camera && requested.motion) {
+        router.push({
+          pathname: "/session",
+          params: { "microphone-enabled": "true", "device-type": deviceType },
+        });
+      } else {
+        router.push("/session/permissionGate");
+      }
     }
   }, []);
 }

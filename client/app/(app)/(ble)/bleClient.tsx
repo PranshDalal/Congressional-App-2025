@@ -2,9 +2,11 @@ import { BleManager, Device } from "react-native-ble-plx";
 import { parseSensorData, SensorReading } from "./sensorData";
 
 declare global {
-  var Toast: {
-    show: (options: { type: string; text1: string }) => void;
-  } | undefined;
+  var Toast:
+    | {
+        show: (options: { type: string; text1: string }) => void;
+      }
+    | undefined;
 }
 
 const SERVICE_UUID = "12345678-1234-1234-1234-1234567890ab";
@@ -27,10 +29,37 @@ export async function connectToWearable(
   onMessage: (reading: SensorReading) => void,
   retries = 3
 ): Promise<Device> {
+  const connected = await bleManager.connectedDevices([SERVICE_UUID]);
+  if (connected.length > 0) {
+    const existing = connected[0];
+
+    console.log("Already connected to device:", existing.id);
+
+    existing.monitorCharacteristicForService(
+      SERVICE_UUID,
+      CHARACTERISTIC_UUID,
+      (error, characteristic) => {
+        if (error) {
+          console.error("Monitor error:", error);
+          return;
+        }
+        if (characteristic?.value) {
+          const decoded = atob(characteristic.value);
+          const reading = parseSensorData(decoded);
+          if (reading) onMessage(reading);
+        }
+      }
+    );
+    return connected[0];
+  }
+
   return new Promise<Device>((resolve, reject) => {
     const tryScan = (attempt: number) => {
       console.log(`Scan attempt ${attempt + 1}/${retries}`);
-      global.Toast?.show({ type: "info", text1: `Scanning (try ${attempt + 1})...` });
+      global.Toast?.show({
+        type: "info",
+        text1: `Scanning (try ${attempt + 1})...`,
+      });
 
       let timeout: NodeJS.Timeout | null = setTimeout(() => {
         bleManager.stopDeviceScan();
@@ -42,82 +71,102 @@ export async function connectToWearable(
         }
       }, 10000);
 
-      bleManager.startDeviceScan([SERVICE_UUID], null, async (error, device) => {
-        if (error) {
-          if (timeout) clearTimeout(timeout);
-          bleManager.stopDeviceScan();
-          console.error("❌ Scan error:", error.message);
-          global.Toast?.show({ type: "error", text1: "Scan error: " + error.message });
-          return reject(error);
-        }
+      bleManager.startDeviceScan(
+        [SERVICE_UUID],
+        null,
+        async (error, device) => {
+          if (error) {
+            if (timeout) clearTimeout(timeout);
+            bleManager.stopDeviceScan();
+            console.error("❌ Scan error:", error.message);
+            global.Toast?.show({
+              type: "error",
+              text1: "Scan error: " + error.message,
+            });
+            return reject(error);
+          }
 
-        if (!device) return;
+          if (!device) return;
 
-        console.log("Discovered:", {
-          id: device.id,
-          name: device.name,
-          localName: device.localName,
-          serviceUUIDs: device.serviceUUIDs,
-        });
+          console.log("Discovered:", {
+            id: device.id,
+            name: device.name,
+            localName: device.localName,
+            serviceUUIDs: device.serviceUUIDs,
+          });
 
-        const matches =
-          (device.name && device.name.includes(DEVICE_NAME)) ||
-          (device.localName && device.localName.includes(DEVICE_NAME)) ||
-          (device.serviceUUIDs?.some(
-            uuid => uuid.toLowerCase() === SERVICE_UUID.toLowerCase()
-          ));
-
-        if (matches) {
-          if (timeout) clearTimeout(timeout);
-          bleManager.stopDeviceScan();
-
-          console.log("Found ADHD_Wearable:", device.id);
-          global.Toast?.show({ type: "success", text1: "Found ADHD_Wearable" });
-
-          try {
-            const connected = await device.connect();
-            await connected.discoverAllServicesAndCharacteristics();
-
-            const services = await connected.services();
-            console.log("Services:", services.map(s => s.uuid));
-
-            const service = services.find(
-              s => s.uuid.toLowerCase() === SERVICE_UUID.toLowerCase()
+          const matches =
+            (device.name && device.name.includes(DEVICE_NAME)) ||
+            (device.localName && device.localName.includes(DEVICE_NAME)) ||
+            device.serviceUUIDs?.some(
+              (uuid) => uuid.toLowerCase() === SERVICE_UUID.toLowerCase()
             );
-            if (!service) throw new Error("Service not found");
 
-            const characteristics = await connected.characteristicsForService(service.uuid);
-            console.log("Characteristics:", characteristics.map(c => c.uuid));
+          if (matches) {
+            if (timeout) clearTimeout(timeout);
+            bleManager.stopDeviceScan();
 
-            const characteristic = characteristics.find(c =>
-              c.uuid.toLowerCase().includes(
-                CHARACTERISTIC_UUID.replace(/^0000/, "").toLowerCase()
-              )
-            );
-            if (!characteristic) throw new Error("Characteristic not found");
+            console.log("Found ADHD_Wearable:", device.id);
+            global.Toast?.show({
+              type: "success",
+              text1: "Found ADHD_Wearable",
+            });
 
-            connected.monitorCharacteristicForService(
-              service.uuid,
-              characteristic.uuid,
-              (err, char) => {
-                if (err) {
-                  console.error("Monitor error:", err);
-                  return;
+            try {
+              const connected = await device.connect();
+              await connected.discoverAllServicesAndCharacteristics();
+
+              const services = await connected.services();
+              console.log(
+                "Services:",
+                services.map((s) => s.uuid)
+              );
+
+              const service = services.find(
+                (s) => s.uuid.toLowerCase() === SERVICE_UUID.toLowerCase()
+              );
+              if (!service) throw new Error("Service not found");
+
+              const characteristics = await connected.characteristicsForService(
+                service.uuid
+              );
+              console.log(
+                "Characteristics:",
+                characteristics.map((c) => c.uuid)
+              );
+
+              const characteristic = characteristics.find((c) =>
+                c.uuid
+                  .toLowerCase()
+                  .includes(
+                    CHARACTERISTIC_UUID.replace(/^0000/, "").toLowerCase()
+                  )
+              );
+              if (!characteristic) throw new Error("Characteristic not found");
+
+              connected.monitorCharacteristicForService(
+                service.uuid,
+                characteristic.uuid,
+                (err, char) => {
+                  if (err) {
+                    console.error("Monitor error:", err);
+                    return;
+                  }
+                  if (char?.value) {
+                    const decoded = atob(char.value);
+                    const reading = parseSensorData(decoded);
+                    if (reading) onMessage(reading);
+                  }
                 }
-                if (char?.value) {
-                  const decoded = atob(char.value);
-                  const reading = parseSensorData(decoded);
-                  if (reading) onMessage(reading);
-                }
-              }
-            );
+              );
 
-            resolve(connected);
-          } catch (err) {
-            reject(err);
+              resolve(connected);
+            } catch (err) {
+              reject(err);
+            }
           }
         }
-      });
+      );
     };
 
     const subscription = bleManager.onStateChange((state) => {
@@ -132,14 +181,16 @@ export async function sendMessage(device: Device, msg: string): Promise<void> {
   const base64Msg = btoa(msg);
   const services = await device.services();
 
-  const service = services.find(s => s.uuid.toLowerCase() === SERVICE_UUID.toLowerCase());
+  const service = services.find(
+    (s) => s.uuid.toLowerCase() === SERVICE_UUID.toLowerCase()
+  );
   if (!service) throw new Error("Service not found");
 
   const characteristics = await device.characteristicsForService(service.uuid);
-  const characteristic = characteristics.find(c =>
-    c.uuid.toLowerCase().includes(
-      CHARACTERISTIC_UUID.replace(/^0000/, "").toLowerCase()
-    )
+  const characteristic = characteristics.find((c) =>
+    c.uuid
+      .toLowerCase()
+      .includes(CHARACTERISTIC_UUID.replace(/^0000/, "").toLowerCase())
   );
   if (!characteristic) throw new Error("Characteristic not found");
 

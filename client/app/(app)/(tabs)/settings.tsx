@@ -77,11 +77,11 @@ const settings = () => {
       </View>
 
 
-      <TextButton
+      {/* <TextButton
         title="Connect to Wearable"
         onPress={() => setConnectModalVisible(true)}
         variant="primary"
-      />
+      /> */}
 
       <SizedBox height={10} />
 
@@ -108,9 +108,10 @@ const settings = () => {
         submitButtonText="Connect"
         visible={connectModalVisible}
         onSubmit={() => {
-          connectToWearable((msg) => {
-            Toast.show({ type: "success", text1: `Received: ${msg}` });
-          });
+          // connectToWearable((msg) => {
+          //   Toast.show({ type: "success", text1: `Received: ${msg}` });
+          // });
+          console.log("I commented the code to connect to wearable. please reenable in settings.tsx");
           setConnectModalVisible(false);
         }}
         setModalVisibleCallback={setConnectModalVisible}

@@ -6,16 +6,19 @@ export type SensorReading = {
 };
 
 export function parseSensorData(raw: string): SensorReading | null {
+  console.log("Raw sensor data:", raw);
   try {
+    const json = JSON.parse(raw);
+    
     const parts = raw.split(",");
     const light = parseFloat(parts[0].split(":")[1]);
     const sound = parseFloat(parts[1].split(":")[1]);
     const [x, y, z] = parts[2].split(":")[1].split("|").map(Number);
 
     return {
-      light,
-      sound,
-      accel: { x, y, z },
+      light: json.light,
+      sound: json.sound,
+      accel: { x: json.accel.x, y: json.accel.y, z: json.accel.z },
       timestamp: Date.now(),
     };
   } catch (err) {
