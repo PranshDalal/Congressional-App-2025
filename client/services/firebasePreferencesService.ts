@@ -1,4 +1,4 @@
-import firestore from "@react-native-firebase/firestore";
+import { getFirestore, collection, doc, setDoc, getDoc, getDocs, query, orderBy, addDoc } from "@react-native-firebase/firestore";
 import { getAuth } from "@react-native-firebase/auth";
 import { get } from "react-native/Libraries/TurboModule/TurboModuleRegistry";
 
@@ -9,26 +9,21 @@ export const PreferencesService = {
         const userId = getAuth().currentUser?.uid;
         if (!userId) throw new Error("User not authenticated");
 
-        await firestore()
-            .collection("users")
-            .doc(userId)
-            .collection(preferencesCollection)
-            .doc("frequency")
-            .set({ nudgeFrequency: frequency }, { merge: true });
+        const db = getFirestore();
+        const freqDocRef = doc(collection(doc(collection(db, "users"), userId), preferencesCollection), "frequency");
+        await setDoc(freqDocRef, { nudgeFrequency: frequency }, { merge: true });
     },
 
     getNudgeFrequency: async () => {
         const userId = getAuth().currentUser?.uid;
         if (!userId) throw new Error("User not authenticated");
 
-        const doc = await firestore()
-            .collection("users")
-            .doc(userId)
-            .collection(preferencesCollection)
-            .doc("frequency")
-            .get();
+        const db = getFirestore();
+        const freqDocRef = doc(collection(doc(collection(db, "users"), userId), preferencesCollection), "frequency");
+        
+        const freqDoc = await getDoc(freqDocRef);
 
-        return doc.data()?.nudgeFrequency;
+        return freqDoc.data()?.nudgeFrequency;
     }
 }
 

@@ -21,8 +21,9 @@ import { connectToWearable } from "../../../utils/ble/bleClient";
 import { parseSensorData, SensorReading } from "../../../utils/ble/sensorData";
 import { PreferencesService } from "@/services/firebasePreferencesService";
 import { feedbackNudge } from "@/services/firebaseNudgesService";
-import firestore from "@react-native-firebase/firestore";
+// import firestore from "@react-native-firebase/firestore";
 import { Device } from "react-native-ble-plx";
+import { serverTimestamp } from "@react-native-firebase/firestore";
 
 function useNudgePolling({ //the sigmaest thing every omg
   userId,
@@ -109,7 +110,7 @@ function useNudgePolling({ //the sigmaest thing every omg
                 feedbackNudge({
                   nudge_text: data.nudge,
                   response: response,
-                  timestamp: firestore.FieldValue.serverTimestamp() as any, 
+                  timestamp: serverTimestamp() as any,
                 });
               } catch (error) {
                 console.error("Error sending feedback:", error);
