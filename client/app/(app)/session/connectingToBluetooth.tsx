@@ -7,7 +7,7 @@ import globalStyles from "@/styles/globalStyles";
 import TextButton from "@/components/button/TextButton";
 import theme from "@/styles/theme";
 import { router } from "expo-router";
-import { connectToWearable } from "../(ble)/bleClient";
+import { connectToWearable } from "../../../utils/ble/bleClient";
 
 const ConnectingToBluetoothScreen = () => {
   const [connected, setIsConnected] = React.useState(false);
@@ -34,16 +34,18 @@ const ConnectingToBluetoothScreen = () => {
       style={{ justifyContent: "center", alignItems: "center" }}
     >
       <ThemedText style={globalStyles.header1}>
-        Connecting to Bluetooth...
+        {connected ? "Connected to Bluetooth!" : "Connecting to Bluetooth..."}
       </ThemedText>
-      <ThemedText>Please ensure your device is nearby.</ThemedText>
+      <ThemedText>
+        {connected ? null : "Please ensure your device is nearby."}
+      </ThemedText>
 
       {!connected && (
         <ActivityIndicator size="large" style={{ marginTop: 20 }} />
       )}
       <View style={styles.bottomStickyView}>
         <TextButton
-          title={connected ? "Connected! Continue" : "Cancel"}
+          title={connected ? "Continue" : "Cancel"}
           width={"90%"}
           onPress={connected ? continueToNextScreen : cancelConnection}
         />

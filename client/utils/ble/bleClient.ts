@@ -40,7 +40,8 @@ export async function connectToWearable(
       CHARACTERISTIC_UUID,
       (error, characteristic) => {
         if (error) {
-          console.error("Monitor error:", error);
+          // console.error("Monitor error:", error);
+          console.warn("Monitor error: ", error);
           return;
         }
         if (characteristic?.value) {
