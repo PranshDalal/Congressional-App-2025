@@ -34,6 +34,8 @@ function useNudgePolling({ //the sigmaest thing every omg
     light: number | null;
     noise: number | null;
     motion: number | null;
+    temp: number | null;
+    humidity: number | null;
     session_length: number;
   };
 }) {
@@ -78,6 +80,8 @@ function useNudgePolling({ //the sigmaest thing every omg
           light: env.light,
           noise: env.noise,
           motion: env.motion,
+          temp: env.temp,
+          humidity: env.humidity,
           session_length: env.session_length,
         }),
       })
@@ -153,12 +157,15 @@ const SessionScreen = () => {
   const [motionReadings, setMotionReadings] = useState<number[]>([]);
   const [lightReadings, setLightReadings] = useState<number[]>([]);
 
+  const [tempReadings, setTempReadings] = useState<number[]>([]);
+  const [humidityReadings, setHumidityReadings] = useState<number[]>([]);
+
   const intervalRef = useRef<ReturnType<typeof setInterval> | null>(null);
   const startTimeRef = useRef<number>(Date.now());
 
   const { 
-    "microphone-enabled": microphoneEnabled,
-    "device-type": deviceType 
+    "microphone-enabled": microphoneEnabled, 
+    "device-type": deviceType
   } = useLocalSearchParams();
 
   const [endSessionModalVisible, setEndSessionModalVisible] = useState(false);
@@ -167,11 +174,14 @@ const SessionScreen = () => {
   const [bleDevice, setBleDevice] = useState<Device | null>(null);
   const [isUsingBLE, setIsUsingBLE] = useState(false);
   const [latestBLEData, setLatestBLEData] = useState<SensorReading | null>(null);
-  const [bleConnectionResolved, setBleConnectionResolved] = useState(false); 
+  const [bleConnectionResolved, setBleConnectionResolved] = useState(false);
 
   useEffect(() => {
     const startSession = async () => {
       try {
+
+        //if this screen was pushed from connectingToBluetooth.tsx, deviceType param will be set to bluetooth
+        
         console.log("Current user:", currentUser);
         if (!currentUser) {
           console.error("No authenticated user found");
@@ -202,18 +212,18 @@ const SessionScreen = () => {
   }, []);
 
   useEffect(() => {
+    console.log("Device type param:", deviceType);
     if (deviceType === "bluetooth") {
       const connectBLE = async () => {
         try {
           console.log("Attempting to connect to BLE device...");
           const device = await connectToWearable((sensorData) => {
             setLatestBLEData(sensorData);
-            console.log("Received BLE sensor data:", sensorData);
           });
           setBleDevice(device);
           setIsUsingBLE(true);
           setBleConnectionResolved(true);
-          console.log("Successfully connected to BLE device");
+          console.log("Successfully connected to BLE device - isUsingBLE set to true");
         } catch (error) {
           console.error("Failed to connect to BLE device:", error);
           setIsUsingBLE(false);
@@ -248,6 +258,8 @@ const SessionScreen = () => {
           noise: latestBLEData.sound,
           motion: magnitude,
           session_length: Math.floor(elapsed / 1000),
+          temp: latestBLEData.temp,
+          humidity: latestBLEData.humidity,
         };
         console.log("getEnvData called (BLE):", env);
         return env;
@@ -257,6 +269,8 @@ const SessionScreen = () => {
           noise: fakeRenderDB !== -1 ? fakeRenderDB : null,
           motion: motionMagnitude,
           session_length: Math.floor(elapsed / 1000),
+          temp: tempReadings.length > 0 ? Math.round(tempReadings.reduce((a, b) => a + b, 0) / tempReadings.length) : null,
+          humidity: humidityReadings.length > 0 ? Math.round(humidityReadings.reduce((a, b) => a + b, 0) / humidityReadings.length) : null,
         };
         console.log("getEnvData called (phone):", env);
         return env;
@@ -289,11 +303,13 @@ const SessionScreen = () => {
   }, [isStopwatchRunning]);
 
   const collectSessionData = () => {
-    let avgNoiseLevel, avgMotionLevel, avgLightLevel;
+    let avgNoiseLevel, avgMotionLevel, avgLightLevel, avgTempLevel, avgHumidityLevel;
 
     if (isUsingBLE && latestBLEData) {
       avgNoiseLevel = latestBLEData.sound;
       avgLightLevel = latestBLEData.light;
+      avgTempLevel = latestBLEData.temp;
+      avgHumidityLevel = latestBLEData.humidity;
       const magnitude = Math.sqrt(
         latestBLEData.accel.x * latestBLEData.accel.x +
         latestBLEData.accel.y * latestBLEData.accel.y +
@@ -325,12 +341,21 @@ const SessionScreen = () => {
                 lightReadings.length
             )
           : lighting;
+
+      avgTempLevel = tempReadings.length > 0 
+        ? Math.round(tempReadings.reduce((a, b) => a + b, 0) / tempReadings.length) 
+        : null;
+      avgHumidityLevel = humidityReadings.length > 0 
+        ? Math.round(humidityReadings.reduce((a, b) => a + b, 0) / humidityReadings.length) 
+        : null;
     }
 
     console.log("Session averages calculated:", {
       noise: { average: avgNoiseLevel, source: isUsingBLE ? "BLE" : "phone" },
       motion: { average: avgMotionLevel, source: isUsingBLE ? "BLE" : "phone" },
       light: { average: avgLightLevel, source: isUsingBLE ? "BLE" : "phone" },
+      temp: { average: avgTempLevel, source: isUsingBLE ? "BLE" : "phone" },
+      humidity: { average: avgHumidityLevel, source: isUsingBLE ? "BLE" : "phone" },
     });
 
     return {
@@ -338,11 +363,15 @@ const SessionScreen = () => {
       noise_level: avgNoiseLevel,
       motion_level: avgMotionLevel,
       light_level: avgLightLevel,
+      temp_level: avgTempLevel,
+      humidity_level: avgHumidityLevel,
       user_id: currentUser?.uid,
       elapsed_time: elapsed,
       noise_sample_count: isUsingBLE ? 1 : noiseReadings.length,
       motion_sample_count: isUsingBLE ? 1 : motionReadings.length,
       light_sample_count: isUsingBLE ? 1 : lightReadings.length,
+      temp_sample_count: isUsingBLE ? 1 : tempReadings.length,
+      humidity_sample_count: isUsingBLE ? 1 : humidityReadings.length,
       data_source: isUsingBLE ? "bluetooth" : "phone",
     };
   };
@@ -587,6 +616,18 @@ const SessionScreen = () => {
           {isUsingBLE && latestBLEData ? 
             `Lighting: ${latestBLEData.light}/100 (BLE)` :
             lighting !== null ? `Lighting: ${lighting}/100` : ""
+          }
+        </ThemedText>
+        <ThemedText style={globalStyles.mutedText}>
+          {isUsingBLE && latestBLEData ? 
+            `Temperature: ${latestBLEData.temp}°C (BLE)` : 
+            "Temperature: Not available on phone"
+          }
+        </ThemedText>
+        <ThemedText style={globalStyles.mutedText}>
+          {isUsingBLE && latestBLEData ? 
+            `Humidity: ${latestBLEData.humidity}% (BLE)` : 
+            "Humidity: Not available on phone"
           }
         </ThemedText>
         {!permission?.granted && (

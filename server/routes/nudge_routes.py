@@ -46,6 +46,26 @@ def detect_drifts(current, preferred, tolerance=0.2):
         except ValueError:
             drifts.append("Motion value invalid")
 
+    if "temperature" in preferred and preferred["temperature"] is not None:
+        try:
+            current_temp = float(current.get("temperature", 0))
+            preferred_temp = float(preferred.get("temperature", 0))
+            if not (preferred_temp * (1 - tolerance) <= current_temp <= preferred_temp * (1 + tolerance)):
+                drifts.append(f"Temperature is {current_temp}°C, preferred ~{preferred_temp}°C")
+        except ValueError:
+            if current.get("temperature") != preferred.get("temperature"):
+                drifts.append(f"Temperature is {current.get('temperature')} but preferred is {preferred.get('temperature')}")
+
+    if "humidity" in preferred and preferred["humidity"] is not None:
+        try:
+            current_humidity = float(current.get("humidity", 0))
+            preferred_humidity = float(preferred.get("humidity", 0))
+            if not (preferred_humidity * (1 - tolerance) <= current_humidity <= preferred_humidity * (1 + tolerance)):
+                drifts.append(f"Humidity is {current_humidity}%, preferred ~{preferred_humidity}%")
+        except ValueError:
+            if current.get("humidity") != preferred.get("humidity"):
+                drifts.append(f"Humidity is {current.get('humidity')} but preferred is {preferred.get('humidity')}")
+
     session_length_seconds = int(current.get("session_length", 0))
     session_length_minutes = session_length_seconds // 60
     if session_length_minutes > 1:

@@ -55,7 +55,7 @@ def get_recommendations(user_id):
     df = fetch_user_sessions(
         user_id,
         fields=[
-            'focus_rating', 'noise_level', 'light_level', 'motion_level', 'headphones', 'ventilation', 'start_time', 'status'
+            'focus_rating', 'noise_level', 'light_level', 'motion_level', 'temperature', 'humidity', 'headphones', 'ventilation', 'start_time', 'status'
         ],
         status='completed',
         limit=20
@@ -72,7 +72,7 @@ def get_recommendations(user_id):
     high_focus = df[df['focus_rating'] >= 7].copy()
 
     recommended = {}
-    numeric_features = ['noise_level', 'light_level', 'motion_level']
+    numeric_features = ['noise_level', 'light_level', 'motion_level', 'temperature', 'humidity']
     categorical_features = ['headphones', 'ventilation']
 
     for col in numeric_features:
