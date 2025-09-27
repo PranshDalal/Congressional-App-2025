@@ -52,6 +52,8 @@ def end_session():
         'focus_rating': data.get('focus_rating'),
         'noise_level': data.get('noise_level'),
         'light_level': data.get('light_level'),
+        'temperature': data.get('temperature'),
+        'humidity': data.get('humidity'),
         'motion_level': data.get('motion_level'),
         'headphones': data.get('headphones'),
         'ventilation': data.get('ventilation'),

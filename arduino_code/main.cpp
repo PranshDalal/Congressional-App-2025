@@ -1,5 +1,6 @@
 #include <ArduinoBLE.h>
 #include <Arduino_BMI270_BMM150.h>
+#include <Arduino_HS300x.h>
 
 #define SERVICE_UUID        "12345678-1234-1234-1234-1234567890ab"
 #define CHARACTERISTIC_UUID "abcd1234-5678-90ab-cdef-1234567890ab"
@@ -25,6 +26,11 @@ void setup() {
 
   if (!IMU.begin()) {
     Serial.println("Failed to initialize IMU!");
+    while (1);
+  }
+
+  if (!HS300x.begin()) {
+    Serial.println("Failed to start temperature and humidity sensor");
     while (1);
   }
 
@@ -55,6 +61,10 @@ void loop() {
       IMU.readAcceleration(x, y, z);
     }
 
+    float temperature = HS300x.readTemperature();
+    float humidity = HS300x.readHumidity();
+
+
     // String oldPayload = "light:" + String(lightLevel) +
     //                  ",sound:" + String(soundLevel) +
     //                  ",accel:" + String(x, 2) + "|" + String(y, 2) + "|" + String(z, 2);
@@ -66,7 +76,11 @@ void loop() {
     payload += "\"x\":" + String(x, 2) + ",";
     payload += "\"y\":" + String(y, 2) + ",";
     payload += "\"z\":" + String(z, 2);
-    payload += "}}";
+    payload += "},";
+    payload += "\"temp\":" + String(temperature, 2) + ",";
+    payload += "\"humidity\":" + String(humidity, 2);
+    payload += "}";
+
 
     dataChar.writeValue(payload.c_str());
     Serial.println("Sent: " + payload);
