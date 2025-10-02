@@ -17,7 +17,10 @@ const ConnectingToBluetoothScreen = () => {
   };
 
   const continueToNextScreen = () => {
-    router.push("/session");
+    router.push({
+      pathname: "/session",
+      params: { "device-type": "bluetooth" },
+    });
   };
 
   useEffect(() => {

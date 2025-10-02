@@ -79,7 +79,7 @@ export async function connectToWearable(
           if (error) {
             if (timeout) clearTimeout(timeout);
             bleManager.stopDeviceScan();
-            console.error("❌ Scan error:", error.message);
+            console.error("Scan error:", error.message);
             global.Toast?.show({
               type: "error",
               text1: "Scan error: " + error.message,
