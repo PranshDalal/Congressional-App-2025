@@ -43,6 +43,11 @@ import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { KeyboardProvider } from "react-native-keyboard-controller";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 
+SplashScreen.setOptions({
+  duration: 400,
+  fade: true,
+});
+
 SplashScreen.preventAutoHideAsync();
 
 export default function RootLayout() {

@@ -1,6 +1,6 @@
 {
   "expo": {
-    "name": "Ambien",
+    "name": "Attune",
     "slug": "client",
     "version": "0.1.0",
     "orientation": "portrait",
@@ -12,6 +12,11 @@
       "supportsTablet": true,
       "bundleIdentifier": "com.pranshdalal.client",
       "googleServicesFile": "./GoogleService-Info.plist",
+      "icon": {
+        "dark": "./assets/icons/ios-dark.png",
+        "light": "./assets/icons/ios-light.png",
+        "tinted": "./assets/icons/ios-tinted.png"
+      },
       "infoPlist": {
         "ITSAppUsesNonExemptEncryption": false,
         "NSMicrophoneUsageDescription": "We use the microphone to measure ambient noise levels during focus sessions.",
@@ -22,8 +27,8 @@
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./assets/images/adaptive-icon.png",
-        "backgroundColor": "#ffffff"
+        "foregroundImage": "./assets/icons/adaptive-icon.png",
+        "backgroundColor": "#14141D"
       },
       "edgeToEdgeEnabled": true,
       "package": "com.pranshdalal.client",
@@ -56,10 +61,10 @@
       [
         "expo-splash-screen",
         {
-          "image": "./assets/images/splash-icon.png",
+          "image": "./assets/icons/splash-icon-light.png",
           "imageWidth": 200,
           "resizeMode": "contain",
-          "backgroundColor": "#ffffff"
+          "backgroundColor": "#14141D"
         }
       ],
       "expo-web-browser",
