@@ -24,8 +24,9 @@ import { feedbackNudge } from "@/services/firebaseNudgesService";
 // import firestore from "@react-native-firebase/firestore";
 import { Device } from "react-native-ble-plx";
 import { serverTimestamp } from "@react-native-firebase/firestore";
+import { useSessionSettingsState } from "@/utils/sessionSettingsStore";
 
-function useNudgePolling({ //the sigmaest thing every omg
+function useNudgePolling({
   userId,
   getEnvData,
 }: {
@@ -42,20 +43,25 @@ function useNudgePolling({ //the sigmaest thing every omg
   const cooldownRef = useRef<{ [userId: string]: number }>({});
   const pollingRef = useRef<NodeJS.Timeout | null>(null);
   const getEnvDataRef = useRef(getEnvData);
-  const [timeInterval, setTimeInterval] = useState(300000); 
-  
+  const [timeInterval, setTimeInterval] = useState(300000);
+
   useEffect(() => {
     const fetchNudgeFrequency = async () => {
       try {
         const nudgesFrequency = await PreferencesService.getNudgeFrequency();
-        const interval = nudgesFrequency === "High" ?  60000: nudgesFrequency === "Mid" ? 180000 : 300000;
+        const interval =
+          nudgesFrequency === "High"
+            ? 60000
+            : nudgesFrequency === "Mid"
+            ? 180000
+            : 300000;
         console.log("The user has a nudge frequency of ", interval);
         setTimeInterval(interval);
       } catch (error) {
         console.error("Failed to get nudge frequency:", error);
       }
     };
-    
+
     fetchNudgeFrequency();
   }, []);
 
@@ -69,7 +75,7 @@ function useNudgePolling({ //the sigmaest thing every omg
       const now = Date.now();
       const key = String(userId);
       const lastNudge = cooldownRef.current[key] || 0;
-/*       if (now - lastNudge < 3 * 60 * 1000) return; */
+      /*       if (now - lastNudge < 3 * 60 * 1000) return; */
       console.log("Polling nudge for user:", userId);
       const env = getEnvDataRef.current();
       fetch(`${process.env.EXPO_PUBLIC_API_BASE_URL}/api/get_nudge`, {
@@ -133,8 +139,9 @@ function useNudgePolling({ //the sigmaest thing every omg
 }
 
 const SessionScreen = () => {
-  useKeepAwake(); 
+  useKeepAwake();
   const currentUser = getAuth().currentUser;
+  const { sessionType, sessionDuration } = useSessionSettingsState();
 
   const router = useRouter();
   const [permission, requestPermission] = useCameraPermissions();
@@ -163,25 +170,26 @@ const SessionScreen = () => {
   const intervalRef = useRef<ReturnType<typeof setInterval> | null>(null);
   const startTimeRef = useRef<number>(Date.now());
 
-  const { 
-    "microphone-enabled": microphoneEnabled, 
-    "device-type": deviceType
-  } = useLocalSearchParams();
+  const { "microphone-enabled": microphoneEnabled, "device-type": deviceType } =
+    useLocalSearchParams();
 
   const [endSessionModalVisible, setEndSessionModalVisible] = useState(false);
+  const [timeUpModalVisible, setTimeUpModalVisible] = useState(false);
+  const [shownTimeUpModal, setShownTimeUpModal] = useState(false);
   const [sessionId, setSessionId] = useState<string | null>(null);
 
   const [bleDevice, setBleDevice] = useState<Device | null>(null);
   const [isUsingBLE, setIsUsingBLE] = useState(false);
-  const [latestBLEData, setLatestBLEData] = useState<SensorReading | null>(null);
+  const [latestBLEData, setLatestBLEData] = useState<SensorReading | null>(
+    null
+  );
   const [bleConnectionResolved, setBleConnectionResolved] = useState(false);
 
   useEffect(() => {
     const startSession = async () => {
       try {
-
         //if this screen was pushed from connectingToBluetooth.tsx, deviceType param will be set to bluetooth
-        
+
         console.log("Current user:", currentUser);
         if (!currentUser) {
           console.error("No authenticated user found");
@@ -223,19 +231,23 @@ const SessionScreen = () => {
           setBleDevice(device);
           setIsUsingBLE(true);
           setBleConnectionResolved(true);
-          console.log("Successfully connected to BLE device - isUsingBLE set to true");
+          console.log(
+            "Successfully connected to BLE device - isUsingBLE set to true"
+          );
         } catch (error) {
           console.error("Failed to connect to BLE device:", error);
           setIsUsingBLE(false);
           setBleConnectionResolved(true);
           Alert.alert(
             "Bluetooth Connection Failed",
-            `Could not connect to ADHD_Wearable device. Using phone sensors instead.\n\nError: ${error instanceof Error ? error.message : String(error)}`,
+            `Could not connect to ADHD_Wearable device. Using phone sensors instead.\n\nError: ${
+              error instanceof Error ? error.message : String(error)
+            }`,
             [{ text: "OK" }]
           );
         }
       };
-      
+
       connectBLE();
     } else {
       setBleConnectionResolved(true);
@@ -250,8 +262,8 @@ const SessionScreen = () => {
       if (isUsingBLE && latestBLEData) {
         const magnitude = Math.sqrt(
           latestBLEData.accel.x * latestBLEData.accel.x +
-          latestBLEData.accel.y * latestBLEData.accel.y +
-          latestBLEData.accel.z * latestBLEData.accel.z
+            latestBLEData.accel.y * latestBLEData.accel.y +
+            latestBLEData.accel.z * latestBLEData.accel.z
         );
         const env = {
           light: latestBLEData.light,
@@ -269,15 +281,25 @@ const SessionScreen = () => {
           noise: fakeRenderDB !== -1 ? fakeRenderDB : null,
           motion: motionMagnitude,
           session_length: Math.floor(elapsed / 1000),
-          temp: tempReadings.length > 0 ? Math.round(tempReadings.reduce((a, b) => a + b, 0) / tempReadings.length) : null,
-          humidity: humidityReadings.length > 0 ? Math.round(humidityReadings.reduce((a, b) => a + b, 0) / humidityReadings.length) : null,
+          temp:
+            tempReadings.length > 0
+              ? Math.round(
+                  tempReadings.reduce((a, b) => a + b, 0) / tempReadings.length
+                )
+              : null,
+          humidity:
+            humidityReadings.length > 0
+              ? Math.round(
+                  humidityReadings.reduce((a, b) => a + b, 0) /
+                    humidityReadings.length
+                )
+              : null,
         };
         console.log("getEnvData called (phone):", env);
         return env;
       }
     },
   });
-
 
   useEffect(() => {
     console.log("Camera permission state:", permission);
@@ -291,7 +313,22 @@ const SessionScreen = () => {
     if (isStopwatchRunning) {
       startTimeRef.current = Date.now() - elapsed;
       intervalRef.current = setInterval(() => {
-        setElapsed(Date.now() - startTimeRef.current);
+        const newElapsed = Date.now() - startTimeRef.current;
+        setElapsed(newElapsed);
+        // console.log(
+        //   sessionType === "timed"
+        //     ? sessionDuration! * 60 * 1000 - newElapsed
+        //     : false
+        // );
+        if (
+          sessionType === "timed" &&
+          sessionDuration! * 60 * 1000 - newElapsed < 0
+        ) {
+          if (!shownTimeUpModal) {
+            setShownTimeUpModal(true);
+            setTimeUpModalVisible(true);
+          }
+        }
       }, 100);
     } else if (intervalRef.current) {
       clearInterval(intervalRef.current);
@@ -300,10 +337,14 @@ const SessionScreen = () => {
     return () => {
       if (intervalRef.current) clearInterval(intervalRef.current);
     };
-  }, [isStopwatchRunning]);
+  }, [isStopwatchRunning, sessionType, sessionDuration]);
 
   const collectSessionData = () => {
-    let avgNoiseLevel, avgMotionLevel, avgLightLevel, avgTempLevel, avgHumidityLevel;
+    let avgNoiseLevel,
+      avgMotionLevel,
+      avgLightLevel,
+      avgTempLevel,
+      avgHumidityLevel;
 
     if (isUsingBLE && latestBLEData) {
       avgNoiseLevel = latestBLEData.sound;
@@ -312,8 +353,8 @@ const SessionScreen = () => {
       avgHumidityLevel = latestBLEData.humidity;
       const magnitude = Math.sqrt(
         latestBLEData.accel.x * latestBLEData.accel.x +
-        latestBLEData.accel.y * latestBLEData.accel.y +
-        latestBLEData.accel.z * latestBLEData.accel.z
+          latestBLEData.accel.y * latestBLEData.accel.y +
+          latestBLEData.accel.z * latestBLEData.accel.z
       );
       avgMotionLevel = Math.round(magnitude * 1000) / 1000;
     } else {
@@ -342,12 +383,19 @@ const SessionScreen = () => {
             )
           : lighting;
 
-      avgTempLevel = tempReadings.length > 0 
-        ? Math.round(tempReadings.reduce((a, b) => a + b, 0) / tempReadings.length) 
-        : null;
-      avgHumidityLevel = humidityReadings.length > 0 
-        ? Math.round(humidityReadings.reduce((a, b) => a + b, 0) / humidityReadings.length) 
-        : null;
+      avgTempLevel =
+        tempReadings.length > 0
+          ? Math.round(
+              tempReadings.reduce((a, b) => a + b, 0) / tempReadings.length
+            )
+          : null;
+      avgHumidityLevel =
+        humidityReadings.length > 0
+          ? Math.round(
+              humidityReadings.reduce((a, b) => a + b, 0) /
+                humidityReadings.length
+            )
+          : null;
     }
 
     console.log("Session averages calculated:", {
@@ -355,7 +403,10 @@ const SessionScreen = () => {
       motion: { average: avgMotionLevel, source: isUsingBLE ? "BLE" : "phone" },
       light: { average: avgLightLevel, source: isUsingBLE ? "BLE" : "phone" },
       temp: { average: avgTempLevel, source: isUsingBLE ? "BLE" : "phone" },
-      humidity: { average: avgHumidityLevel, source: isUsingBLE ? "BLE" : "phone" },
+      humidity: {
+        average: avgHumidityLevel,
+        source: isUsingBLE ? "BLE" : "phone",
+      },
     });
 
     return {
@@ -367,6 +418,9 @@ const SessionScreen = () => {
       humidity_level: avgHumidityLevel,
       user_id: currentUser?.uid,
       elapsed_time: elapsed,
+      session_type: sessionType,
+      scheduled_session_duration:
+        sessionType === "timed" ? sessionDuration! * 60 : null,
       noise_sample_count: isUsingBLE ? 1 : noiseReadings.length,
       motion_sample_count: isUsingBLE ? 1 : motionReadings.length,
       light_sample_count: isUsingBLE ? 1 : lightReadings.length,
@@ -379,8 +433,12 @@ const SessionScreen = () => {
   // #region Microphone
   useEffect(() => {
     const shouldUsePhoneSensors = bleConnectionResolved && !isUsingBLE;
-    
-    if (microphoneEnabled === "true" && isStopwatchRunning && shouldUsePhoneSensors) {
+
+    if (
+      microphoneEnabled === "true" &&
+      isStopwatchRunning &&
+      shouldUsePhoneSensors
+    ) {
       console.log("Starting phone microphone...");
       RNSoundLevel.start();
 
@@ -406,7 +464,12 @@ const SessionScreen = () => {
         clearInterval(dBUpdateInterval);
       };
     }
-  }, [microphoneEnabled, isStopwatchRunning, bleConnectionResolved, isUsingBLE]);
+  }, [
+    microphoneEnabled,
+    isStopwatchRunning,
+    bleConnectionResolved,
+    isUsingBLE,
+  ]);
   // #endregion
 
   // #region Accelerometer (Motion)
@@ -448,7 +511,12 @@ const SessionScreen = () => {
 
     const shouldUsePhoneSensors = bleConnectionResolved && !isUsingBLE;
 
-    if (isStopwatchRunning && permission?.granted && isCameraReady && shouldUsePhoneSensors) {
+    if (
+      isStopwatchRunning &&
+      permission?.granted &&
+      isCameraReady &&
+      shouldUsePhoneSensors
+    ) {
       console.log("Starting phone camera for lighting...");
       const initDelay = setTimeout(() => {
         lightingInterval = setInterval(async () => {
@@ -497,7 +565,13 @@ const SessionScreen = () => {
         clearInterval(lightingInterval);
       }
     };
-  }, [isStopwatchRunning, permission?.granted, isCameraReady, bleConnectionResolved, isUsingBLE]);
+  }, [
+    isStopwatchRunning,
+    permission?.granted,
+    isCameraReady,
+    bleConnectionResolved,
+    isUsingBLE,
+  ]);
 
   function estimateBrightness(base64: string): number {
     try {
@@ -560,8 +634,6 @@ const SessionScreen = () => {
   };
   // #endregion
 
-
-
   return (
     <BackgroundView>
       {permission?.granted && (
@@ -589,46 +661,53 @@ const SessionScreen = () => {
       <BouncingCircles paused={!isStopwatchRunning} />
       <View style={styles.content}>
         <ThemedText style={[globalStyles.header1, styles.stopwatchText]}>
-          {formatTime(elapsed)}
-        </ThemedText>
-        <ThemedText style={globalStyles.mutedText}>
-          {isStopwatchRunning ? (
-            isUsingBLE && latestBLEData ? 
-              `Collecting data via Bluetooth...` : 
-              `Collecting ambient data...`
-          ) : "Paused"}
-        </ThemedText>
-        <ThemedText style={globalStyles.mutedText}>
-          {isStopwatchRunning && (
-            isUsingBLE && latestBLEData ? 
-              `Sound level: ${latestBLEData.sound} dB (BLE)` :
-              fakeRenderDB !== -1 ? `Sound level: ${fakeRenderDB} dB` : ""
+          {formatTime(
+            sessionType === "untimed"
+              ? elapsed
+              : Math.abs(sessionDuration! * 60 * 1000 - elapsed)
           )}
         </ThemedText>
         <ThemedText style={globalStyles.mutedText}>
-          {isStopwatchRunning && (
-            isUsingBLE && latestBLEData ? 
-              `Motion: ${Math.sqrt(latestBLEData.accel.x ** 2 + latestBLEData.accel.y ** 2 + latestBLEData.accel.z ** 2).toFixed(3)} (BLE)` :
-              `Motion magnitude: ${motionMagnitude.toFixed(3)}`
-          )}
+          {isStopwatchRunning
+            ? isUsingBLE && latestBLEData
+              ? `Collecting data via Bluetooth...`
+              : `Collecting ambient data...`
+            : "Paused"}
         </ThemedText>
         <ThemedText style={globalStyles.mutedText}>
-          {isUsingBLE && latestBLEData ? 
-            `Lighting: ${latestBLEData.light}/100 (BLE)` :
-            lighting !== null ? `Lighting: ${lighting}/100` : ""
-          }
+          {isStopwatchRunning &&
+            (isUsingBLE && latestBLEData
+              ? `Sound level: ${latestBLEData.sound} dB (BLE)`
+              : fakeRenderDB !== -1
+              ? `Sound level: ${fakeRenderDB} dB`
+              : "")}
         </ThemedText>
         <ThemedText style={globalStyles.mutedText}>
-          {isUsingBLE && latestBLEData ? 
-            `Temperature: ${latestBLEData.temp}°C (BLE)` : 
-            "Temperature: Not available on phone"
-          }
+          {isStopwatchRunning &&
+            (isUsingBLE && latestBLEData
+              ? `Motion: ${Math.sqrt(
+                  latestBLEData.accel.x ** 2 +
+                    latestBLEData.accel.y ** 2 +
+                    latestBLEData.accel.z ** 2
+                ).toFixed(3)} (BLE)`
+              : `Motion magnitude: ${motionMagnitude.toFixed(3)}`)}
         </ThemedText>
         <ThemedText style={globalStyles.mutedText}>
-          {isUsingBLE && latestBLEData ? 
-            `Humidity: ${latestBLEData.humidity}% (BLE)` : 
-            "Humidity: Not available on phone"
-          }
+          {isUsingBLE && latestBLEData
+            ? `Lighting: ${latestBLEData.light}/100 (BLE)`
+            : lighting !== null
+            ? `Lighting: ${lighting}/100`
+            : ""}
+        </ThemedText>
+        <ThemedText style={globalStyles.mutedText}>
+          {isUsingBLE && latestBLEData
+            ? `Temperature: ${latestBLEData.temp}°C (BLE)`
+            : "Temperature: Not available on phone"}
+        </ThemedText>
+        <ThemedText style={globalStyles.mutedText}>
+          {isUsingBLE && latestBLEData
+            ? `Humidity: ${latestBLEData.humidity}% (BLE)`
+            : "Humidity: Not available on phone"}
         </ThemedText>
         {!permission?.granted && (
           <TextButton
@@ -673,6 +752,24 @@ const SessionScreen = () => {
         body={"Are you sure you want to end the session?"}
         visible={endSessionModalVisible}
         setModalVisibleCallback={setEndSessionModalVisible}
+        type="ask"
+        onSubmit={() => {
+          const sessionData = collectSessionData();
+          router.replace({
+            pathname: "/session/survey",
+            params: {
+              sessionData: JSON.stringify(sessionData),
+            },
+          });
+        }}
+        submitButtonText="End Session"
+      />
+
+      <StyledModal
+        title={"Congratulations!"}
+        body={"Times Up! End the session now?"}
+        visible={timeUpModalVisible}
+        setModalVisibleCallback={setTimeUpModalVisible}
         type="ask"
         onSubmit={() => {
           const sessionData = collectSessionData();
