@@ -1,9 +1,9 @@
-import { useState, useEffect, useCallback } from 'react';
-import auth from '@react-native-firebase/auth';
+import { useState, useEffect, useCallback } from "react";
+import auth from "@react-native-firebase/auth";
 // import { getUserSessions } from '@/services/backendSessionService';
-import { SessionData } from '@/types/types';
-import { getSessions } from '@/services/firebaseSessionService';
-import { Timestamp } from '@react-native-firebase/firestore';
+import { SessionData } from "@/types/types";
+import { getSessions } from "@/services/firebaseSessionService";
+import { Timestamp } from "@react-native-firebase/firestore";
 
 export interface StatsData {
   totalSessions: number;
@@ -46,15 +46,14 @@ export function useStatsData(): UseStatsDataReturn {
       const sessionData = await getSessions();
 
       // Sort sessions by start time (most recent first)
-      sessionData.sort(
-        (a, b) =>
-          a.start_time > b.start_time ? -1 : b.start_time > a.start_time ? 1 : 0
+      sessionData.sort((a, b) =>
+        a.start_time > b.start_time ? -1 : b.start_time > a.start_time ? 1 : 0
       );
-      
+
       setSessions(sessionData);
     } catch (err) {
       setError("Failed to load sessions");
-      console.error('Error fetching sessions:', err);
+      console.error("Error fetching sessions:", err);
     } finally {
       setLoading(false);
     }
@@ -71,23 +70,35 @@ export function useStatsData(): UseStatsDataReturn {
 
     sessions.forEach((session) => {
       // console.log(session);
-      if (session.status === "completed" && session.start_time && session.end_time) {
+      if (
+        session.status === "completed" &&
+        session.start_time &&
+        session.end_time
+      ) {
         completed++;
         const start = session.start_time.seconds;
         const end = session.end_time.seconds;
         const diff = (end - start) / 60;
-        totalMinutes += diff;
 
-        if (session.focus_rating) focusSum += Number(session.focus_rating);
+        if (!isNaN(diff)) {
+          totalMinutes += diff;
 
-        const sessionDate = session.start_time.toDate().toISOString().split("T")[0];
-        // const sessionDate = session.start_time.split("T")[0];
-        if (sessionDate !== lastSessionDate) {
-          streak++;
-          lastSessionDate = sessionDate;
+          if (session.focus_rating) focusSum += Number(session.focus_rating);
+
+          const sessionDate = session.start_time
+            .toDate()
+            .toISOString()
+            .split("T")[0];
+          // const sessionDate = session.start_time.split("T")[0];
+          if (sessionDate !== lastSessionDate) {
+            streak++;
+            lastSessionDate = sessionDate;
+          }
         }
       }
     });
+
+    // console.log({ totalMinutes, completed, focusSum, streak });
 
     return {
       totalSessions: completed,
@@ -105,10 +116,11 @@ export function useStatsData(): UseStatsDataReturn {
         day: "numeric",
       }),
       duration: session.end_time
-        ? `${Math.round(
-            (session.end_time.seconds - session.start_time.seconds) /
-              60
-          )} min`
+        ? isNaN(session.end_time!.seconds - session.start_time.seconds)
+          ? "0 min"
+          : `${Math.round(
+              (session.end_time.seconds - session.start_time.seconds) / 60
+            )} min`
         : "N/A",
     }));
   }, [sessions]);
