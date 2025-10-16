@@ -694,9 +694,9 @@ const SessionScreen = () => {
         </ThemedText>
         <ThemedText style={globalStyles.mutedText}>
           {isUsingBLE && latestBLEData
-            ? `Lighting: ${latestBLEData.light}/100 (BLE)`
+            ? `Lighting: ${latestBLEData.light} (BLE)`
             : lighting !== null
-            ? `Lighting: ${lighting}/100`
+            ? `Lighting: ${lighting}`
             : ""}
         </ThemedText>
         <ThemedText style={globalStyles.mutedText}>
