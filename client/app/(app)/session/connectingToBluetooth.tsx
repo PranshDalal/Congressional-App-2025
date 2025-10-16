@@ -26,7 +26,7 @@ const ConnectingToBluetoothScreen = () => {
   useEffect(() => {
     connectToWearable((msg) => {
       setIsConnected(true);
-      Toast.show({ type: "success", text1: `Received: ${msg}` });
+      // Toast.show({ type: "success", text1: `Received: ${msg}` });
     });
   }, []);
 
