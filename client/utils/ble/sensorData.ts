@@ -29,8 +29,8 @@ export function parseSensorData(raw: string): SensorReading | null {
     }
     
     const result = {
-      light: Math.max(0, Math.min(100, json.light)), 
-      sound: Math.max(-120, Math.min(120, json.sound)), 
+      light: Math.max(0, Math.min(1023, json.light)), 
+      sound: Math.max(-120, Math.min(1023, json.sound)), 
       accel: { 
         x: json.accel.x, 
         y: json.accel.y, 
