@@ -1,14 +1,6 @@
 import { BleManager, Device } from "react-native-ble-plx";
 import { parseSensorData, SensorReading } from "./sensorData";
 
-declare global {
-  var Toast:
-    | {
-        show: (options: { type: string; text1: string }) => void;
-      }
-    | undefined;
-}
-
 const SERVICE_UUID = "12345678-1234-1234-1234-1234567890ab";
 const CHARACTERISTIC_UUID = "abcd1234-5678-90ab-cdef-1234567890ab";
 const DEVICE_NAME = "ADHD_Wearable";
@@ -57,10 +49,6 @@ export async function connectToWearable(
   return new Promise<Device>((resolve, reject) => {
     const tryScan = (attempt: number) => {
       console.log(`Scan attempt ${attempt + 1}/${retries}`);
-      global.Toast?.show({
-        type: "info",
-        text1: `Scanning (try ${attempt + 1})...`,
-      });
 
       let timeout: NodeJS.Timeout | null = setTimeout(() => {
         bleManager.stopDeviceScan();
@@ -80,10 +68,6 @@ export async function connectToWearable(
             if (timeout) clearTimeout(timeout);
             bleManager.stopDeviceScan();
             console.error("Scan error:", error.message);
-            global.Toast?.show({
-              type: "error",
-              text1: "Scan error: " + error.message,
-            });
             return reject(error);
           }
 
@@ -108,10 +92,6 @@ export async function connectToWearable(
             bleManager.stopDeviceScan();
 
             console.log("Found ADHD_Wearable:", device.id);
-            global.Toast?.show({
-              type: "success",
-              text1: "Found ADHD_Wearable",
-            });
 
             try {
               const connected = await device.connect();
