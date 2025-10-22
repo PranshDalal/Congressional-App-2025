@@ -21,7 +21,7 @@ float soundLevel = 0.0;
 
 float luxHistory[5] = {0};
 int luxIndex = 0;
-float lastLux = 0.0; 
+float lastLux = 0.0;
 
 void onPDMdata() {
     int bytesAvailable = PDM.available();
@@ -39,9 +39,8 @@ float smoothLux(float lux) {
 
 void setup() {
     Serial.begin(115200);
-    while (!Serial && millis() < 3000);
+    // while (!Serial && millis() < 3000);
 
-    // Initialize BLE
     if (!BLE.begin()) {
         Serial.println("BLE failed to start!");
         while (1);
@@ -66,6 +65,7 @@ void setup() {
     delay(100);
 
     PDM.onReceive(onPDMdata);
+    PDM.setGain(40); 
     if (!PDM.begin(1, 16000)) {
         Serial.println("Failed to start PDM microphone!");
         while (1);
@@ -97,12 +97,9 @@ void loop() {
         if (APDS.colorAvailable()) {
             int r = 0, g = 0, b = 0;
             APDS.readColor(r, g, b);
-            
-            //some formula that gemini gave me idk
-            float lux = (0.2126*r + 0.7152*g + 0.0722*b);
-
+            float lux = (0.2126 * r + 0.7152 * g + 0.0722 * b);
             lastLux = smoothLux(lux);
-            
+
             Serial.print("R: "); Serial.print(r);
             Serial.print(" G: "); Serial.print(g);
             Serial.print(" B: "); Serial.print(b);
@@ -110,18 +107,31 @@ void loop() {
         }
 
         if (samplesRead) {
-            long sum = 0;
-            for (int i = 0; i < samplesRead; i++) sum += abs(sampleBuffer[i]);
-            soundLevel = (float)sum / samplesRead / 32768.0 * 100.0;
-            samplesRead = 0;
-        }
+            long sumSquares = 0;
+            for (int i = 0; i < samplesRead; i++) {
+                sumSquares += (long)sampleBuffer[i] * (long)sampleBuffer[i];
+            }
 
+            float meanSquare = (float)sumSquares / samplesRead;
+            float rms = sqrt(meanSquare);
+
+            // Convert RMS to approximate dB scale (30-90 dB range)
+            // This maps the RMS value to a more realistic sound level range
+            float normalizedRms = rms / 32768.0; // Normalize to 0-1
+            soundLevel = 30.0 + (normalizedRms * 60.0); // Map to 30-90 dB range
+            soundLevel = constrain(soundLevel, 30.0, 90.0); // Ensure within bounds
+
+            samplesRead = 0;
+
+            Serial.print("Sound level: ");
+            Serial.println(soundLevel);
+        }
         char payload[PAYLOAD_BUFFER_SIZE];
         int len = snprintf(
             payload,
             PAYLOAD_BUFFER_SIZE,
             "{\"light\":%.2f,\"sound\":%.2f,\"accel\":{\"x\":%.2f,\"y\":%.2f,\"z\":%.2f},\"temp\":%.2f,\"humidity\":%.2f}",
-            lastLux, 
+            lastLux,
             soundLevel,
             x,
             y,
