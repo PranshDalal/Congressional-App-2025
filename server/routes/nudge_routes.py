@@ -14,33 +14,37 @@ PERPLEXITY_ENDPOINT = "https://api.perplexity.ai/chat/completions"
 MODEL = "sonar"  
 
 
-def detect_drifts(current, preferred, tolerance=0.2):
+def detect_drifts(current, preferred, tolerance=0.02):
     drifts = []
 
-    if "light" in preferred and preferred["light"] is not None:
+    #print preferred data
+    print("Preferred data:", preferred)
+    print("Current data:", current)
+
+    if "light_level" in preferred and preferred["light_level"] is not None:
         try:
             current_light = float(current.get("light", 0))
-            preferred_light = float(preferred.get("light", 0))
+            preferred_light = float(preferred.get("light_level", 0))
             if not (preferred_light * (1 - tolerance) <= current_light <= preferred_light * (1 + tolerance)):
                 drifts.append(f"Lighting is {current_light}, preferred ~{preferred_light}")
         except ValueError:
-            if current.get("light") != preferred.get("light"):
-                drifts.append(f"Lighting is {current.get('light')} but preferred is {preferred.get('light')}")
+            if current.get("light") != preferred.get("light_level"):
+                drifts.append(f"Lighting is {current.get('light')} but preferred is {preferred.get('light_level')}")
 
-    if "noise" in preferred and preferred["noise"] is not None:
+    if "noise_level" in preferred and preferred["noise_level"] is not None:
         try:
             current_noise = float(current.get("noise", 0))
-            preferred_noise = float(preferred.get("noise", 0))
+            preferred_noise = float(preferred.get("noise_level", 0))
             if not (preferred_noise * (1 - tolerance) <= current_noise <= preferred_noise * (1 + tolerance)):
                 drifts.append(f"Noise is {current_noise} dB, preferred ~{preferred_noise} dB")
         except ValueError:
-            if current.get("noise") != preferred.get("noise"):
-                drifts.append(f"Noise is {current.get('noise')} but preferred is {preferred.get('noise')}")
+            if current.get("noise") != preferred.get("noise_level"):
+                drifts.append(f"Noise is {current.get('noise')} but preferred is {preferred.get('noise_level')}")
 
-    if "motion" in preferred and preferred["motion"] is not None:
+    if "motion_level" in preferred and preferred["motion_level"] is not None:
         try:
             current_motion = float(current.get("motion", 0))
-            preferred_motion = float(preferred.get("motion", 0))
+            preferred_motion = float(preferred.get("motion_level", 0))
             if not (preferred_motion * (1 - tolerance) <= current_motion <= preferred_motion * (1 + tolerance)):
                 drifts.append(f"Motion is {current_motion}, preferred ~{preferred_motion}")
         except ValueError:
@@ -48,13 +52,13 @@ def detect_drifts(current, preferred, tolerance=0.2):
 
     if "temperature" in preferred and preferred["temperature"] is not None:
         try:
-            current_temp = float(current.get("temperature", 0))
+            current_temp = float(current.get("temp", 0))
             preferred_temp = float(preferred.get("temperature", 0))
             if not (preferred_temp * (1 - tolerance) <= current_temp <= preferred_temp * (1 + tolerance)):
                 drifts.append(f"Temperature is {current_temp}°C, preferred ~{preferred_temp}°C")
         except ValueError:
-            if current.get("temperature") != preferred.get("temperature"):
-                drifts.append(f"Temperature is {current.get('temperature')} but preferred is {preferred.get('temperature')}")
+            if current.get("temp") != preferred.get("temperature"):
+                drifts.append(f"Temperature is {current.get('temp')} but preferred is {preferred.get('temperature')}")
 
     if "humidity" in preferred and preferred["humidity"] is not None:
         try:
