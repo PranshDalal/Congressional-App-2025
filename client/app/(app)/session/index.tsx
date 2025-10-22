@@ -25,7 +25,6 @@ import { feedbackNudge } from "@/services/firebaseNudgesService";
 import { Device } from "react-native-ble-plx";
 import { serverTimestamp } from "@react-native-firebase/firestore";
 import { useSessionSettingsState } from "@/utils/sessionSettingsStore";
-import { standardizeSensorData, StandardizedSensorData } from "@/utils/sensorStandardization";
 
 function useNudgePolling({
   userId,
@@ -260,67 +259,44 @@ const SessionScreen = () => {
   useNudgePolling({
     userId: uid,
     getEnvData: () => {
-      let rawData, standardizedData;
-      
       if (isUsingBLE && latestBLEData) {
         const magnitude = Math.sqrt(
           latestBLEData.accel.x * latestBLEData.accel.x +
             latestBLEData.accel.y * latestBLEData.accel.y +
             latestBLEData.accel.z * latestBLEData.accel.z
         );
-        
-        rawData = {
+        const env = {
           light: latestBLEData.light,
-          sound: latestBLEData.sound,
+          noise: latestBLEData.sound,
           motion: magnitude,
+          session_length: Math.floor(elapsed / 1000),
           temp: latestBLEData.temp,
           humidity: latestBLEData.humidity,
-          source: 'bluetooth' as const,
         };
-        
-        standardizedData = standardizeSensorData(rawData);
-        console.log("Raw BLE data:", rawData);
-        console.log("Standardized BLE data:", standardizedData);
-        
-        return {
-          light: standardizedData.light_level,
-          noise: standardizedData.noise_level,
-          motion: standardizedData.motion_level,
-          session_length: Math.floor(elapsed / 1000),
-          temp: standardizedData.temp_level,
-          humidity: standardizedData.humidity_level,
-        };
+        console.log("getEnvData called (BLE):", env);
+        return env;
       } else {
-        rawData = {
-          light: lighting || 0,
-          sound: fakeRenderDB !== -1 ? fakeRenderDB : 0,
+        const env = {
+          light: lighting,
+          noise: fakeRenderDB !== -1 ? fakeRenderDB : null,
           motion: motionMagnitude,
-          temp: tempReadings.length > 0
-            ? Math.round(
-                tempReadings.reduce((a, b) => a + b, 0) / tempReadings.length
-              )
-            : null,
-          humidity: humidityReadings.length > 0
-            ? Math.round(
-                humidityReadings.reduce((a, b) => a + b, 0) /
-                  humidityReadings.length
-              )
-            : null,
-          source: 'phone' as const,
-        };
-        
-        standardizedData = standardizeSensorData(rawData);
-        console.log("Raw phone data:", rawData);
-        console.log("Standardized phone data:", standardizedData);
-        
-        return {
-          light: standardizedData.light_level,
-          noise: standardizedData.noise_level,
-          motion: standardizedData.motion_level,
           session_length: Math.floor(elapsed / 1000),
-          temp: standardizedData.temp_level,
-          humidity: standardizedData.humidity_level,
+          temp:
+            tempReadings.length > 0
+              ? Math.round(
+                  tempReadings.reduce((a, b) => a + b, 0) / tempReadings.length
+                )
+              : null,
+          humidity:
+            humidityReadings.length > 0
+              ? Math.round(
+                  humidityReadings.reduce((a, b) => a + b, 0) /
+                    humidityReadings.length
+                )
+              : null,
         };
+        console.log("getEnvData called (phone):", env);
+        return env;
       }
     },
   });
@@ -364,67 +340,82 @@ const SessionScreen = () => {
   }, [isStopwatchRunning, sessionType, sessionDuration]);
 
   const collectSessionData = () => {
-    let rawData, standardizedData;
+    let avgNoiseLevel,
+      avgMotionLevel,
+      avgLightLevel,
+      avgTempLevel,
+      avgHumidityLevel;
 
     if (isUsingBLE && latestBLEData) {
+      avgNoiseLevel = latestBLEData.sound;
+      avgLightLevel = latestBLEData.light;
+      avgTempLevel = latestBLEData.temp;
+      avgHumidityLevel = latestBLEData.humidity;
       const magnitude = Math.sqrt(
         latestBLEData.accel.x * latestBLEData.accel.x +
           latestBLEData.accel.y * latestBLEData.accel.y +
           latestBLEData.accel.z * latestBLEData.accel.z
       );
-      
-      rawData = {
-        light: latestBLEData.light,
-        sound: latestBLEData.sound,
-        motion: magnitude,
-        temp: latestBLEData.temp,
-        humidity: latestBLEData.humidity,
-        source: 'bluetooth' as const,
-      };
+      avgMotionLevel = Math.round(magnitude * 1000) / 1000;
     } else {
-      rawData = {
-        light: lightReadings.length > 0
-          ? lightReadings.reduce((sum, reading) => sum + reading, 0) / lightReadings.length
-          : (lighting || 0),
-        sound: noiseReadings.length > 0
-          ? noiseReadings.reduce((sum, reading) => sum + reading, 0) / noiseReadings.length
-          : (fakeRenderDB !== -1 ? fakeRenderDB : 0),
-        motion: motionReadings.length > 0
-          ? motionReadings.reduce((sum, reading) => sum + reading, 0) / motionReadings.length
-          : motionMagnitude,
-        temp: tempReadings.length > 0
-          ? tempReadings.reduce((a, b) => a + b, 0) / tempReadings.length
-          : null,
-        humidity: humidityReadings.length > 0
-          ? humidityReadings.reduce((a, b) => a + b, 0) / humidityReadings.length
-          : null,
-        source: 'phone' as const,
-      };
+      avgNoiseLevel =
+        noiseReadings.length > 0
+          ? Math.round(
+              noiseReadings.reduce((sum, reading) => sum + reading, 0) /
+                noiseReadings.length
+            )
+          : fakeRenderDB;
+
+      avgMotionLevel =
+        motionReadings.length > 0
+          ? Math.round(
+              (motionReadings.reduce((sum, reading) => sum + reading, 0) /
+                motionReadings.length) *
+                1000
+            ) / 1000
+          : motionMagnitude;
+
+      avgLightLevel =
+        lightReadings.length > 0
+          ? Math.round(
+              lightReadings.reduce((sum, reading) => sum + reading, 0) /
+                lightReadings.length
+            )
+          : lighting;
+
+      avgTempLevel =
+        tempReadings.length > 0
+          ? Math.round(
+              tempReadings.reduce((a, b) => a + b, 0) / tempReadings.length
+            )
+          : null;
+      avgHumidityLevel =
+        humidityReadings.length > 0
+          ? Math.round(
+              humidityReadings.reduce((a, b) => a + b, 0) /
+                humidityReadings.length
+            )
+          : null;
     }
 
-    // Standardize the data
-    standardizedData = standardizeSensorData(rawData);
-
-    console.log("Session data collection:", {
-      rawData,
-      standardizedData,
-      source: isUsingBLE ? "BLE" : "phone",
-      sampleCounts: {
-        noise: isUsingBLE ? 1 : noiseReadings.length,
-        motion: isUsingBLE ? 1 : motionReadings.length,
-        light: isUsingBLE ? 1 : lightReadings.length,
-        temp: isUsingBLE ? 1 : tempReadings.length,
-        humidity: isUsingBLE ? 1 : humidityReadings.length,
-      }
+    console.log("Session averages calculated:", {
+      noise: { average: avgNoiseLevel, source: isUsingBLE ? "BLE" : "phone" },
+      motion: { average: avgMotionLevel, source: isUsingBLE ? "BLE" : "phone" },
+      light: { average: avgLightLevel, source: isUsingBLE ? "BLE" : "phone" },
+      temp: { average: avgTempLevel, source: isUsingBLE ? "BLE" : "phone" },
+      humidity: {
+        average: avgHumidityLevel,
+        source: isUsingBLE ? "BLE" : "phone",
+      },
     });
 
     return {
       session_id: sessionId,
-      noise_level: standardizedData.noise_level,
-      motion_level: standardizedData.motion_level,
-      light_level: standardizedData.light_level,
-      temp_level: standardizedData.temp_level,
-      humidity_level: standardizedData.humidity_level,
+      noise_level: avgNoiseLevel,
+      motion_level: avgMotionLevel,
+      light_level: avgLightLevel,
+      temp_level: avgTempLevel,
+      humidity_level: avgHumidityLevel,
       user_id: currentUser?.uid,
       elapsed_time: elapsed,
       session_type: sessionType,
