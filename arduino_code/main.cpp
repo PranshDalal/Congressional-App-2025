@@ -41,7 +41,6 @@ void setup() {
     Serial.begin(115200);
     while (!Serial && millis() < 3000);
 
-    // Initialize BLE
     if (!BLE.begin()) {
         Serial.println("BLE failed to start!");
         while (1);
@@ -87,8 +86,16 @@ void loop() {
 
     if (central && central.connected()) {
         float x = 0.0, y = 0.0, z = 0.0;
+        float motionMagnitude = 0.0;
         if (IMU.accelerationAvailable()) {
             IMU.readAcceleration(x, y, z);
+            
+            motionMagnitude = sqrt(x*x + y*y + z*z);
+            
+            Serial.print("Motion - X: "); Serial.print(x);
+            Serial.print(" Y: "); Serial.print(y);
+            Serial.print(" Z: "); Serial.print(z);
+            Serial.print(" Magnitude: "); Serial.println(motionMagnitude);
         }
 
         float temperature = HS300x.readTemperature();
@@ -98,10 +105,11 @@ void loop() {
             int r = 0, g = 0, b = 0;
             APDS.readColor(r, g, b);
             
-            //some formula that gemini gave me idk
             float lux = (0.2126*r + 0.7152*g + 0.0722*b);
-
-            lastLux = smoothLux(lux);
+            
+            if (lux >= 0 && lux <= 10000) { 
+                lastLux = smoothLux(lux);
+            }
             
             Serial.print("R: "); Serial.print(r);
             Serial.print(" G: "); Serial.print(g);
@@ -110,22 +118,37 @@ void loop() {
         }
 
         if (samplesRead) {
-            long sum = 0;
-            for (int i = 0; i < samplesRead; i++) sum += abs(sampleBuffer[i]);
-            soundLevel = (float)sum / samplesRead / 32768.0 * 100.0;
+            long sumSquares = 0;
+            for (int i = 0; i < samplesRead; i++) {
+                sumSquares += (long)sampleBuffer[i] * (long)sampleBuffer[i];
+            }
+            
+            float rms = sqrt((float)sumSquares / samplesRead);
+            
+            if (rms > 0) {
+                soundLevel = 20 * log10(rms / 32768.0) + 90; 
+                soundLevel = constrain(soundLevel, 30.0, 90.0); // i am clamping here but this might need to change
+            } else {
+                soundLevel = 30.0;
+            }
+            
             samplesRead = 0;
+            
+            Serial.print("Sound RMS: "); Serial.print(rms);
+            Serial.print(" dB: "); Serial.println(soundLevel);
         }
 
         char payload[PAYLOAD_BUFFER_SIZE];
         int len = snprintf(
             payload,
             PAYLOAD_BUFFER_SIZE,
-            "{\"light\":%.2f,\"sound\":%.2f,\"accel\":{\"x\":%.2f,\"y\":%.2f,\"z\":%.2f},\"temp\":%.2f,\"humidity\":%.2f}",
+            "{\"light\":%.2f,\"sound\":%.2f,\"accel\":{\"x\":%.2f,\"y\":%.2f,\"z\":%.2f,\"magnitude\":%.3f},\"temp\":%.2f,\"humidity\":%.2f}",
             lastLux, 
             soundLevel,
             x,
             y,
             z,
+            motionMagnitude,
             temperature,
             humidity
         );
