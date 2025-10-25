@@ -52,11 +52,27 @@ const IndexScreen = () => {
 
   return (
     <>
-      <BackgroundView withSafeArea withScreenPadding>
+      <BackgroundView withSafeArea withScreenPadding style={{ justifyContent: "center", alignItems: "center" }}>
+        <Image
+          source={require("@/assets/icons/ios-dark.png")}
+          style={{ width: 120, height: 120, resizeMode: "contain" }}
+        />
+        <SizedBox height={16} />
+        <ThemedText
+          style={[
+            globalStyles.header1,
+            { textAlign: "center" },
+          ]}
+        >
+          Ready to focus?
+        </ThemedText>
+        <SizedBox height={24} />
         <TextButton
           textStyle={{ fontSize: theme.fontSize.lg }}
           icon={<PlaySolid size={20} color="white" />}
           title="Start Session"
+          style={{ borderRadius: theme.radii.full }}
+          width={"100%"}
           onPress={openSessionStartSheet}
         />
         <StyledBottomSheet
