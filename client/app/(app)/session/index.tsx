@@ -141,7 +141,7 @@ function useNudgePolling({
 const SessionScreen = () => {
   useKeepAwake();
   const currentUser = getAuth().currentUser;
-  const { sessionType, sessionDuration } = useSessionSettingsState();
+  const { sessionType, sessionDuration, sessionGoalText } = useSessionSettingsState();
 
   const router = useRouter();
   const [permission, requestPermission] = useCameraPermissions();
@@ -184,6 +184,16 @@ const SessionScreen = () => {
     null
   );
   const [bleConnectionResolved, setBleConnectionResolved] = useState(false);
+
+  const [showSessionGoalText, setShowSessionGoalText] = useState(false);
+
+  useEffect(() => {
+    if (sessionGoalText && sessionGoalText.trim() !== "") {
+      setShowSessionGoalText(true);
+    } else {
+      setShowSessionGoalText(false);
+    }
+  }, [setShowSessionGoalText, sessionGoalText]);
 
   useEffect(() => {
     const startSession = async () => {
@@ -666,6 +676,9 @@ const SessionScreen = () => {
               ? elapsed
               : Math.abs(sessionDuration! * 60 * 1000 - elapsed)
           )}
+        </ThemedText>
+        <ThemedText style={globalStyles.bodyText}>
+          {showSessionGoalText ? `Session goal: ${sessionGoalText}` : ""}
         </ThemedText>
         <ThemedText style={globalStyles.mutedText}>
           {isStopwatchRunning
