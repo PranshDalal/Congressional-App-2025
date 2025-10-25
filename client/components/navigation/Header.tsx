@@ -1,7 +1,6 @@
 import theme from "@/styles/theme";
 import ThemedText from "../ThemedText";
 import globalStyles from "@/styles/globalStyles";
-import { BottomTabNavigationOptions } from "@react-navigation/bottom-tabs";
 import { View } from "react-native";
 
 export const headerPreset = {

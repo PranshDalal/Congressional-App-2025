@@ -7,7 +7,7 @@ import ThemedText from "@/components/ThemedText";
 import globalStyles from "@/styles/globalStyles";
 import { View, Image, Dimensions } from "react-native";
 // import Icon from "react-native-vector-icons/MaterialCommunityIcons";
-import { PlayOutline } from "@/assets/icons/heroicons";
+import { PlayOutline, PlaySolid } from "@/assets/icons/heroicons";
 import { Confetti, ConfettiMethods } from "react-native-fast-confetti";
 import { useLocalSearchParams } from "expo-router";
 import theme from "@/styles/theme";
@@ -50,7 +50,7 @@ const IndexScreen = () => {
       <BackgroundView withSafeArea withScreenPadding>
         <TextButton
           textStyle={{ fontSize: theme.fontSize.lg }}
-          icon={<PlayOutline size={20} color="white" />}
+          icon={<PlaySolid size={20} color="white" />}
           title="Start Session"
           onPress={openSessionStartSheet}
         />
