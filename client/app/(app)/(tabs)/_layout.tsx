@@ -62,18 +62,17 @@ export default function TabLayout() {
                 paddingHorizontal: theme.spacing.sm,
               }}
             >
-              <Image
+              {/* <Image
                 source={require("@/assets/icons/ios-dark.png")}
                 style={{ width: 40, height: 40, marginRight: theme.spacing.md }}
                 resizeMode="contain"
-              />
-              <ThemedText style={globalStyles.header1}>Attune</ThemedText>
+              /> */}
+              {/* <ThemedText style={globalStyles.header1}>Attune</ThemedText> */}
+              <ThemedText style={globalStyles.header1}>
+                {`Welcome back${user?.displayName ? ", " + user.displayName : ""
+                  }`}
+              </ThemedText>
             </View>
-            // <ThemedText style={globalStyles.header1}>
-            //   {`Welcome back${
-            //     user?.displayName ? ", " + user.displayName : ""
-            //   }`}
-            // </ThemedText>
           ),
           tabBarIcon: ({ color, focused }) =>
             focused ? (
