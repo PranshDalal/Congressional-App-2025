@@ -1,6 +1,6 @@
 import { Tabs, useRouter } from "expo-router";
 import React from "react";
-import { Platform } from "react-native";
+import { Platform, Image } from "react-native";
 
 import { HapticTab } from "@/components/navigation/HapticTab";
 import TabBarBackground from "@/components/ui/TabBarBackground";
@@ -21,6 +21,8 @@ import { getAuth } from "@react-native-firebase/auth";
 import ThemedText from "@/components/ThemedText";
 import IconButton from "@/components/button/IconButton";
 import globalStyles from "@/styles/globalStyles";
+import { View } from "moti";
+import SizedBox from "@/components/SizedBox";
 
 export default function TabLayout() {
   const user = getAuth().currentUser;
@@ -49,12 +51,29 @@ export default function TabLayout() {
       <Tabs.Screen
         name="index"
         options={{
+          headerStyle: {
+            height: 120,
+          },
           headerTitle: () => (
-            <ThemedText style={globalStyles.header1}>
-              {`Welcome back${
-                user?.displayName ? ", " + user.displayName : ""
-              }`}
-            </ThemedText>
+            <View
+              style={{
+                flexDirection: "row",
+                alignItems: "center",
+                paddingHorizontal: theme.spacing.sm,
+              }}
+            >
+              <Image
+                source={require("@/assets/icons/ios-dark.png")}
+                style={{ width: 40, height: 40, marginRight: theme.spacing.md }}
+                resizeMode="contain"
+              />
+              <ThemedText style={globalStyles.header1}>Attune</ThemedText>
+            </View>
+            // <ThemedText style={globalStyles.header1}>
+            //   {`Welcome back${
+            //     user?.displayName ? ", " + user.displayName : ""
+            //   }`}
+            // </ThemedText>
           ),
           tabBarIcon: ({ color, focused }) =>
             focused ? (
