@@ -159,6 +159,11 @@ const SessionScreen = () => {
   const [pictureSize, setPictureSize] = useState<string | undefined>(undefined);
   const [isCameraReady, setIsCameraReady] = useState(false);
   const cameraRef = useRef<CameraView | null>(null);
+  
+  // Add smoothing buffers for phone sensors (like Arduino)
+  const lightHistoryRef = useRef<number[]>([]);
+  const soundHistoryRef = useRef<number[]>([]);
+  const maxHistorySize = 5;
 
   const [noiseReadings, setNoiseReadings] = useState<number[]>([]);
   const [motionReadings, setMotionReadings] = useState<number[]>([]);
@@ -260,7 +265,8 @@ const SessionScreen = () => {
     userId: uid,
     getEnvData: () => {
       if (isUsingBLE && latestBLEData) {
-        const magnitude = Math.sqrt(
+        // Use Arduino's pre-calculated magnitude if available, otherwise calculate it
+        const magnitude = latestBLEData.accel.magnitude ?? Math.sqrt(
           latestBLEData.accel.x * latestBLEData.accel.x +
             latestBLEData.accel.y * latestBLEData.accel.y +
             latestBLEData.accel.z * latestBLEData.accel.z
@@ -351,7 +357,8 @@ const SessionScreen = () => {
       avgLightLevel = latestBLEData.light;
       avgTempLevel = latestBLEData.temp;
       avgHumidityLevel = latestBLEData.humidity;
-      const magnitude = Math.sqrt(
+      // Use Arduino's pre-calculated magnitude if available, otherwise calculate it
+      const magnitude = latestBLEData.accel.magnitude ?? Math.sqrt(
         latestBLEData.accel.x * latestBLEData.accel.x +
           latestBLEData.accel.y * latestBLEData.accel.y +
           latestBLEData.accel.z * latestBLEData.accel.z
@@ -445,7 +452,10 @@ const SessionScreen = () => {
       RNSoundLevel.onNewFrame = (data) => {
         setDB(data.value);
         const readableDB = Math.round(data.value + 110);
-        fakeConvertedDBRef.current = readableDB;
+        
+        // Apply smoothing to sound readings like Arduino does
+        const smoothedDB = smoothSensorReading(readableDB, soundHistoryRef);
+        fakeConvertedDBRef.current = Math.round(smoothedDB);
       };
 
       const dBUpdateInterval = setInterval(() => {
@@ -536,11 +546,14 @@ const SessionScreen = () => {
             cameraRef.current.pausePreview();
 
             if (photo.base64) {
-              const avg = estimateBrightness(photo.base64);
-              setLighting(avg);
+              const rawBrightness = estimateBrightness(photo.base64);
+              
+              // Apply smoothing like Arduino does
+              const smoothedBrightness = smoothSensorReading(rawBrightness, lightHistoryRef);
+              setLighting(smoothedBrightness);
 
-              if (avg !== null && avg > 0) {
-                setLightReadings((prev) => [...prev, avg]);
+              if (smoothedBrightness !== null && smoothedBrightness > 0) {
+                setLightReadings((prev) => [...prev, smoothedBrightness]);
               }
             } else {
               console.warn("No base64 data from camera");
@@ -572,6 +585,17 @@ const SessionScreen = () => {
     bleConnectionResolved,
     isUsingBLE,
   ]);
+
+  // Smooth sensor readings like Arduino does
+  const smoothSensorReading = (newReading: number, historyRef: React.MutableRefObject<number[]>): number => {
+    historyRef.current.push(newReading);
+    if (historyRef.current.length > maxHistorySize) {
+      historyRef.current.shift(); // Remove oldest reading
+    }
+    
+    const sum = historyRef.current.reduce((acc, val) => acc + val, 0);
+    return sum / historyRef.current.length;
+  };
 
   function estimateBrightness(base64: string): number {
     try {
@@ -685,11 +709,11 @@ const SessionScreen = () => {
         <ThemedText style={globalStyles.mutedText}>
           {isStopwatchRunning &&
             (isUsingBLE && latestBLEData
-              ? `Motion: ${Math.sqrt(
+              ? `Motion: ${(latestBLEData.accel.magnitude ?? Math.sqrt(
                   latestBLEData.accel.x ** 2 +
                     latestBLEData.accel.y ** 2 +
                     latestBLEData.accel.z ** 2
-                ).toFixed(3)} (BLE)`
+                )).toFixed(3)} (BLE)`
               : `Motion magnitude: ${motionMagnitude.toFixed(3)}`)}
         </ThemedText>
         <ThemedText style={globalStyles.mutedText}>
