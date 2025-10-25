@@ -1,22 +1,24 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import BackgroundView from "@/components/view/BackgroundView";
 import TextButton from "@/components/button/TextButton";
 import { useGetStartSessionPermissions } from "@/hooks/useGetStartSessionPermissions";
 import SizedBox from "@/components/SizedBox";
 import ThemedText from "@/components/ThemedText";
 import globalStyles from "@/styles/globalStyles";
-import { View, Image, Dimensions } from "react-native";
+import { View, Image, Dimensions, StyleSheet } from "react-native";
 // import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 import { PlayOutline, PlaySolid } from "@/assets/icons/heroicons";
 import { Confetti, ConfettiMethods } from "react-native-fast-confetti";
 import { useLocalSearchParams } from "expo-router";
 import theme from "@/styles/theme";
 import StyledBottomSheet from "@/components/StyledBottomSheet";
-import { BottomSheetModal } from "@gorhom/bottom-sheet";
+import { BottomSheetModal, BottomSheetTextInput } from "@gorhom/bottom-sheet";
 import SettingsButton from "@/components/button/SettingsButton";
 import TimeRangePicker from "@/components/TimeRangePicker";
 import { usePermissionsStore } from "@/utils/permissionStore";
 import { useSessionSettingsState } from "@/utils/sessionSettingsStore";
+// import StyledTextInput from "@/components/StyledTextInput";
+// import { TextInput } from "react-native-gesture-handler";
 
 const { width } = Dimensions.get("window");
 
@@ -30,10 +32,11 @@ const IndexScreen = () => {
   // const [durationInMinutes, setDurationInMinutes] = useState<number>(30);
 
   const { requested, setRequested } = usePermissionsStore();
-  const { sessionDevice, setSessionDevice, sessionType, setSessionType, sessionDuration, setSessionDuration } =
+  const { sessionGoalText, setSessionGoalText, sessionDevice, setSessionDevice, sessionType, setSessionType, sessionDuration, setSessionDuration } =
     useSessionSettingsState();
 
   const bottomSheetRef = useRef<BottomSheetModal>(null);
+  // const bottomSheetTextInputRef = useRef<TextInput>(null);
 
   const openSessionStartSheet = () => {
     bottomSheetRef.current?.present();
@@ -44,6 +47,8 @@ const IndexScreen = () => {
     console.log("Session Device: ", sessionDevice);
     startSession(sessionDevice);
   };
+
+  useEffect(() => { setSessionGoalText("") }, [setSessionGoalText]);
 
   return (
     <>
@@ -56,9 +61,9 @@ const IndexScreen = () => {
         />
         <StyledBottomSheet
           ref={bottomSheetRef}
-          snapPoints={["45%"]}
+          snapPoints={["42%"]}
           enableDynamicSizing={false}
-          onSheetChange={() => {}}
+          onSheetChange={() => { }}
         >
           <View
             style={{
@@ -71,7 +76,14 @@ const IndexScreen = () => {
             <ThemedText style={[globalStyles.header3]}>
               New Focus Session
             </ThemedText>
-            <SizedBox height={16} />
+            <BottomSheetTextInput
+              // ref={bottomSheetTextInputRefs}
+              value={sessionGoalText || ""}
+              onChangeText={setSessionGoalText}
+              placeholder="What do you want to accomplish? (optional)"
+              style={styles.bottomSheetTextInput}
+            />
+            <SizedBox height={8} />
             <SettingsButton
               title="Input Device"
               rightVariant="arrow"
@@ -359,3 +371,14 @@ const IndexScreen = () => {
 };
 
 export default IndexScreen;
+
+const styles = StyleSheet.create({
+  bottomSheetTextInput: {
+    ...globalStyles.bodyText,
+    fontWeight: theme.fontWeight.semibold,
+    paddingVertical: theme.spacing.md,
+    paddingHorizontal: theme.spacing.md,
+    borderRadius: theme.radii.lg,
+    backgroundColor: theme.colors.bgLight,
+  },
+})
