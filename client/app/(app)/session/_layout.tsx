@@ -15,7 +15,7 @@ export default function SessionLayout() {
       <Stack.Screen
         name="survey"
         options={{
-          title: "Survey",
+          title: "Session Recap & Survey",
           headerShown: true,
           headerBackVisible: false,
         }}

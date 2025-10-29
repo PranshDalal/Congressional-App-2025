@@ -15,10 +15,11 @@ import StyledSlider from "@/components/StyledSlider";
 import ChipRadioButtonGroup from "@/components/button/ChipRadioButtonGroup";
 import ThemedText from "@/components/ThemedText";
 import { KeyboardAwareScrollView } from "react-native-keyboard-controller";
+import { StatCard } from "@/components/stats";
 
 const SurveyScreen = () => {
   const router = useRouter();
-  
+
   const [deleteModalVisible, setDeleteModalVisible] = useState(false);
   const { sessionData } = useLocalSearchParams();
   const [focusRating, setFocusRating] = useState(5);
@@ -29,6 +30,9 @@ const SurveyScreen = () => {
   const [musicHeadphonesIndex, setMusicHeadphonesIndex] = useState<
     number | null
   >(null);
+  const [taskStatusIndex, setTaskStatusIndex] = useState<number | null>(null);
+  const [taskStatus, setTaskStatus] = useState<string>("");
+
   const [taskType, setTaskType] = useState("");
   const [location, setLocation] = useState("");
   const [ventilationStatusIndex, setVentilationStatusIndex] = useState<
@@ -71,7 +75,7 @@ const SurveyScreen = () => {
         text2: "Session data saved successfully",
       });
 
-      router.push({pathname: "/", params: {"completed_session": "true"}});
+      router.push({ pathname: "/", params: { completed_session: "true" } });
     } catch (error) {
       Toast.show({
         type: "error",
@@ -92,10 +96,52 @@ const SurveyScreen = () => {
 
   return (
     <BackgroundView withSafeArea>
-      <KeyboardAwareScrollView bottomOffset={48} style={{ flex: 1, marginBottom: 48 }}>
+      <KeyboardAwareScrollView
+        bottomOffset={48}
+        style={{ flex: 1, marginBottom: 48 }}
+      >
         <View style={globalStyles.screenPadding}>
+          <View
+            style={{
+              flexDirection: "row",
+              flexWrap: "wrap",
+              justifyContent: "space-between",
+            }}
+          >
+            <StatCard
+              label="Duration"
+              value={
+                parsedSessionData.duration
+                  ? `${Math.floor(
+                      parsedSessionData.duration / 60000
+                    )}m ${Math.floor(
+                      (parsedSessionData.duration % 60000) / 1000
+                    )}s`
+                  : "N/A"
+              }
+            />
+            <StatCard
+              label="Session Type"
+              value={parsedSessionData.sessionType || "N/A"}
+            />
+              {/* // NOTE: I haven't implemented this yet, this is just a placeholder */}
+            <StatCard
+              label="Number of Nudges"
+              value={parsedSessionData.numberOfNudges || 0}
+            />
+            <StatCard
+              label="Goal"
+              value={
+                parsedSessionData.goal?.length > 0
+                  ? parsedSessionData.goal
+                  : "N/A"
+              }
+            />
+          </View>
           {/* Focus Rating Slider */}
-          <ThemedText style={styles.sliderLabel}>Focus Rating: {focusRating}</ThemedText>
+          <ThemedText style={styles.sliderLabel}>
+            Focus Rating: {focusRating}
+          </ThemedText>
           <StyledSlider
             minimumValue={1}
             maximumValue={10}
@@ -142,6 +188,17 @@ const SurveyScreen = () => {
 
           {/* Task Type Question */}
           <View style={styles.questionContainer}>
+            <ThemedText style={styles.questionLabel}>Task Status</ThemedText>
+            <ChipRadioButtonGroup
+              labels={["Completed", "Incompleted"]}
+              onSelect={(index) => {
+                setTaskStatusIndex(index);
+                setTaskStatus(index === 0 ? "Completed" : "Incompleted");
+              }}
+              selectedIndex={taskStatusIndex}
+            />
+          </View>
+          {/* <View style={styles.questionContainer}>
             <ThemedText style={styles.questionLabel}>Task Type</ThemedText>
             <StyledTextInput
               placeholder="e.g., Studying, Work, Reading..."
@@ -149,7 +206,7 @@ const SurveyScreen = () => {
               onChangeText={setTaskType}
               style={styles.textInput}
             />
-          </View>
+          </View> */}
 
           <SizedBox height={20} />
 
