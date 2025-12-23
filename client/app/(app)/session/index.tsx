@@ -141,7 +141,8 @@ function useNudgePolling({
 const SessionScreen = () => {
   useKeepAwake();
   const currentUser = getAuth().currentUser;
-  const { sessionType, sessionDuration } = useSessionSettingsState();
+  const { sessionType, sessionDuration, sessionGoalText } =
+    useSessionSettingsState();
 
   const router = useRouter();
   const [permission, requestPermission] = useCameraPermissions();
@@ -159,7 +160,7 @@ const SessionScreen = () => {
   const [pictureSize, setPictureSize] = useState<string | undefined>(undefined);
   const [isCameraReady, setIsCameraReady] = useState(false);
   const cameraRef = useRef<CameraView | null>(null);
-  
+
   // Add smoothing buffers for phone sensors (like Arduino)
   const lightHistoryRef = useRef<number[]>([]);
   const soundHistoryRef = useRef<number[]>([]);
@@ -189,6 +190,16 @@ const SessionScreen = () => {
     null
   );
   const [bleConnectionResolved, setBleConnectionResolved] = useState(false);
+
+  const [showSessionGoalText, setShowSessionGoalText] = useState(false);
+
+  useEffect(() => {
+    if (sessionGoalText && sessionGoalText.trim() !== "") {
+      setShowSessionGoalText(true);
+    } else {
+      setShowSessionGoalText(false);
+    }
+  }, [setShowSessionGoalText, sessionGoalText]);
 
   useEffect(() => {
     const startSession = async () => {
@@ -266,11 +277,13 @@ const SessionScreen = () => {
     getEnvData: () => {
       if (isUsingBLE && latestBLEData) {
         // Use Arduino's pre-calculated magnitude if available, otherwise calculate it
-        const magnitude = latestBLEData.accel.magnitude ?? Math.sqrt(
-          latestBLEData.accel.x * latestBLEData.accel.x +
-            latestBLEData.accel.y * latestBLEData.accel.y +
-            latestBLEData.accel.z * latestBLEData.accel.z
-        );
+        const magnitude =
+          latestBLEData.accel.magnitude ??
+          Math.sqrt(
+            latestBLEData.accel.x * latestBLEData.accel.x +
+              latestBLEData.accel.y * latestBLEData.accel.y +
+              latestBLEData.accel.z * latestBLEData.accel.z
+          );
         const env = {
           light: latestBLEData.light,
           noise: latestBLEData.sound,
@@ -358,11 +371,13 @@ const SessionScreen = () => {
       avgTempLevel = latestBLEData.temp;
       avgHumidityLevel = latestBLEData.humidity;
       // Use Arduino's pre-calculated magnitude if available, otherwise calculate it
-      const magnitude = latestBLEData.accel.magnitude ?? Math.sqrt(
-        latestBLEData.accel.x * latestBLEData.accel.x +
-          latestBLEData.accel.y * latestBLEData.accel.y +
-          latestBLEData.accel.z * latestBLEData.accel.z
-      );
+      const magnitude =
+        latestBLEData.accel.magnitude ??
+        Math.sqrt(
+          latestBLEData.accel.x * latestBLEData.accel.x +
+            latestBLEData.accel.y * latestBLEData.accel.y +
+            latestBLEData.accel.z * latestBLEData.accel.z
+        );
       avgMotionLevel = Math.round(magnitude * 1000) / 1000;
     } else {
       avgNoiseLevel =
@@ -414,6 +429,8 @@ const SessionScreen = () => {
         average: avgHumidityLevel,
         source: isUsingBLE ? "BLE" : "phone",
       },
+      duration: elapsed,
+      goal: sessionGoalText,
     });
 
     return {
@@ -434,6 +451,9 @@ const SessionScreen = () => {
       temp_sample_count: isUsingBLE ? 1 : tempReadings.length,
       humidity_sample_count: isUsingBLE ? 1 : humidityReadings.length,
       data_source: isUsingBLE ? "bluetooth" : "phone",
+      duration: elapsed,
+      goal: sessionGoalText,
+      sessionType: sessionType,
     };
   };
 
@@ -452,7 +472,7 @@ const SessionScreen = () => {
       RNSoundLevel.onNewFrame = (data) => {
         setDB(data.value);
         const readableDB = Math.round(data.value + 110);
-        
+
         // Apply smoothing to sound readings like Arduino does
         const smoothedDB = smoothSensorReading(readableDB, soundHistoryRef);
         fakeConvertedDBRef.current = Math.round(smoothedDB);
@@ -547,9 +567,12 @@ const SessionScreen = () => {
 
             if (photo.base64) {
               const rawBrightness = estimateBrightness(photo.base64);
-              
+
               // Apply smoothing like Arduino does
-              const smoothedBrightness = smoothSensorReading(rawBrightness, lightHistoryRef);
+              const smoothedBrightness = smoothSensorReading(
+                rawBrightness,
+                lightHistoryRef
+              );
               setLighting(smoothedBrightness);
 
               if (smoothedBrightness !== null && smoothedBrightness > 0) {
@@ -587,12 +610,15 @@ const SessionScreen = () => {
   ]);
 
   // Smooth sensor readings like Arduino does
-  const smoothSensorReading = (newReading: number, historyRef: React.MutableRefObject<number[]>): number => {
+  const smoothSensorReading = (
+    newReading: number,
+    historyRef: React.MutableRefObject<number[]>
+  ): number => {
     historyRef.current.push(newReading);
     if (historyRef.current.length > maxHistorySize) {
       historyRef.current.shift(); // Remove oldest reading
     }
-    
+
     const sum = historyRef.current.reduce((acc, val) => acc + val, 0);
     return sum / historyRef.current.length;
   };
@@ -691,6 +717,9 @@ const SessionScreen = () => {
               : Math.abs(sessionDuration! * 60 * 1000 - elapsed)
           )}
         </ThemedText>
+        <ThemedText style={globalStyles.bodyText}>
+          {showSessionGoalText ? `Session goal: ${sessionGoalText}` : ""}
+        </ThemedText>
         <ThemedText style={globalStyles.mutedText}>
           {isStopwatchRunning
             ? isUsingBLE && latestBLEData
@@ -709,11 +738,14 @@ const SessionScreen = () => {
         <ThemedText style={globalStyles.mutedText}>
           {isStopwatchRunning &&
             (isUsingBLE && latestBLEData
-              ? `Motion: ${(latestBLEData.accel.magnitude ?? Math.sqrt(
-                  latestBLEData.accel.x ** 2 +
-                    latestBLEData.accel.y ** 2 +
-                    latestBLEData.accel.z ** 2
-                )).toFixed(3)} (BLE)`
+              ? `Motion: ${(
+                  latestBLEData.accel.magnitude ??
+                  Math.sqrt(
+                    latestBLEData.accel.x ** 2 +
+                      latestBLEData.accel.y ** 2 +
+                      latestBLEData.accel.z ** 2
+                  )
+                ).toFixed(3)} (BLE)`
               : `Motion magnitude: ${motionMagnitude.toFixed(3)}`)}
         </ThemedText>
         <ThemedText style={globalStyles.mutedText}>

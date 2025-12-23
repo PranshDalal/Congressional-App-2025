@@ -2,8 +2,16 @@ server/.venv/
 client/node_modules/
 client/.expo/
 server/service_acc.json
-server/routes/__pycache__/
 .vscode/
 .expo/
 client/.env
 server/.env
+ 
+# Python cache/artifacts (ignore everywhere)
+__pycache__/
+*.py[cod]
+*.pyo
+.pytest_cache/
+.mypy_cache/
+
+server/service_acc2.json
