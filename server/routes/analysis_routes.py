@@ -3,6 +3,9 @@ from firebase_admin import firestore
 import numpy as np
 import pandas as pd
 from datetime import datetime
+from sklearn.linear_model import LogisticRegression
+from sklearn.preprocessing import StandardScaler
+from sklearn.pipeline import Pipeline
 
 analysis_bp = Blueprint('analysis', __name__)
 
@@ -25,93 +28,120 @@ def fetch_user_sessions(user_id, fields=None, status=None, limit=None):
     return pd.DataFrame(session_list) if session_list else None
 
 
-def weighted_median(data, weights):
-    data, weights = np.array(data), np.array(weights)
-    sorted_indices = np.argsort(data)
-    data_sorted = data[sorted_indices]
-    weights_sorted = weights[sorted_indices]
-    cumsum = np.cumsum(weights_sorted)
-    cutoff = weights_sorted.sum() / 2.0
-    return data_sorted[cumsum >= cutoff][0]
+def train_focus_model(df):
+    numeric = ['noise_level', 'light_level', 'motion_level', 'temperature', 'humidity']
+    categorical = ['headphones', 'ventilation']
+
+    df = df.copy()
+    df['focus_rating'] = pd.to_numeric(df['focus_rating'], errors='coerce')
+    df['target'] = (df['focus_rating'] >= 7).astype(int)
+
+    for col in numeric:
+        df[col] = pd.to_numeric(df[col], errors='coerce')
+
+    for col in categorical:
+        if col in df.columns:
+            df[col] = df[col].astype(float)
+
+    features = numeric + categorical
+    df = df.dropna(subset=features + ['target'])
+
+    if len(df) < 10:
+        return None, "Not enough valid data"
+
+    X = df[features]
+    y = df['target']
+
+    model = Pipeline([
+        ("scaler", StandardScaler()),
+        ("clf", LogisticRegression())
+    ])
+
+    model.fit(X, y)
+    return model, None
 
 
-def interpret_correlation(feature, value):
-    if pd.isna(value):
-        return None
-    if value > 0.5:
-        return f"Higher {feature} strongly supports your focus."
-    elif 0.2 < value <= 0.5:
-        return f"{feature.capitalize()} has a mild positive effect on your focus."
-    elif -0.5 <= value < -0.2:
-        return f"Lower {feature} may help you focus better."
-    elif value < -0.5:
-        return f"{feature.capitalize()} seems to strongly hurt your focus."
-    return None
+def feature_importance(model, feature_names):
+    coef = model.named_steps['clf'].coef_[0]
+    importance = sorted(list(zip(feature_names, coef)), key=lambda x: abs(x[1]), reverse=True)
+
+    explanations = []
+    for feat, weight in importance:
+        if weight > 0:
+            explanations.append(f"Higher {feat.replace('_',' ')} increases your probability of good focus.")
+        elif weight < 0:
+            explanations.append(f"Higher {feat.replace('_',' ')} reduces your probability of good focus.")
+
+    return explanations[:4]
+
+
+def compute_best_environment(df, model):
+    numeric = ['noise_level', 'light_level', 'motion_level', 'temperature', 'humidity']
+    categorical = ['headphones', 'ventilation']
+    features = numeric + categorical
+
+    coef = model.named_steps['clf'].coef_[0]
+
+    best_env = {}
+
+    for i, feat in enumerate(features):
+        if feat in numeric:
+            col = pd.to_numeric(df[feat], errors='coerce').dropna()
+
+            if len(col) == 0:
+                continue
+
+            if coef[i] > 0:
+                best_env[feat] = float(col.quantile(0.8))   
+            else:
+                best_env[feat] = float(col.quantile(0.2))   
+
+        else:
+            if coef[i] > 0:
+                best_env[feat] = True
+            else:
+                best_env[feat] = False
+
+    x = np.array([[best_env.get(f, 0) for f in features]])
+    prob = model.predict_proba(x)[0][1]
+
+    best_env["success_probability"] = round(float(prob), 3)
+    return best_env
 
 
 @analysis_bp.route('/recommendations/<user_id>', methods=['GET'])
 def get_recommendations(user_id):
     db = firestore.client()
+
     df = fetch_user_sessions(
         user_id,
         fields=[
-            'focus_rating', 'noise_level', 'light_level', 'motion_level', 'temperature', 'humidity', 'headphones', 'ventilation', 'start_time', 'status'
+            'focus_rating', 'noise_level', 'light_level',
+            'motion_level', 'temperature', 'humidity',
+            'headphones', 'ventilation', 'start_time', 'status'
         ],
         status='completed',
-        limit=20
+        limit=50
     )
-    if df is None or len(df) < 5:
-        return jsonify({'message': 'Not enough session data to generate recommendations.'}), 200
 
-    df['focus_rating'] = pd.to_numeric(df['focus_rating'], errors='coerce')
-    df.dropna(subset=['focus_rating'], inplace=True)
+    if df is None or len(df) < 8:
+        return jsonify({'message': 'Not enough session data to generate recommendations'}), 200
 
-    if df.empty or df['focus_rating'].max() < 7:
-        return jsonify({'message': 'No high-focus sessions recorded yet. Keep tracking to get recommendations.'}), 200
+    model, err = train_focus_model(df)
+    if model is None:
+        return jsonify({'message': err}), 200
 
-    high_focus = df[df['focus_rating'] >= 7].copy()
+    features = ['noise_level', 'light_level', 'motion_level', 'temperature', 'humidity', 'headphones', 'ventilation']
+    insights = feature_importance(model, features)
 
-    recommended = {}
-    numeric_features = ['noise_level', 'light_level', 'motion_level', 'temperature', 'humidity']
-    categorical_features = ['headphones', 'ventilation']
-
-    for col in numeric_features:
-        if col in high_focus.columns:
-            high_focus[col] = pd.to_numeric(high_focus[col], errors='coerce')
-            valid = high_focus.dropna(subset=[col])
-            if not valid.empty:
-                wm = weighted_median(valid[col], valid['focus_rating'])
-                recommended[col] = round(float(wm), 2)
-
-    for col in categorical_features:
-        if col in high_focus.columns and not high_focus[col].dropna().empty:
-            recommended[col] = bool(high_focus[col].mode().iloc[0])
-
-    correlations = {}
-    for col in numeric_features + categorical_features:
-        if col in df.columns:
-            try:
-                col_numeric = pd.to_numeric(df[col], errors='coerce')
-                valid_corr = df[['focus_rating', col_numeric]].dropna()
-                if len(valid_corr) > 2:
-                    corr = valid_corr['focus_rating'].corr(valid_corr[col_numeric])
-                    correlations[col] = corr
-            except Exception:
-                continue
-    insights = [interpret_correlation(col, val) for col, val in correlations.items()]
-    insights = [msg for msg in insights if msg]
-
-    message = "We've analyzed your past high-focus sessions and found your ideal environment settings."
-    if insights:
-        message += " Here’s what we learned: " + " ".join(insights)
+    best_env = compute_best_environment(df, model)
 
     pref_ref = db.collection("users").document(user_id).collection("preferences").document("environment")
-    recommended['updated_at'] = datetime.utcnow().isoformat()
-    pref_ref.set(recommended, merge=True)
+    best_env['updated_at'] = datetime.utcnow().isoformat()
+    pref_ref.set(best_env, merge=True)
 
     return jsonify({
-        'message': message,
-        'recommendations': recommended,
-        'insights': insights,
-        'raw_correlations': correlations
+        "message": "Analysis complete",
+        "predicted_best_environment": best_env,
+        "insights": insights
     }), 200
