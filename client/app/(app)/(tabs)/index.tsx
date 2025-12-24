@@ -77,7 +77,6 @@ const IndexScreen = () => {
         />
         <StyledBottomSheet
           ref={bottomSheetRef}
-<<<<<<< HEAD
           snapPoints={["50%"]}
           enableDynamicSizing={false}
           onSheetChange={() => { }}
