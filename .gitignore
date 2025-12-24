@@ -13,3 +13,5 @@ __pycache__/
 *.pyo
 .pytest_cache/
 .mypy_cache/
+
+server/service_acc2.json
