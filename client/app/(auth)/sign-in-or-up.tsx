@@ -20,7 +20,7 @@ const SignInOrUpScreen = () => {
       <BouncingCircles />
       <View style={{ flex: 1, alignItems: "center" }}>
         <Animated.View entering={FadeInUp.duration(2000).delay(200)}>
-          <ThemedText style={styles.header}>Welcome to Ambien 👋</ThemedText>
+          <ThemedText style={styles.header}>Welcome to Attune 👋</ThemedText>
         </Animated.View>
         <Animated.View entering={FadeInUp.duration(1700).delay(500)}>
           <ThemedText style={globalStyles.mutedText}>
