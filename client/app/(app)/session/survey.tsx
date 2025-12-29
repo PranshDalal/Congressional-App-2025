@@ -47,6 +47,20 @@ const SurveyScreen = () => {
     : {};
 
   const saveSession = async () => {
+    if (
+      focusRating === null ||
+      hadMusicOrHeadphones === null ||
+      ventilationStatus === null ||
+      location.trim() === ""
+    ) {
+      Toast.show({
+        type: "error",
+        text1: "Missing required fields",
+        text2: "Please answer all questions before saving."
+      });
+      return;
+    }
+
     try {
       const completeSessionData = {
         ...parsedSessionData,
