@@ -9,10 +9,11 @@ app = Flask(__name__)
 
 nudge_bp = Blueprint('nudge', __name__)
 
-PERPLEXITY_API_KEY = os.getenv("PERPLEXITY_API_KEY") 
-PERPLEXITY_ENDPOINT = "https://api.perplexity.ai/chat/completions"
-MODEL = "sonar"  
 
+# Gemini API setup
+GEMINI_API_KEY = os.getenv("GOOGLE_GEMINI_API_KEY")
+GEMINI_MODEL = "models/gemini-2.5-flash"
+GEMINI_ENDPOINT = f"https://generativelanguage.googleapis.com/v1/{GEMINI_MODEL}:generateContent"
 
 def detect_drifts(current, preferred, tolerance=0.02):
     drifts = []
@@ -72,7 +73,7 @@ def detect_drifts(current, preferred, tolerance=0.02):
 
     session_length_seconds = int(current.get("session_length", 0))
     session_length_minutes = session_length_seconds // 60
-    if session_length_minutes > 1:
+    if session_length_minutes > 30:
         drifts.append(f"Session length is {session_length_minutes} min, exceeding preferred 30 min")
 
     return drifts
@@ -89,25 +90,32 @@ def generate_nudge(drifts, feedback_history):
     Example: "Noise is higher than preferred; try listening to white noise."
     """
 
+    print("[Gemini] Prompt:", prompt)
+
     headers = {
-        "Authorization": f"Bearer {PERPLEXITY_API_KEY}",
         "Content-Type": "application/json",
     }
 
     body = {
-        "model": MODEL,
-        "messages": [
-            {"role": "system", "content": "You are a focus assistant that gives concise ADHD-friendly nudges."},
-            {"role": "user", "content": prompt},
-        ],
-        "max_tokens": 100,
+        "contents": [
+            {"role": "user", "parts": [{"text": prompt}]}
+        ]
     }
 
-    response = requests.post(PERPLEXITY_ENDPOINT, headers=headers, json=body)
-    response.raise_for_status()
-    data = response.json()
-
-    return data["choices"][0]["message"]["content"]
+    url = f"{GEMINI_ENDPOINT}?key={GEMINI_API_KEY}"
+    print("[Gemini] Request URL:", url)
+    print("[Gemini] Request Body:", body)
+    try:
+        response = requests.post(url, headers=headers, json=body)
+        print("[Gemini] Response Status:", response.status_code)
+        print("[Gemini] Response Text:", response.text)
+        response.raise_for_status()
+        data = response.json()
+        print("[Gemini] Parsed Response:", data)
+        return data["candidates"][0]["content"]["parts"][0]["text"]
+    except Exception as e:
+        print("[Gemini] Exception:", str(e))
+        raise
 
 
 @nudge_bp.route("/get_nudge", methods=["POST"])
