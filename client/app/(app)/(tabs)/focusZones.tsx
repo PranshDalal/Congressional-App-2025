@@ -18,6 +18,15 @@ const getRecommendationDetails = (key: string, value: any) => {
   let description = "";
 
   switch (key) {
+        case "success_probability":
+          icon = "percent";
+          if (typeof value === "number") {
+            displayValue = `${value.toFixed(1)}%`;
+            description = "Estimated chance of high focus.";
+          } else {
+            displayValue = String(value);
+          }
+          break;
     case "noise_level":
       icon = "volume-medium";
       if (typeof value === "number") {

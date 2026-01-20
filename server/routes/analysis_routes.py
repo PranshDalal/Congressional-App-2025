@@ -116,7 +116,7 @@ def compute_best_environment(df, model):
     x = np.array([[best_env.get(f, 0) for f in features]])
     prob = model.predict_proba(x)[0][1]
 
-    best_env["success_probability"] = round(float(prob), 3)
+    best_env["success_probability"] = round(float(prob) * 100, 1)
     return best_env
 
 
