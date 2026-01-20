@@ -149,6 +149,7 @@ def get_recommendations(user_id):
     print(f"Best environment: {best_env}")
 
     recommendations = {}
+
     for key in ['noise_level', 'light_level', 'motion_level']:
         if key in best_env:
             recommendations[key] = best_env[key]

@@ -161,8 +161,33 @@ const FocusZonesScreen = () => {
 
           {recommendationsData.recommendations ? (
             <ScrollView style={styles.recommendationsList}>
-              {Object.entries(recommendationsData.recommendations).map(
-                ([key, value]) => {
+              {[
+                'noise_level',
+                'light_level',
+                'motion_level',
+                'headphones',
+                'ventilation',
+                'success_probability',
+                ...Object.keys(recommendationsData.recommendations).filter(
+                  (k) =>
+                    ![
+                      'noise_level',
+                      'light_level',
+                      'motion_level',
+                      'headphones',
+                      'ventilation',
+                      'success_probability',
+                    ].includes(k)
+                ),
+              ]
+                .filter((key) =>
+                  Object.prototype.hasOwnProperty.call(
+                    recommendationsData.recommendations!,
+                    key
+                  )
+                )
+                .map((key) => {
+                  const value = recommendationsData.recommendations![key];
                   const { icon, displayValue, description } =
                     getRecommendationDetails(key, value);
 
@@ -190,8 +215,7 @@ const FocusZonesScreen = () => {
                       </View>
                     </Animated.View>
                   );
-                }
-              )}
+                })}
             </ScrollView>
           ) : (
             <Animated.View entering={FadeInDown.duration(500).delay(400)}>
