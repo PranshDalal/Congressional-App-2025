@@ -94,7 +94,7 @@ export async function connectToWearable(
             console.log("Found ADHD_Wearable:", device.id);
 
             try {
-              const connected = await device.connect();
+              const connected = await device.connect({ requestMTU: 185 });
               await connected.discoverAllServicesAndCharacteristics();
 
               const services = await connected.services();

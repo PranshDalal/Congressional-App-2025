@@ -146,7 +146,7 @@ const SignupScreen = () => {
               exiting={determineAnimation("exiting", currentDirection)}
             >
               <ThemedText style={globalStyles.header1}>
-                What's your name?
+                What&apos;s your name?
               </ThemedText>
               <SizedBox height={theme.spacing.xl} />
               <StyledTextInput

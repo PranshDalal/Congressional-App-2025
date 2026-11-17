@@ -5,6 +5,33 @@ import { SessionData } from "@/types/types";
 import { getSessions } from "@/services/firebaseSessionService";
 import { Timestamp } from "@react-native-firebase/firestore";
 
+// Older sessions stored end_time as an ISO string; newer ones use a Firestore Timestamp.
+function toSeconds(value: unknown): number | null {
+  if (!value) return null;
+  if (typeof value === "string") {
+    // Python writes microseconds; JS engines only reliably parse milliseconds
+    const iso = value.replace(/(\.\d{3})\d+/, "$1");
+    const ms = Date.parse(iso.endsWith("Z") || /[+-]\d\d:\d\d$/.test(iso) ? iso : iso + "Z");
+    return isNaN(ms) ? null : ms / 1000;
+  }
+  const seconds = (value as { seconds?: number }).seconds;
+  return typeof seconds === "number" ? seconds : null;
+}
+
+function longestDayStreak(dayKeys: string[]): number {
+  const days = Array.from(new Set(dayKeys)).sort();
+  let best = 0;
+  let run = 0;
+  let prev: number | null = null;
+  for (const key of days) {
+    const day = Date.parse(key) / 86400000;
+    run = prev !== null && day - prev === 1 ? run + 1 : 1;
+    best = Math.max(best, run);
+    prev = day;
+  }
+  return best;
+}
+
 export interface StatsData {
   totalSessions: number;
   totalHours: string;
@@ -65,8 +92,7 @@ export function useStatsData(): UseStatsDataReturn {
     let totalMinutes = 0;
     let completed = 0;
     let focusSum = 0;
-    let streak = 0;
-    let lastSessionDate: string | null = null;
+    const sessionDays: string[] = [];
 
     sessions.forEach((session) => {
       // console.log(session);
@@ -76,11 +102,11 @@ export function useStatsData(): UseStatsDataReturn {
         session.end_time
       ) {
         completed++;
-        const start = session.start_time.seconds;
-        const end = session.end_time.seconds;
-        const diff = (end - start) / 60;
+        const start = toSeconds(session.start_time);
+        const end = toSeconds(session.end_time);
 
-        if (!isNaN(diff)) {
+        if (start !== null && end !== null) {
+          const diff = (end - start) / 60;
           totalMinutes += diff;
 
           if (session.focus_rating) focusSum += Number(session.focus_rating);
@@ -89,11 +115,7 @@ export function useStatsData(): UseStatsDataReturn {
             .toDate()
             .toISOString()
             .split("T")[0];
-          // const sessionDate = session.start_time.split("T")[0];
-          if (sessionDate !== lastSessionDate) {
-            streak++;
-            lastSessionDate = sessionDate;
-          }
+          sessionDays.push(sessionDate);
         }
       }
     });
@@ -103,7 +125,7 @@ export function useStatsData(): UseStatsDataReturn {
     return {
       totalSessions: completed,
       totalHours: (totalMinutes / 60).toFixed(1),
-      bestStreak: streak,
+      bestStreak: longestDayStreak(sessionDays),
       averageFocus: completed ? Math.round(focusSum / completed) : 0,
     };
   }, [sessions]);
@@ -115,13 +137,13 @@ export function useStatsData(): UseStatsDataReturn {
         month: "short",
         day: "numeric",
       }),
-      duration: session.end_time
-        ? isNaN(session.end_time!.seconds - session.start_time.seconds)
-          ? "0 min"
-          : `${Math.round(
-              (session.end_time.seconds - session.start_time.seconds) / 60
-            )} min`
-        : "N/A",
+      duration: (() => {
+        const start = toSeconds(session.start_time);
+        const end = toSeconds(session.end_time);
+        return start !== null && end !== null
+          ? `${Math.round((end - start) / 60)} min`
+          : "N/A";
+      })(),
     }));
   }, [sessions]);
 

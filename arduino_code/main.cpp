@@ -22,6 +22,7 @@ float soundLevel = 0.0;
 float luxHistory[5] = {0};
 int luxIndex = 0;
 float lastLux = 0.0; 
+float lastX = 0.0, lastY = 0.0, lastZ = 0.0, lastMagnitude = 0.0;
 
 void onPDMdata() {
     int bytesAvailable = PDM.available();
@@ -85,8 +86,9 @@ void loop() {
     BLEDevice central = BLE.central();
 
     if (central && central.connected()) {
-        float x = 0.0, y = 0.0, z = 0.0;
-        float motionMagnitude = 0.0;
+        // Keep the last reading so a loop without new IMU data doesn't report zero motion
+        float &x = lastX, &y = lastY, &z = lastZ;
+        float &motionMagnitude = lastMagnitude;
         if (IMU.accelerationAvailable()) {
             IMU.readAcceleration(x, y, z);
             
@@ -153,7 +155,9 @@ void loop() {
             humidity
         );
 
-        dataChar.writeValue((const void*)payload, len);
+        if (len > 0 && len < PAYLOAD_BUFFER_SIZE && !isnan(temperature) && !isnan(humidity)) {
+            dataChar.writeValue((const void*)payload, len);
+        }
         Serial.println("Sent: " + String(payload));
 
         delay(1000);

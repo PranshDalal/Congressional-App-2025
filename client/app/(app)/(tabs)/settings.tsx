@@ -10,7 +10,7 @@ import ThemedText from "@/components/ThemedText";
 import { PreferencesService } from "@/services/firebasePreferencesService";
 import { connectToWearable } from "../../../utils/ble/bleClient";
 
-const settings = () => {
+const Settings = () => {
   const [signOutModalVisible, setSignOutModalVisible] = useState(false);
   // const [connectModalVisible, setConnectModalVisible] = useState(false);
   const [nudgeFrequency, setNudgeFrequency] = useState<"Low" | "Mid" | "High">("Mid");
@@ -120,4 +120,4 @@ const settings = () => {
   );
 };
 
-export default settings;
+export default Settings;

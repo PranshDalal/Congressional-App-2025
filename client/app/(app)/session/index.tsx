@@ -149,7 +149,6 @@ const SessionScreen = () => {
 
   const [elapsed, setElapsed] = useState(0);
   const [isStopwatchRunning, setStopwatchRunning] = useState(true);
-  const [dB, setDB] = useState<number>(-120);
   const fakeConvertedDBRef = useRef(-1);
   const [fakeRenderDB, setFakeRenderDB] = useState(-1);
 
@@ -181,7 +180,7 @@ const SessionScreen = () => {
 
   const [endSessionModalVisible, setEndSessionModalVisible] = useState(false);
   const [timeUpModalVisible, setTimeUpModalVisible] = useState(false);
-  const [shownTimeUpModal, setShownTimeUpModal] = useState(false);
+  const shownTimeUpModalRef = useRef(false);
   const [sessionId, setSessionId] = useState<string | null>(null);
 
   const [bleDevice, setBleDevice] = useState<Device | null>(null);
@@ -343,8 +342,8 @@ const SessionScreen = () => {
           sessionType === "timed" &&
           sessionDuration! * 60 * 1000 - newElapsed < 0
         ) {
-          if (!shownTimeUpModal) {
-            setShownTimeUpModal(true);
+          if (!shownTimeUpModalRef.current) {
+            shownTimeUpModalRef.current = true;
             setTimeUpModalVisible(true);
           }
         }
@@ -438,8 +437,8 @@ const SessionScreen = () => {
       noise_level: avgNoiseLevel,
       motion_level: avgMotionLevel,
       light_level: avgLightLevel,
-      temp_level: avgTempLevel,
-      humidity_level: avgHumidityLevel,
+      temperature: avgTempLevel,
+      humidity: avgHumidityLevel,
       user_id: currentUser?.uid,
       elapsed_time: elapsed,
       session_type: sessionType,
@@ -470,7 +469,6 @@ const SessionScreen = () => {
       RNSoundLevel.start();
 
       RNSoundLevel.onNewFrame = (data) => {
-        setDB(data.value);
         const readableDB = Math.round(data.value + 110);
 
         // Apply smoothing to sound readings like Arduino does
@@ -480,9 +478,10 @@ const SessionScreen = () => {
 
       const dBUpdateInterval = setInterval(() => {
         if (isStopwatchRunning) {
-          setFakeRenderDB(fakeConvertedDBRef.current);
-          if (dB != -120) {
-            setNoiseReadings((prev) => [...prev, dB]);
+          const latest = fakeConvertedDBRef.current;
+          setFakeRenderDB(latest);
+          if (latest !== -1) {
+            setNoiseReadings((prev) => [...prev, latest]);
           }
         } else {
           setFakeRenderDB(-1);

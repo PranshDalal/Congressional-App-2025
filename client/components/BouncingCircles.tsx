@@ -140,4 +140,6 @@ const styles = StyleSheet.create({
   },
 });
 
+Circle.displayName = "Circle";
+
 export default BouncingCircles;

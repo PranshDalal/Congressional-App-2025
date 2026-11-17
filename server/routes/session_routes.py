@@ -8,7 +8,7 @@ session_bp = Blueprint('session', __name__)
 def start_session():
     from firebase_admin import firestore
     db = firestore.client()  
-    data = request.json
+    data = request.get_json(silent=True) or {}
     user_id = data.get('user_id')
 
     if not user_id:
@@ -32,7 +32,7 @@ def start_session():
 def end_session():
     from firebase_admin import firestore 
     db = firestore.client()  
-    data = request.get_json()
+    data = request.get_json(silent=True) or {}
     user_id = data.get('user_id')
     session_id = data.get('session_id')
 
@@ -45,7 +45,7 @@ def end_session():
     if not session_doc.exists:
         return jsonify({'error': 'Session not found'}), 404
 
-    end_time = datetime.utcnow().isoformat()
+    end_time = datetime.now(timezone.utc)
 
     update_data = {
         'end_time': end_time,

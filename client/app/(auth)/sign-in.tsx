@@ -95,7 +95,7 @@ const SigninScreen = () => {
         <SizedBox height={25} />
         <View style={{ flexDirection: "row" }}>
           <ThemedText style={globalStyles.mutedText}>
-            Don't have an account?{" "}
+            Don&apos;t have an account?{" "}
           </ThemedText>
           <Link href="/sign-up" style={globalStyles.linkText} replace>
             Sign Up

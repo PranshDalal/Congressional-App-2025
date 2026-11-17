@@ -1,6 +1,5 @@
-import { getFirestore, collection, doc, setDoc, getDoc, getDocs, query, orderBy, addDoc } from "@react-native-firebase/firestore";
+import { getFirestore, collection, doc, setDoc, getDoc } from "@react-native-firebase/firestore";
 import { getAuth } from "@react-native-firebase/auth";
-import { get } from "react-native/Libraries/TurboModule/TurboModuleRegistry";
 
 const preferencesCollection = "preferences";
 

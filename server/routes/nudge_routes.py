@@ -72,7 +72,7 @@ def detect_drifts(current, preferred, tolerance=0.02):
 
     session_length_seconds = int(current.get("session_length", 0))
     session_length_minutes = session_length_seconds // 60
-    if session_length_minutes > 1:
+    if session_length_minutes > 30:
         drifts.append(f"Session length is {session_length_minutes} min, exceeding preferred 30 min")
 
     return drifts
@@ -113,8 +113,10 @@ def generate_nudge(drifts, feedback_history):
 @nudge_bp.route("/get_nudge", methods=["POST"])
 def get_nudge():
     db = firestore.client()
-    data = request.json
+    data = request.get_json(silent=True) or {}
     user_id = data.get("user_id")
+    if not user_id:
+        return jsonify({"error": "user_id is required"}), 400
 
     try:
         pref_ref = db.collection("users").document(user_id).collection("preferences").document("environment")
@@ -134,6 +136,7 @@ def get_nudge():
         )
         feedback_history = [f.to_dict() for f in feedbacks]
 
+        nudge_text = None
         if drifts:
             nudge_text = generate_nudge(drifts, feedback_history)
         else:

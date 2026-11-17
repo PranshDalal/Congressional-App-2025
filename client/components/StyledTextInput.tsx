@@ -38,6 +38,8 @@ const StyledTextInput = forwardRef<TextInput, StyledTextInputProps>(
 
 export default StyledTextInput;
 
+StyledTextInput.displayName = "StyledTextInput";
+
 const styles = StyleSheet.create({
   base: {
     ...globalStyles.bodyText,

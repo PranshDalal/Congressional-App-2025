@@ -2,7 +2,7 @@ from flask import Blueprint, request, jsonify
 from firebase_admin import firestore
 import numpy as np
 import pandas as pd
-from datetime import datetime
+from datetime import datetime, timezone
 
 analysis_bp = Blueprint('analysis', __name__)
 
@@ -85,19 +85,17 @@ def get_recommendations(user_id):
 
     for col in categorical_features:
         if col in high_focus.columns and not high_focus[col].dropna().empty:
-            recommended[col] = bool(high_focus[col].mode().iloc[0])
+            top = high_focus[col].dropna().mode().iloc[0]
+            # headphones is a yes/no answer; ventilation is a label like "Open Window"
+            recommended[col] = bool(top) if col == 'headphones' else str(top)
 
     correlations = {}
     for col in numeric_features + categorical_features:
         if col in df.columns:
-            try:
-                col_numeric = pd.to_numeric(df[col], errors='coerce')
-                valid_corr = df[['focus_rating', col_numeric]].dropna()
-                if len(valid_corr) > 2:
-                    corr = valid_corr['focus_rating'].corr(valid_corr[col_numeric])
-                    correlations[col] = corr
-            except Exception:
-                continue
+            col_numeric = pd.to_numeric(df[col], errors='coerce').astype(float)
+            pair = pd.DataFrame({'focus': df['focus_rating'], 'x': col_numeric}).dropna()
+            if len(pair) > 2 and pair['x'].nunique() > 1:
+                correlations[col] = round(float(pair['focus'].corr(pair['x'])), 3)
     insights = [interpret_correlation(col, val) for col, val in correlations.items()]
     insights = [msg for msg in insights if msg]
 
@@ -106,7 +104,7 @@ def get_recommendations(user_id):
         message += " Here’s what we learned: " + " ".join(insights)
 
     pref_ref = db.collection("users").document(user_id).collection("preferences").document("environment")
-    recommended['updated_at'] = datetime.utcnow().isoformat()
+    recommended['updated_at'] = datetime.now(timezone.utc).isoformat()
     pref_ref.set(recommended, merge=True)
 
     return jsonify({

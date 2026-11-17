@@ -79,8 +79,6 @@ const styles = StyleSheet.create({
     paddingHorizontal: theme.spacing.lg,
     borderRadius: theme.radii.full,
     backgroundColor: theme.colors.bgLight,
-    // Add transition properties for smooth hover
-    transitionDuration: "150ms",
   },
   radioSelected: {
     backgroundColor: theme.colors.primary,
