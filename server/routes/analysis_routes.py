@@ -35,18 +35,25 @@ def weighted_median(data, weights):
     return data_sorted[cumsum >= cutoff][0]
 
 
+# For each feature: what a higher value looks like, and what a lower value looks like
+INSIGHT_PHRASES = {
+    'noise_level': ("there's more background noise", "the room is quieter"),
+    'light_level': ("the light is brighter", "the light is dimmer"),
+    'motion_level': ("you move around more", "you stay still"),
+    'temperature': ("the room is warmer", "the room is cooler"),
+    'humidity': ("the air is more humid", "the air is drier"),
+    'headphones': ("you use headphones or music", "you skip headphones or music"),
+}
+
+
 def interpret_correlation(feature, value):
-    if pd.isna(value):
+    if pd.isna(value) or feature not in INSIGHT_PHRASES or abs(value) <= 0.2:
         return None
-    if value > 0.5:
-        return f"Higher {feature} strongly supports your focus."
-    elif 0.2 < value <= 0.5:
-        return f"{feature.capitalize()} has a mild positive effect on your focus."
-    elif -0.5 <= value < -0.2:
-        return f"Lower {feature} may help you focus better."
-    elif value < -0.5:
-        return f"{feature.capitalize()} seems to strongly hurt your focus."
-    return None
+    higher, lower = INSIGHT_PHRASES[feature]
+    clause = higher if value > 0 else lower
+    if abs(value) > 0.5:
+        return f"You focus noticeably better when {clause}."
+    return f"You tend to focus a bit better when {clause}."
 
 
 @analysis_bp.route('/recommendations/<user_id>', methods=['GET'])
@@ -55,13 +62,18 @@ def get_recommendations(user_id):
     df = fetch_user_sessions(
         user_id,
         fields=[
-            'focus_rating', 'noise_level', 'light_level', 'motion_level', 'temperature', 'humidity', 'headphones', 'ventilation', 'start_time', 'status'
+            'focus_rating', 'noise_level', 'light_level', 'motion_level', 'temperature', 'humidity', 'headphones', 'ventilation', 'start_time', 'status', 'light_unit'
         ],
         status='completed',
         limit=20
     )
     if df is None or len(df) < 5:
         return jsonify({'message': 'Not enough session data to generate recommendations.'}), 200
+
+    # Only use light values recorded in lux; older sessions stored a 0-100 camera value.
+    if 'light_level' in df.columns:
+        is_lux = df['light_unit'] == 'lux' if 'light_unit' in df.columns else False
+        df['light_level'] = df['light_level'].where(is_lux)
 
     df['focus_rating'] = pd.to_numeric(df['focus_rating'], errors='coerce')
     df.dropna(subset=['focus_rating'], inplace=True)
@@ -105,11 +117,15 @@ def get_recommendations(user_id):
 
     pref_ref = db.collection("users").document(user_id).collection("preferences").document("environment")
     recommended['updated_at'] = datetime.now(timezone.utc).isoformat()
+    # Drop a stale light preference left over from pre-lux sessions
+    if 'light_level' not in recommended:
+        recommended['light_level'] = firestore.DELETE_FIELD
     pref_ref.set(recommended, merge=True)
 
+    response_recs = {k: v for k, v in recommended.items() if v is not firestore.DELETE_FIELD}
     return jsonify({
         'message': message,
-        'recommendations': recommended,
+        'recommendations': response_recs,
         'insights': insights,
         'raw_correlations': correlations
     }), 200

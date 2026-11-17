@@ -52,6 +52,8 @@ def end_session():
         'focus_rating': data.get('focus_rating'),
         'noise_level': data.get('noise_level'),
         'light_level': data.get('light_level'),
+        'light_unit': data.get('light_unit'),
+        'light_raw': data.get('light_raw'),
         'temperature': data.get('temperature'),
         'humidity': data.get('humidity'),
         'motion_level': data.get('motion_level'),

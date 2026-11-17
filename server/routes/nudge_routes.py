@@ -14,63 +14,47 @@ PERPLEXITY_ENDPOINT = "https://api.perplexity.ai/chat/completions"
 MODEL = "sonar"  
 
 
-def detect_drifts(current, preferred, tolerance=0.02):
+# How far a reading can stray from the preferred value before it counts as drift.
+# ("abs", n) allows +/- n units; ("rel", f) allows +/- f as a fraction of the preferred value.
+DRIFT_TOLERANCES = {
+    "light_level": ("rel", 0.4),   # lux spans orders of magnitude, so compare proportionally
+    "noise_level": ("abs", 6),     # dB
+    "motion_level": ("abs", 0.2),  # g
+    "temperature": ("abs", 2),     # °C
+    "humidity": ("abs", 10),       # % RH
+}
+
+
+def detect_drifts(current, preferred):
     drifts = []
 
     #print preferred data
     print("Preferred data:", preferred)
     print("Current data:", current)
 
-    if "light_level" in preferred and preferred["light_level"] is not None:
+    # (current key, preference key, drift message)
+    checks = [
+        ("light", "light_level", "Lighting is {c} lux, preferred ~{p} lux"),
+        ("noise", "noise_level", "Noise is {c} dB, preferred ~{p} dB"),
+        ("motion", "motion_level", "Motion is {c}, preferred ~{p}"),
+        ("temp", "temperature", "Temperature is {c}°C, preferred ~{p}°C"),
+        ("humidity", "humidity", "Humidity is {c}%, preferred ~{p}%"),
+    ]
+    for current_key, pref_key, message in checks:
+        # Skip anything the device couldn't measure this time (sent as null)
+        if preferred.get(pref_key) is None or current.get(current_key) is None:
+            continue
         try:
-            current_light = float(current.get("light", 0))
-            preferred_light = float(preferred.get("light_level", 0))
-            if not (preferred_light * (1 - tolerance) <= current_light <= preferred_light * (1 + tolerance)):
-                drifts.append(f"Lighting is {current_light}, preferred ~{preferred_light}")
-        except ValueError:
-            if current.get("light") != preferred.get("light_level"):
-                drifts.append(f"Lighting is {current.get('light')} but preferred is {preferred.get('light_level')}")
+            c = float(current[current_key])
+            p = float(preferred[pref_key])
+        except (TypeError, ValueError):
+            continue
+        kind, amount = DRIFT_TOLERANCES[pref_key]
+        allowed = amount if kind == "abs" else abs(p) * amount
+        if abs(c - p) > allowed:
+            drifts.append(message.format(c=round(c, 1), p=round(p, 1)))
 
-    if "noise_level" in preferred and preferred["noise_level"] is not None:
-        try:
-            current_noise = float(current.get("noise", 0))
-            preferred_noise = float(preferred.get("noise_level", 0))
-            if not (preferred_noise * (1 - tolerance) <= current_noise <= preferred_noise * (1 + tolerance)):
-                drifts.append(f"Noise is {current_noise} dB, preferred ~{preferred_noise} dB")
-        except ValueError:
-            if current.get("noise") != preferred.get("noise_level"):
-                drifts.append(f"Noise is {current.get('noise')} but preferred is {preferred.get('noise_level')}")
-
-    if "motion_level" in preferred and preferred["motion_level"] is not None:
-        try:
-            current_motion = float(current.get("motion", 0))
-            preferred_motion = float(preferred.get("motion_level", 0))
-            if not (preferred_motion * (1 - tolerance) <= current_motion <= preferred_motion * (1 + tolerance)):
-                drifts.append(f"Motion is {current_motion}, preferred ~{preferred_motion}")
-        except ValueError:
-            drifts.append("Motion value invalid")
-
-    if "temperature" in preferred and preferred["temperature"] is not None:
-        try:
-            current_temp = float(current.get("temp", 0))
-            preferred_temp = float(preferred.get("temperature", 0))
-            if not (preferred_temp * (1 - tolerance) <= current_temp <= preferred_temp * (1 + tolerance)):
-                drifts.append(f"Temperature is {current_temp}°C, preferred ~{preferred_temp}°C")
-        except ValueError:
-            if current.get("temp") != preferred.get("temperature"):
-                drifts.append(f"Temperature is {current.get('temp')} but preferred is {preferred.get('temperature')}")
-
-    if "humidity" in preferred and preferred["humidity"] is not None:
-        try:
-            current_humidity = float(current.get("humidity", 0))
-            preferred_humidity = float(preferred.get("humidity", 0))
-            if not (preferred_humidity * (1 - tolerance) <= current_humidity <= preferred_humidity * (1 + tolerance)):
-                drifts.append(f"Humidity is {current_humidity}%, preferred ~{preferred_humidity}%")
-        except ValueError:
-            if current.get("humidity") != preferred.get("humidity"):
-                drifts.append(f"Humidity is {current.get('humidity')} but preferred is {preferred.get('humidity')}")
-
-    session_length_seconds = int(current.get("session_length", 0))
+    session_length_seconds = int(current.get("session_length") or 0)
     session_length_minutes = session_length_seconds // 60
     if session_length_minutes > 30:
         drifts.append(f"Session length is {session_length_minutes} min, exceeding preferred 30 min")

@@ -18,13 +18,14 @@ import { PauseSolid, PlaySolid } from "@/assets/icons/heroicons";
 import { useKeepAwake } from "expo-keep-awake";
 import ThemedText from "@/components/ThemedText";
 import { connectToWearable } from "../../../utils/ble/bleClient";
-import { parseSensorData, SensorReading } from "../../../utils/ble/sensorData";
+import { parseSensorData, SensorReading, wearableLightToLux } from "../../../utils/ble/sensorData";
 import { PreferencesService } from "@/services/firebasePreferencesService";
 import { feedbackNudge } from "@/services/firebaseNudgesService";
 // import firestore from "@react-native-firebase/firestore";
 import { Device } from "react-native-ble-plx";
 import { serverTimestamp } from "@react-native-firebase/firestore";
 import { useSessionSettingsState } from "@/utils/sessionSettingsStore";
+import { estimateLux } from "@/utils/lightMeter";
 
 function useNudgePolling({
   userId,
@@ -189,6 +190,8 @@ const SessionScreen = () => {
     null
   );
   const [bleConnectionResolved, setBleConnectionResolved] = useState(false);
+  const bleReadingsRef = useRef<SensorReading[]>([]);
+  const isStopwatchRunningRef = useRef(true);
 
   const [showSessionGoalText, setShowSessionGoalText] = useState(false);
 
@@ -242,6 +245,9 @@ const SessionScreen = () => {
           console.log("Attempting to connect to BLE device...");
           const device = await connectToWearable((sensorData) => {
             setLatestBLEData(sensorData);
+            if (isStopwatchRunningRef.current) {
+              bleReadingsRef.current.push(sensorData);
+            }
           });
           setBleDevice(device);
           setIsUsingBLE(true);
@@ -284,7 +290,7 @@ const SessionScreen = () => {
               latestBLEData.accel.z * latestBLEData.accel.z
           );
         const env = {
-          light: latestBLEData.light,
+          light: wearableLightToLux(latestBLEData.light),
           noise: latestBLEData.sound,
           motion: magnitude,
           session_length: Math.floor(elapsed / 1000),
@@ -328,6 +334,10 @@ const SessionScreen = () => {
   }, [permission]);
 
   useEffect(() => {
+    isStopwatchRunningRef.current = isStopwatchRunning;
+  }, [isStopwatchRunning]);
+
+  useEffect(() => {
     if (isStopwatchRunning) {
       startTimeRef.current = Date.now() - elapsed;
       intervalRef.current = setInterval(() => {
@@ -360,24 +370,25 @@ const SessionScreen = () => {
   const collectSessionData = () => {
     let avgNoiseLevel,
       avgMotionLevel,
-      avgLightLevel,
+      avgLightLevel: number | null,
+      lightRaw: number | null = null,
       avgTempLevel,
       avgHumidityLevel;
 
-    if (isUsingBLE && latestBLEData) {
-      avgNoiseLevel = latestBLEData.sound;
-      avgLightLevel = latestBLEData.light;
-      avgTempLevel = latestBLEData.temp;
-      avgHumidityLevel = latestBLEData.humidity;
-      // Use Arduino's pre-calculated magnitude if available, otherwise calculate it
-      const magnitude =
-        latestBLEData.accel.magnitude ??
-        Math.sqrt(
-          latestBLEData.accel.x * latestBLEData.accel.x +
-            latestBLEData.accel.y * latestBLEData.accel.y +
-            latestBLEData.accel.z * latestBLEData.accel.z
-        );
-      avgMotionLevel = Math.round(magnitude * 1000) / 1000;
+    const bleReadings = bleReadingsRef.current;
+    if (isUsingBLE && bleReadings.length > 0) {
+      const mean = (pick: (r: SensorReading) => number) =>
+        bleReadings.reduce((sum, r) => sum + pick(r), 0) / bleReadings.length;
+      const magnitudeOf = (r: SensorReading) =>
+        r.accel.magnitude ??
+        Math.sqrt(r.accel.x ** 2 + r.accel.y ** 2 + r.accel.z ** 2);
+
+      avgNoiseLevel = Math.round(mean((r) => r.sound));
+      lightRaw = Math.round(mean((r) => r.light));
+      avgLightLevel = wearableLightToLux(lightRaw);
+      avgTempLevel = Math.round(mean((r) => r.temp) * 10) / 10;
+      avgHumidityLevel = Math.round(mean((r) => r.humidity));
+      avgMotionLevel = Math.round(mean(magnitudeOf) * 1000) / 1000;
     } else {
       avgNoiseLevel =
         noiseReadings.length > 0
@@ -437,6 +448,9 @@ const SessionScreen = () => {
       noise_level: avgNoiseLevel,
       motion_level: avgMotionLevel,
       light_level: avgLightLevel,
+      // Lets analysis ignore light values from older sessions, which weren't recorded in lux
+      light_unit: avgLightLevel !== null ? "lux" : null,
+      light_raw: lightRaw,
       temperature: avgTempLevel,
       humidity: avgHumidityLevel,
       user_id: currentUser?.uid,
@@ -444,11 +458,11 @@ const SessionScreen = () => {
       session_type: sessionType,
       scheduled_session_duration:
         sessionType === "timed" ? sessionDuration! * 60 : null,
-      noise_sample_count: isUsingBLE ? 1 : noiseReadings.length,
-      motion_sample_count: isUsingBLE ? 1 : motionReadings.length,
-      light_sample_count: isUsingBLE ? 1 : lightReadings.length,
-      temp_sample_count: isUsingBLE ? 1 : tempReadings.length,
-      humidity_sample_count: isUsingBLE ? 1 : humidityReadings.length,
+      noise_sample_count: isUsingBLE ? bleReadings.length : noiseReadings.length,
+      motion_sample_count: isUsingBLE ? bleReadings.length : motionReadings.length,
+      light_sample_count: isUsingBLE ? bleReadings.length : lightReadings.length,
+      temp_sample_count: isUsingBLE ? bleReadings.length : tempReadings.length,
+      humidity_sample_count: isUsingBLE ? bleReadings.length : humidityReadings.length,
       data_source: isUsingBLE ? "bluetooth" : "phone",
       duration: elapsed,
       goal: sessionGoalText,
@@ -557,29 +571,35 @@ const SessionScreen = () => {
 
             console.log("Attempting to take picture for lighting...");
             cameraRef.current.resumePreview();
+            // Let auto-exposure adjust to the current light before capturing,
+            // since the exposure settings are what the lux estimate is based on
+            await new Promise((resolve) => setTimeout(resolve, 500));
+            if (!cameraRef.current) return;
             const photo = await cameraRef.current.takePictureAsync({
               base64: true,
+              exif: true,
               quality: 0.1,
               skipProcessing: true,
             });
             cameraRef.current.pausePreview();
 
-            if (photo.base64) {
-              const rawBrightness = estimateBrightness(photo.base64);
-
-              // Apply smoothing like Arduino does
-              const smoothedBrightness = smoothSensorReading(
-                rawBrightness,
-                lightHistoryRef
-              );
-              setLighting(smoothedBrightness);
-
-              if (smoothedBrightness !== null && smoothedBrightness > 0) {
-                setLightReadings((prev) => [...prev, smoothedBrightness]);
-              }
-            } else {
+            if (!photo.base64) {
               console.warn("No base64 data from camera");
+              return;
             }
+
+            const lux = estimateLux(photo.base64, photo.exif);
+            if (lux === null) {
+              console.warn("Photo had no exposure metadata; skipping light reading");
+              return;
+            }
+
+            // Apply smoothing like Arduino does
+            const smoothedLux = Math.round(
+              smoothSensorReading(lux, lightHistoryRef)
+            );
+            setLighting(smoothedLux);
+            setLightReadings((prev) => [...prev, smoothedLux]);
           } catch (err) {
             console.warn("Camera error:", err);
             setLighting(null);
@@ -621,52 +641,6 @@ const SessionScreen = () => {
     const sum = historyRef.current.reduce((acc, val) => acc + val, 0);
     return sum / historyRef.current.length;
   };
-
-  function estimateBrightness(base64: string): number {
-    try {
-      const cleanBase64 = base64.replace(/^data:image\/[a-z]+;base64,/, "");
-
-      const binaryString = atob(cleanBase64);
-      const bytes = new Uint8Array(binaryString.length);
-      for (let i = 0; i < binaryString.length; i++) {
-        bytes[i] = binaryString.charCodeAt(i);
-      }
-
-      let sum = 0;
-      let count = 0;
-
-      const skipPixels = 100;
-
-      for (let i = 0; i < bytes.length; i += skipPixels) {
-        sum += bytes[i];
-        count++;
-      }
-
-      const avg = count > 0 ? (sum / count / 255) * 100 : 0;
-      const result = Math.round(Math.max(0, Math.min(100, avg)));
-
-      console.log(
-        `Brightness calculation: ${count} samples, avg=${avg.toFixed(
-          2
-        )}, result=${result}`
-      );
-      return result;
-    } catch (err) {
-      console.warn("Brightness estimation error:", err);
-      let sum = 0;
-      let count = 0;
-
-      for (let i = 0; i < base64.length; i += 100) {
-        const charCode = base64.charCodeAt(i);
-        sum += charCode;
-        count++;
-      }
-
-      const fallback = Math.round((sum / count / 255) * 100);
-      console.log("Using fallback brightness calculation:", fallback);
-      return fallback;
-    }
-  }
 
   const getSmallestCameraResolution = async () => {
     const sizes = await cameraRef.current!.getAvailablePictureSizesAsync();
@@ -749,9 +723,9 @@ const SessionScreen = () => {
         </ThemedText>
         <ThemedText style={globalStyles.mutedText}>
           {isUsingBLE && latestBLEData
-            ? `Lighting: ${latestBLEData.light} (BLE)`
+            ? `Lighting: ~${wearableLightToLux(latestBLEData.light)} lux (BLE)`
             : lighting !== null
-            ? `Lighting: ${lighting}`
+            ? `Lighting: ~${lighting} lux`
             : ""}
         </ThemedText>
         <ThemedText style={globalStyles.mutedText}>

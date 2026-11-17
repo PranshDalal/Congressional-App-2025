@@ -33,10 +33,10 @@ const getRecommendationDetails = (key: string, value: any) => {
       icon = "lightbulb-on";
       if (typeof value === "number") {
         displayValue = `${value.toFixed(0)} lux`;
-        if (value < 20) description = "Dim lighting";
-        else if (value < 50) description = "Moderate lighting";
-        else if (value < 100) description = "Bright lighting";
-        else description = "Very bright lighting";
+        if (value < 50) description = "Dim lighting";
+        else if (value < 300) description = "Moderate lighting (typical home)";
+        else if (value < 1000) description = "Bright lighting (office or classroom)";
+        else description = "Very bright lighting (near daylight)";
       }
       break;
     case "motion_level":
