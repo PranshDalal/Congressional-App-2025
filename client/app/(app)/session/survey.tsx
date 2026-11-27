@@ -11,6 +11,7 @@ import SizedBox from "@/components/SizedBox";
 import StyledTextInput from "@/components/StyledTextInput";
 import { useLocalSearchParams } from "expo-router";
 import { endSession } from "@/services/backendSessionService";
+import { deleteSession as deleteSessionDoc } from "@/services/firebaseSessionService";
 import StyledSlider from "@/components/StyledSlider";
 import ChipRadioButtonGroup from "@/components/button/ChipRadioButtonGroup";
 import ThemedText from "@/components/ThemedText";
@@ -21,6 +22,8 @@ const SurveyScreen = () => {
   const router = useRouter();
 
   const [deleteModalVisible, setDeleteModalVisible] = useState(false);
+  const [saving, setSaving] = useState(false);
+  const [deleting, setDeleting] = useState(false);
   const { sessionData } = useLocalSearchParams();
   const [focusRating, setFocusRating] = useState(5);
   const [lightLevel, setLightLevel] = useState(5);
@@ -47,6 +50,8 @@ const SurveyScreen = () => {
     : {};
 
   const saveSession = async () => {
+    if (saving || deleting) return;
+    setSaving(true);
     try {
       const completeSessionData = {
         ...parsedSessionData,
@@ -77,21 +82,41 @@ const SurveyScreen = () => {
 
       router.push({ pathname: "/", params: { completed_session: "true" } });
     } catch (error) {
+      console.error("Failed to save session:", error);
+      // Stay on the survey so the user's answers aren't lost and they can retry
       Toast.show({
         type: "error",
         text1: "Failed to save session",
+        text2: "Check your connection and tap Save to try again.",
       });
-
-      router.push("/");
+    } finally {
+      setSaving(false);
     }
   };
 
-  const deleteSession = () => {
-    Toast.show({
-      type: "error",
-      text1: "Deleted session",
-    });
-    router.push("/");
+  const deleteSession = async () => {
+    if (saving || deleting) return;
+    const sessionId = parsedSessionData.session_id;
+    setDeleting(true);
+    try {
+      if (sessionId) {
+        await deleteSessionDoc(sessionId);
+      }
+      Toast.show({
+        type: "success",
+        text1: "Deleted session",
+      });
+      router.push("/");
+    } catch (error) {
+      console.error("Failed to delete session:", error);
+      Toast.show({
+        type: "error",
+        text1: "Failed to delete session",
+        text2: "Check your connection and try again.",
+      });
+    } finally {
+      setDeleting(false);
+    }
   };
 
   return (
@@ -231,7 +256,12 @@ const SurveyScreen = () => {
           onPress={() => setDeleteModalVisible(true)}
           width="45%"
         />
-        <TextButton title="Save" onPress={saveSession} width="45%" />
+        <TextButton
+          title="Save"
+          onPress={saveSession}
+          width="45%"
+          showLoading={saving}
+        />
       </View>
       <StyledModal
         title="Delete Session"

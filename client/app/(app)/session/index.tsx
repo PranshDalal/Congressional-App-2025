@@ -390,13 +390,17 @@ const SessionScreen = () => {
       avgHumidityLevel = Math.round(mean((r) => r.humidity));
       avgMotionLevel = Math.round(mean(magnitudeOf) * 1000) / 1000;
     } else {
+      // No readings (e.g. microphone off) -> null, never the -1 "no reading yet" placeholder,
+      // which would otherwise be saved as a real noise level and skew the analysis.
       avgNoiseLevel =
         noiseReadings.length > 0
           ? Math.round(
               noiseReadings.reduce((sum, reading) => sum + reading, 0) /
                 noiseReadings.length
             )
-          : fakeRenderDB;
+          : fakeRenderDB !== -1
+          ? fakeRenderDB
+          : null;
 
       avgMotionLevel =
         motionReadings.length > 0

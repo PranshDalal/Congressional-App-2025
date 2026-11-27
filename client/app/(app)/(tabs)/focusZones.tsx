@@ -95,6 +95,9 @@ type RecommendationsResponse = {
     ventilation: string | number;
     [key: string]: any;
   };
+  // Only statistically significant patterns; absent when there wasn't enough data to analyze.
+  insights?: string[];
+  sessions_analyzed?: number;
 };
 
 const FocusZonesScreen = () => {
@@ -159,9 +162,43 @@ const FocusZonesScreen = () => {
             </ThemedText>
           </Animated.View>
 
+          {recommendationsData.insights && (
+            <Animated.View
+              style={styles.insightsCard}
+              entering={FadeInDown.duration(500).delay(300)}
+            >
+              <ThemedText style={styles.insightsTitle}>What we learned</ThemedText>
+              {recommendationsData.insights.length > 0 ? (
+                recommendationsData.insights.map((insight) => (
+                  <View key={insight} style={styles.insightRow}>
+                    <MaterialCommunityIcons
+                      name="chart-line"
+                      size={18}
+                      color={theme.colors.primary}
+                      style={{ marginRight: 8, marginTop: 2 }}
+                    />
+                    <ThemedText style={styles.insightText}>{insight}</ThemedText>
+                  </View>
+                ))
+              ) : (
+                <ThemedText style={styles.infoText}>
+                  No significant patterns yet
+                  {recommendationsData.sessions_analyzed
+                    ? ` across your last ${recommendationsData.sessions_analyzed} sessions`
+                    : ""}
+                  . None of your environment factors are clearly linked to
+                  your focus so far. Keep tracking sessions and check back.
+                </ThemedText>
+              )}
+            </Animated.View>
+          )}
+
           {recommendationsData.recommendations ? (
             <ScrollView style={styles.recommendationsList}>
-              {Object.entries(recommendationsData.recommendations).map(
+              {Object.entries(recommendationsData.recommendations)
+                // updated_at is bookkeeping metadata, not an environment setting
+                .filter(([key]) => key !== "updated_at")
+                .map(
                 ([key, value]) => {
                   const { icon, displayValue, description } =
                     getRecommendationDetails(key, value);
@@ -239,6 +276,27 @@ const styles = StyleSheet.create({
     marginTop: 16,
     color: theme.colors.danger,
     fontSize: 16,
+  },
+  insightsCard: {
+    marginBottom: theme.spacing.md,
+    padding: theme.spacing.md,
+    borderRadius: theme.radii.md,
+    borderWidth: 1,
+    borderColor: theme.colors.textMuted,
+  },
+  insightsTitle: {
+    fontSize: 16,
+    fontWeight: 700,
+    marginBottom: 8,
+  },
+  insightRow: {
+    flexDirection: "row",
+    alignItems: "flex-start",
+    marginBottom: 6,
+  },
+  insightText: {
+    fontSize: 15,
+    flexShrink: 1,
   },
   infoText: {
     fontSize: 16,

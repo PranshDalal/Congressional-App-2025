@@ -47,6 +47,22 @@ export async function getSessions() {
   return sessions;
 }
 
+export async function deleteSession(sessionId: string) {
+  const user = getAuth().currentUser;
+
+  if (!user) {
+    throw new Error("User not authenticated");
+  }
+
+  // The server creates each session document with its session_id as the document ID
+  await db
+    .collection("users")
+    .doc(user.uid)
+    .collection(SESSIONS_COLLECTION)
+    .doc(sessionId)
+    .delete();
+}
+
 export async function createSession(sessionData: SessionData) {
   const user = getAuth().currentUser;
 
